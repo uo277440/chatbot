@@ -1,0 +1,10 @@
+Respuesta del Chatbot,Etiqueta
+Buenos días,SALUDO
+Hola,SALUDO
+¿Cómo estás?,SALUDO
+Quisiera hacer una reserva,RESERVA
+¿Tienen mesas disponibles?,RESERVA
+¿Cuál es el menú del día?,MENU
+¿Qué platos vegetarianos tienen?,MENU
+Gracias,AGRADECIMIENTO
+Hasta luego,DESPEDIDA

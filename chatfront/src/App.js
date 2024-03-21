@@ -1,10 +1,11 @@
 import React from 'react';
 import HelloWorld from './HelloWorld';
+import Chatbot from './Chatbot';
 
 function App() {
   return (
     <div>
-      <HelloWorld />
+      <Chatbot />
     </div>
   );
 }

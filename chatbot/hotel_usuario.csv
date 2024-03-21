@@ -1,0 +1,6 @@
+Entrada del Usuario,Etiqueta
+Buenos días en qué puedo ayudarte,SALUDO
+Claro para cuántas personas sería la reserva,RESERVA
+Estos son nuestros platos del día: [lista de platos],MENU
+De nada estoy aquí para ayudarte,AGRADECIMIENTO
+Hasta luego que tengas un buen día!,DESPEDIDA
