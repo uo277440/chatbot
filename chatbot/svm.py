@@ -3,17 +3,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
-from process import TextProcessor
 from sklearn.base import BaseEstimator, TransformerMixin
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+from nltk.corpus import wordnet
+import numpy as np
 import string
 
 class TextTokenizer(BaseEstimator, TransformerMixin):
     def __init__(self):
         self.lemmatizer = WordNetLemmatizer()
-        self.stop_words = set(stopwords.words('spanish'))
+        self.stop_words = set(stopwords.words('english'))
 
     def fit(self, X, y=None):
         return self
@@ -34,10 +35,14 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         # Eliminar stopwords
         filtered_tokens = [word for word in tokens if word not in self.stop_words]
         
-        # Lematización
-        lemmatized_tokens = [self.lemmatizer.lemmatize(word) for word in filtered_tokens]
-        print('holaaaa'+' '.join(lemmatized_tokens))
-        return ' '.join(lemmatized_tokens)
+        # Lematización y búsqueda de sinónimos
+        synonyms = set()
+        for word in filtered_tokens:
+            word_synonyms = [synset.lemmas()[0].name() for synset in wordnet.synsets(word)]
+            synonyms.update(word_synonyms[:3])
+        print('Hola') 
+        print(synonyms)
+        return ' '.join(synonyms)
 class SVMChatbot:
     def __init__(self, csv_user_file,csv_chatbot_file):
         self.csv_user_file = csv_user_file
@@ -51,11 +56,11 @@ class SVMChatbot:
         # Cargar el archivo CSV
         data = pd.read_csv(self.csv_user_file)
         # Dividir los datos en características (X) y etiquetas (y)
-        self.X = data['Entrada del Usuario']
-        self.y = data['Etiqueta']
+        self.X = data['User Input']
+        self.y = data['Label']
         # Dividir los datos en conjuntos de entrenamiento y prueba
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
-        self.responses = pd.read_csv(self.csv_chatbot_file, index_col='Etiqueta')
+        self.responses = pd.read_csv(self.csv_chatbot_file, index_col='Label')
 
     def train_model(self):
         self.pipeline = Pipeline([
@@ -76,15 +81,17 @@ class SVMChatbot:
         predicted_label = predicted_response[0]
 
         # Obtener la respuesta asociada a la etiqueta predicha
-        response = self.responses.loc[predicted_label, 'Respuesta del Chatbot']
+        response = self.responses.loc[predicted_label, 'Chatbot Response']
+    
         return response
-
+    
 
 # Uso de la clase SVMChatbot
 chatbot = SVMChatbot('hotel_usuario.csv','hotel_chatbot.csv')  # Crear una instancia del chatbot
 chatbot.load_data()  # Cargar los datos de entrenamiento
 chatbot.train_model()  # Entrenar el modelo SVM
 
-input_text = "platos que tengo en menu"
+input_text = "I want to see the menu"
 predicted_response = chatbot.predict_response(input_text)
-print("Respuesta del chatbot:", predicted_response)
+print("Chatbot Response:", predicted_response)
+

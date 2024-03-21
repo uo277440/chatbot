@@ -1,0 +1,10 @@
+Chatbot Response,Label
+Good morning,GREETING
+Hello,GREETING
+How are you?,GREETING
+I would like to make a reservation,RESERVATION
+Do you have any available tables?,RESERVATION
+What is the menu of the day?,MENU
+What vegetarian dishes do you have?,MENU
+Thank you,THANKS
+See you later,FAREWELL

@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import './ChatInput.css'; // Estilos CSS personalizados
+
 function ChatInput({ onSubmit }) {
     const [message, setMessage] = useState('');
 
@@ -26,4 +28,5 @@ function ChatInput({ onSubmit }) {
         </form>
     );
 }
+
 export default ChatInput;

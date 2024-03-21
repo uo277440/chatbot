@@ -1,0 +1,29 @@
+.chatbot-container {
+    width: 400px;
+    margin: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.chatbot {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; 
+}
+
+.messages-section {
+    flex: 1; 
+    max-height: calc(100vh - 50px); 
+    overflow-y: auto; 
+}
+
+.input-section {
+    height: 10vh; 
+}
+
+
+
+
+

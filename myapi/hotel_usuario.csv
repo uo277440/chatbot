@@ -1,0 +1,6 @@
+User Input,Label
+Good morning how can I help you?,GREETING
+Sure for how many people would the reservation be?,RESERVATION
+These are our dishes of the day: [list of dishes],MENU
+You're welcome I'm here to help you,THANKS
+See you later have a nice day!,FAREWELL

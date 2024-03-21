@@ -34,6 +34,6 @@ class TextProcessor:
 
 # Ejemplo de uso:
 text_processor = TextProcessor()
-input_text = "Tenéis algún menú interesante?"
+input_text = "You're welcome I'ms hedasdassre to help you"
 processed_text = text_processor.process_text(input_text)
 print(processed_text)

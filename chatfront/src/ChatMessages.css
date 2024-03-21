@@ -1,0 +1,26 @@
+.chat-messages {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    max-height: 80vh; /* Límite de altura para el contenedor de mensajes */
+    overflow-y: auto; /* Activar el desplazamiento vertical cuando sea necesario */
+}
+
+.message {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.user {
+    align-self: flex-end;
+    background-color: #DCF8C6;
+}
+
+.bot {
+    align-self: flex-start;
+    background-color: #afe6e6;
+}
+
