@@ -7,4 +7,51 @@ Here is our menu for today: [list of dishes],MENU
 Would you like any recommendations from our menu?,MENU
 Thank you for choosing our hotel. We look forward to your stay.,THANKS
 Please let me know if there's anything else I can assist you with.,THANKS
+Do you have any other questions or requests?,QUESTION
 Have a pleasant day!,FAREWELL
+"I'm sorry, but we're fully booked for that date.",CHECK_NO_AVAILABILITY
+"Unfortunately, we don't have any availability for that night.",CHECK_NO_AVAILABILITY
+"I'm afraid we're completely booked up for that particular evening.",CHECK_NO_AVAILABILITY
+"I'm sorry, but all our rooms are reserved for that date.",CHECK_NO_AVAILABILITY
+"Regrettably, we're unable to accommodate you on that date as we're at full capacity.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available for the date you requested.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we're unable to fulfill your request for that particular date.",CHECK_NO_AVAILABILITY
+"I'm afraid we're fully occupied on the date you're looking for.",CHECK_NO_AVAILABILITY
+"I regret to inform you that we're fully reserved for the date in question.",CHECK_NO_AVAILABILITY
+"I apologize, but there are no vacancies for the date you've chosen.",CHECK_NO_AVAILABILITY
+"Yes, we have availability for that date.",CHECK_AVAILABILITY
+"Certainly, your reservation is confirmed for the selected date.",CHECK_AVAILABILITY
+"Absolutely, we can accommodate you on that day.",CHECK_AVAILABILITY
+"Yes, your booking is secured for the requested date.",CHECK_AVAILABILITY
+"Confirmed, your reservation is set for the chosen date.",CHECK_AVAILABILITY
+"Affirmative, we have space available on the specified date.",CHECK_AVAILABILITY
+"Confirmed, we'll be expecting you on that day.",CHECK_AVAILABILITY
+"Yes, your reservation is confirmed and scheduled for that date.",CHECK_AVAILABILITY
+"Could you please provide your full name and NIF for the reservation?",TAKE_DETAILS
+"We'll need your complete name and NIF to proceed with the booking. May I have them, please?",TAKE_DETAILS
+"To finalize the reservation, could you share your full name and NIF?",TAKE_DETAILS
+"Before confirming your reservation, we require your full name and NIF. Could you provide them?",TAKE_DETAILS
+"In order to secure your booking, we'll need your name and NIF. Could you kindly share them with us?",TAKE_DETAILS
+"To complete the reservation process, we kindly ask for your full name and NIF. Could you provide them, please?",TAKE_DETAILS
+"Before we proceed with the reservation, could you confirm your full name and NIF for our records?",TAKE_DETAILS
+"For our records, we'll need your full name and NIF to confirm the reservation. Could you provide them now?",TAKE_DETAILS
+"Is there anything else I can assist you with?",ASK_QUESTION
+"Do you have any other requests or questions?",ASK_QUESTION
+"Are there any additional services or information you require?",ASK_QUESTION
+"Would you like assistance with anything else?",ASK_QUESTION
+"Do you need help with anything else?",ASK_QUESTION
+"Are there any other concerns or inquiries you have?",ASK_QUESTION
+"Is there any further assistance you need?",ASK_QUESTION
+"Are there any other matters I can help you with?",ASK_QUESTION
+"Would you like to inquire about anything else?",ASK_QUESTION
+"Do you require assistance with any other arrangements?",ASK_QUESTION
+"Your reservation has been successfully confirmed.",CONFIRM_RESERVATION
+"I'm pleased to inform you that your booking has been confirmed.",CONFIRM_RESERVATION
+"Great news! Your reservation is now confirmed.",CONFIRM_RESERVATION
+"I'm happy to confirm that your booking has been secured.",CONFIRM_RESERVATION
+"Your reservation is all set and confirmed.",CONFIRM_RESERVATION
+"Consider your reservation confirmed and ready to go.",CONFIRM_RESERVATION
+"You're all set! Your booking is confirmed and guaranteed.",CONFIRM_RESERVATION
+"Your reservation is now officially confirmed.",CONFIRM_RESERVATION
+"Confirmation of your booking has been processed.",CONFIRM_RESERVATION
+"Rest assured, your reservation is confirmed and confirmed.",CONFIRM_RESERVATION

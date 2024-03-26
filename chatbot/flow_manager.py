@@ -5,6 +5,7 @@ class FlowManager:
         self.flow = self.load_flow(json_file, flow_name) 
         self.next_options = ["GREETING"]
         self.finished = False
+        self.response = None
 
     def load_flow(self, json_file, flow_name):
         with open(json_file, 'r') as file:
@@ -20,6 +21,7 @@ class FlowManager:
             for step in self.flow.get('steps', []):
                 if step['label'] == next_label:
                     self.next_options = step.get('options', [])
+                    self.response = step['message']
                     if not self.next_options:
                         self.finished=True
                         print("FLUJO TERMINADO")

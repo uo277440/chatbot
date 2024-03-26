@@ -4,14 +4,19 @@ from rest_framework import viewsets
 from .serializer import UserSerializer
 from .models import User
 from chatbot.svm import SVMChatbot
+from chatbot.grammar import GrammarCorrector
+from chatbot.flow_manager import FlowManager
 
 
 class UserView(viewsets.ModelViewSet):
     serializer_class=UserSerializer
     queryset = User.objects.all()
 
-chatbot = SVMChatbot('hotel_usuario.csv', 'hotel_chatbot.csv')
-    
+chatbot = SVMChatbot('hotel_usuario.csv')
+chatbot.load_data()  
+chatbot.train_model()
+grammarCorrector = GrammarCorrector()  
+flowManager = FlowManager('hotel_flujos.json', 'RESERVATION_FLOW')
 @api_view(['GET'])
 def hello_world(request):
     return Response({'message': 'Hello, world!'})
@@ -20,7 +25,10 @@ def hello_world(request):
 def chatbot_response(request):
     if request.method == 'GET':
         user_message = request.GET.get('message', '')
-        chatbot.load_data()  
-        chatbot.train_model()
+        grammarCorrector.correct_text(user_message)
         bot_response = chatbot.predict_response(user_message)
-        return Response({'response': bot_response})
+        if(flowManager.advance(bot_response)):
+            response=flowManager.response + bot_response
+        else:
+            response="FLUJO NO VA BIEN" + bot_response
+        return Response({'response': response})
