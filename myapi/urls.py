@@ -8,5 +8,6 @@ router = routers.DefaultRouter()
 
 urlpatterns = [
     path('hello-world/', views.hello_world, name='hello_world'),
-    path("chatbot_response/",views.chatbot_response, name='chatbot_response')
+    path("chatbot_response/",views.chatbot_response, name='chatbot_response'),
+    path("mascot_message/",views.mascot_message, name='mascot_message')
 ]

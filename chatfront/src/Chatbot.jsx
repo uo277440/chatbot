@@ -3,6 +3,7 @@ import axios from 'axios';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
+import Mascot from './Mascot';
 
 function Chatbot() {
     const [messages, setMessages] = useState([]);
@@ -25,12 +26,16 @@ function Chatbot() {
     return (
         <div className="chatbot">
             <ChatHeader />
+            <div className="mascot-section">
+                <Mascot/>
+            </div>
             <div className="messages-section">
                 <ChatMessages messages={messages} />
             </div>
             <div className="input-section">
                 <ChatInput onSubmit={handleSubmitMessage} />
             </div>
+            
         </div>
         
     );

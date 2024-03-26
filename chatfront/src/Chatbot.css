@@ -22,6 +22,12 @@
 .input-section {
     height: 10vh; 
 }
+.mascot-section {
+    position: fixed;
+    top: 20px; /* Ajusta según sea necesario */
+    right: 20px; /* Ajusta según sea necesario */
+    z-index: 9999; /* Asegura que esté por encima de otros elementos */
+}
 
 
 

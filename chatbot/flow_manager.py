@@ -4,6 +4,7 @@ class FlowManager:
     def __init__(self, json_file, flow_name):
         self.flow = self.load_flow(json_file, flow_name) 
         self.next_options = ["GREETING"]
+        self.current_label=None
         self.finished = False
         self.response = None
 
@@ -15,11 +16,17 @@ class FlowManager:
             if flow.get('name') == flow_name:
                 return flow
         return None
-    
+    def suggest(self):
+        for step in self.flow.get('steps', []):
+                if step['label'] == self.current_label:
+                    return step['suggestion']
+        return 'Start with a greeting message!'
+
     def advance(self, next_label):
         if next_label in self.next_options:
             for step in self.flow.get('steps', []):
                 if step['label'] == next_label:
+                    self.current_label = next_label
                     self.next_options = step.get('options', [])
                     self.response = step['message']
                     if not self.next_options:

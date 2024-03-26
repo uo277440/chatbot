@@ -24,6 +24,7 @@ def hello_world(request):
 @api_view(['GET'])
 def chatbot_response(request):
     if request.method == 'GET':
+        print('holaaaaaaaaaa')
         user_message = request.GET.get('message', '')
         grammarCorrector.correct_text(user_message)
         bot_response = chatbot.predict_response(user_message)
@@ -32,3 +33,7 @@ def chatbot_response(request):
         else:
             response="FLUJO NO VA BIEN" + bot_response
         return Response({'response': response})
+@api_view(['GET'])
+def mascot_message(request):
+    if request.method == 'GET':
+        return Response({'response': flowManager.suggest()})
