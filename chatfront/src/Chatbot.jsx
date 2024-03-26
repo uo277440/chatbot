@@ -4,6 +4,7 @@ import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
 import Mascot from './Mascot';
+import './Chatbot.css';
 
 function Chatbot() {
     const [messages, setMessages] = useState([]);

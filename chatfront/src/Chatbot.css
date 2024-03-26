@@ -5,12 +5,18 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
+    background-image: url('hotel.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .chatbot {
     display: flex;
     flex-direction: column;
     height: 100vh; 
+    background-image: url('hotel.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
 .messages-section {
@@ -28,6 +34,7 @@
     right: 20px; /* Ajusta según sea necesario */
     z-index: 9999; /* Asegura que esté por encima de otros elementos */
 }
+
 
 
 

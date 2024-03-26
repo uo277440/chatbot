@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import './Mascot.css';
 
 function Mascot() {
     const [isVisible, setIsVisible] = useState(false);
