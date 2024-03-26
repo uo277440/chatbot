@@ -1,0 +1,47 @@
+{
+    "flows": [
+      {
+        "name": "RESERVATION_FLOW",
+        "steps": [
+          {
+            "label": "GREETING",
+            "message": "Hello! I'd like to make a reservation for tonight.",
+            "options": ["CHECK_AVAILABILITY","CHECK_NO_AVAILABILITY"]
+          },
+          {
+            "label": "CHECK_NO_AVAILABILITY",
+            "message": "Ok,im sorry to hear that",
+            "options": ["ASK_QUESTION"]
+          },
+          {
+            "label": "CHECK_AVAILABILITY",
+            "message": "Ok, thats fine to me",
+            "options": ["TAKE_DETAILS"]
+          },
+          {
+            "label": "TAKE_DETAILS",
+            "message": "My name is pepito, my dni is x",
+            "options": ["CONFIRM_RESERVATION"]
+          },
+          {
+            "label": "CONFIRM_RESERVATION",
+            "message": "Thanks you so much",
+            "options": ["ASK_QUESTION"]
+          },
+          {
+            "label": "ASK_QUESTION",
+            "message": "No, thanks",
+            "options": ["FAREWELL"]
+          },
+          {
+            "label": "FAREWELL",
+            "message": "No, thanks",
+            "options": []
+          }
+        ]
+      }
+    ]
+  }
+  
+
+  
