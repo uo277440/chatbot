@@ -1,14 +1,27 @@
 User Input,Label
 Good morning how can I assist you?,GREETING
 Welcome to our hotel how may I help you today?,GREETING
-Sure I'd be happy to assist you. How many guests will be checking in?,RESERVATION
-Could you please provide your reservation details?,RESERVATION
-Here is our menu for today: [list of dishes],MENU
-Would you like any recommendations from our menu?,MENU
-Thank you for choosing our hotel. We look forward to your stay.,THANKS
-Please let me know if there's anything else I can assist you with.,THANKS
-Do you have any other questions or requests?,QUESTION
-Have a pleasant day!,FAREWELL
+"Welcome to our hotel! Is there anything I can assist you with today?",GREETING
+"Good [morning/afternoon/evening] and welcome to our hotel! How may I be of service to you?",GREETING
+"Greetings and welcome! How can I help make your stay more comfortable?",GREETING
+"Hello and a warm welcome to our hotel! What can I do to assist you during your visit?",GREETING
+"Welcome to [hotel name]! How may I help you make the most of your time here?",GREETING
+"Hi there, and welcome! Is there anything specific you need assistance with today?",GREETING
+"A pleasant welcome to our hotel! How can I make your stay with us more enjoyable?",GREETING
+"Greetings and a hearty welcome! Please let me know how I can assist you during your stay.",GREETING
+"Hello and welcome to our hotel! What can I do to ensure you have a pleasant experience?",GREETING
+"Welcome, traveler! How can I make your visit to our hotel more memorable?",GREETING
+"Have a pleasant day!",FAREWELL
+"Thank you for choosing our hotel. Have a wonderful day!",FAREWELL
+"We hope you enjoyed your stay. Safe travels!",FAREWELL
+"It was a pleasure serving you. Until next time!",FAREWELL
+"Wishing you a fantastic day ahead. Goodbye for now!",FAREWELL
+"If you need any assistance in the future, don't hesitate to reach out. Goodbye!",FAREWELL
+"Take care and have a great day!",FAREWELL
+"We appreciate your visit. Farewell and best wishes!",FAREWELL
+"Goodbye and thank you for staying with us!",FAREWELL
+"We hope to welcome you back soon. Goodbye!",FAREWELL
+"May the rest of your day be filled with joy. Goodbye!",
 "I'm sorry, but we're fully booked for that date.",CHECK_NO_AVAILABILITY
 "Unfortunately, we don't have any availability for that night.",CHECK_NO_AVAILABILITY
 "I'm afraid we're completely booked up for that particular evening.",CHECK_NO_AVAILABILITY
@@ -37,6 +50,7 @@ Have a pleasant day!,FAREWELL
 "For our records, we'll need your full name and NIF to confirm the reservation. Could you provide them now?",TAKE_DETAILS
 "Is there anything else I can assist you with?",ASK_QUESTION
 "Do you have any other requests or questions?",ASK_QUESTION
+Do you have any other questions or requests?,ASK_QUESTION
 "Are there any additional services or information you require?",ASK_QUESTION
 "Would you like assistance with anything else?",ASK_QUESTION
 "Do you need help with anything else?",ASK_QUESTION
@@ -45,3 +59,13 @@ Have a pleasant day!,FAREWELL
 "Are there any other matters I can help you with?",ASK_QUESTION
 "Would you like to inquire about anything else?",ASK_QUESTION
 "Do you require assistance with any other arrangements?",ASK_QUESTION
+"Your reservation has been successfully confirmed.",CONFIRM_RESERVATION
+"I'm pleased to inform you that your booking has been confirmed.",CONFIRM_RESERVATION
+"Great news! Your reservation is now confirmed.",CONFIRM_RESERVATION
+"I'm happy to confirm that your booking has been secured.",CONFIRM_RESERVATION
+"Your reservation is all set and confirmed.",CONFIRM_RESERVATION
+"Consider your reservation confirmed and ready to go.",CONFIRM_RESERVATION
+"You're all set! Your booking is confirmed and guaranteed.",CONFIRM_RESERVATION
+"Your reservation is now officially confirmed.",CONFIRM_RESERVATION
+"Confirmation of your booking has been processed.",CONFIRM_RESERVATION
+"Rest assured, your reservation is confirmed and confirmed.",CONFIRM_RESERVATION

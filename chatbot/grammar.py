@@ -9,13 +9,40 @@ class GrammarCorrector:
             corrections = []
             for match in data['matches']:
                 corrections.append((match['offset'], match['length'], match['message']))
-            return corrections
+            return self.messaje(corrections)
         else:
             print("Error:", response.status_code)
+    def messaje(self,corrections):
+        suggestion_messages = []
+        for correction in corrections:
+            #print("Sugerencia:", correction[2], "En posición:", correction[0])
+            error_offset = correction[0]
+            words = input_text.split()
+            current_offset = 0
+            for word in words:
+                if current_offset <= error_offset < current_offset + len(word):
+                    suggestion_messages.append("Sugerencia:"+ correction[2] + " En la palabra:" +word)
+                current_offset += len(word) + 1
+        return suggestion_messages
 
 # Ejemplo de uso
 grammar = GrammarCorrector()
-input_text = "I am an engineer and I love programming."
-corrections = grammar.correct_text(input_text)
+input_text = "I regret to inform you that we're fully reserved for the date in question."
+for suggestion in grammar.correct_text(input_text):
+    print(suggestion)
+#print(grammar.correct_text(input_text))
+'''
+print(corrections)
 for correction in corrections:
     print("Sugerencia:", correction[2], "En posición:", correction[0])
+    # Obtener la palabra en la posición del error
+    error_offset = correction[0]
+    words = input_text.split()  # Dividir el texto en palabras
+    word_index = 0
+    current_offset = 0
+    for word in words:
+        if current_offset <= error_offset < current_offset + len(word):
+            print("Palabra en la posición del error:", word)
+            break
+        current_offset += len(word) + 1  # Sumar 1 para contar el espacio después de cada palabra
+        '''

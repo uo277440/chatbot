@@ -10,6 +10,7 @@ from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 import numpy as np
 import string
+from sklearn.calibration import CalibratedClassifierCV
 
 
 class TextTokenizer(BaseEstimator, TransformerMixin):
@@ -48,10 +49,11 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         '''
         return ' '.join(lemmatized_tokens)
 class SVMChatbot:
-    def __init__(self, csv_user_file):
+    def __init__(self, csv_user_file,confidence_threshold=0.33):
         self.csv_user_file = csv_user_file
         self.text_processor = TextTokenizer()
         self.pipeline = None
+        self.confidence_threshold = confidence_threshold
        
         
 
@@ -67,13 +69,16 @@ class SVMChatbot:
         
 
     def train_model(self):
+        base_classifier = SVC(kernel='linear')
+        calibrated_classifier = CalibratedClassifierCV(base_classifier)
         self.pipeline = Pipeline([
             ('tokenizer', TextTokenizer()),  # Tokenización y lematización personalizadas
             ('vectorizer', CountVectorizer()),  # Convertir el texto en vectores de características
-            ('classifier', SVC(kernel='linear'))  # Clasificador SVM lineal
+            #('classifier', SVC(kernel='linear'))  # Clasificador SVM lineal
+            ('classifier', calibrated_classifier)
         ])
         print(self.X)
-        self.pipeline.fit(self.X,self.y)
+        self.pipeline.fit(self.X_train,self.y_train)
 
     def evaluate_model(self):
         # Evaluar el modelo en el conjunto de prueba
@@ -85,6 +90,27 @@ class SVMChatbot:
         predicted_response = self.pipeline.predict([processed_input_text])
         predicted_label = predicted_response[0]
         return predicted_label
+    def predict_response_with_confidence(self, input_text):
+    # Preprocesar el texto
+        processed_input_text = self.text_processor.tokenize_and_lemmatize(input_text)
+
+        # Predecir la etiqueta y obtener las probabilidades
+        predicted_label = self.pipeline.predict([processed_input_text])[0]
+        probabilities = self.pipeline.predict_proba([processed_input_text])[0]
+        predicted_labels = self.pipeline.classes_
+        for label, probability in zip(predicted_labels, probabilities):
+            print(f"Etiqueta: {label}, Probabilidad: {probability}")
+
+        # Obtener la probabilidad asociada a la etiqueta predicha
+        probability = probabilities[self.pipeline.classes_.tolist().index(predicted_label)]
+
+        # Verificar si la confianza supera el umbral
+        if probability >= self.confidence_threshold:
+            #return predicted_label,probability,probabilities
+            return predicted_label
+        else:
+            #return None,probabilities,predicted_label,probability
+            return None
     
 
 # Uso de la clase SVMChatbot
@@ -92,7 +118,7 @@ chatbot = SVMChatbot('hotel_usuario.csv')  # Crear una instancia del chatbot
 chatbot.load_data()  # Cargar los datos de entrenamiento
 chatbot.train_model()  # Entrenar el modelo SVM
 
-input_text = "Confirmed, your reservation is set for the chosen date."
-predicted_response = chatbot.predict_response(input_text)
+input_text = "I like to travel to hotels"
+predicted_response = chatbot.predict_response_with_confidence(input_text)
 print("Chatbot Response:", predicted_response)
 

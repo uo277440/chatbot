@@ -26,12 +26,16 @@ def chatbot_response(request):
     if request.method == 'GET':
         print('holaaaaaaaaaa')
         user_message = request.GET.get('message', '')
-        grammarCorrector.correct_text(user_message)
-        bot_response = chatbot.predict_response(user_message)
+        suggestions = grammarCorrector.correct_text(user_message)
+        if suggestions:
+            return Response({'response': suggestions})
+        bot_response = chatbot.predict_response_with_confidence(user_message)
         if(flowManager.advance(bot_response)):
             response=flowManager.response + bot_response
         else:
             response="FLUJO NO VA BIEN" + bot_response
+        if(response is None):
+            return Response({'response': 'La respuesta es incoherente'})
         return Response({'response': response})
 @api_view(['GET'])
 def mascot_message(request):
