@@ -1,6 +1,6 @@
 User Input,Label
-"Good morning how can I assist you?",GREETING
-"Welcome to our hotel how may I help you today?",GREETING
+Good morning how can I assist you?,GREETING
+Welcome to our hotel how may I help you today?,GREETING
 "Welcome to our hotel! Is there anything I can assist you with today?",GREETING
 "Good [morning/afternoon/evening] and welcome to our hotel! How may I be of service to you?",GREETING
 "Greetings and welcome! How can I help make your stay more comfortable?",GREETING
@@ -22,16 +22,6 @@ User Input,Label
 "Goodbye and thank you for staying with us!",FAREWELL
 "We hope to welcome you back soon. Goodbye!",FAREWELL
 "May the rest of your day be filled with joy. Goodbye!",
-"I'm sorry, but we're fully booked for that date.",CHECK_NO_AVAILABILITY
-"Unfortunately, we don't have any availability for that night.",CHECK_NO_AVAILABILITY
-"I'm afraid we're completely booked up for that particular evening.",CHECK_NO_AVAILABILITY
-"I'm sorry, but all our rooms are reserved for that date.",CHECK_NO_AVAILABILITY
-"Regrettably, we're unable to accommodate you on that date as we're at full capacity.",CHECK_NO_AVAILABILITY
-"Unfortunately, there are no rooms available for the date you requested.",CHECK_NO_AVAILABILITY
-"I'm sorry, but we're unable to fulfill your request for that particular date.",CHECK_NO_AVAILABILITY
-"I'm afraid we're fully occupied on the date you're looking for.",CHECK_NO_AVAILABILITY
-"I regret to inform you that we're fully reserved for the date in question.",CHECK_NO_AVAILABILITY
-"I apologize, but there are no vacancies for the date you've chosen.",CHECK_NO_AVAILABILITY
 "Yes, we have availability for that date.",CHECK_AVAILABILITY
 "Certainly, your reservation is confirmed for the selected date.",CHECK_AVAILABILITY
 "Absolutely, we can accommodate you on that day.",CHECK_AVAILABILITY
@@ -40,8 +30,6 @@ User Input,Label
 "Affirmative, we have space available on the specified date.",CHECK_AVAILABILITY
 "Confirmed, we'll be expecting you on that day.",CHECK_AVAILABILITY
 "Yes, your reservation is confirmed and scheduled for that date.",CHECK_AVAILABILITY
-"Certainly, we can reserve a room for you on that date.",CHECK_AVAILABILITY
-"Yes, we do have rooms available for your requested date.",CHECK_AVAILABILITY
 "Could you please provide your full name and NIF for the reservation?",TAKE_DETAILS
 "We'll need your complete name and NIF to proceed with the booking. May I have them, please?",TAKE_DETAILS
 "To finalize the reservation, could you share your full name and NIF?",TAKE_DETAILS
@@ -52,7 +40,8 @@ User Input,Label
 "For our records, we'll need your full name and NIF to confirm the reservation. Could you provide them now?",TAKE_DETAILS
 "Is there anything else I can assist you with?",ASK_QUESTION
 "Do you have any other requests or questions?",ASK_QUESTION
-"Do you have any other questions or requests?",ASK_QUESTION
+Do you have any other questions or requests?,ASK_QUESTION
+"Are there any additional services or information you require?",ASK_QUESTION
 "Would you like assistance with anything else?",ASK_QUESTION
 "Do you need help with anything else?",ASK_QUESTION
 "Are there any other concerns or inquiries you have?",ASK_QUESTION
