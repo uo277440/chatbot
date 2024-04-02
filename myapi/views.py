@@ -44,7 +44,7 @@ def chatbot_response(request):
             return Response({'response': 'La respuesta es incoherente'})
         return Response({'response': response})
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def mascot_message(request):
     if request.method == 'GET':
         return Response({'response': flowManager.suggest()})

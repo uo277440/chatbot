@@ -9,15 +9,15 @@ class GrammarCorrector:
             corrections = []
             for match in data['matches']:
                 corrections.append((match['offset'], match['length'], match['message']))
-            return self.messaje(corrections)
+            return self.messaje(corrections,text)
         else:
             print("Error:", response.status_code)
-    def messaje(self,corrections):
+    def messaje(self,corrections,text):
         suggestion_messages = []
         for correction in corrections:
             #print("Sugerencia:", correction[2], "En posición:", correction[0])
             error_offset = correction[0]
-            words = input_text.split()
+            words = text.split()
             current_offset = 0
             for word in words:
                 if current_offset <= error_offset < current_offset + len(word):
@@ -26,11 +26,13 @@ class GrammarCorrector:
         return suggestion_messages
 
 # Ejemplo de uso
+'''
 grammar = GrammarCorrector()
-input_text = "I regret to inform you that we're fully reserved for the date in question."
+input_text = "Welcome to our hotel how may I help you today?"
 for suggestion in grammar.correct_text(input_text):
     print(suggestion)
 #print(grammar.correct_text(input_text))
+'''
 '''
 print(corrections)
 for correction in corrections:

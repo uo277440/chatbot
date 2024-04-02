@@ -1,15 +1,20 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useContext  } from 'react';
 import axios from 'axios';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
 import Mascot from './Mascot';
+import AuthContext from './AuthContext';
+import NavigationBar from './NavigationBar';
+import { useNavigate } from 'react-router-dom';
 import './Chatbot.css';
 
 function Chatbot() {
     const [messages, setMessages] = useState([]);
+    const { currentUser, setCurrentUser } = useContext(AuthContext)
+    const navigate = useNavigate();
     const axiosInstance = axios.create({
-        baseURL: 'http://127.0.0.1:8000',
+        baseURL: 'http://localhost:8000',
         withCredentials: true
     });
 
@@ -25,10 +30,25 @@ function Chatbot() {
                 console.log(error);
             });
     };
+    function handleLogout(e) {
+        e.preventDefault();
+        axiosInstance.post(
+          "/api/logout",
+          { withCredentials: true }
+        ).then(function (res) {
+          setCurrentUser(false);
+          navigate('/')
+        });
+      }
+    
    
 
     return (
         <div className="chatbot">
+            <NavigationBar
+                currentUser={currentUser}
+                handleLogout={handleLogout}
+            />
             <ChatHeader />
             <div className="mascot-section">
                 <Mascot/>
