@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model,login,logout
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions,status
 from rest_framework.views import APIView
@@ -10,6 +10,7 @@ from chatbot.grammar import GrammarCorrector
 from chatbot.flow_manager import FlowManager
 from .validations import custom_validation,validate_email,validate_password
 from django.contrib.auth import get_user_model, login, logout
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 
 
@@ -26,6 +27,7 @@ def hello_world(request):
     return Response({'message': 'Hello, world!'})
 
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def chatbot_response(request):
     if request.method == 'GET':
         print('holaaaaaaaaaa')
@@ -42,6 +44,7 @@ def chatbot_response(request):
             return Response({'response': 'La respuesta es incoherente'})
         return Response({'response': response})
 @api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def mascot_message(request):
     if request.method == 'GET':
         return Response({'response': flowManager.suggest()})

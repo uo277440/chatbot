@@ -8,12 +8,15 @@ import './Chatbot.css';
 
 function Chatbot() {
     const [messages, setMessages] = useState([]);
-    
+    const axiosInstance = axios.create({
+        baseURL: 'http://127.0.0.1:8000',
+        withCredentials: true
+    });
 
     const handleSubmitMessage = (message) => {
         const newUserMessage = { text: message, from: 'user' };
         setMessages([...messages, newUserMessage]);
-        axios.get(`http://localhost:8000/api/chatbot_response/?message=${encodeURIComponent(message)}`)
+        axiosInstance.get(`/api/chatbot_response/?message=${encodeURIComponent(message)}`)
             .then(response => {
                 const newBotMessage = { text: response.data.response, from: 'bot' };
                 setMessages([...messages, newUserMessage, newBotMessage]);

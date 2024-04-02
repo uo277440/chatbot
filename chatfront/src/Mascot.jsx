@@ -5,9 +5,12 @@ import './Mascot.css';
 function Mascot() {
     const [isVisible, setIsVisible] = useState(false);
     const [message, setMessage] = useState('');
-
+    const axiosInstance = axios.create({
+        baseURL: 'http://127.0.0.1:8000',
+        withCredentials: true
+    });
     const handleMascotClick = () => {
-        axios.get('http://localhost:8000/api/mascot_message')
+        axiosInstance.get('/api/mascot_message')
             .then(response => {
                 setMessage(response.data.response);
                 setIsVisible(true);
