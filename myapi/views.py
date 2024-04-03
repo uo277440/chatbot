@@ -7,6 +7,7 @@ from rest_framework.views import APIView
 from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer
 from chatbot.svm import SVMChatbot
 from chatbot.grammar import GrammarCorrector
+from chatbot.reproductor import text_to_audio
 from chatbot.flow_manager import FlowManager
 from .validations import custom_validation,validate_email,validate_password
 from django.contrib.auth import get_user_model, login, logout
@@ -44,10 +45,21 @@ def chatbot_response(request):
             return Response({'response': 'La respuesta es incoherente'})
         return Response({'response': response})
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def mascot_message(request):
     if request.method == 'GET':
         return Response({'response': flowManager.suggest()})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def transform(request):
+    if request.method == 'GET':
+        print('hola')
+        text = request.GET.get('text', '')
+        text_to_audio(text)
+        return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+	    
 
 class UserRegister(APIView):
 	permission_classes = (permissions.AllowAny,)

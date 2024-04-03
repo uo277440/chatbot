@@ -23,4 +23,12 @@
     align-self: flex-start;
     background-color: #afe6e6;
 }
-
+.image-button {
+    width: 20px; 
+    height: 20px; 
+    cursor: pointer;
+  }
+  .image-button.disabled {
+    cursor: not-allowed; 
+    opacity: 0.5; 
+  }
