@@ -34,6 +34,10 @@
     right: 20px; /* Ajusta según sea necesario */
     z-index: 9999; /* Asegura que esté por encima de otros elementos */
 }
+.messages-section {
+    overflow-y: hidden; 
+  }
+  
 
 
 

@@ -2,6 +2,7 @@
 .mascot-message {
     background-color: #fff;
     border: 1px solid #ccc;
+    color: black;
     border-radius: 5px;
     padding: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);

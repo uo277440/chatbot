@@ -15,4 +15,6 @@ urlpatterns = [
 	path('logout', views.UserLogout.as_view(), name='logout'),
 	path('user', views.UserView.as_view(), name='user'),
     path('transform', views.transform, name='transform'),
+    path('restart_flow', views.restart_flow, name='restart_flow'),
+    path('translate', views.translate, name='translate'),
 ]

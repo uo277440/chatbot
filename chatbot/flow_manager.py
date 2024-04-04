@@ -16,6 +16,12 @@ class FlowManager:
             if flow.get('name') == flow_name:
                 return flow
         return None
+    def reset_flow(self):
+        self.current_label = None
+        self.next_options = ["GREETING"]
+        self.finished = False
+        self.response = None
+        
     def suggest(self):
         for step in self.flow.get('steps', []):
                 if step['label'] == self.current_label:

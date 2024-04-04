@@ -45,7 +45,7 @@ def chatbot_response(request):
             return Response({'response': 'La respuesta es incoherente'})
         return Response({'response': response})
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def mascot_message(request):
     if request.method == 'GET':
         return Response({'response': flowManager.suggest()})
@@ -56,8 +56,26 @@ def transform(request):
     if request.method == 'GET':
         print('hola')
         text = request.GET.get('text', '')
-        text_to_audio(text)
+        sourceLang = request.GET.get('source', '')
+        return Response({'delay': text_to_audio(text,sourceLang)})
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def restart_flow(request):
+    if request.method == 'GET':
+        flowManager.reset_flow()
         return Response(status=status.HTTP_200_OK)
+    return Response(status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def translate(request):
+    if request.method == 'GET':
+        text = request.GET.get('text', '')
+        targetLang = request.GET.get('target', '')
+        translated_text=grammarCorrector.translate_to_spanish(text,targetLang)
+        print(translated_text)
+        print(targetLang)
+        return Response({'translated_text': translated_text})
     return Response(status=status.HTTP_400_BAD_REQUEST)
 	    
 

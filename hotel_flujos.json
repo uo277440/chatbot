@@ -5,9 +5,9 @@
         "steps": [
           {
             "label": "GREETING",
-            "message": "Hello! I'd like to make a reservation for tonight.",
+            "message": "Hello! I would like to make a reservation for tonight.",
             "suggestion":"At this moment, you should check if there is availability for the requested reservation. Since it's a fictional scenario, you can decide. Communicate the availability or unavailability of the reservation.",
-            "options": ["CHECK_AVAILABILITY","CHECK_NO_AVAILABILITY "]
+            "options": ["CHECK_AVAILABILITY","CHECK_NO_AVAILABILITY"]
           },
           {
             "label": "CHECK_NO_AVAILABILITY",
@@ -42,7 +42,7 @@
           {
             "label": "FAREWELL",
             "message": "Nice day",
-            "suggestion":"Well done !",
+            "suggestion":"Well done ! Reinicia el flujo si quieres volver a practicar este escenario !",
             "options": []
           }
         ]

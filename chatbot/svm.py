@@ -50,7 +50,7 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         '''
         return ' '.join(lemmatized_tokens)
 class SVMChatbot:
-    def __init__(self, csv_user_file,confidence_threshold=0.33):
+    def __init__(self, csv_user_file,confidence_threshold=0.10):
         self.csv_user_file = csv_user_file
         self.text_processor = TextTokenizer()
         self.pipeline = None

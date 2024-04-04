@@ -1,4 +1,5 @@
 import requests
+from googletrans import Translator
 class GrammarCorrector:
     def correct_text(self,text):
         url = 'https://languagetool.org/api/v2/check'
@@ -24,6 +25,11 @@ class GrammarCorrector:
                     suggestion_messages.append("Sugerencia:"+ correction[2] + " En la palabra:" +word)
                 current_offset += len(word) + 1
         return suggestion_messages
+    def translate_to_spanish(self,text,targetLang):
+        translator = Translator()
+        translation = translator.translate(text, dest=targetLang)
+        translated_text = translation.text
+        return translated_text
 
 # Ejemplo de uso
 '''

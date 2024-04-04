@@ -17,6 +17,9 @@ function Chatbot() {
         baseURL: 'http://localhost:8000',
         withCredentials: true
     });
+    const handleClearMessages = () => {
+        setMessages([]);
+    };
 
     const handleSubmitMessage = (message) => {
         const newUserMessage = { text: message, from: 'user' };
@@ -25,6 +28,15 @@ function Chatbot() {
             .then(response => {
                 const newBotMessage = { text: response.data.response, from: 'bot' };
                 setMessages([...messages, newUserMessage, newBotMessage]);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+    const restartFlow = () => {
+        axiosInstance.get(`/api/restart_flow`)
+            .then(response => {
+                console.log('hola')
             })
             .catch(error => {
                 console.log(error);
@@ -49,15 +61,12 @@ function Chatbot() {
                 currentUser={currentUser}
                 handleLogout={handleLogout}
             />
-            <ChatHeader />
-            <div className="mascot-section">
-                <Mascot/>
-            </div>
+            <ChatHeader handleClearMessages={handleClearMessages} restartFlow={restartFlow}/>
             <div className="messages-section">
-                <ChatMessages messages={messages} />
+                <ChatMessages messages={messages} setMessages={setMessages}/>
             </div>
             <div className="input-section">
-                <ChatInput onSubmit={handleSubmitMessage} />
+                <ChatInput onSubmit={handleSubmitMessage}/>
             </div>
             
         </div>

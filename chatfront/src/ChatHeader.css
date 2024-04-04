@@ -1,7 +1,29 @@
 .chat-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #9cf1f7;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .chat-header h1 {
+    margin: 0;
+    font-size: 20px;
+  }
+  
+  .chat-header button {
+    padding: 8px 16px;
+    margin-left: 10px;
+    border: none;
     background-color: #007bff;
     color: #fff;
-    padding: 15px;
-    text-align: center;
-    font-size: 1.5rem;
-}
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .chat-header button:hover {
+    background-color: #0056b3;
+  }
+  
