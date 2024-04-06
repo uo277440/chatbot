@@ -35,7 +35,9 @@ def chatbot_response(request):
         user_message = request.GET.get('message', '')
         suggestions = grammarCorrector.correct_text(user_message)
         if suggestions:
-            return Response({'response': suggestions})
+            response_text = '\n'.join(suggestions)
+            print(response_text)
+            return Response({'response': response_text})
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(flowManager.advance(bot_response)):
             response=flowManager.response + bot_response

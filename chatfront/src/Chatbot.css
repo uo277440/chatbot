@@ -21,12 +21,12 @@
 
 .messages-section {
     flex: 1; 
-    max-height: calc(100vh - 50px); 
+    max-height: calc(100vh - 100px); 
     overflow-y: auto; 
 }
 
 .input-section {
-    height: 10vh; 
+    height: 8vh; 
 }
 .mascot-section {
     position: fixed;

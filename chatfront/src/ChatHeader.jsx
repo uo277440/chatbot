@@ -2,6 +2,7 @@ import React from 'react';
 import './ChatHeader.css';
 import Mascot from './Mascot';
 
+
 function ChatHeader(props) {
     return (
         <div className="chat-header">

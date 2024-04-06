@@ -22,7 +22,7 @@ class GrammarCorrector:
             current_offset = 0
             for word in words:
                 if current_offset <= error_offset < current_offset + len(word):
-                    suggestion_messages.append("Sugerencia:"+ correction[2] + " En la palabra:" +word)
+                    suggestion_messages.append("Suggestion: "+ correction[2] + " In word: " +word)
                 current_offset += len(word) + 1
         return suggestion_messages
     def translate_to_spanish(self,text,targetLang):
