@@ -12,6 +12,7 @@ import numpy as np
 import string
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.preprocessing import LabelEncoder
+from sklearn.feature_extraction.text import TfidfVectorizer
 
 
 class TextTokenizer(BaseEstimator, TransformerMixin):
@@ -76,7 +77,7 @@ class SVMChatbot:
         calibrated_classifier = CalibratedClassifierCV(base_classifier)
         self.pipeline = Pipeline([
             ('tokenizer', TextTokenizer()),  # Tokenización y lematización personalizadas
-            ('vectorizer', CountVectorizer()),  # Convertir el texto en vectores de características
+            ('vectorizer', TfidfVectorizer()),  # Convertir el texto en vectores de características
             #('classifier', SVC(kernel='linear'))  # Clasificador SVM lineal
             ('classifier', calibrated_classifier)
         ])
@@ -123,7 +124,7 @@ chatbot = SVMChatbot('hotel_usuario.csv')  # Crear una instancia del chatbot
 chatbot.load_data()  # Cargar los datos de entrenamiento
 chatbot.train_model()  # Entrenar el modelo SVM
 
-input_text = "laffyatfgafafiova"
+input_text = "Yes, we have availability for tonight."
 predicted_response = chatbot.predict_response_with_confidence(input_text)
 print("Chatbot Response:", predicted_response)
 
