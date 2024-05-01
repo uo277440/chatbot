@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.postgres.fields import ArrayField
+import json
 
 class AppUserManager(BaseUserManager):
 	def create_user(self,email,username, password=None):
@@ -23,15 +24,18 @@ class AppUserManager(BaseUserManager):
 		user.is_superuser = True
 		user.save()
 		return user
-
-
 class AppUser(AbstractBaseUser, PermissionsMixin):
 	user_id = models.AutoField(primary_key=True)
 	email = models.EmailField(max_length=50, unique=True)
 	username = models.CharField(max_length=50)
+	is_superuser=models.BooleanField(default=False)
 	USERNAME_FIELD = 'email'
 	REQUIRED_FIELDS = ['username']
 	objects = AppUserManager()
+ 
+	class Meta:
+		db_table = 'appuser'
+        
 	def __str__(self):
 		return self.username
 
@@ -44,3 +48,35 @@ class Step(models.Model):
     message = models.TextField()
     suggestion = models.TextField()
     options = ArrayField(models.CharField(max_length=100), blank=True)
+
+
+class FlowService(models.Manager):
+    def get_flow_by_name(self, name):
+        try:
+            return self.get(name=name)
+        except Flow.DoesNotExist:
+            return None
+
+    def get_steps_for_flow(self, flow_name):
+        flow = self.get_flow_by_name(flow_name)
+        if flow:
+            return flow.steps.all()
+        return None
+    
+class Flow(models.Model):
+    name = models.CharField(max_length=100,unique=True)
+    objects = FlowService()
+    
+    class Meta:
+        db_table = 'flow'
+		
+
+class Step(models.Model):
+    flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='steps')
+    label = models.CharField(max_length=100)
+    message = models.TextField()
+    suggestion = models.TextField()
+    options = ArrayField(models.CharField(max_length=100), blank=True)
+    
+    class Meta:
+        db_table = 'step'
