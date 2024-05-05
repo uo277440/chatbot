@@ -62,17 +62,30 @@ class FlowService(models.Manager):
         if flow:
             return flow.steps.all()
         return None
+class ScenaryService(models.Manager):
+    def get_scenary_by_name(self, name):
+        try:
+            return self.get(name=name)
+        except Scenery.DoesNotExist:
+            return None
+class Scenery(models.Model):
+    name = models.CharField(max_length=100,unique=True)
+    objects = ScenaryService()
+    
+    class Meta:
+        db_table = 'scenery'
     
 class Flow(models.Model):
     name = models.CharField(max_length=100,unique=True)
     objects = FlowService()
-    
+    scenery = models.ForeignKey(Scenery, on_delete=models.CASCADE, related_name='scenery')
     class Meta:
         db_table = 'flow'
 		
 
 class Step(models.Model):
     flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='steps')
+    
     label = models.CharField(max_length=100)
     message = models.TextField()
     suggestion = models.TextField()
