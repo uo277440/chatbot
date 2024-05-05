@@ -68,6 +68,11 @@ class ScenaryService(models.Manager):
             return self.get(name=name)
         except Scenery.DoesNotExist:
             return None
+    def get_all_scenarios(self):
+        try:
+            return Scenery.objects.all()
+        except Scenery.DoesNotExist:
+            return None
 class Scenery(models.Model):
     name = models.CharField(max_length=100,unique=True)
     objects = ScenaryService()
@@ -85,7 +90,6 @@ class Flow(models.Model):
 
 class Step(models.Model):
     flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='steps')
-    
     label = models.CharField(max_length=100)
     message = models.TextField()
     suggestion = models.TextField()

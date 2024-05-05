@@ -17,5 +17,6 @@ urlpatterns = [
     path('transform', views.transform, name='transform'),
     path('restart_flow', views.restart_flow, name='restart_flow'),
     path('translate', views.translate, name='translate'),
-    path('upload_json', views.upload_json, name='upload_json'),
+    path('upload_scenary', views.upload_scenary, name='upload_scenary'),
+    path('scenarios', views.scenarios, name='scenarios'),
 ]

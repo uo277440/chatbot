@@ -1,0 +1,69 @@
+/* Estilos para el contenedor principal */
+.admin-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilos para los títulos */
+  .admin-title {
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  /* Estilos para los campos de entrada */
+  .input-field {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  /* Estilos para el botón de carga */
+  .upload-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* Estilos para la lista desplegable */
+  .select-field {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+  }
+  
+  /* Estilos para el botón de carga */
+  .file-input {
+    display: none;
+  }
+  
+  /* Estilos para la etiqueta del botón de carga */
+  .file-label {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+  }
+  
+  /* Estilos para la etiqueta del botón de carga al pasar el mouse */
+  .file-label:hover {
+    background-color: #0056b3;
+  }
+  

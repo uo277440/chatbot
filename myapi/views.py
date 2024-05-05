@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions,status
 from rest_framework.views import APIView
-from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer
-from .models import Flow, Step
+from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer
+from .models import Flow, Step,FlowService,ScenaryService
 from chatbot.svm import SVMChatbot
 from chatbot.grammar import GrammarCorrector
 from chatbot.reproductor import text_to_audio
@@ -13,7 +13,7 @@ from chatbot.flow_manager import FlowManager
 from .validations import custom_validation,validate_email,validate_password
 from django.contrib.auth import get_user_model, login, logout
 from rest_framework.permissions import IsAuthenticated, AllowAny
-from .importarFlujos import cargar_datos_json_a_bd
+from .importarFlujos import cargar_datos_a_bd
 from django.http import JsonResponse
 from django.contrib.auth.decorators import user_passes_test
 
@@ -24,27 +24,34 @@ from django.contrib.auth.decorators import user_passes_test
 chatbot = SVMChatbot('hotel_usuario.csv')
 chatbot.load_data()  
 chatbot.train_model()
+scenary_service = ScenaryService()
 grammarCorrector = GrammarCorrector()  
 flowManager = FlowManager('hotel_flujos.json', 'RESERVATION_FLOW')
 def is_admin(user):
     return user.is_superuser
 @api_view(['GET'])
 def hello_world(request):
+    print('adioss')
     return Response({'message': 'Hello, world!'})
-
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def scenarios(request):
+    scenarios = scenary_service.get_all_scenarios()
+    serializer = ScenerySerializer(scenarios, many=True)
+    return Response({'scenarios': serializer.data})
 @api_view(['POST'])
 @permission_classes([AllowAny])
-def upload_json(request):
-    print('estoy aqui')
+def upload_scenary(request):
+    print('holaaaaaa')
     json_file = request.FILES.get('json_file')
-    print('estoy aqui')
+    scenario = request.data.get('scenario')
+    print('holaaaaaa')
+    print(scenario)
     if json_file:
         # Lógica para procesar el archivo JSON y cargarlo en la base de datos
-        print('estoy aqui')
-        cargar_datos_json_a_bd(json_file)
+        cargar_datos_a_bd(json_file,scenario)
         return JsonResponse({'message': 'El JSON se ha subido correctamente'}, status=200)
     else:
-        print('estoy aca')
         return JsonResponse({'error': 'No se proporcionó ningún archivo JSON'}, status=400)
 
 @api_view(['GET'])
