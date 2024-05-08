@@ -40,6 +40,17 @@ class FlowManager:
                         print("FLUJO TERMINADO")
                     return True
         return False
+    def is_finished(self):
+        return self.finished
+class Marker:
+    def __init__(self):
+        self.mark=10
+        
+    def decrease(self):
+        self.mark = self.mark -1 
+        
+    def restart(self):
+        self.mark = 10
 
 # Uso del FlowManager
 flow_manager = FlowManager('hotel_flujos.json', 'RESERVATION_FLOW')

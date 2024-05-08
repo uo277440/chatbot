@@ -97,3 +97,11 @@ class Step(models.Model):
     
     class Meta:
         db_table = 'step'
+
+class Mark(models.Model):
+    flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='flow')
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='user')
+    mark = models.DecimalField(max_digits=2, decimal_places=1)
+    
+    class Meta:
+        db_table = 'mark'
