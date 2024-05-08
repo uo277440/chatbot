@@ -70,7 +70,7 @@ function Login() {
         password: password
       }
     ).then(function (res) {
-      navigate('/chatbot');
+      navigate('/menu');
       setCurrentUser(true);
     });
   }

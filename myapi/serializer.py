@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
-from .models import Scenery,Mark,Flow
+from .models import Scenery,Mark,Flow,Step
 UserModel = get_user_model()
 
 class UserRegisterSerializer(serializers.ModelSerializer):
@@ -39,5 +39,9 @@ class MarkSerializer(serializers.ModelSerializer):
 class FlowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Flow
-        fields = ('id', 'name')
+        fields = '__all__'
+class StepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Step
+        fields = '__all__'
   

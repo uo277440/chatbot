@@ -16,6 +16,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from .importarFlujos import cargar_datos_a_bd
 from django.http import JsonResponse
 from django.contrib.auth.decorators import user_passes_test
+from django.views.decorators.csrf import csrf_exempt
 
 
 
@@ -26,19 +27,40 @@ chatbot.load_data()
 chatbot.train_model()
 scenary_service = ScenaryService()
 grammarCorrector = GrammarCorrector()  
-flowManager = FlowManager('hotel_flujos.json', 'RESERVATION_FLOW')
+flowManager = None
+
 def is_admin(user):
     return user.is_superuser
 @api_view(['GET'])
 def hello_world(request):
     print('adioss')
     return Response({'message': 'Hello, world!'})
+
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def scenarios(request):
     scenarios = scenary_service.get_all_scenarios()
     serializer = ScenerySerializer(scenarios, many=True)
     return Response({'scenarios': serializer.data})
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def update_flow_manager(request):
+    flow_id = request.GET.get('flow_id')
+
+    try:
+        flow = Flow.objects.get(id=flow_id)
+    except Flow.DoesNotExist:
+        return JsonResponse({'error': 'Flujo no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+
+    new_flow_manager = FlowManager(flow.name)
+
+    global flowManager
+    flowManager = new_flow_manager
+
+    return JsonResponse({'message': 'flowManager actualizado correctamente'})
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def upload_scenary(request):

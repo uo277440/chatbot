@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './Menu.css';
 
 function Menu() {
     const [scenarios, setScenarios] = useState([]);
     const [selectedScenario, setSelectedScenario] = useState(null);
     const [flows, setFlows] = useState([]);
+    const navigate = useNavigate();
     const axiosInstance = axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true
@@ -44,9 +46,14 @@ function Menu() {
     };
 
     const handleFlowClick = (flowId) => {
-        // Aquí puedes redirigir a la vista del chatbot con el flujo seleccionado
-        // por ejemplo: history.push(`/chatbot/${flowId}`)
-        console.log('Flow clicked:', flowId);
+        axiosInstance.get(`/api/start_flow?flow_id=${flowId}`)
+            .then(response => {
+                console.log(response.data.message);
+                navigate('/chatbot');
+            })
+            .catch(error => {
+                console.error('Error al iniciar el flujo:', error);
+            });
     };
 
     return (
