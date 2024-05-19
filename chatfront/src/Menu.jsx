@@ -44,6 +44,10 @@ function Menu() {
         setSelectedScenario(scenario);
         fetchFlowsByScenario(scenario.id);
     };
+    const handleScenarioLeave = () => {
+        setSelectedScenario(null);
+        setFlows([]);
+    };
 
     const handleFlowClick = (flowId) => {
         axiosInstance.get(`/api/start_flow?flow_id=${flowId}`)
@@ -63,7 +67,7 @@ function Menu() {
                 {scenarios.map(scenario => (
                     <div key={scenario.id} className="scenario"
                         onMouseEnter={() => handleScenarioHover(scenario)}
-                        onMouseLeave={() => setSelectedScenario(null)}>
+                        onMouseLeave={() => handleScenarioLeave()}>
                         <h2>{scenario.name}</h2>
                         {selectedScenario && selectedScenario.id === scenario.id &&
                             <ul className="flow-list">
