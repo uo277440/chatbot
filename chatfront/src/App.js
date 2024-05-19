@@ -6,6 +6,7 @@ import Login from './Login';
 import Menu from './Menu';
 import AdminView from './AdminView';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
+import AdminMarks from './AdminMarks';
 function App() {
   return (
     <AuthProvider>
@@ -15,6 +16,7 @@ function App() {
             <Route path='/chatbot' element={<Chatbot />} />
             <Route path='/admin' element={<AdminView />} />
             <Route path='/menu' element={<Menu />} />
+            <Route path='/marks' element={<AdminMarks />} />
           </Routes>
       </Router>
     </AuthProvider>

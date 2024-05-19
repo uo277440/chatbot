@@ -4,7 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions,status
 from rest_framework.views import APIView
-from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer,FlowSerializer
+from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer,FlowSerializer,UserSerializer,MarkSerializer
 from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser
 from chatbot.svm import SVMChatbot
 from chatbot.grammar import GrammarCorrector
@@ -131,6 +131,23 @@ def mascot_message(request):
     if request.method == 'GET':
         marker.decrease()
         return Response({'response': flowManager.suggest()})
+@api_view(['GET'])
+@permission_classes([permissions.IsAuthenticated])
+def search_student(request):
+    username = request.query_params.get('username', None)
+    if username:
+        try:
+            user = AppUser.objects.get(username=username)
+            user_serializer = UserSerializer(user)
+            marks = Mark.objects.filter(user=user)
+            marks_serializer = MarkSerializer(marks, many=True)
+            print(user_serializer.data)
+            print(marks_serializer.data)
+            return Response({'user': user_serializer.data, 'marks': marks_serializer.data}, status=status.HTTP_200_OK)
+        except AppUser.DoesNotExist:
+            return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
+    else:
+        return Response({'error': 'Username parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

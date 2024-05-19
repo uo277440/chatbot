@@ -21,4 +21,5 @@ urlpatterns = [
     path('scenarios', views.scenarios, name='scenarios'),
     path('flows/', views.get_flows_by_scenario, name='get_flows_by_scenario'),
     path('start_flow', views.update_flow_manager, name='start_flow'),
+    path('search_student/', views.search_student, name='search_student'),
 ]

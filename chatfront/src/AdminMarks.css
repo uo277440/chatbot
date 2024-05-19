@@ -1,0 +1,45 @@
+.admin-view {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.admin-view h1 {
+    text-align: center;
+}
+
+.admin-view input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+}
+
+.admin-view button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.admin-view button:hover {
+    background-color: #0056b3;
+}
+
+.admin-view h2 {
+    margin-top: 20px;
+}
+
+.admin-view ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-view li {
+    background: #f8f9fa;
+    margin: 5px 0;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+}
