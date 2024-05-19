@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import permissions,status
 from rest_framework.views import APIView
 from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer,FlowSerializer
-from .models import Flow, Step,FlowService,ScenaryService,Mark
+from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser
 from chatbot.svm import SVMChatbot
 from chatbot.grammar import GrammarCorrector
 from chatbot.reproductor import text_to_audio
@@ -21,7 +21,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 
-mark = Marker()
+marker = Marker()
 chatbot = SVMChatbot('hotel_usuario.csv')
 chatbot.load_data()  
 chatbot.train_model()
@@ -54,7 +54,7 @@ def update_flow_manager(request):
         return JsonResponse({'error': 'Flujo no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
 
-    new_flow_manager = FlowManager(flow.name)
+    new_flow_manager = FlowManager(flow.id)
 
     global flowManager
     flowManager = new_flow_manager
@@ -95,6 +95,7 @@ def get_flows_by_scenario(request):
 def chatbot_response(request):
     if request.method == 'GET':
         print('holaaaaaaaaaa')
+        print(flowManager.is_finished())
         user_message = request.GET.get('message', '')
         suggestions = grammarCorrector.correct_text(user_message)
         if suggestions:
@@ -104,15 +105,21 @@ def chatbot_response(request):
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(flowManager.advance(bot_response)):
             response=flowManager.response + bot_response
-            '''
             if flowManager.is_finished():
-                mark_value = mark.
-                user = request.user  
-                flow = 
-                mark = Mark.objects.create(flow=flow, user=user, mark=mark_value)
-                mark.save()
-                '''
-                
+                mark_value = marker.mark
+                try:
+                    print('entre')
+                    user = AppUser.objects.get(user_id=request.user.user_id)
+                    flow = Flow.objects.get(id=flowManager.id)
+                    mark = Mark.objects.create(flow=flow, user=user, mark=mark_value)
+                    mark.save()
+                    print('sali')
+                except AppUser.DoesNotExist:
+                    print('fallo')
+                    return Response({'response': 'Usuario no encontrado'})
+                except Flow.DoesNotExist:
+                    print('falloFlow')
+                    return Response({'response': 'Flujo no encontrado'})
         else:
             response="FLUJO NO VA BIEN" + bot_response
         if(response is None):
@@ -122,7 +129,7 @@ def chatbot_response(request):
 @permission_classes([AllowAny])
 def mascot_message(request):
     if request.method == 'GET':
-        mark.decrease()
+        marker.decrease()
         return Response({'response': flowManager.suggest()})
 
 @api_view(['GET'])
@@ -139,7 +146,7 @@ def transform(request):
 def restart_flow(request):
     if request.method == 'GET':
         flowManager.reset_flow()
-        mark.restart()
+        marker.restart()
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
@@ -149,7 +156,7 @@ def translate(request):
         text = request.GET.get('text', '')
         targetLang = request.GET.get('target', '')
         translated_text=grammarCorrector.translate_to_spanish(text,targetLang)
-        mark.decrease()
+        marker.decrease()
         return Response({'translated_text': translated_text})
     return Response(status=status.HTTP_400_BAD_REQUEST)
 	    

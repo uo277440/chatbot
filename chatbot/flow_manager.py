@@ -2,17 +2,18 @@ import json
 from myapi.models import Flow,Step
 
 class FlowManager:
-    def __init__(self, flow_name):
-        self.flow = self.load_flow(flow_name)
+    def __init__(self, id):
+        self.flow = self.load_flow(id)
+        self.id = id
         self.next_options = ["GREETING"]
         self.current_label = None
         self.finished = False
         self.response = None
         
 
-    def load_flow(self, flow_name):
+    def load_flow(self, flow_id):
         try:
-            flow = Flow.objects.get(name=flow_name)
+            flow = Flow.objects.get(id=flow_id)
             steps = Step.objects.filter(flow=flow)
             self.flow = flow
             self.steps = steps
