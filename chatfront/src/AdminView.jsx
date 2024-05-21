@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import AuthContext from './AuthContext';
 import './Admin.css';
-
+import NavigationBar from './NavigationBar';
 function AdminView() {
   const [file, setFile] = useState(null);
   const [scenarios, setScenarios] = useState([]);
@@ -74,6 +74,7 @@ function AdminView() {
 
   return (
     <div className="admin">
+      <NavigationBar/>
       <h2>Admin View</h2>
       <input type="file" onChange={handleFileChange} />
       

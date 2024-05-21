@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './AdminMarks.css';
-
+import NavigationBar from './NavigationBar';
 function AdminMarks() {
     const [username, setUsername] = useState('');
     const [user, setUser] = useState(null);
@@ -25,6 +25,7 @@ function AdminMarks() {
 
     return (
         <div className="admin-view">
+            <NavigationBar/>
             <h1>Buscar Alumnos</h1>
             <input 
                 type="text" 

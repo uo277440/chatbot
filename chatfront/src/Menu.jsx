@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './Menu.css';
+import NavigationBar from './NavigationBar';
 
 function Menu() {
     const [scenarios, setScenarios] = useState([]);
@@ -62,6 +63,7 @@ function Menu() {
 
     return (
         <div className="menu">
+            <NavigationBar/>
             <h1>Selecciona un escenario:</h1>
             <div className="scenario-container">
                 {scenarios.map(scenario => (

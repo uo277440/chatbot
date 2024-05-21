@@ -44,8 +44,7 @@ function Chatbot() {
 
     return (
         <div className="chatbot">
-            <NavigationBar
-            />
+            <NavigationBar/>
             <ChatHeader handleClearMessages={handleClearMessages} restartFlow={restartFlow}/>
             <div className="messages-section">
                 <ChatMessages messages={messages} setMessages={setMessages}/>

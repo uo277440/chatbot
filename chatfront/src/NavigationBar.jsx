@@ -30,7 +30,7 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
-        <Navbar.Brand>Authentication App</Navbar.Brand>
+        <Navbar.Brand>CHATBOT</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
