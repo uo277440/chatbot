@@ -34,6 +34,7 @@ function Profile() {
 
     return (
         <div className="profile">
+            <NavigationBar/>
             <h1>Perfil de Usuario</h1>
             <div className="user-info">
                 <h2>Información del Usuario</h2>
