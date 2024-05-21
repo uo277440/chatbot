@@ -1,11 +1,32 @@
-// NavigationBar.jsx
-
-import React from 'react';
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
+import AuthContext from './AuthContext';
 
-const NavigationBar = ({ currentUser, handleLogout, registrationToggle, updateFormBtn }) => {
+const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  
+  const axiosInstance = axios.create({
+    baseURL: 'http://localhost:8000',
+    withCredentials: true
+  });
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    axiosInstance.post("/api/logout")
+      .then(res => {
+        setCurrentUser(false);
+        navigate('/');
+      })
+      .catch(error => {
+        console.log('Error during logout:', error);
+      });
+  };
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>

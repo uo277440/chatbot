@@ -70,6 +70,7 @@ function Login() {
         password: password
       }
     ).then(function (res) {
+      setCurrentUser(true);
       const user = res.data.user;
       console.log("Usuario:", user);
       if (user.is_superuser) {
@@ -77,7 +78,6 @@ function Login() {
       } else {
         navigate('/menu');
       }
-      setCurrentUser(true);
     });
   }
 

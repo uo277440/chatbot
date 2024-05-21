@@ -11,8 +11,6 @@ import './Chatbot.css';
 
 function Chatbot() {
     const [messages, setMessages] = useState([]);
-    const { currentUser, setCurrentUser } = useContext(AuthContext)
-    const navigate = useNavigate();
     const axiosInstance = axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true
@@ -42,24 +40,11 @@ function Chatbot() {
                 console.log(error);
             });
     };
-    function handleLogout(e) {
-        e.preventDefault();
-        axiosInstance.post(
-          "/api/logout",
-          { withCredentials: true }
-        ).then(function (res) {
-          setCurrentUser(false);
-          navigate('/')
-        });
-      }
-    
    
 
     return (
         <div className="chatbot">
             <NavigationBar
-                currentUser={currentUser}
-                handleLogout={handleLogout}
             />
             <ChatHeader handleClearMessages={handleClearMessages} restartFlow={restartFlow}/>
             <div className="messages-section">
