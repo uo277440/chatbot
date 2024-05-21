@@ -7,6 +7,7 @@ import Menu from './Menu';
 import AdminView from './AdminView';
 import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import AdminMarks from './AdminMarks';
+import Profile from './Profile';
 function App() {
   return (
     <AuthProvider>
@@ -17,6 +18,7 @@ function App() {
             <Route path='/admin' element={<AdminView />} />
             <Route path='/menu' element={<Menu />} />
             <Route path='/marks' element={<AdminMarks />} />
+            <Route path='/profile' element={<Profile />} />
           </Routes>
       </Router>
     </AuthProvider>

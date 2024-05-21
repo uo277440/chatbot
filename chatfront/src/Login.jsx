@@ -70,7 +70,13 @@ function Login() {
         password: password
       }
     ).then(function (res) {
-      navigate('/menu');
+      const user = res.data.user;
+      console.log("Usuario:", user);
+      if (user.is_superuser) {
+        navigate('/admin');
+      } else {
+        navigate('/menu');
+      }
       setCurrentUser(true);
     });
   }

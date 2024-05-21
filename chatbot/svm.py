@@ -63,7 +63,6 @@ class SVMChatbot:
     def load_data(self):
         # Cargar el archivo CSV
         data = pd.read_csv(self.csv_user_file)
-        print(data)
         # Dividir los datos en características (X) y etiquetas (y)
         self.X = data['User Input']
         self.y = data['Label']
@@ -81,14 +80,12 @@ class SVMChatbot:
             #('classifier', SVC(kernel='linear'))  # Clasificador SVM lineal
             ('classifier', calibrated_classifier)
         ])
-        print(self.X)
         self.y_train_encoded = self.label_encoder.fit_transform(self.y)
         self.pipeline.fit(self.X,self.y_train_encoded)
 
     def evaluate_model(self):
         # Evaluar el modelo en el conjunto de prueba
         accuracy = self.pipeline.score(self.X_test, self.y_test)
-        print("Precisión del modelo en el conjunto de prueba:", accuracy)
     
     def predict_response(self, input_text):
         processed_input_text = (self.text_processor.tokenize_and_lemmatize(input_text))
@@ -104,8 +101,6 @@ class SVMChatbot:
         predicted_scalar = self.pipeline.predict([processed_input_text])[0]
         probabilities = self.pipeline.predict_proba([processed_input_text])[0]
         predicted_labels = self.pipeline.classes_
-        for label, probability in zip(predicted_labels, probabilities):
-            print(f"Etiqueta: {label}, Probabilidad: {probability}")
 
         # Obtener la probabilidad asociada a la etiqueta predicha
         
@@ -118,7 +113,7 @@ class SVMChatbot:
             #return None,probabilities,predicted_label,probability
             return None
     
-
+'''
 # Uso de la clase SVMChatbot
 chatbot = SVMChatbot('hotel_usuario.csv')  # Crear una instancia del chatbot
 chatbot.load_data()  # Cargar los datos de entrenamiento
@@ -127,4 +122,5 @@ chatbot.train_model()  # Entrenar el modelo SVM
 input_text = "Yes, we have availability for tonight."
 predicted_response = chatbot.predict_response_with_confidence(input_text)
 print("Chatbot Response:", predicted_response)
+'''
 

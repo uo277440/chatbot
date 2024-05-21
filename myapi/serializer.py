@@ -17,7 +17,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 class UserLoginSerializer(serializers.Serializer):
 	email = serializers.EmailField()
 	password = serializers.CharField()
-	##
+
 	def check_user(self, clean_data):
 		user = authenticate(username=clean_data['email'], password=clean_data['password'])
 		if not user:
@@ -27,7 +27,7 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
-		fields = ('email', 'username')
+		fields = '__all__'
 class ScenerySerializer(serializers.ModelSerializer):
     class Meta:
         model = Scenery
@@ -46,4 +46,7 @@ class StepSerializer(serializers.ModelSerializer):
     class Meta:
         model = Step
         fields = '__all__'
+class AverageMarkSerializer(serializers.Serializer):
+    flow = FlowSerializer()
+    average_mark = serializers.FloatField()
   
