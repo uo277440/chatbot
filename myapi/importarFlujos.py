@@ -23,3 +23,4 @@ def cargar_datos_a_bd(json_file, scenario_name):
                 suggestion=step_data['suggestion'],
                 options=step_data['options']
             )
+            return flow

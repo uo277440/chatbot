@@ -10,6 +10,7 @@ from nltk.corpus import stopwords
 from nltk.corpus import wordnet
 import numpy as np
 import string
+from io import StringIO
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -51,8 +52,8 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         '''
         return ' '.join(lemmatized_tokens)
 class SVMChatbot:
-    def __init__(self, csv_user_file,confidence_threshold=0.10):
-        self.csv_user_file = csv_user_file
+    def __init__(self, csv_user_content,confidence_threshold=0.10):
+        self.csv_user_content = csv_user_content
         self.text_processor = TextTokenizer()
         self.pipeline = None
         self.confidence_threshold = confidence_threshold
@@ -62,7 +63,7 @@ class SVMChatbot:
 
     def load_data(self):
         # Cargar el archivo CSV
-        data = pd.read_csv(self.csv_user_file)
+        data = pd.read_csv(StringIO(self.csv_user_content))
         # Dividir los datos en características (X) y etiquetas (y)
         self.X = data['User Input']
         self.y = data['Label']

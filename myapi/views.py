@@ -14,6 +14,8 @@ from .validations import custom_validation,validate_email,validate_password
 from django.contrib.auth import get_user_model, login, logout
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .importarFlujos import cargar_datos_a_bd
+from .importTraining import cargar_datos_csv_a_bd
+from .generateCsv import generar_csv_entrenamiento
 from django.db.models import Avg
 from django.http import JsonResponse
 from django.contrib.auth.decorators import user_passes_test
@@ -23,9 +25,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 marker = Marker()
-chatbot = SVMChatbot('hotel_usuario.csv')
-chatbot.load_data()  
-chatbot.train_model()
+chatbot = None
 scenary_service = ScenaryService()
 grammarCorrector = GrammarCorrector()  
 flowManager = None
@@ -56,23 +56,35 @@ def update_flow_manager(request):
 
 
     new_flow_manager = FlowManager(flow.id)
-
+    new_chatbot = SVMChatbot(generar_csv_entrenamiento(flow.id))
     global flowManager
+    global chatbot
     flowManager = new_flow_manager
-
+    chatbot = new_chatbot
+    chatbot.load_data()  
+    chatbot.train_model()
     return JsonResponse({'message': 'flowManager actualizado correctamente'})
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def upload_scenary(request):
-    print('holaaaaaa')
     json_file = request.FILES.get('json_file')
     scenario = request.data.get('scenario')
-    print('holaaaaaa')
     print(scenario)
     if json_file:
         # Lógica para procesar el archivo JSON y cargarlo en la base de datos
-        cargar_datos_a_bd(json_file,scenario)
+        flow = cargar_datos_a_bd(json_file,scenario)
+        return JsonResponse({'message': 'El JSON se ha subido correctamente', 'flow': {'id': flow.id, 'name': flow.name}}, status=200)
+    else:
+        return JsonResponse({'error': 'No se proporcionó ningún archivo JSON'}, status=400)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def upload_training(request):
+    csv_file = request.FILES.get('csv_file')
+    flow = request.data.get('flow')
+    if csv_file and flow:
+        # Lógica para procesar el archivo JSON y cargarlo en la base de datos
+        cargar_datos_csv_a_bd(csv_file,flow)
         return JsonResponse({'message': 'El JSON se ha subido correctamente'}, status=200)
     else:
         return JsonResponse({'error': 'No se proporcionó ningún archivo JSON'}, status=400)
@@ -95,13 +107,10 @@ def get_flows_by_scenario(request):
 @permission_classes([IsAuthenticated])
 def chatbot_response(request):
     if request.method == 'GET':
-        print('holaaaaaaaaaa')
-        print(flowManager.is_finished())
         user_message = request.GET.get('message', '')
         suggestions = grammarCorrector.correct_text(user_message)
         if suggestions:
             response_text = '\n'.join(suggestions)
-            print(response_text)
             return Response({'response': response_text})
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(flowManager.advance(bot_response)):
@@ -109,17 +118,13 @@ def chatbot_response(request):
             if flowManager.is_finished():
                 mark_value = marker.mark
                 try:
-                    print('entre')
                     user = AppUser.objects.get(user_id=request.user.user_id)
                     flow = Flow.objects.get(id=flowManager.id)
                     mark = Mark.objects.create(flow=flow, user=user, mark=mark_value)
                     mark.save()
-                    print('sali')
                 except AppUser.DoesNotExist:
-                    print('fallo')
                     return Response({'response': 'Usuario no encontrado'})
                 except Flow.DoesNotExist:
-                    print('falloFlow')
                     return Response({'response': 'Flujo no encontrado'})
         else:
             response="FLUJO NO VA BIEN" + bot_response
@@ -227,6 +232,8 @@ class UserLogin(APIView):
             login(request, user)
             user_data = UserSerializer(user).data
             return Response({'user': user_data }, status=status.HTTP_200_OK)
+        else:
+            return Response(status=status.HTTP_401_UNAUTHORIZED)
     
 class UserLogout(APIView):
 	permission_classes = (permissions.AllowAny,)

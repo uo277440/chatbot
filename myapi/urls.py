@@ -18,6 +18,7 @@ urlpatterns = [
     path('restart_flow', views.restart_flow, name='restart_flow'),
     path('translate', views.translate, name='translate'),
     path('upload_scenary', views.upload_scenary, name='upload_scenary'),
+    path('upload_training', views.upload_training, name='upload_training'),
     path('scenarios', views.scenarios, name='scenarios'),
     path('flows/', views.get_flows_by_scenario, name='get_flows_by_scenario'),
     path('start_flow', views.update_flow_manager, name='start_flow'),

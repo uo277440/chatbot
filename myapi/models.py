@@ -105,3 +105,14 @@ class Mark(models.Model):
     
     class Meta:
         db_table = 'mark'
+        
+class ChatbotData(models.Model):
+    user_input = models.TextField()
+    label = models.CharField(max_length=50)
+    flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='flow_csv')
+    
+    class Meta:
+        db_table = 'training'
+        
+    def __str__(self):
+        return f"{self.user_input} - {self.label}"
