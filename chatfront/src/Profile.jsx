@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import AuthContext from './AuthContext';
 import './Profile.css';
+import NavigationBar from './NavigationBar';
 
 function Profile() {
     const [profileData, setProfileData] = useState(null);
