@@ -59,7 +59,17 @@ function Login() {
       }
     ).then(function (res) {
       submitLogin();
-    });
+    })
+    .catch(error => {
+      if (error.response) {
+          console.log('Código de estado HTTP: '+ error.response.status);
+          alert(error.response.data.message);
+      } else if (error.request) {
+          console.error('No se recibió ninguna respuesta del servidor:', error.request);
+      } else {
+          console.error('Error al configurar la solicitud:', error.message);
+      }
+  });
   }
 
   function submitLogin() {
@@ -78,7 +88,17 @@ function Login() {
       } else {
         navigate('/menu');
       }
-    });
+    })
+    .catch(error => {
+      if (error.response) {
+          console.log('Código de estado HTTP: '+ error.response.status);
+          alert(error.response.data.message);
+      } else if (error.request) {
+          console.error('No se recibió ninguna respuesta del servidor:', error.request);
+      } else {
+          console.error('Error al configurar la solicitud:', error.message);
+      }
+  });
   }
 
   function handleLogout(e) {

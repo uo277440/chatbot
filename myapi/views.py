@@ -20,6 +20,7 @@ from django.db.models import Avg
 from django.http import JsonResponse
 from django.contrib.auth.decorators import user_passes_test
 from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ValidationError
 
 
 
@@ -210,15 +211,19 @@ def user_profile(request):
 	    
 
 class UserRegister(APIView):
-	permission_classes = (permissions.AllowAny,)
-	def post(self, request):
-		clean_data = custom_validation(request.data)
-		serializer = UserRegisterSerializer(data=clean_data)
-		if serializer.is_valid(raise_exception=True):
-			user = serializer.create(clean_data)
-			if user:
-				return Response(serializer.data, status=status.HTTP_201_CREATED)
-		return Response(status=status.HTTP_400_BAD_REQUEST)
+    permission_classes = (permissions.AllowAny,)
+    def post(self, request):
+        try:
+            clean_data = custom_validation(request.data)
+            serializer = UserRegisterSerializer(data=clean_data)
+            if serializer.is_valid(raise_exception=True):
+                user = serializer.create(clean_data)
+                if user:
+                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+        except ValidationError as e:
+            return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 class UserLogin(APIView):
@@ -226,30 +231,36 @@ class UserLogin(APIView):
     authentication_classes = (SessionAuthentication,)
     def post(self, request):
         data = request.data
-        assert validate_email(data)
-        assert validate_password(data)
+        try:
+            validate_email(data)
+            validate_password(data)
+        except ValidationError as e:
+            print(e.message)
+            return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UserLoginSerializer(data=data)
-        if serializer.is_valid(raise_exception=True):
-            user = serializer.check_user(data)
-            login(request, user)
-            user_data = UserSerializer(user).data
-            return Response({'user': user_data }, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_401_UNAUTHORIZED)
+        try:
+            if serializer.is_valid(raise_exception=True):
+                user = serializer.check_user(data)
+                login(request, user)
+                user_data = UserSerializer(user).data
+                return Response({'user': user_data }, status=status.HTTP_200_OK)
+            else:
+                return Response({'message': 'No autorizado'}, status=status.HTTP_401_UNAUTHORIZED)
+        except ValidationError as e:
+            return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
+       
     
 class UserLogout(APIView):
-	permission_classes = (permissions.AllowAny,)
-	authentication_classes = ()
-	def post(self, request):
-		logout(request)
-		return Response(status=status.HTTP_200_OK)
-
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+    def post(self, request):
+        logout(request)
+        return Response(status=status.HTTP_200_OK)
 
 
 class UserView(APIView):
-	permission_classes = (permissions.IsAuthenticated,)
-	authentication_classes = (SessionAuthentication,)
-	##
-	def get(self, request):
-		serializer = UserSerializer(request.user)
-		return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
+    def get(self, request):
+        serializer = UserSerializer(request.user)
+        return Response({'user': serializer.data}, status=status.HTTP_200_OK)
