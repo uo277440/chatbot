@@ -14,8 +14,7 @@ function AdminView() {
   const [csvFile, setCSVFile] = useState(null);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000',
-    withCredentials: true
+    baseURL: 'http://localhost:8000'
 });
 
   useEffect(() => {
@@ -47,7 +46,10 @@ function AdminView() {
   const handleNewScenarioChange = (event) => {
     setNewScenario(event.target.value);
   };
-
+  function getCookie(name) {
+    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return cookieValue ? cookieValue.pop() : '';
+  }
   const handleUpload = () => {
     if (!file) {
       alert('Seleccione un archivo JSON');
@@ -67,10 +69,11 @@ function AdminView() {
 
     // Append selected scenario or new scenario to form data
     formData.append('scenario', selectedScenario || newScenario);
-
+    const csrftoken = getCookie('csrftoken');
     axiosInstance.post('/api/upload_scenary', formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        'X-CSRFToken': csrftoken
       }
     })
     .then(response => {
@@ -87,10 +90,11 @@ function AdminView() {
     const formData = new FormData();
     formData.append('csv_file', csvFile);
     formData.append('flow', flowId);
-
+    const csrftoken = getCookie('csrftoken');
     axiosInstance.post('/api/upload_training', formData, {
       headers: {
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'multipart/form-data',
+        'X-CSRFToken': csrftoken
       }
     })
     .then(response => {

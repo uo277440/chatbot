@@ -38,7 +38,7 @@ def hello_world(request):
     return Response({'message': 'Hello, world!'})
 
 @api_view(['GET'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def scenarios(request):
     scenarios = scenary_service.get_all_scenarios()
     serializer = ScenerySerializer(scenarios, many=True)
@@ -66,7 +66,7 @@ def update_flow_manager(request):
     return JsonResponse({'message': 'flowManager actualizado correctamente'})
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def upload_scenary(request):
     json_file = request.FILES.get('json_file')
     scenario = request.data.get('scenario')
@@ -78,7 +78,7 @@ def upload_scenary(request):
     else:
         return JsonResponse({'error': 'No se proporcionó ningún archivo JSON'}, status=400)
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 def upload_training(request):
     csv_file = request.FILES.get('csv_file')
     flow = request.data.get('flow')
