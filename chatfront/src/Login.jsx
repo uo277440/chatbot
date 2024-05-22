@@ -82,7 +82,6 @@ function Login() {
     ).then(function (res) {
       setCurrentUser(true);
       const user = res.data.user;
-      console.log("Usuario:", user);
       if (user.is_superuser) {
         navigate('/admin');
       } else {
@@ -110,7 +109,21 @@ function Login() {
       setCurrentUser(false);
     });
   }
+  if(currentUser){
+    client.get('/api/user')
+            .then(response => {
+                const user=response.data.user
+                if (user.is_superuser) {
+                  navigate('/admin');
+                } else {
+                  navigate('/menu');
+                }
 
+            })
+            .catch(error => {
+                console.error('Error finding user:', error);
+            });
+  }
   return (
     <div>
       <NavigationBar
