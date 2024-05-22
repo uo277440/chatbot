@@ -21,6 +21,7 @@ from django.http import JsonResponse
 from django.contrib.auth.decorators import user_passes_test
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
+from django.db.models import Q
 
 
 
@@ -143,17 +144,16 @@ def mascot_message(request):
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def search_student(request):
-    username = request.query_params.get('username', None)
-    if username:
-        try:
-            user = AppUser.objects.get(username=username)
+    search_param = request.query_params.get('search_param', None)
+    if search_param:
+        users = AppUser.objects.filter(Q(username=search_param) | Q(email=search_param))
+        if users.exists():
+            user = users.first()
             user_serializer = UserSerializer(user)
             marks = Mark.objects.filter(user=user)
             marks_serializer = MarkSerializer(marks, many=True)
-            print(user_serializer.data)
-            print(marks_serializer.data)
             return Response({'user': user_serializer.data, 'marks': marks_serializer.data}, status=status.HTTP_200_OK)
-        except AppUser.DoesNotExist:
+        else:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     else:
         return Response({'error': 'Username parameter is required'}, status=status.HTTP_400_BAD_REQUEST)

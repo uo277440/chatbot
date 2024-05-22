@@ -14,7 +14,7 @@ function AdminMarks() {
         withCredentials: true
     });
     const handleSearch = () => {
-        axiosInstance.get(`/api/search_student/?username=${username}`)
+        axiosInstance.get(`/api/search_student/?search_param=${username}`)
             .then(response => {
                 setUser(response.data.user);
                 setMarks(response.data.marks);
@@ -23,6 +23,7 @@ function AdminMarks() {
                 console.error('Error fetching user data:', error);
                 setUser(null);
                 setMarks([]);
+                alert('No se encontró ningun usuario')
             });
     };
 
