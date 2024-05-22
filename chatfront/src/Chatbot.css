@@ -21,7 +21,7 @@
 
 .messages-section {
     flex: 1; 
-    max-height: calc(100vh - 100px); 
+    max-height: 70vh;
     overflow-y: auto; 
 }
 
