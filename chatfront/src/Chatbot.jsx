@@ -18,6 +18,7 @@ function Chatbot() {
     const handleClearMessages = () => {
         setMessages([]);
     };
+    const navigate = useNavigate();
 
     const handleSubmitMessage = (message) => {
         const newUserMessage = { text: message, from: 'user' };
@@ -26,6 +27,10 @@ function Chatbot() {
             .then(response => {
                 const newBotMessage = { text: response.data.response, from: 'bot' };
                 setMessages([...messages, newUserMessage, newBotMessage]);
+                if(response.data.is_finished){
+                    alert('Flujo terminado con una nota de '+response.data.mark)
+                    navigate('/menu')
+                }
             })
             .catch(error => {
                 console.log(error);

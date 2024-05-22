@@ -1,16 +1,18 @@
 import json
 from .models import Flow, Step,Scenery
 
-def cargar_datos_a_bd(json_file, scenario_name):
+def cargar_datos_a_bd(json_file, scenario_id):
     # Lee el contenido del archivo JSON desde el objeto InMemoryUploadedFile
     json_data = json_file.read().decode('utf-8')
 
     # Procesa el contenido del archivo JSON y cárgalo en la base de datos
     datos = json.loads(json_data)
-    
+    flow=None 
     # Obtener el escenario o crear uno nuevo si no existe
-    scenario,created = Scenery.objects.get_or_create(name=scenario_name)
-    
+    print(scenario_id)
+    scenario,created = Scenery.objects.get_or_create(id=scenario_id)
+    print(scenario)
+    print(created)
     for flow_data in datos['flows']:
         # Crea el flujo asociado al escenario
         flow = Flow.objects.create(name=flow_data['name'], scenery=scenario)
@@ -23,4 +25,4 @@ def cargar_datos_a_bd(json_file, scenario_name):
                 suggestion=step_data['suggestion'],
                 options=step_data['options']
             )
-            return flow
+    return flow

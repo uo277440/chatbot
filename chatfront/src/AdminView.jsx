@@ -3,6 +3,9 @@ import axios from 'axios';
 import AuthContext from './AuthContext';
 import './Admin.css';
 import NavigationBar from './NavigationBar';
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
 function AdminView() {
   const [file, setFile] = useState(null);
   const [scenarios, setScenarios] = useState([]);

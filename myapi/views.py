@@ -107,9 +107,11 @@ def get_flows_by_scenario(request):
 @permission_classes([IsAuthenticated])
 def chatbot_response(request):
     if request.method == 'GET':
+        print(flowManager.next_options)
         user_message = request.GET.get('message', '')
         suggestions = grammarCorrector.correct_text(user_message)
         if suggestions:
+            marker.decrease()
             response_text = '\n'.join(suggestions)
             return Response({'response': response_text})
         bot_response = chatbot.predict_response_with_confidence(user_message)
@@ -130,7 +132,7 @@ def chatbot_response(request):
             response="FLUJO NO VA BIEN" + bot_response
         if(response is None):
             return Response({'response': 'La respuesta es incoherente'})
-        return Response({'response': response})
+        return Response({'response': response,'is_finished':flowManager.is_finished(),'mark': marker.mark})
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def mascot_message(request):
