@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.postgres.fields import ArrayField
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 import json
 
 class AppUserManager(BaseUserManager):
@@ -116,3 +118,24 @@ class ChatbotData(models.Model):
         
     def __str__(self):
         return f"{self.user_input} - {self.label}"
+
+class ForumMessage(models.Model):
+    id = models.AutoField(primary_key=True)
+    content = models.TextField()
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='mensajes_foro')
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'forum_message'
+        ordering = ['-date']
+        
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            'forum_group',
+            {
+                'type': 'send_message',
+                'message': self.content,
+            }
+        )
