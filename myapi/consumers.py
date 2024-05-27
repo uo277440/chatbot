@@ -124,7 +124,7 @@ class ForumConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def save_forum_message(message, user):
         print('metodo bd')
-        return ForumMessage.objects.create(content=message, user=user)
+        return ForumMessage.objects.create(message=message, user=user)
     @staticmethod
     @database_sync_to_async
     def delete_forum_message(message_id):
@@ -133,4 +133,4 @@ class ForumConsumer(AsyncWebsocketConsumer):
     @staticmethod
     @database_sync_to_async
     def edit_forum_message(message_id, new_content):
-        ForumMessage.objects.filter(id=message_id).update(content=new_content)
+        ForumMessage.objects.filter(id=message_id).update(message=new_content)

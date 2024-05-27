@@ -121,7 +121,7 @@ class ChatbotData(models.Model):
 
 class ForumMessage(models.Model):
     id = models.AutoField(primary_key=True)
-    content = models.TextField()
+    message = models.TextField()
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='mensajes_foro')
     date = models.DateTimeField(auto_now_add=True)
 
@@ -136,6 +136,6 @@ class ForumMessage(models.Model):
             'forum_group',
             {
                 'type': 'send_message',
-                'message': self.content,
+                'message': self.message,
             }
         )

@@ -17,6 +17,14 @@ const Forum = () => {
     const websocket = useRef(null);
 
     useEffect(() => {
+        const fetchMessages = async () => {
+            try {
+                const response = await client.get('/api/forum/messages');
+                setMessages(response.data);
+            } catch (error) {
+                console.error('Error fetching messages:', error);
+            }
+        };
         const initializeWebSocket = () => {
             if (websocket.current) {
                 console.log("WebSocket already initialized");
@@ -57,6 +65,7 @@ const Forum = () => {
                 console.log(response.data)
                 setUserId(response.data.user.user_id);
                 setIsSuperUser(response.data.user.is_superuser);
+                fetchMessages();
                 initializeWebSocket();
             })
             .catch(error => {
@@ -108,7 +117,7 @@ const Forum = () => {
             <h1 id="forum-header">Forum</h1>
             <ul id="forum-messages">
                 {messages.map((msg, index) => (
-                    <li key={index} className="forum-message">
+                     <li key={index} className={`forum-message ${msg.user.user_id === userId ? 'own-message' : ''}`}>
                     <div className="message-content">
                         <strong className="message-user">{msg.user.username}</strong>: {msg.message}
                     </div>

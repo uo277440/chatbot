@@ -29,10 +29,6 @@ class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
 		fields = '__all__'
-class ForumMessageSerializer(serializers.ModelSerializer):
-	class Meta:
-		model = ForumMessage
-		fields = '__all__'
 class ScenerySerializer(serializers.ModelSerializer):
     class Meta:
         model = Scenery
@@ -54,4 +50,11 @@ class StepSerializer(serializers.ModelSerializer):
 class AverageMarkSerializer(serializers.Serializer):
     flow = FlowSerializer()
     average_mark = serializers.FloatField()
+
+class ForumMessageSerializer(serializers.ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = ForumMessage
+        fields = ['id', 'message', 'user', 'date']
   

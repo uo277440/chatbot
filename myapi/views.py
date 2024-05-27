@@ -232,6 +232,15 @@ def edit_message(request,message_id):
         serializer.save()
         return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def forum_messages(request):
+    try:
+        messages = ForumMessage.objects.all().order_by('date')
+        serializer = ForumMessageSerializer(messages, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):

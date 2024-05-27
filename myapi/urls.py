@@ -26,5 +26,6 @@ urlpatterns = [
     path('user_profile', views.user_profile, name='user_profile'),
     path('messages/<int:message_id>/delete/', views.delete_message, name='delete_message'),
     path('messages/<int:message_id>/edit/', views.edit_message, name='edit_message'),
+    path('forum/messages', views.forum_messages, name='forum-messages'),
     
 ]
