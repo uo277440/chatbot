@@ -55,12 +55,14 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
                     <>
                       <Nav.Link as={Link} to="/marks">Evaluador</Nav.Link>
                       <Nav.Link as={Link} to="/admin">Panel</Nav.Link>
+                      <Nav.Link as={Link} to="/forumMessage">Foro</Nav.Link>
                     </>
                   ) : (
                     <>
                       <Nav.Link as={Link} to="/menu">Menú</Nav.Link>
                       <Nav.Link as={Link} to="/chatbot">Chatbot</Nav.Link>
                       <Nav.Link as={Link} to="/profile">Perfil</Nav.Link>
+                      <Nav.Link as={Link} to="/forumMessage">Foro</Nav.Link>
                     </>
                   )}
                 </Nav>

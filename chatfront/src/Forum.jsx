@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import './Forum.css';
+import NavigationBar from './NavigationBar';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -114,7 +115,8 @@ const Forum = () => {
 
     return (
         <div id="forum-container">
-            <h1 id="forum-header">Forum</h1>
+            <NavigationBar/>
+            <h1 id="forum-header">Foro</h1>
             <ul id="forum-messages">
                 {messages.map((msg, index) => (
                      <li key={index} className={`forum-message ${msg.user.user_id === userId ? 'own-message' : ''}`}>
@@ -144,7 +146,7 @@ const Forum = () => {
                     required
                     id="message-input"
                 />
-                <button type="submit" id="submit-button">Post Message</button>
+                <button type="submit" id="submit-button">Enviar</button>
             </form>
         </div>
     );
