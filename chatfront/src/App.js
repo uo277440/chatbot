@@ -8,6 +8,7 @@ import {BrowserRouter as Router,Routes,Route} from 'react-router-dom';
 import AdminMarks from './AdminMarks';
 import Profile from './Profile';
 import Forum from './Forum';
+import NavigationBar from './NavigationBar';
 
 
 function App() {

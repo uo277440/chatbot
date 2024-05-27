@@ -1,7 +1,7 @@
 // Login.jsx
 
 import './Login.css';
-import React, { useState, useEffect, useContext  } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -29,12 +29,23 @@ function Login() {
   useEffect(() => {
     client.get("/api/user")
       .then(function (res) {
-        setCurrentUser(true);
+        setCurrentUser(res.data.user);
       })
       .catch(function (error) {
-        setCurrentUser(false);
+        setCurrentUser(null);
       });
   }, []);
+
+  useEffect(() => {
+    if (currentUser) {
+      const user = currentUser;
+      if (user.is_superuser) {
+        navigate('/admin');
+      } else {
+        navigate('/menu');
+      }
+    }
+  }, [currentUser, navigate]);
 
   function updateFormBtn() {
     setRegistrationToggle(!registrationToggle);
@@ -62,14 +73,14 @@ function Login() {
     })
     .catch(error => {
       if (error.response) {
-          console.log('Código de estado HTTP: '+ error.response.status);
-          alert(error.response.data.message);
+        console.log('Código de estado HTTP: ' + error.response.status);
+        alert(error.response.data.message);
       } else if (error.request) {
-          console.error('No se recibió ninguna respuesta del servidor:', error.request);
+        console.error('No se recibió ninguna respuesta del servidor:', error.request);
       } else {
-          console.error('Error al configurar la solicitud:', error.message);
+        console.error('Error al configurar la solicitud:', error.message);
       }
-  });
+    });
   }
 
   function submitLogin() {
@@ -80,8 +91,8 @@ function Login() {
         password: password
       }
     ).then(function (res) {
-      setCurrentUser(true);
       const user = res.data.user;
+      setCurrentUser(user);
       if (user.is_superuser) {
         navigate('/admin');
       } else {
@@ -90,14 +101,14 @@ function Login() {
     })
     .catch(error => {
       if (error.response) {
-          console.log('Código de estado HTTP: '+ error.response.status);
-          alert(error.response.data.message);
+        console.log('Código de estado HTTP: ' + error.response.status);
+        alert(error.response.data.message);
       } else if (error.request) {
-          console.error('No se recibió ninguna respuesta del servidor:', error.request);
+        console.error('No se recibió ninguna respuesta del servidor:', error.request);
       } else {
-          console.error('Error al configurar la solicitud:', error.message);
+        console.error('Error al configurar la solicitud:', error.message);
       }
-  });
+    });
   }
 
   function handleLogout(e) {
@@ -106,24 +117,11 @@ function Login() {
       "/api/logout",
       { withCredentials: true }
     ).then(function (res) {
-      setCurrentUser(false);
+      setCurrentUser(null);
+      navigate('/');
     });
   }
-  if(currentUser){
-    client.get('/api/user')
-            .then(response => {
-                const user=response.data.user
-                if (user.is_superuser) {
-                  navigate('/admin');
-                } else {
-                  navigate('/menu');
-                }
 
-            })
-            .catch(error => {
-                console.error('Error finding user:', error);
-            });
-  }
   return (
     <div>
       <NavigationBar
@@ -167,3 +165,4 @@ function Login() {
 }
 
 export default Login;
+
