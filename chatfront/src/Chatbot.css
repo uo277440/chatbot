@@ -5,7 +5,7 @@
     border-radius: 5px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     overflow: hidden;
-    background-image: url('hotel.jpg');
+    background-image: url('multimedia/hotel.jpg');
     background-size: cover;
     background-position: center;
 }
@@ -14,7 +14,7 @@
     display: flex;
     flex-direction: column;
     height: 100vh; 
-    background-image: url('hotel.jpg');
+    background-image: url('multimedia/hotel.jpg');
     background-size: cover;
     background-position: center;
 }

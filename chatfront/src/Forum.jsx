@@ -124,9 +124,13 @@ const Forum = () => {
                     {(msg.user.user_id === userId || isSuperUser) && (
                         <div className="message-actions">
                             {msg.user.user_id === userId && (
-                                <button onClick={() => handleEdit(msg.id)} className="edit-button">Edit</button>
+                                 <button onClick={() => handleEdit(msg.id)} className="edit-button">
+                                    <img src="/multimedia/editar.png" alt="Edit" />
+                                </button>
                             )}
-                            <button onClick={() => handleDelete(msg.id)} className="delete-button">Delete</button>
+                            <button onClick={() => handleDelete(msg.id)} className="delete-button">
+                                <img src="/multimedia/borrar.png" alt="Delete" />
+                            </button>
                         </div>
                     )}
                 </li>
