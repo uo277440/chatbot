@@ -62,7 +62,8 @@ class Marker:
         self.mark=10
         
     def decrease(self):
-        self.mark = self.mark -1 
+        if self.mark > 0:
+            self.mark = self.mark -1 
         
     def restart(self):
         self.mark = 10

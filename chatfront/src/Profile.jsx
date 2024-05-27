@@ -25,6 +25,18 @@ function Profile() {
             });
     }, []);
 
+    const getMarkClass = (mark) => {
+        if (mark >= 0 && mark <= 4) {
+            return 'low-mark';
+        } else if (mark >= 5 && mark <= 7) {
+            return 'medium-mark';
+        } else if (mark >= 8 && mark <= 10) {
+            return 'high-mark';
+        } else {
+            return '';
+        }
+    };
+
     if (loading) {
         return <div>Loading...</div>;
     }
@@ -47,7 +59,7 @@ function Profile() {
                 {profileData.average_marks.length > 0 ? (
                     <ul>
                         {profileData.average_marks.map((mark, index) => (
-                            <li key={index}>
+                            <li key={index} className={getMarkClass(mark.average_mark)}>
                                 <p><strong>Escenario:</strong> {mark.flow.scenery.name}</p>
                                 <p><strong>Flujo:</strong> {mark.flow.name}</p>
                                 <p><strong>Nota media:</strong> {mark.average_mark.toFixed(2)}</p>

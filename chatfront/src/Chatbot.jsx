@@ -27,9 +27,11 @@ function Chatbot() {
             .then(response => {
                 const newBotMessage = { text: response.data.response, from: 'bot' };
                 setMessages([...messages, newUserMessage, newBotMessage]);
-                if(response.data.is_finished){
-                    alert('Flujo terminado con una nota de '+response.data.mark)
-                    navigate('/menu')
+                if (response.data.is_finished) {
+                    setTimeout(() => {
+                        alert('Flujo terminado con una nota de ' + response.data.mark);
+                        navigate('/menu');
+                    }, 2000); 
                 }
             })
             .catch(error => {

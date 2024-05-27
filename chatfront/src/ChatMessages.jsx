@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState  } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import './ChatMessages.css';
 import altavoz from './assets/altavoz.png';
@@ -10,6 +10,7 @@ function ChatMessages({ messages, setMessages }) {
         baseURL: 'http://localhost:8000',
         withCredentials: true
     });
+
     useEffect(() => {
         scrollToBottom();
     }, [messages]);
@@ -17,35 +18,37 @@ function ChatMessages({ messages, setMessages }) {
     const scrollToBottom = () => {
         messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     };
+
     const [isButtonEnabled, setIsButtonEnabled] = useState(true);
 
-    const handleTextToAudio = (text,lang) => {
-        const sourceLang = lang || 'en'; 
-        if (!isButtonEnabled) return; 
-        setIsButtonEnabled(false); 
+    const handleTextToAudio = (text, lang) => {
+        const sourceLang = lang || 'en';
+        if (!isButtonEnabled) return;
+        setIsButtonEnabled(false);
         axiosInstance.get(`api/transform?text=${encodeURIComponent(text)}&source=${sourceLang}`)
             .then(response => {
                 console.log('Respuesta de text_to_audio:', response);
                 setTimeout(() => {
-                    setIsButtonEnabled(true); 
+                    setIsButtonEnabled(true);
                 }, response.data.delay);
             })
             .catch(error => {
                 console.error('Error al llamar a text_to_audio:', error);
-                setIsButtonEnabled(true); 
+                setIsButtonEnabled(true);
             });
     };
-    const handleTranslate = (text,lang,index) => { 
-        const sourceLang = lang || 'en'; 
-        const targetLang = sourceLang === 'en' ? 'es' : 'en'; 
+
+    const handleTranslate = (text, lang, index) => {
+        const sourceLang = lang || 'en';
+        const targetLang = sourceLang === 'en' ? 'es' : 'en';
         axiosInstance.get(`api/translate?text=${encodeURIComponent(text)}&target=${targetLang}`)
             .then(response => {
                 const translatedText = response.data.translated_text;
                 console.log('Respuesta de handleTranslate:', translatedText);
                 const updatedMessages = [...messages];
                 updatedMessages[index].text = translatedText;
-                updatedMessages[index].lang = targetLang; 
-                setMessages(updatedMessages)
+                updatedMessages[index].lang = targetLang;
+                setMessages(updatedMessages);
             })
             .catch(error => {
                 console.error('Error al llamar a text_to_audio:', error);
@@ -56,19 +59,21 @@ function ChatMessages({ messages, setMessages }) {
         <div className="chat-messages" ref={messagesRef}>
             {messages.map((message, index) => (
                 <div key={index} className={`message ${message.from}`} lang={message.lang || 'en'}>
-                    <div>{message.text}</div>
+                    {message.text.split('\n').map((line, idx) => (
+                        <p key={idx}>{line}</p>
+                    ))}
                     <img
                         src={altavoz}
                         alt="Altavoz"
-                        onClick={() => handleTextToAudio(message.text,message.lang)}
+                        onClick={() => handleTextToAudio(message.text, message.lang)}
                         className={`image-button ${isButtonEnabled ? '' : 'disabled'}`}
                     />
                     {message.from === 'bot' && (
-                        <img 
-                        src={traducir}
-                        alt="Traducir"
-                        onClick={() => handleTranslate(message.text,message.lang,index)}
-                        className={'image-button'}
+                        <img
+                            src={traducir}
+                            alt="Traducir"
+                            onClick={() => handleTranslate(message.text, message.lang, index)}
+                            className={'image-button'}
                         />
                     )}
                 </div>
@@ -78,5 +83,6 @@ function ChatMessages({ messages, setMessages }) {
 }
 
 export default ChatMessages;
+
 
 
