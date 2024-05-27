@@ -31,28 +31,65 @@ class ForumConsumer(AsyncWebsocketConsumer):
         except User.DoesNotExist:
             return None
     async def receive(self, text_data):
+
         text_data_json = json.loads(text_data)
-        message = text_data_json['message']
-        user = text_data_json['user']  # Asegúrate de que esta clave sea consistente con lo que envías desde el frontend
-        print('metodo receive')
-        # Obtener el usuario
-        user = await self.get_user_from_id(user)
-        # Guardar el mensaje en la base de datos solo si el usuario está presente
-        if user:
-            await self.save_forum_message(message, user)
+        action = text_data_json.get('action', 'send')
+        
 
         # Enviar el mensaje al grupo de WebSocket
+        if action == 'send':
+            message = text_data_json['message']
+            user = text_data_json['user'] 
+            user = await self.get_user_from_id(user)
+            # Guardar el mensaje en la base de datos solo si el usuario está presente
+            if user:
+                forum_message = await self.save_forum_message(message, user)
+            await(self.channel_layer.group_send)(
+                'forum_group',
+                {
+                    'type': 'send_message',
+                    'id': forum_message.id,
+                    'message': message,
+                    'username': user.username if user else 'Anonymous',  
+                    'user_id': user.user_id,
+                    'is_superuser': user.is_superuser,
+                }
+            )
+        elif action == 'delete':
+            id = text_data_json['id']
+            await self.delete_forum_message(id)
+            await self.channel_layer.group_send(
+                'forum_group',
+                {
+                    'type': 'delete_message',
+                    'id': id
+                }
+            )
+        elif action == 'edit':
+            message = text_data_json['message']
+            id = text_data_json['id']
+            await self.edit_forum_message(id, message)
+            await self.channel_layer.group_send(
+                'forum_group',
+                {
+                    'type': 'edit_message',
+                    'message': message,
+                    'id': id
+                }
+            )
         
-        await(self.channel_layer.group_send)(
-            'forum_group',
-            {
-                'type': 'send_message',
-                'message': message,
-                'username': user.username if user else 'Anonymous',  
-            }
-        )
-        
-        
+    async def delete_message(self, event):
+        await self.send(text_data=json.dumps({
+            'action': 'delete',
+            'id': event['id']
+        }))
+
+    async def edit_message(self, event):
+        await self.send(text_data=json.dumps({
+            'action': 'edit',
+            'message': event['message'],
+            'id': event['id']
+        }))
         
     
     async def send_message(self, event):
@@ -61,11 +98,15 @@ class ForumConsumer(AsyncWebsocketConsumer):
             print(event)
             message = event['message']
             username = event['username']
+            user_id = event['user_id']
+            is_superuser = event['is_superuser']
+            id=event['id']
             print('metodo send_message')
 
             await self.send(text_data=json.dumps({
                 'message': message,
-                'user': {'username': username}
+                'user': {'username': username,'user_id': user_id,'is_superuser':is_superuser},
+                'id':id,
             }))
         else:
             print('Username not in event:', event)
@@ -83,4 +124,13 @@ class ForumConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async
     def save_forum_message(message, user):
         print('metodo bd')
-        ForumMessage.objects.create(content=message, user=user)
+        return ForumMessage.objects.create(content=message, user=user)
+    @staticmethod
+    @database_sync_to_async
+    def delete_forum_message(message_id):
+        ForumMessage.objects.filter(id=message_id).delete()
+
+    @staticmethod
+    @database_sync_to_async
+    def edit_forum_message(message_id, new_content):
+        ForumMessage.objects.filter(id=message_id).update(content=new_content)

@@ -24,4 +24,7 @@ urlpatterns = [
     path('start_flow', views.update_flow_manager, name='start_flow'),
     path('search_student/', views.search_student, name='search_student'),
     path('user_profile', views.user_profile, name='user_profile'),
+    path('messages/<int:message_id>/delete/', views.delete_message, name='delete_message'),
+    path('messages/<int:message_id>/edit/', views.edit_message, name='edit_message'),
+    
 ]

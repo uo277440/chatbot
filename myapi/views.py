@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.response import Response
 from rest_framework import permissions,status
 from rest_framework.views import APIView
-from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer,FlowSerializer,UserSerializer,MarkSerializer,AverageMarkSerializer
-from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser
+from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer,FlowSerializer,UserSerializer,MarkSerializer,AverageMarkSerializer,ForumMessageSerializer
+from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser,ForumMessage
 from chatbot.svm import SVMChatbot
 from chatbot.grammar import GrammarCorrector
 from chatbot.reproductor import text_to_audio
@@ -209,7 +209,29 @@ def user_profile(request):
         'average_marks': average_marks_serializer.data
     }, status=status.HTTP_200_OK)
 	    
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
+def delete_message(request,message_id):
+    try:
+        message = ForumMessage.objects.get(id=message_id)
+        message.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    except ForumMessage.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
 
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
+def edit_message(request,message_id):
+    try:
+        message = ForumMessage.objects.get(id=message_id, user=request.user)
+    except ForumMessage.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    serializer = ForumMessageSerializer(message, data=request.data, partial=True)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):

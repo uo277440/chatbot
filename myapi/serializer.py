@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
-from .models import Scenery,Mark,Flow,Step
+from .models import Scenery,Mark,Flow,Step,ForumMessage
 
 UserModel = get_user_model()
 
@@ -28,6 +28,10 @@ class UserLoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
 	class Meta:
 		model = UserModel
+		fields = '__all__'
+class ForumMessageSerializer(serializers.ModelSerializer):
+	class Meta:
+		model = ForumMessage
 		fields = '__all__'
 class ScenerySerializer(serializers.ModelSerializer):
     class Meta:
