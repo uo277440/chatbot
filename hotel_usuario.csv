@@ -21,7 +21,7 @@ User Input,Label
 "We appreciate your visit. Farewell and best wishes!",FAREWELL
 "Goodbye and thank you for staying with us!",FAREWELL
 "We hope to welcome you back soon. Goodbye!",FAREWELL
-"May the rest of your day be filled with joy. Goodbye!",
+"May the rest of your day be filled with joy. Goodbye!",FAREWELL
 "I'm sorry, but we're fully booked for tonight.",CHECK_NO_AVAILABILITY
 "Unfortunately, we don't have any availability for that night.",CHECK_NO_AVAILABILITY
 "I'm afraid we're completely booked up for that particular evening.",CHECK_NO_AVAILABILITY

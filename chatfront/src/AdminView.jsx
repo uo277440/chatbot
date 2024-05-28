@@ -6,6 +6,7 @@ import NavigationBar from './NavigationBar';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
+
 function AdminView() {
   const [file, setFile] = useState(null);
   const [scenarios, setScenarios] = useState([]);
@@ -15,15 +16,13 @@ function AdminView() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const axiosInstance = axios.create({
     baseURL: 'http://localhost:8000'
-});
+  });
 
   useEffect(() => {
-    // Fetch existing scenarios when component mounts
     fetchScenarios();
   }, []);
 
   const fetchScenarios = () => {
-    // Fetch existing scenarios from the backend
     axiosInstance.get('/api/scenarios')
       .then(response => {
         setScenarios(response.data.scenarios);
@@ -36,9 +35,11 @@ function AdminView() {
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
   };
+
   const handleCSVChange = (event) => {
     setCSVFile(event.target.files[0]);
   };
+
   const handleScenarioChange = (event) => {
     setSelectedScenario(event.target.value);
   };
@@ -46,10 +47,12 @@ function AdminView() {
   const handleNewScenarioChange = (event) => {
     setNewScenario(event.target.value);
   };
+
   function getCookie(name) {
     const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
     return cookieValue ? cookieValue.pop() : '';
   }
+
   const handleUpload = () => {
     if (!file) {
       alert('Seleccione un archivo JSON');
@@ -66,50 +69,28 @@ function AdminView() {
 
     const formData = new FormData();
     formData.append('json_file', file);
-
-    // Append selected scenario or new scenario to form data
+    formData.append('csv_file', csvFile);
     formData.append('scenario', selectedScenario || newScenario);
     const csrftoken = getCookie('csrftoken');
-    axiosInstance.post('/api/upload_scenary', formData, {
+    axiosInstance.post('/api/upload_combined', formData, {
       headers: {
         'Content-Type': 'multipart/form-data',
         'X-CSRFToken': csrftoken
       }
     })
     .then(response => {
-      const flow = response.data.flow;
-      uploadTrainingData(flow.id);
-      alert('El JSON se ha subido correctamente');
+      alert('Archivos subidos y verificados correctamente');
     })
     .catch(error => {
-        alert('Ha habido un error durante la subida del archivo');
-    });
-  };
-
-  const uploadTrainingData = (flowId) => {
-    const formData = new FormData();
-    formData.append('csv_file', csvFile);
-    formData.append('flow', flowId);
-    const csrftoken = getCookie('csrftoken');
-    axiosInstance.post('/api/upload_training', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'X-CSRFToken': csrftoken
-      }
-    })
-    .then(response => {
-      alert('El archivo CSV se ha subido correctamente');
-    })
-    .catch(error => {
-      alert('Ha habido un error durante la subida del archivo CSV');
+      alert('Ha habido un error durante la subida del archivo');
     });
   };
 
   return (
     <div className="admin">
-      <NavigationBar/>
+      <NavigationBar />
       <h2>Admin View</h2>
-      
+
       <div className="upload-section">
         <label htmlFor="jsonFileInput">Subir archivo JSON (Flujo):</label>
         <input id="jsonFileInput" type="file" onChange={handleFileChange} />
@@ -136,11 +117,12 @@ function AdminView() {
           onChange={handleNewScenarioChange}
         />
       </div>
-      
+
       <button onClick={handleUpload}>Enviar al backend</button>
     </div>
   );
 }
 
 export default AdminView;
+
 

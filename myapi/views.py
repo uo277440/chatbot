@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework import permissions,status
 from rest_framework.views import APIView
 from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer,FlowSerializer,UserSerializer,MarkSerializer,AverageMarkSerializer,ForumMessageSerializer
-from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser,ForumMessage
+from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser,ForumMessage,Scenery
 from chatbot.svm import SVMChatbot
 from chatbot.grammar import GrammarCorrector
 from chatbot.reproductor import text_to_audio
@@ -22,6 +22,8 @@ from django.contrib.auth.decorators import user_passes_test
 from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from django.db.models import Q
+import csv
+import json
 
 
 
@@ -90,6 +92,53 @@ def upload_training(request):
         return JsonResponse({'message': 'El JSON se ha subido correctamente'}, status=200)
     else:
         return JsonResponse({'error': 'No se proporcionó ningún archivo JSON'}, status=400)
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def upload_combined(request):
+    json_file = request.FILES.get('json_file')
+    csv_file = request.FILES.get('csv_file')
+    scenario = request.data.get('scenario')
+
+    if not json_file or not csv_file or not scenario:
+        return JsonResponse({'error': 'JSON file, CSV file, and scenario are required'}, status=400)
+
+    # Parse the JSON file
+    try:
+        json_data = json.load(json_file)
+        print("JSON Data:", json_data)
+    except json.JSONDecodeError:
+        return JsonResponse({'error': 'Invalid JSON file'}, status=400)
+
+    # Read the CSV file
+    try:
+        csv_content = csv_file.read().decode('utf-8').splitlines()
+        csv_data = list(csv.DictReader(csv_content))
+        print("CSV Data:", csv_data)  # Imprimir datos CSV
+        csv_file.seek(0)  # Reset the file pointer to the beginning after reading for print
+    except Exception as e:
+        return JsonResponse({'error': 'Invalid CSV file'}, status=400)
+
+    # Extract JSON keys and CSV headers
+    json_labels = {step['label'] for flow in json_data['flows'] for step in flow['steps']}
+    csv_labels_count = {label: 0 for label in json_labels}
+
+    for row in csv_data:
+        label = row.get('Label')
+        if label in csv_labels_count:
+            csv_labels_count[label] += 1
+
+    # Check if all JSON labels are in CSV and have at least 10 phrases
+    for label, count in csv_labels_count.items():
+        if count < 10:
+            return JsonResponse({'error': f'Label {label} has less than 10 phrases in the CSV file'}, status=400)
+
+    # Proceed with saving JSON and CSV data to the database
+    flow = cargar_datos_a_bd(json_data, scenario)
+    csv_file.seek(0)  # Reset the file pointer again before re-reading for saving
+    csv_data = csv.DictReader(csv_content)  # Re-read for actual processing
+    cargar_datos_csv_a_bd(csv_data, flow)
+
+    return JsonResponse({'message': 'Files uploaded and verified successfully', 'flow': {'id': flow.id, 'name': flow.name}}, status=200)
     
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -255,7 +304,30 @@ class UserRegister(APIView):
         except ValidationError as e:
             return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
 
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def delete_flow(request):
+    flow_id = request.data.get('flow_id')
+    if not flow_id:
+        return Response({'error': 'Flow ID is required'}, status=status.HTTP_400_BAD_REQUEST)
+    
+    try:
+        flow = Flow.objects.get(id=flow_id)
+        flow.delete()
+        return Response({'message': 'Flow deleted successfully'}, status=status.HTTP_200_OK)
+    except Flow.DoesNotExist:
+        return Response({'error': 'Flow not found'}, status=status.HTTP_404_NOT_FOUND)
 
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_flows_by_scenario(request, scenario_id):
+    try:
+        scenario = Scenery.objects.get(id=scenario_id)
+        flows = scenario.flows.all()
+        flows_data = [{'id': flow.id, 'name': flow.name} for flow in flows]
+        return Response({'flows': flows_data}, status=status.HTTP_200_OK)
+    except Scenery.DoesNotExist:
+        return Response({'error': 'Scenario not found'}, status=status.HTTP_404_NOT_FOUND)
 
 class UserLogin(APIView):
     permission_classes = (permissions.AllowAny,)
