@@ -24,6 +24,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 import csv
 import json
+from django.db import transaction
 
 
 
@@ -92,13 +93,17 @@ def upload_training(request):
         return JsonResponse({'message': 'El JSON se ha subido correctamente'}, status=200)
     else:
         return JsonResponse({'error': 'No se proporcionó ningún archivo JSON'}, status=400)
+from django.db import transaction
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def upload_combined(request):
     json_file = request.FILES.get('json_file')
     csv_file = request.FILES.get('csv_file')
     scenario = request.data.get('scenario')
-
+    print(json_file)
+    print(csv_file)
+    print(scenario)
     if not json_file or not csv_file or not scenario:
         return JsonResponse({'error': 'JSON file, CSV file, and scenario are required'}, status=400)
 
@@ -133,17 +138,23 @@ def upload_combined(request):
             return JsonResponse({'error': f'Label {label} has less than 10 phrases in the CSV file'}, status=400)
 
     # Proceed with saving JSON and CSV data to the database
-    flow = cargar_datos_a_bd(json_data, scenario)
-    csv_file.seek(0)  # Reset the file pointer again before re-reading for saving
-    csv_data = csv.DictReader(csv_content)  # Re-read for actual processing
-    cargar_datos_csv_a_bd(csv_data, flow)
+    try:
+        with transaction.atomic():
+            flow = cargar_datos_a_bd(json_data, scenario)
+            csv_file.seek(0)  # Reset the file pointer again before re-reading for saving
+            csv_data = csv.DictReader(csv_content)  # Re-read for actual processing
+            cargar_datos_csv_a_bd(csv_data, flow)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=400)
 
     return JsonResponse({'message': 'Files uploaded and verified successfully', 'flow': {'id': flow.id, 'name': flow.name}}, status=200)
+
     
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_flows_by_scenario(request):
+def get_flows_by_scenario_url(request):
     scenery_id = request.GET.get('scenery_id')
+    print(scenery_id)
     if scenery_id is not None:
         try:
             flows = Flow.objects.filter(scenery_id=scenery_id)

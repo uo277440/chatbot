@@ -92,6 +92,7 @@ function AdminView() {
 
     const formData = new FormData();
     formData.append('json_file', file);
+    formData.append('csv_file', csvFile);
     formData.append('scenario', selectedScenario || newScenario);
     const csrftoken = getCookie('csrftoken');
     axiosInstance.post('/api/upload_combined', formData, {
