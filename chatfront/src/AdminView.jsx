@@ -3,6 +3,7 @@ import axios from 'axios';
 import AuthContext from './AuthContext';
 import './Admin.css';
 import NavigationBar from './NavigationBar';
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -13,6 +14,8 @@ function AdminView() {
   const [selectedScenario, setSelectedScenario] = useState('');
   const [newScenario, setNewScenario] = useState('');
   const [csvFile, setCSVFile] = useState(null);
+  const [flows, setFlows] = useState([]);
+  const [selectedFlow, setSelectedFlow] = useState('');
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const axiosInstance = axios.create({
     baseURL: 'http://localhost:8000'
@@ -22,6 +25,12 @@ function AdminView() {
     fetchScenarios();
   }, []);
 
+  useEffect(() => {
+    if (selectedScenario) {
+      fetchFlows(selectedScenario);
+    }
+  }, [selectedScenario]);
+
   const fetchScenarios = () => {
     axiosInstance.get('/api/scenarios')
       .then(response => {
@@ -29,6 +38,16 @@ function AdminView() {
       })
       .catch(error => {
         console.error('Error fetching scenarios:', error);
+      });
+  };
+
+  const fetchFlows = (scenarioId) => {
+    axiosInstance.get(`/api/scenarios/${scenarioId}/flows`)
+      .then(response => {
+        setFlows(response.data.flows);
+      })
+      .catch(error => {
+        console.error('Error fetching flows:', error);
       });
   };
 
@@ -42,6 +61,10 @@ function AdminView() {
 
   const handleScenarioChange = (event) => {
     setSelectedScenario(event.target.value);
+  };
+
+  const handleFlowChange = (event) => {
+    setSelectedFlow(event.target.value);
   };
 
   const handleNewScenarioChange = (event) => {
@@ -69,7 +92,6 @@ function AdminView() {
 
     const formData = new FormData();
     formData.append('json_file', file);
-    formData.append('csv_file', csvFile);
     formData.append('scenario', selectedScenario || newScenario);
     const csrftoken = getCookie('csrftoken');
     axiosInstance.post('/api/upload_combined', formData, {
@@ -79,16 +101,42 @@ function AdminView() {
       }
     })
     .then(response => {
-      alert('Archivos subidos y verificados correctamente');
+      const flow = response.data.flow;
+      alert('El JSON y el CSV se han subido correctamente');
     })
     .catch(error => {
       alert('Ha habido un error durante la subida del archivo');
     });
   };
 
+  const handleDeleteFlow = () => {
+    if (!selectedFlow) {
+      alert('Seleccione un flujo para eliminar');
+      return;
+    }
+
+    const csrftoken = getCookie('csrftoken');
+    axiosInstance.post('/api/delete_flow', { flow_id: selectedFlow }, {
+      headers: {
+        'X-CSRFToken': csrftoken
+      }
+    })
+    .then(response => {
+      alert('Flujo eliminado correctamente');
+      setFlows(flows.filter(flow => flow.id !== selectedFlow));
+      if (selectedScenario) {
+        fetchFlows(selectedScenario); 
+      }
+      setSelectedFlow('');
+    })
+    .catch(error => {
+      alert('Ha habido un error durante la eliminación del flujo');
+    });
+  };
+
   return (
     <div className="admin">
-      <NavigationBar />
+      <NavigationBar/>
       <h2>Admin View</h2>
 
       <div className="upload-section">
@@ -119,6 +167,18 @@ function AdminView() {
       </div>
 
       <button onClick={handleUpload}>Enviar al backend</button>
+
+      <div className="flow-selection">
+        <h3>Eliminar Flujo</h3>
+        <label htmlFor="flowSelect">Seleccione un flujo:</label>
+        <select id="flowSelect" onChange={handleFlowChange}>
+          <option value="">Seleccione un flujo</option>
+          {flows.map(flow => (
+            <option key={flow.id} value={flow.id}>{flow.name}</option>
+          ))}
+        </select>
+        <button onClick={handleDeleteFlow}>Eliminar Flujo</button>
+      </div>
     </div>
   );
 }

@@ -20,6 +20,8 @@ urlpatterns = [
     path('upload_scenary', views.upload_scenary, name='upload_scenary'),
     path('upload_training', views.upload_training, name='upload_training'),
     path('upload_combined', views.upload_combined, name='upload_combined'),
+    path('delete_flow', views.delete_flow, name='delete_flow'),
+    path('upload_combined', views.upload_combined, name='upload_combined'),
     path('scenarios', views.scenarios, name='scenarios'),
     path('flows/', views.get_flows_by_scenario, name='get_flows_by_scenario'),
     path('start_flow', views.update_flow_manager, name='start_flow'),
@@ -27,6 +29,7 @@ urlpatterns = [
     path('user_profile', views.user_profile, name='user_profile'),
     path('messages/<int:message_id>/delete/', views.delete_message, name='delete_message'),
     path('messages/<int:message_id>/edit/', views.edit_message, name='edit_message'),
+    path('scenarios/<int:scenario_id>/flows', views.get_flows_by_scenario, name='get-flows-by-scenario'),
     path('forum/messages', views.forum_messages, name='forum-messages'),
     
 ]

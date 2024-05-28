@@ -85,7 +85,7 @@ class Scenery(models.Model):
 class Flow(models.Model):
     name = models.CharField(max_length=100,unique=True)
     objects = FlowService()
-    scenery = models.ForeignKey(Scenery, on_delete=models.CASCADE, related_name='scenery')
+    scenery = models.ForeignKey(Scenery, on_delete=models.CASCADE, related_name='flows')
     class Meta:
         db_table = 'flow'
 		
@@ -101,8 +101,8 @@ class Step(models.Model):
         db_table = 'step'
 
 class Mark(models.Model):
-    flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='flow')
-    user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='user')
+    flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='marks')
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='marks')
     mark = models.DecimalField(max_digits=3, decimal_places=1)
     
     class Meta:
@@ -111,7 +111,7 @@ class Mark(models.Model):
 class ChatbotData(models.Model):
     user_input = models.TextField()
     label = models.CharField(max_length=50)
-    flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='flow_csv')
+    flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='chatbot_data')
     
     class Meta:
         db_table = 'training'
