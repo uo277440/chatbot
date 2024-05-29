@@ -9,11 +9,15 @@ import AdminMarks from './AdminMarks';
 import Profile from './Profile';
 import Forum from './Forum';
 import NavigationBar from './NavigationBar';
+import './App.css';
+
+
 
 
 function App() {
   return (
     <AuthProvider>
+      <div className="background">
       <Router>
         <Routes>
           <Route path='/' element={<Login />} />
@@ -25,6 +29,7 @@ function App() {
           <Route path='/forumMessage' element={<Forum />} />
         </Routes>
       </Router>
+      </div>
     </AuthProvider>
   );
 }

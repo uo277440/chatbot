@@ -1,5 +1,3 @@
-// Login.jsx
-
 import './Login.css';
 import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
@@ -9,6 +7,7 @@ import Button from 'react-bootstrap/Button';
 import NavigationBar from './NavigationBar';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from './AuthContext';
+import logo from './multimedia/logo.png'; // Import the logo image
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -19,7 +18,7 @@ const client = axios.create({
 });
 
 function Login() {
-  const { currentUser, setCurrentUser } = useContext(AuthContext)
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -130,8 +129,11 @@ function Login() {
         registrationToggle={registrationToggle}
         updateFormBtn={updateFormBtn}
       />
-      <Container className="center">
-        {renderLoginForm()}
+      <Container className="login">
+        <div className="login-content">
+          <img src={logo} alt="App Logo" className="login-logo" />
+          {renderLoginForm()}
+        </div>
       </Container>
     </div>
   );
@@ -165,4 +167,5 @@ function Login() {
 }
 
 export default Login;
+
 

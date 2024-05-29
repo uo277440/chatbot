@@ -4,6 +4,7 @@ import AuthContext from './AuthContext';
 import './Admin.css';
 import NavigationBar from './NavigationBar';
 
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -170,7 +171,7 @@ function AdminView() {
           />
         </div>
 
-        <button onClick={handleUpload}>Enviar al backend</button>
+        <button onClick={handleUpload}>Añadir Flujo</button>
 
         <div className="flow-selection">
           <h3>Eliminar Flujo</h3>

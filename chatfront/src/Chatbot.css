@@ -8,13 +8,13 @@
     background-image: url('multimedia/hotel.jpg');
     background-size: cover;
     background-position: center;
+    padding: 20px;
 }
 
 .chatbot {
     display: flex;
     flex-direction: column;
     height: 100vh; 
-    background-image: url('multimedia/hotel.jpg');
     background-size: cover;
     background-position: center;
 }

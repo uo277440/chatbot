@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+
 }
 
 .App-logo {
@@ -27,6 +28,14 @@
 .App-link {
   color: #61dafb;
 }
+.background {
+  background-image: url('multimedia/fondo.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 100vh;
+  width: 100%;
+}
 
 @keyframes App-logo-spin {
   from {
@@ -35,4 +44,5 @@
   to {
     transform: rotate(360deg);
   }
+
 }
