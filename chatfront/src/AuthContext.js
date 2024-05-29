@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 
 const AuthContext = createContext();
@@ -13,6 +13,9 @@ export const AuthProvider = ({ children }) => {
     const savedNotification = localStorage.getItem('newForumMessage');
     return savedNotification ? JSON.parse(savedNotification) : false;
   });
+
+  const websocket = useRef(null);
+
 
   useEffect(() => {
     if (currentUser) {
@@ -40,22 +43,51 @@ export const AuthProvider = ({ children }) => {
       fetchCurrentUser();
     }
 
-    const websocket = new WebSocket('ws://localhost:8000/ws/forum/');
+    const connectWebSocket = () => {
+      if (websocket.current) {
+        websocket.current.close();
+        websocket.current = null; 
+    }
 
-    websocket.onmessage = function(event) {
-      
-      const data = JSON.parse(event.data);
-      if (data.action === 'send') {
-        if (parseInt(data.user.user_id) !== parseInt(currentUser?.user_id)) {
-          console.log(data.user.user_id)
-          console.log(currentUser?.user_id)
-          setNewForumMessage(true);
+      websocket.current = new WebSocket('ws://localhost:8000/ws/forum/');
+
+      websocket.current.onopen = () => {
+        console.log('WebSocket connected');
+      };
+
+      websocket.current.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        if (data.action === 'send') {
+          if (parseInt(data.user.user_id) !== parseInt(currentUser?.user_id)) {
+            console.log(data.user.user_id);
+            console.log(currentUser?.user_id);
+            setNewForumMessage(true);
+          }
         }
-      }
+      };
+
+      websocket.current.onclose = function(event) {
+        console.error('WebSocket closed unexpectedly');
+        websocket.current = null; 
     };
 
+      websocket.current.onerror = (error) => {
+        console.error('WebSocket error:', error);
+        if (websocket.current) {
+          websocket.current.close();
+        }
+      };
+    };
+
+    connectWebSocket();
+
     return () => {
-      websocket.close();
+      if (websocket.current) {
+        websocket.current.onclose = null;
+        websocket.current.onerror = null;
+        websocket.current.close();
+        websocket.current = null;
+      }
     };
   }, [currentUser]);
 
@@ -67,6 +99,8 @@ export const AuthProvider = ({ children }) => {
 };
 
 export default AuthContext;
+
+
 
 
 
