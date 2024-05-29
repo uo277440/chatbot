@@ -2,14 +2,13 @@ import React from 'react';
 import './ChatHeader.css';
 import Mascot from './Mascot';
 
-
-function ChatHeader(props) {
+function ChatHeader({ handleClearMessages, restartFlow, showHelp, setShowHelp }) {
     return (
         <div className="chat-header">
             <h1>Chatbot de Aprendizaje de Idiomas</h1>
-            <Mascot/>
-            <button onClick={props.handleClearMessages}>Borrar mensajes</button>
-            <button onClick={props.restartFlow}>Reiniciar flujo</button>
+            <Mascot showHelp={showHelp} setShowHelp={setShowHelp} />
+            <button onClick={handleClearMessages}>Borrar mensajes</button>
+            <button onClick={restartFlow}>Reiniciar flujo</button>
         </div>
     );
 }

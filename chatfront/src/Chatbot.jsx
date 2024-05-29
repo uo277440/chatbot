@@ -3,7 +3,6 @@ import axios from 'axios';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
-import Mascot from './Mascot';
 import AuthContext from './AuthContext';
 import NavigationBar from './NavigationBar';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +12,11 @@ function Chatbot() {
     const [messages, setMessages] = useState(() => {
         const savedMessages = localStorage.getItem('chatMessages');
         return savedMessages ? JSON.parse(savedMessages) : [];
+    });
+
+    const [showHelp, setShowHelp] = useState(() => {
+        const savedShowHelp = localStorage.getItem('showHelp');
+        return savedShowHelp ? JSON.parse(savedShowHelp) : false;
     });
 
     const axiosInstance = axios.create({
@@ -32,6 +36,9 @@ function Chatbot() {
         const updatedMessages = [...messages, newUserMessage];
         setMessages(updatedMessages);
         localStorage.setItem('chatMessages', JSON.stringify(updatedMessages));
+
+        setShowHelp(false); // Ocultar la ayuda cuando se envía un mensaje
+        localStorage.setItem('showHelp', JSON.stringify(false));
 
         axiosInstance.get(`/api/chatbot_response/?message=${encodeURIComponent(message)}`)
             .then(response => {
@@ -62,15 +69,15 @@ function Chatbot() {
                 console.log(error);
             });
     };
+
     useEffect(() => {
         axiosInstance.get(`/api/check_chatbot`)
         .then(response => {
-            const chatbot = response.data.chatbot
+            const chatbot = response.data.chatbot;
             if (!chatbot){
-                navigate('/menu')
-                alert('Escoge un flujo antes de interactuar con el bot !')
+                navigate('/menu');
+                alert('Escoge un flujo antes de interactuar con el bot !');
             }
-
         })
         .catch(error => {
             console.log(error);
@@ -84,7 +91,7 @@ function Chatbot() {
     return (
         <div className="chatbot">
             <NavigationBar/>
-            <ChatHeader handleClearMessages={handleClearMessages} restartFlow={restartFlow}/>
+            <ChatHeader handleClearMessages={handleClearMessages} restartFlow={restartFlow} showHelp={showHelp} setShowHelp={setShowHelp} />
             <div className="messages-section">
                 <ChatMessages messages={messages} setMessages={setMessages}/>
             </div>
@@ -96,6 +103,7 @@ function Chatbot() {
 }
 
 export default Chatbot;
+
 
 
 

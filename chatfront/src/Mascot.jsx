@@ -1,19 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './Mascot.css';
 
-function Mascot() {
-    const [isVisible, setIsVisible] = useState(false);
-    const [message, setMessage] = useState('');
+function Mascot({ showHelp, setShowHelp }) {
+    const [message, setMessage] = useState(() => {
+        const savedMessage = localStorage.getItem('mascotMessage');
+        return savedMessage ? savedMessage : '';
+    });
+
     const axiosInstance = axios.create({
         baseURL: 'http://127.0.0.1:8000',
         withCredentials: true
     });
+
     const handleMascotClick = () => {
         axiosInstance.get('/api/mascot_message')
             .then(response => {
                 setMessage(response.data.response);
-                setIsVisible(true);
+                setShowHelp(true);
+                localStorage.setItem('mascotMessage', response.data.response);
+                localStorage.setItem('showHelp', JSON.stringify(true));
             })
             .catch(error => {
                 console.error('Error fetching mascot message:', error);
@@ -21,13 +27,21 @@ function Mascot() {
     };
 
     const handleCloseMascot = () => {
-        setIsVisible(false);
+        setShowHelp(false);
+        localStorage.setItem('showHelp', JSON.stringify(false));
     };
+
+    useEffect(() => {
+        if (!showHelp) {
+            setMessage('');
+            localStorage.removeItem('mascotMessage');
+        }
+    }, [showHelp]);
 
     return (
         <div className="mascot-container">
             <button onClick={handleMascotClick}>Help</button>
-            {isVisible && (
+            {showHelp && (
                 <div>
                     <p className="mascot-message">{message}</p>
                     <button onClick={handleCloseMascot}>Close</button>
@@ -38,5 +52,7 @@ function Mascot() {
 }
 
 export default Mascot;
+
+
 
 
