@@ -5,6 +5,7 @@ import NavigationBar from './NavigationBar';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
+
 function AdminMarks() {
     const [username, setUsername] = useState('');
     const [user, setUser] = useState(null);
@@ -23,19 +24,26 @@ function AdminMarks() {
                 console.error('Error fetching user data:', error);
                 setUser(null);
                 setMarks([]);
-                alert('No se encontró ningun usuario')
+                alert('No se encontró ningun usuario');
             });
+    };
+
+    const getMarkClass = (mark) => {
+        if (mark < 5) return 'mark-red';
+        if (mark >= 5 && mark <= 7) return 'mark-yellow';
+        if (mark >= 8 && mark <= 10) return 'mark-green';
+        return '';
     };
 
     return (
         <div className="admin-view">
-            <NavigationBar/>
+            <NavigationBar />
             <h1>Buscar Alumnos</h1>
-            <input 
-                type="text" 
-                value={username} 
-                onChange={(e) => setUsername(e.target.value)} 
-                placeholder="Nombre de usuario" 
+            <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                placeholder="Nombre de usuario"
             />
             <button onClick={handleSearch}>Buscar</button>
 
@@ -49,8 +57,8 @@ function AdminMarks() {
                     {marks.length > 0 ? (
                         <ul>
                             {marks.map(mark => (
-                                <li key={mark.id}>
-                                    Escenario: {mark.flow.scenery.name} - Flujo: {mark.flow.name} - Nota: {mark.mark}
+                                <li key={mark.id} className={getMarkClass(mark.mark)}>
+                                    Escenario: {mark.flow.scenery.name} - Flujo: {mark.flow.name} - Nota: {mark.mark} - Fecha: {mark.date}
                                 </li>
                             ))}
                         </ul>
@@ -64,3 +72,4 @@ function AdminMarks() {
 }
 
 export default AdminMarks;
+

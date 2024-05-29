@@ -59,8 +59,6 @@ export const AuthProvider = ({ children }) => {
         const data = JSON.parse(event.data);
         if (data.action === 'send') {
           if (parseInt(data.user.user_id) !== parseInt(currentUser?.user_id)) {
-            console.log(data.user.user_id);
-            console.log(currentUser?.user_id);
             setNewForumMessage(true);
           }
         }

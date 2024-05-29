@@ -40,9 +40,10 @@ class FlowSerializer(serializers.ModelSerializer):
         fields = '__all__'  
 class MarkSerializer(serializers.ModelSerializer):
     flow = FlowSerializer(read_only=True)
+    date = serializers.DateTimeField(format="%d-%m-%Y %H:%M")
     class Meta:
         model = Mark
-        fields = ('id', 'flow', 'user', 'mark')
+        fields = ('id', 'flow', 'user', 'mark','date')
 class StepSerializer(serializers.ModelSerializer):
     class Meta:
         model = Step

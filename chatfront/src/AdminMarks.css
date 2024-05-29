@@ -43,3 +43,21 @@
     padding: 10px;
     border: 1px solid #dee2e6;
 }
+
+.mark-red {
+    background-color: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+.mark-yellow {
+    background-color: #fff3cd;
+    color: #856404;
+    border-color: #ffeeba;
+}
+
+.mark-green {
+    background-color: #d4edda;
+    color: #155724;
+    border-color: #c3e6cb;
+}

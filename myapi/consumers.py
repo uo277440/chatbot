@@ -95,13 +95,11 @@ class ForumConsumer(AsyncWebsocketConsumer):
     async def send_message(self, event):
         # Verificar si 'username' está en el evento
         if 'username' in event:
-            print(event)
             message = event['message']
             username = event['username']
             user_id = event['user_id']
             is_superuser = event['is_superuser']
             id=event['id']
-            print('metodo send_message')
 
             await self.send(text_data=json.dumps({
                 'action':'send',
@@ -109,8 +107,6 @@ class ForumConsumer(AsyncWebsocketConsumer):
                 'user': {'username': username,'user_id': user_id,'is_superuser':is_superuser},
                 'id':id,
             }))
-        else:
-            print('Username not in event:', event)
 
     @staticmethod
     @database_sync_to_async
@@ -118,13 +114,11 @@ class ForumConsumer(AsyncWebsocketConsumer):
         user = None
         if 'user' in scope:
             user = scope['user']
-        print('metodo scope')
         return user
 
     @staticmethod
     @database_sync_to_async
     def save_forum_message(message, user):
-        print('metodo bd')
         return ForumMessage.objects.create(message=message, user=user)
     @staticmethod
     @database_sync_to_async

@@ -39,7 +39,6 @@ def is_admin(user):
     return user.is_superuser
 @api_view(['GET'])
 def hello_world(request):
-    print('adioss')
     return Response({'message': 'Hello, world!'})
 
 @api_view(['GET'])
@@ -75,7 +74,6 @@ def update_flow_manager(request):
 def upload_scenary(request):
     json_file = request.FILES.get('json_file')
     scenario = request.data.get('scenario')
-    print(scenario)
     if json_file:
         # Lógica para procesar el archivo JSON y cargarlo en la base de datos
         flow = cargar_datos_a_bd(json_file,scenario)
@@ -101,16 +99,12 @@ def upload_combined(request):
     json_file = request.FILES.get('json_file')
     csv_file = request.FILES.get('csv_file')
     scenario = request.data.get('scenario')
-    print(json_file)
-    print(csv_file)
-    print(scenario)
     if not json_file or not csv_file or not scenario:
         return JsonResponse({'error': 'JSON file, CSV file, and scenario are required'}, status=400)
 
     # Parse the JSON file
     try:
         json_data = json.load(json_file)
-        print("JSON Data:", json_data)
     except json.JSONDecodeError:
         return JsonResponse({'error': 'Invalid JSON file'}, status=400)
 
@@ -118,8 +112,7 @@ def upload_combined(request):
     try:
         csv_content = csv_file.read().decode('utf-8').splitlines()
         csv_data = list(csv.DictReader(csv_content))
-        print("CSV Data:", csv_data)  # Imprimir datos CSV
-        csv_file.seek(0)  # Reset the file pointer to the beginning after reading for print
+        csv_file.seek(0)  
     except Exception as e:
         return JsonResponse({'error': 'Invalid CSV file'}, status=400)
 
@@ -154,7 +147,6 @@ def upload_combined(request):
 @permission_classes([IsAuthenticated])
 def get_flows_by_scenario_url(request):
     scenery_id = request.GET.get('scenery_id')
-    print(scenery_id)
     if scenery_id is not None:
         try:
             flows = Flow.objects.filter(scenery_id=scenery_id)
@@ -169,7 +161,6 @@ def get_flows_by_scenario_url(request):
 @permission_classes([IsAuthenticated])
 def chatbot_response(request):
     if request.method == 'GET':
-        print(flowManager.next_options)
         user_message = request.GET.get('message', '')
         suggestions = grammarCorrector.correct_text(user_message)
         if suggestions:
@@ -222,7 +213,6 @@ def search_student(request):
 @permission_classes([IsAuthenticated])
 def transform(request):
     if request.method == 'GET':
-        print('hola')
         text = request.GET.get('text', '')
         sourceLang = request.GET.get('source', '')
         return Response({'delay': text_to_audio(text,sourceLang)})
@@ -349,7 +339,6 @@ class UserLogin(APIView):
             validate_email(data)
             validate_password(data)
         except ValidationError as e:
-            print(e.message)
             return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
         serializer = UserLoginSerializer(data=data)
         try:

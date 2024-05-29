@@ -30,16 +30,16 @@ li:last-child {
 
 /* Classes for mark ranges */
 .low-mark {
-    background-color: #f8d7da; /* light red */
+    
     color: #721c24; /* dark red */
 }
 
 .medium-mark {
-    background-color: #fff3cd; /* light orange */
+    
     color: #856404; /* dark orange */
 }
 
 .high-mark {
-    background-color: #d4edda; /* light green */
+    
     color: #155724; /* dark green */
 }

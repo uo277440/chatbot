@@ -104,7 +104,7 @@ class Mark(models.Model):
     flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='marks')
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='marks')
     mark = models.DecimalField(max_digits=3, decimal_places=1)
-    
+    date = models.DateTimeField(auto_now_add=True)
     class Meta:
         db_table = 'mark'
         
