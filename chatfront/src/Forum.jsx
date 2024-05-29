@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef,useContext  } from 'react';
+import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
 import './Forum.css';
 import NavigationBar from './NavigationBar';
@@ -18,6 +18,7 @@ const Forum = () => {
     const [userId, setUserId] = useState(null);
     const [isSuperUser, setIsSuperUser] = useState(false);
     const websocket = useRef(null);
+    const messagesEndRef = useRef(null);
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -28,6 +29,7 @@ const Forum = () => {
                 console.error('Error fetching messages:', error);
             }
         };
+
         const initializeWebSocket = () => {
             if (websocket.current) {
                 console.log("WebSocket already initialized");
@@ -54,7 +56,6 @@ const Forum = () => {
                     setMessages(prevMessages => [...prevMessages, { id: data.id, message: data.message, user: data.user }]);
                 }
             };
-
 
             websocket.current.onclose = function(event) {
                 console.error('WebSocket closed unexpectedly');
@@ -84,6 +85,12 @@ const Forum = () => {
         };
     }, []);
 
+    useEffect(() => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [messages]);
+
     const handleSubmit = (event) => {
         event.preventDefault();
 
@@ -95,7 +102,6 @@ const Forum = () => {
         }
     };
 
-    
     const handleDelete = (messageId) => {
         if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
             websocket.current.send(JSON.stringify({ action: 'delete', id: messageId }));
@@ -114,6 +120,7 @@ const Forum = () => {
             }
         }
     };
+
     useEffect(() => {
         if (window.location.pathname === '/forumMessage') {
             setNewForumMessage(false);  
@@ -121,45 +128,51 @@ const Forum = () => {
     }, [window.location.pathname]);
 
     return (
-        <div id="forum-container">
-            <NavigationBar/>
-            <h1 id="forum-header">Foro</h1>
-            <ul id="forum-messages">
-                {messages.map((msg, index) => (
-                     <li key={index} className={`forum-message ${msg.user.user_id === userId ? 'own-message' : ''}`}>
-                    <div className="message-content">
-                        <strong className="message-user">{msg.user.username}</strong>: {msg.message}
-                    </div>
-                    {(msg.user.user_id === userId || isSuperUser) && (
-                        <div className="message-actions">
-                            {msg.user.user_id === userId && (
-                                 <button onClick={() => handleEdit(msg.id)} className="edit-button">
-                                    <img src="/multimedia/editar.png" alt="Edit" />
-                                </button>
+        <div>
+            <div className="navigation-bar">
+                <NavigationBar />
+            </div>
+            <div id="forum-container">
+                <h1 id="forum-header">Foro</h1>
+                <ul id="forum-messages">
+                    {messages.map((msg, index) => (
+                        <li key={index} className={`forum-message ${msg.user.user_id === userId ? 'own-message' : ''}`}>
+                            <div className="message-content">
+                                <strong className="message-user">{msg.user.username}</strong>: {msg.message}
+                            </div>
+                            {(msg.user.user_id === userId || isSuperUser) && (
+                                <div className="message-actions">
+                                    {msg.user.user_id === userId && (
+                                        <button onClick={() => handleEdit(msg.id)} className="edit-button">
+                                            <img src="/multimedia/editar.png" alt="Edit" />
+                                        </button>
+                                    )}
+                                    <button onClick={() => handleDelete(msg.id)} className="delete-button">
+                                        <img src="/multimedia/borrar.png" alt="Delete" />
+                                    </button>
+                                </div>
                             )}
-                            <button onClick={() => handleDelete(msg.id)} className="delete-button">
-                                <img src="/multimedia/borrar.png" alt="Delete" />
-                            </button>
-                        </div>
-                    )}
-                </li>
-            ))}
-        </ul>
-            <form onSubmit={handleSubmit} id="forum-form">
-                <textarea
-                    value={content}
-                    onChange={(e) => setContent(e.target.value)}
-                    placeholder="Write your message..."
-                    required
-                    id="message-input"
-                />
-                <button type="submit" id="submit-button">Enviar</button>
-            </form>
+                        </li>
+                    ))}
+                    <div ref={messagesEndRef} />
+                </ul>
+                <form onSubmit={handleSubmit} id="forum-form">
+                    <textarea
+                        value={content}
+                        onChange={(e) => setContent(e.target.value)}
+                        placeholder="Write your message..."
+                        required
+                        id="message-input"
+                    />
+                    <button type="submit" id="submit-button">Enviar</button>
+                </form>
+            </div>
         </div>
     );
 };
 
 export default Forum;
+
 
 
 

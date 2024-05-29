@@ -36,37 +36,41 @@ function AdminMarks() {
     };
 
     return (
-        <div className="admin-view">
-            <NavigationBar />
-            <h1>Buscar Alumnos</h1>
-            <input
-                type="text"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                placeholder="Nombre de usuario"
-            />
-            <button onClick={handleSearch}>Buscar</button>
+        <div>
+            <div className="navigation-bar">
+                <NavigationBar />
+            </div>
+            <div className="admin-view">
+                <h1>Buscar Alumnos</h1>
+                <input
+                    type="text"
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
+                    placeholder="Nombre de usuario"
+                />
+                <button onClick={handleSearch}>Buscar</button>
 
-            {user && (
-                <div>
-                    <h2>Detalles del Usuario</h2>
-                    <p>Nombre: {user.username}</p>
-                    <p>Email: {user.email}</p>
+                {user && (
+                    <div>
+                        <h2>Detalles del Usuario</h2>
+                        <p>Nombre: {user.username}</p>
+                        <p>Email: {user.email}</p>
 
-                    <h2>Notas</h2>
-                    {marks.length > 0 ? (
-                        <ul>
-                            {marks.map(mark => (
-                                <li key={mark.id} className={getMarkClass(mark.mark)}>
-                                    Escenario: {mark.flow.scenery.name} - Flujo: {mark.flow.name} - Nota: {mark.mark} - Fecha: {mark.date}
-                                </li>
-                            ))}
-                        </ul>
-                    ) : (
-                        <p>Este usuario no tiene notas registradas.</p>
-                    )}
-                </div>
-            )}
+                        <h2>Notas</h2>
+                        {marks.length > 0 ? (
+                            <ul>
+                                {marks.map(mark => (
+                                    <li key={mark.id} className={getMarkClass(mark.mark)}>
+                                        Escenario: {mark.flow.scenery.name} - Flujo: {mark.flow.name} - Nota: {mark.mark} - Fecha: {mark.date}
+                                    </li>
+                                ))}
+                            </ul>
+                        ) : (
+                            <p>Este usuario no tiene notas registradas.</p>
+                        )}
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

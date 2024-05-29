@@ -1,5 +1,5 @@
 .admin {
-    max-width: 600px;
+    max-width: 90vh;
     margin: 0 auto;
     padding: 20px;
     background-color: #f9f9f9;
@@ -40,4 +40,7 @@
   .admin button:hover {
     background-color: #0056b3;
   }
-  
+  .navigation-bar {
+    width: 100%;
+    margin-bottom: 20px;
+  }

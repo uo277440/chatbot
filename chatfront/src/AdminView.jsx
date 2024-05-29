@@ -136,49 +136,53 @@ function AdminView() {
   };
 
   return (
-    <div className="admin">
-      <NavigationBar/>
-      <h2>Admin View</h2>
-
-      <div className="upload-section">
-        <label htmlFor="jsonFileInput">Subir archivo JSON (Flujo):</label>
-        <input id="jsonFileInput" type="file" onChange={handleFileChange} />
-
-        <label htmlFor="csvFileInput">Subir archivo CSV (Datos de Entrenamiento):</label>
-        <input id="csvFileInput" type="file" onChange={handleCSVChange} />
+    <div>
+      <div className="navigation-bar">
+        <NavigationBar />
       </div>
+      <div className="admin">
+        <h2>Admin View</h2>
 
-      <div className="scenario-selection">
-        <label htmlFor="existingScenarioSelect">Seleccione un escenario existente:</label>
-        <select id="existingScenarioSelect" onChange={handleScenarioChange}>
-          <option value="">Seleccione un escenario existente</option>
-          {scenarios.map(scenario => (
-            <option key={scenario.id} value={scenario.id}>{scenario.name}</option>
-          ))}
-        </select>
+        <div className="upload-section">
+          <label htmlFor="jsonFileInput">Subir archivo JSON (Flujo):</label>
+          <input id="jsonFileInput" type="file" onChange={handleFileChange} />
 
-        <label htmlFor="newScenarioInput">O ingrese el nombre de un nuevo escenario:</label>
-        <input
-          id="newScenarioInput"
-          type="text"
-          placeholder="Nombre del nuevo escenario"
-          value={newScenario}
-          onChange={handleNewScenarioChange}
-        />
-      </div>
+          <label htmlFor="csvFileInput">Subir archivo CSV (Datos de Entrenamiento):</label>
+          <input id="csvFileInput" type="file" onChange={handleCSVChange} />
+        </div>
 
-      <button onClick={handleUpload}>Enviar al backend</button>
+        <div className="scenario-selection">
+          <label htmlFor="existingScenarioSelect">Seleccione un escenario existente:</label>
+          <select id="existingScenarioSelect" onChange={handleScenarioChange}>
+            <option value="">Seleccione un escenario existente</option>
+            {scenarios.map(scenario => (
+              <option key={scenario.id} value={scenario.id}>{scenario.name}</option>
+            ))}
+          </select>
 
-      <div className="flow-selection">
-        <h3>Eliminar Flujo</h3>
-        <label htmlFor="flowSelect">Seleccione un flujo:</label>
-        <select id="flowSelect" onChange={handleFlowChange}>
-          <option value="">Seleccione un flujo</option>
-          {flows.map(flow => (
-            <option key={flow.id} value={flow.id}>{flow.name}</option>
-          ))}
-        </select>
-        <button onClick={handleDeleteFlow}>Eliminar Flujo</button>
+          <label htmlFor="newScenarioInput">O ingrese el nombre de un nuevo escenario:</label>
+          <input
+            id="newScenarioInput"
+            type="text"
+            placeholder="Nombre del nuevo escenario"
+            value={newScenario}
+            onChange={handleNewScenarioChange}
+          />
+        </div>
+
+        <button onClick={handleUpload}>Enviar al backend</button>
+
+        <div className="flow-selection">
+          <h3>Eliminar Flujo</h3>
+          <label htmlFor="flowSelect">Seleccione un flujo:</label>
+          <select id="flowSelect" onChange={handleFlowChange}>
+            <option value="">Seleccione un flujo</option>
+            {flows.map(flow => (
+              <option key={flow.id} value={flow.id}>{flow.name}</option>
+            ))}
+          </select>
+          <button onClick={handleDeleteFlow}>Eliminar Flujo</button>
+        </div>
       </div>
     </div>
   );
