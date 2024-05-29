@@ -1,0 +1,14 @@
+.notification-icon {
+  position: relative;
+  display: inline-block;
+}
+
+.notification-icon::after {
+  content: url('multimedia/notificacion.png'); /* Ruta a la imagen de notificación */
+  position: absolute;
+  top: 0;
+  padding: 50px;
+  right: -10px;
+  width: 5px; /* Ajusta el tamaño según tus necesidades */
+  height: 5px; /* Ajusta el tamaño según tus necesidades */
+}

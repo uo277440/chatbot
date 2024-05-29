@@ -6,9 +6,10 @@ import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
 import AuthContext from './AuthContext';
+import './NavigationBar.css';
 
 const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { currentUser, setCurrentUser, newForumMessage } = useContext(AuthContext);
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   
@@ -55,14 +56,14 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
                     <>
                       <Nav.Link as={Link} to="/marks">Evaluador</Nav.Link>
                       <Nav.Link as={Link} to="/admin">Panel</Nav.Link>
-                      <Nav.Link as={Link} to="/forumMessage">Foro</Nav.Link>
+                      <Nav.Link as={Link} to="/forumMessage" style={{ color: newForumMessage ? 'red' : 'white' }}>Foro</Nav.Link>
                     </>
                   ) : (
                     <>
                       <Nav.Link as={Link} to="/menu">Menú</Nav.Link>
                       <Nav.Link as={Link} to="/chatbot">Chatbot</Nav.Link>
                       <Nav.Link as={Link} to="/profile">Perfil</Nav.Link>
-                      <Nav.Link as={Link} to="/forumMessage">Foro</Nav.Link>
+                      <Nav.Link as={Link} to="/forumMessage" style={{ color: newForumMessage ? 'red' : 'white' }}>Foro</Nav.Link>
                     </>
                   )}
                 </Nav>
@@ -81,4 +82,6 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
 };
 
 export default NavigationBar;
+
+
 

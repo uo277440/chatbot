@@ -104,6 +104,7 @@ class ForumConsumer(AsyncWebsocketConsumer):
             print('metodo send_message')
 
             await self.send(text_data=json.dumps({
+                'action':'send',
                 'message': message,
                 'user': {'username': username,'user_id': user_id,'is_superuser':is_superuser},
                 'id':id,

@@ -31,5 +31,4 @@ urlpatterns = [
     path('messages/<int:message_id>/edit/', views.edit_message, name='edit_message'),
     path('scenarios/<int:scenario_id>/flows', views.get_flows_by_scenario, name='get-flows-by-scenario'),
     path('forum/messages', views.forum_messages, name='forum-messages'),
-    
 ]

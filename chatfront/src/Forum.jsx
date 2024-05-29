@@ -1,7 +1,8 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef,useContext  } from 'react';
 import axios from 'axios';
 import './Forum.css';
 import NavigationBar from './NavigationBar';
+import AuthContext from './AuthContext';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -11,6 +12,7 @@ const client = axios.create({
 });
 
 const Forum = () => {
+    const { currentUser, newForumMessage, setNewForumMessage } = useContext(AuthContext);
     const [messages, setMessages] = useState([]);
     const [content, setContent] = useState('');
     const [userId, setUserId] = useState(null);
@@ -112,6 +114,11 @@ const Forum = () => {
             }
         }
     };
+    useEffect(() => {
+        if (window.location.pathname === '/forumMessage') {
+            setNewForumMessage(false);  
+        }
+    }, [window.location.pathname]);
 
     return (
         <div id="forum-container">
