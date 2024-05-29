@@ -9,10 +9,7 @@ export const AuthProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
 
-  const [newForumMessage, setNewForumMessage] = useState(() => {
-    const savedNotification = localStorage.getItem('newForumMessage');
-    return savedNotification ? JSON.parse(savedNotification) : false;
-  });
+  const [newForumMessage, setNewForumMessage] = useState(false);
 
   const websocket = useRef(null);
 
@@ -60,6 +57,9 @@ export const AuthProvider = ({ children }) => {
         if (data.action === 'send') {
           if (parseInt(data.user.user_id) !== parseInt(currentUser?.user_id)) {
             setNewForumMessage(true);
+          }else{
+            console.log('falso')
+            setNewForumMessage(false);
           }
         }
       };

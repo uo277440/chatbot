@@ -42,6 +42,10 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
       });
   };
 
+  useEffect(() => {
+    console.log('newForumMessage updated:', newForumMessage);
+  }, [newForumMessage]);
+
   return (
     <Navbar bg="dark" variant="dark">
       <Container>
@@ -56,13 +60,13 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
                     <>
                       <Nav.Link as={Link} to="/marks">Evaluador</Nav.Link>
                       <Nav.Link as={Link} to="/admin">Panel</Nav.Link>
-                      <Nav.Link as={Link} to="/forumMessage" style={{ color: newForumMessage ? 'red' : {} }}>Foro</Nav.Link>
+                      <Nav.Link as={Link} to="/forumMessage" className={newForumMessage ? 'rojo' : ''}>Foro</Nav.Link>
                     </>
                   ) : (
                     <>
                       <Nav.Link as={Link} to="/menu">Menú</Nav.Link>
                       <Nav.Link as={Link} to="/chatbot">Chatbot</Nav.Link>
-                      <Nav.Link as={Link} to="/forumMessage" style={{ color: newForumMessage ? 'red' : {} }}>Foro</Nav.Link>
+                      <Nav.Link as={Link} to="/forumMessage" className={newForumMessage ? 'rojo' : ''}>Foro</Nav.Link>
                       <Nav.Link as={Link} to="/profile">Perfil</Nav.Link>
                     </>
                   )}
@@ -82,6 +86,7 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
 };
 
 export default NavigationBar;
+
 
 
 
