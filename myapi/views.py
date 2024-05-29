@@ -40,7 +40,14 @@ def is_admin(user):
 @api_view(['GET'])
 def hello_world(request):
     return Response({'message': 'Hello, world!'})
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def check_chatbot(request):
+    if chatbot and flowManager:
+        return Response({'chatbot': True},status=status.HTTP_200_OK)
+    else:
+        return Response({'chatbot': False},status=status.HTTP_200_OK)
+        
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def scenarios(request):

@@ -62,6 +62,20 @@ function Chatbot() {
                 console.log(error);
             });
     };
+    useEffect(() => {
+        axiosInstance.get(`/api/check_chatbot`)
+        .then(response => {
+            const chatbot = response.data.chatbot
+            if (!chatbot){
+                navigate('/menu')
+                alert('Escoge un flujo antes de interactuar con el bot !')
+            }
+
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }, []);
 
     useEffect(() => {
         localStorage.setItem('chatMessages', JSON.stringify(messages));
