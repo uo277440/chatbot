@@ -33,24 +33,14 @@ class FlowManager:
         return 'Start with a greeting message!'
 
     def advance(self, next_label):
-        print('hola las opciones son ')
-        print(self.next_options)
-        print('me está llegando la opción :'+next_label)
-        print(self.steps)
-        print(len(self.steps))
-        for step in self.steps:
-                print(step.label)
         if next_label in self.next_options:
             for step in self.steps:
-                print(step.label)
                 if step.label == next_label:
                     self.current_label = next_label
                     self.next_options = step.options
                     self.response = step.message
                     if not self.next_options:
                         self.finished = True
-                        print("FLUJO TERMINADO")
-                    print('devuelvo True')
                     return True
         return False
 

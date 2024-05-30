@@ -11,6 +11,7 @@ from nltk.corpus import wordnet
 import numpy as np
 import string
 from io import StringIO
+from sklearn.metrics import accuracy_score, classification_report
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -25,7 +26,7 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         return self
 
     def transform(self, X):
-        return [self.tokenize_and_lemmatize(text) for text in X]
+        return [self.tokenize_and_lemmatize(text) for text in X]  
 
     def tokenize_and_lemmatize(self, input_text):
         lemmatizer = WordNetLemmatizer()
@@ -81,12 +82,18 @@ class SVMChatbot:
             #('classifier', SVC(kernel='linear'))  # Clasificador SVM lineal
             ('classifier', calibrated_classifier)
         ])
-        self.y_train_encoded = self.label_encoder.fit_transform(self.y)
-        self.pipeline.fit(self.X,self.y_train_encoded)
+        self.y_train_encoded = self.label_encoder.fit_transform(self.y_train)
+        self.pipeline.fit(self.X_train, self.y_train_encoded)
+        print('A evaluar el modelo')
+        self.evaluate_model()
 
     def evaluate_model(self):
-        # Evaluar el modelo en el conjunto de prueba
-        accuracy = self.pipeline.score(self.X_test, self.y_test)
+        y_test_encoded = self.label_encoder.transform(self.y_test)
+        y_pred = self.pipeline.predict(self.X_test)
+        accuracy = accuracy_score(y_test_encoded, y_pred)
+        report = classification_report(y_test_encoded, y_pred, target_names=self.label_encoder.classes_)
+        print(f'Accuracy: {accuracy}')
+        print(f'Classification Report:\n{report}')
     
     def predict_response(self, input_text):
         processed_input_text = (self.text_processor.tokenize_and_lemmatize(input_text))
