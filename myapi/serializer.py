@@ -57,5 +57,5 @@ class ForumMessageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = ForumMessage
-        fields = ['id', 'message', 'user', 'date']
+        fields = ['id', 'message', 'user', 'date', 'pinned']
   

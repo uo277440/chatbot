@@ -124,6 +124,7 @@ class ForumMessage(models.Model):
     message = models.TextField()
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='mensajes_foro')
     date = models.DateTimeField(auto_now_add=True)
+    pinned = models.BooleanField(default=False)
 
     class Meta:
         db_table = 'forum_message'

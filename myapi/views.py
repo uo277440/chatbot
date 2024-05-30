@@ -299,10 +299,13 @@ def edit_message(request,message_id):
 def forum_messages(request):
     try:
         messages = ForumMessage.objects.all().order_by('date')
+        pinned_message = ForumMessage.objects.filter(pinned=True).first()
         serializer = ForumMessageSerializer(messages, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        pinned_serializer = ForumMessageSerializer(pinned_message)
+        return Response({'messages':serializer.data,'pinnedMessage': pinned_serializer.data if pinned_serializer else None}, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):

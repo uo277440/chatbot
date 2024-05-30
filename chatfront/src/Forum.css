@@ -35,10 +35,31 @@
     overflow-wrap: break-word;
 }
 
+.pinned-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word; 
+    overflow-wrap: break-word;
+    color: red;
+    font-weight: bold;
+}
+
 .message-content {
     flex-grow: 1;
     word-break: break-word; 
     white-space: pre-wrap;
+}
+.pinned-content {
+    flex-grow: 1;
+    word-break: break-word; 
+    white-space: pre-wrap;
+    color:red;
 }
 
 .message-user {
@@ -50,7 +71,8 @@
 }
 
 .edit-button,
-.delete-button {
+.delete-button,
+.pin-button {
     background-color: #007BFF;
     color: white;
     border: none;
@@ -70,6 +92,18 @@
 
 .delete-button:hover {
     background-color: #c82333;
+}
+
+.pin-button {
+    background-color: #ffc107;
+}
+
+.pin-button:hover {
+    background-color: #e0a800;
+}
+
+.unpin-button:hover {
+    background-color: #e0a800;
 }
 
 #forum-form {
@@ -100,9 +134,11 @@
 #submit-button:hover {
     background-color: #218838;
 }
+
 .own-message {
     background-color: #d4edda; 
 }
+
 .message-actions button {
     background: none;
     border: none;
@@ -121,4 +157,9 @@
 .delete-button img {
     content: url('multimedia/borrar.png');
 }
+
+.pin-button img,.unpin-button img  {
+    content: url('multimedia/chincheta.png');
+}
+
 

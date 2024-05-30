@@ -14,6 +14,7 @@ const client = axios.create({
 const Forum = () => {
     const { currentUser, newForumMessage, setNewForumMessage } = useContext(AuthContext);
     const [messages, setMessages] = useState([]);
+    const [pinnedMessage, setPinnedMessage] = useState(null); // Estado para el mensaje fijado
     const [content, setContent] = useState('');
     const [userId, setUserId] = useState(null);
     const [isSuperUser, setIsSuperUser] = useState(false);
@@ -24,7 +25,8 @@ const Forum = () => {
         const fetchMessages = async () => {
             try {
                 const response = await client.get('/api/forum/messages');
-                setMessages(response.data);
+                setMessages(response.data.messages);
+                setPinnedMessage(response.data.pinnedMessage); // Asignar mensaje fijado
             } catch (error) {
                 console.error('Error fetching messages:', error);
             }
@@ -52,6 +54,10 @@ const Forum = () => {
                     setMessages(prevMessages => prevMessages.map(msg => 
                         msg.id === data.id ? { ...msg, message: data.message } : msg
                     ));
+                } else if (data.action === 'pin') {
+                    setPinnedMessage(data.message); // Fijar mensaje
+                } else if (data.action === 'unpin') {
+                    setPinnedMessage(null); // Despinar mensaje
                 } else {
                     setMessages(prevMessages => [...prevMessages, { id: data.id, message: data.message, user: data.user }]);
                 }
@@ -60,7 +66,6 @@ const Forum = () => {
             websocket.current.onclose = function(event) {
                 console.error('WebSocket closed unexpectedly');
                 websocket.current = null; // Reset the ref to null when the connection is closed
-                // setTimeout(initializeWebSocket, 1000); // Retry connection after 1 second
             };
         };
 
@@ -121,6 +126,22 @@ const Forum = () => {
         }
     };
 
+    const handlePin = (messageId) => {
+        if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
+            websocket.current.send(JSON.stringify({ action: 'pin', id: messageId }));
+        } else {
+            console.error('WebSocket is not open');
+        }
+    };
+
+    const handleUnpin = () => {
+        if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
+            websocket.current.send(JSON.stringify({ action: 'unpin' }));
+        } else {
+            console.error('WebSocket is not open');
+        }
+    };
+
     useEffect(() => {
         if (window.location.pathname === '/forumMessage') {
             setNewForumMessage(false);  
@@ -134,24 +155,43 @@ const Forum = () => {
             </div>
             <div id="forum-container">
                 <h1 id="forum-header">Foro</h1>
+                {pinnedMessage && pinnedMessage.message && (
+                    <div className="pinned-message">
+                        <div className="message-content">
+                            <strong className="message-user">{pinnedMessage.user.username}</strong>: {pinnedMessage.message}
+                        </div>
+                        {isSuperUser && (
+                            <div className="message-actions">
+                                <button onClick={handleUnpin} className="unpin-button">
+                                    <img src="multimedia/chincheta.png" alt="Unpin" />
+                                </button>
+                            </div>
+                        )}
+                    </div>
+                )}
                 <ul id="forum-messages">
                     {messages.map((msg, index) => (
                         <li key={index} className={`forum-message ${msg.user.user_id === userId ? 'own-message' : ''}`}>
                             <div className="message-content">
                                 <strong className="message-user">{msg.user.username}</strong>: {msg.message}
                             </div>
-                            {(msg.user.user_id === userId || isSuperUser) && (
-                                <div className="message-actions">
-                                    {msg.user.user_id === userId && (
-                                        <button onClick={() => handleEdit(msg.id)} className="edit-button">
-                                            <img src="/multimedia/editar.png" alt="Edit" />
-                                        </button>
-                                    )}
+                            <div className="message-actions">
+                                {msg.user.user_id === userId && (
+                                    <button onClick={() => handleEdit(msg.id)} className="edit-button">
+                                        <img src="/multimedia/editar.png" alt="Edit" />
+                                    </button>
+                                )}
+                                {(msg.user.user_id === userId || isSuperUser) && (
                                     <button onClick={() => handleDelete(msg.id)} className="delete-button">
                                         <img src="/multimedia/borrar.png" alt="Delete" />
                                     </button>
-                                </div>
-                            )}
+                                )}
+                                {isSuperUser && msg.user.user_id === userId &&(
+                                    <button onClick={() => handlePin(msg.id)} className="pin-button">
+                                        <img src="/multimedia/chincheta.png" alt="Pin" />
+                                    </button>
+                                )}
+                            </div>
                         </li>
                     ))}
                     <div ref={messagesEndRef} />
@@ -172,6 +212,7 @@ const Forum = () => {
 };
 
 export default Forum;
+
 
 
 
