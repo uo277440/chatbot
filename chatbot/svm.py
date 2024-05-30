@@ -15,6 +15,8 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
+import joblib
+import os
 
 
 class TextTokenizer(BaseEstimator, TransformerMixin):
@@ -53,15 +55,23 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         '''
         return ' '.join(lemmatized_tokens)
 class SVMChatbot:
-    def __init__(self, csv_user_content,confidence_threshold=0.10):
+    def __init__(self, csv_user_content,model_path,confidence_threshold=0.10):
         self.csv_user_content = csv_user_content
         self.text_processor = TextTokenizer()
         self.pipeline = None
         self.confidence_threshold = confidence_threshold
         self.label_encoder = LabelEncoder()
-       
+        self.model_path = model_path
+    def save_model(self):
+        joblib.dump((self.pipeline, self.label_encoder), self.model_path)  
         
-
+    def load_model(self):
+        if os.path.exists(self.model_path):
+            print('lo cargo')
+            self.pipeline, self.label_encoder = joblib.load(self.model_path)
+            return True
+        print('no lo cargo')
+        return False
     def load_data(self):
         # Cargar el archivo CSV
         data = pd.read_csv(StringIO(self.csv_user_content))
@@ -86,6 +96,7 @@ class SVMChatbot:
         self.pipeline.fit(self.X_train, self.y_train_encoded)
         print('A evaluar el modelo')
         self.evaluate_model()
+        self.save_model()
 
     def evaluate_model(self):
         y_test_encoded = self.label_encoder.transform(self.y_test)

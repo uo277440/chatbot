@@ -24,6 +24,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 import csv
 import json
+import os
 from django.db import transaction
 
 
@@ -65,15 +66,19 @@ def update_flow_manager(request):
     except Flow.DoesNotExist:
         return JsonResponse({'error': 'Flujo no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
-
+    # Definir la ruta del archivo del modelo específico para el flujo
+    model_path = f'models/svm_model_{flow_id}.pkl'
+    # Crear la carpeta models si no existe
+    os.makedirs('models', exist_ok=True)
     new_flow_manager = FlowManager(flow.id)
-    new_chatbot = SVMChatbot(generar_csv_entrenamiento(flow.id))
+    new_chatbot = SVMChatbot(generar_csv_entrenamiento(flow.id), model_path=model_path)
+    if not new_chatbot.load_model():
+        new_chatbot.load_data()  
+        new_chatbot.train_model()
     global flowManager
     global chatbot
     flowManager = new_flow_manager
     chatbot = new_chatbot
-    chatbot.load_data()  
-    chatbot.train_model()
     return JsonResponse({'message': 'flowManager actualizado correctamente'})
 
 @api_view(['POST'])
