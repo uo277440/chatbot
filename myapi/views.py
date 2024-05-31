@@ -8,6 +8,7 @@ from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerialize
 from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser,ForumMessage,Scenery
 from chatbot.svm import SVMChatbot
 from chatbot.grammar import GrammarCorrector
+from chatbot.grammar import SentenceChecker
 from chatbot.reproductor import text_to_audio
 from chatbot.flow_manager import FlowManager,Marker
 from .validations import custom_validation,validate_email,validate_password
@@ -29,7 +30,7 @@ from django.db import transaction
 
 
 
-
+sentence_checker = SentenceChecker()
 marker = Marker()
 chatbot = None
 scenary_service = ScenaryService()
@@ -179,6 +180,8 @@ def chatbot_response(request):
             marker.decrease()
             response_text = '\n'.join(suggestions)
             return Response({'response': response_text})
+        if not sentence_checker.is_sentence_coherent(user_message):
+            return Response({'response':'La frase debe ser coherente y bien ligada'})
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(flowManager.advance(bot_response)):
             response=flowManager.response + bot_response

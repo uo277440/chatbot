@@ -1,5 +1,6 @@
 import requests
 from googletrans import Translator
+import spacy
 class GrammarCorrector:
     def correct_text(self,text):
         url = 'https://languagetool.org/api/v2/check'
@@ -30,6 +31,23 @@ class GrammarCorrector:
         translation = translator.translate(text, dest=targetLang)
         translated_text = translation.text
         return translated_text
+class SentenceChecker:
+    def __init__(self):
+        self.nlp = spacy.load('en_core_web_sm')
+
+    def is_sentence_coherent(self, sentence):
+        doc = self.nlp(sentence)
+        has_subject = False
+        has_verb = False
+
+        for token in doc:
+            if token.dep_ in ('nsubj', 'csubj', 'nsubjpass', 'csubjpass'):  
+                has_subject = True
+            if token.pos_ == 'VERB':  # Verificar si hay un verbo
+                has_verb = True
+
+        # La frase es coherente si tiene al menos un sujeto y un verbo
+        return has_subject and has_verb
 
 # Ejemplo de uso
 '''
