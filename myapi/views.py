@@ -329,7 +329,11 @@ def delete_flow(request):
     
     try:
         flow = Flow.objects.get(id=flow_id)
+        scenery = flow.scenery
         flow.delete()
+        
+        if not scenery.flows.exists():
+            scenery.delete()
         return Response({'message': 'Flow deleted successfully'}, status=status.HTTP_200_OK)
     except Flow.DoesNotExist:
         return Response({'error': 'Flow not found'}, status=status.HTTP_404_NOT_FOUND)
