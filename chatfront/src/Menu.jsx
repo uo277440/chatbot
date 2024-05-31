@@ -51,6 +51,11 @@ function Menu() {
     };
 
     const handleFlowClick = (flowId) => {
+        const currentFlowId = localStorage.getItem('currentFlowId');
+        if (currentFlowId.toString() !== flowId.toString()) {
+            localStorage.removeItem('chatMessages');
+            localStorage.setItem('currentFlowId', flowId.toString());
+        }
         axiosInstance.get(`/api/start_flow?flow_id=${flowId}`)
             .then(response => {
                 console.log(response.data.message);
