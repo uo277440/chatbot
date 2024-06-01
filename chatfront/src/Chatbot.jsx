@@ -42,7 +42,8 @@ function Chatbot() {
 
         axiosInstance.get(`/api/chatbot_response/?message=${encodeURIComponent(message)}`)
             .then(response => {
-                const newBotMessage = { text: response.data.response, from: 'bot' };
+                const suggestion = response.data.suggestion;
+                const newBotMessage = { text: response.data.response, from: 'bot',suggestion: suggestion };
                 const updatedMessagesWithBot = [...updatedMessages, newBotMessage];
                 setMessages(updatedMessagesWithBot);
                 localStorage.setItem('chatMessages', JSON.stringify(updatedMessagesWithBot));

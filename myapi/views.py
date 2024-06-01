@@ -180,9 +180,9 @@ def chatbot_response(request):
         if suggestions:
             marker.decrease()
             response_text = '\n'.join(suggestions)
-            return Response({'response': response_text})
+            return Response({'response': response_text,'suggestion':True})
         if not sentence_checker.is_sentence_coherent(user_message):
-            return Response({'response':'La frase debe ser coherente y bien ligada'})
+            return Response({'response':'La frase debe ser coherente y bien ligada','suggestion':True})
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(flowManager.advance(bot_response)):
             response=flowManager.response + bot_response
@@ -194,14 +194,14 @@ def chatbot_response(request):
                     mark = Mark.objects.create(flow=flow, user=user, mark=mark_value)
                     mark.save()
                 except AppUser.DoesNotExist:
-                    return Response({'response': 'Usuario no encontrado'})
+                    return Response({'response': 'Usuario no encontrado'},status=status.HTTP_404_NOT_FOUND)
                 except Flow.DoesNotExist:
-                    return Response({'response': 'Flujo no encontrado'})
+                    return Response({'response': 'Flujo no encontrado'},status=status.HTTP_404_NOT_FOUND)
         else:
             response="FLUJO NO VA BIEN" + bot_response
         if(response is None):
             return Response({'response': 'La respuesta es incoherente'})
-        return Response({'response': response,'is_finished':flowManager.is_finished(),'mark': marker.mark})
+        return Response({'response': response,'is_finished':flowManager.is_finished(),'mark': marker.mark,'suggestion':False})
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def mascot_message(request):
@@ -248,7 +248,8 @@ def translate(request):
         text = request.GET.get('text', '')
         targetLang = request.GET.get('target', '')
         translated_text=grammarCorrector.translate_to_spanish(text,targetLang)
-        marker.decrease()
+        if(targetLang == 'es'):
+            marker.decrease()
         return Response({'translated_text': translated_text})
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])

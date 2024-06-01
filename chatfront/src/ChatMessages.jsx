@@ -62,13 +62,15 @@ function ChatMessages({ messages, setMessages }) {
                     {message.text.split('\n').map((line, idx) => (
                         <p key={idx}>{line}</p>
                     ))}
-                    <img
-                        src={altavoz}
-                        alt="Altavoz"
-                        onClick={() => handleTextToAudio(message.text, message.lang)}
-                        className={`image-button ${isButtonEnabled ? '' : 'disabled'}`}
-                    />
-                    {message.from === 'bot' && (
+                    {!message.suggestion && (
+                        <img
+                            src={altavoz}
+                            alt="Altavoz"
+                            onClick={() => handleTextToAudio(message.text, message.lang)}
+                            className={`image-button ${isButtonEnabled ? '' : 'disabled'}`}
+                        />
+                    )}
+                    {message.from === 'bot' &&  !message.suggestion && (
                         <img
                             src={traducir}
                             alt="Traducir"
