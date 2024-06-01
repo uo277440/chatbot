@@ -27,6 +27,7 @@ export const AuthProvider = ({ children }) => {
   }, [newForumMessage]);
 
   useEffect(() => {
+    console.log('no paro')
     const fetchCurrentUser = async () => {
       try {
         const response = await axios.get('/api/user');

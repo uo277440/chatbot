@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../css/Menu.css';
@@ -9,10 +9,10 @@ function Menu() {
     const [selectedScenario, setSelectedScenario] = useState(null);
     const [flows, setFlows] = useState([]);
     const navigate = useNavigate();
-    const axiosInstance = axios.create({
+    const axiosInstance = useMemo(() => axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true
-    });
+      }), []);
 
     useEffect(() => {
         // Fetch existing scenarios when component mounts

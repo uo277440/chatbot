@@ -71,6 +71,7 @@ const Forum = () => {
 
         client.get('/api/user')
             .then(response => {
+                console.log('forum')
                 console.log(response.data)
                 setUserId(response.data.user.user_id);
                 setIsSuperUser(response.data.user.is_superuser);

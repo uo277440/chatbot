@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useMemo } from 'react';
 import axios from 'axios';
 import '../css/AdminMarks.css';
 import NavigationBar from '../NavigationBar';
@@ -10,10 +10,10 @@ function AdminMarks() {
     const [username, setUsername] = useState('');
     const [user, setUser] = useState(null);
     const [marks, setMarks] = useState([]);
-    const axiosInstance = axios.create({
+    const axiosInstance = useMemo(() => axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true
-    });
+      }), []);
     const handleSearch = () => {
         axiosInstance.get(`/api/search_student/?search_param=${username}`)
             .then(response => {

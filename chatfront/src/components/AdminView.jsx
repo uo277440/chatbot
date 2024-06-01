@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback  } from 'react';
+import React, { useState, useEffect, useCallback,useMemo  } from 'react';
 import axios from 'axios';
 import '../css/Admin.css';
 import NavigationBar from '../NavigationBar';
@@ -16,9 +16,10 @@ function AdminView() {
   const [csvFile, setCSVFile] = useState(null);
   const [flows, setFlows] = useState([]);
   const [selectedFlow, setSelectedFlow] = useState('');
-  const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000'
-  });
+  const axiosInstance = useMemo(() => axios.create({
+    baseURL: 'http://localhost:8000',
+    withCredentials: true
+  }), []);
 
 
 

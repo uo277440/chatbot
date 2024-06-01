@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState,useMemo } from 'react';
 import axios from 'axios';
 import '../css/ChatMessages.css';
 import altavoz from '../assets/altavoz.png';
@@ -6,10 +6,10 @@ import traducir from '../assets/translate.png';
 
 function ChatMessages({ messages, setMessages }) {
     const messagesRef = useRef(null);
-    const axiosInstance = axios.create({
+    const axiosInstance = useMemo(() => axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true
-    });
+      }), []);
 
     useEffect(() => {
         scrollToBottom();

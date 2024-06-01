@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect,useMemo} from 'react';
 import axios from 'axios';
 import '../css/Profile.css';
 import NavigationBar from '../NavigationBar';
@@ -6,14 +6,15 @@ import NavigationBar from '../NavigationBar';
 function Profile() {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const axiosInstance = axios.create({
+    const axiosInstance = useMemo(() => axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true
-    });
+      }), []);
 
     useEffect(() => {
         axiosInstance.get('/api/user_profile')
             .then(response => {
+                console.log('profile')
                 setProfileData(response.data);
                 setLoading(false);
             })

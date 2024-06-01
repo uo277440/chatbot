@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState,useMemo } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
 import Navbar from 'react-bootstrap/Navbar';
@@ -13,10 +13,10 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
   const [userData, setUserData] = useState(null);
   const navigate = useNavigate();
   
-  const axiosInstance = axios.create({
+  const axiosInstance = useMemo(() => axios.create({
     baseURL: 'http://localhost:8000',
     withCredentials: true
-  });
+  }), []);
 
   useEffect(() => {
     if (currentUser) {

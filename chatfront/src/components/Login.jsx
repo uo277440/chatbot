@@ -1,5 +1,5 @@
 import '../css/Login.css';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext,useMemo } from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -13,11 +13,13 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
-const client = axios.create({
-  baseURL: "http://localhost:8000"
-});
+
 
 function Login() {
+  const client = useMemo(() => axios.create({
+    baseURL: 'http://localhost:8000',
+    withCredentials: true
+  }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
@@ -26,6 +28,7 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    console.log('login')
     client.get("/api/user")
       .then(function (res) {
         setCurrentUser(res.data.user);

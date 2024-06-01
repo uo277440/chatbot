@@ -107,20 +107,28 @@ from django.db import transaction
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def upload_combined(request):
+    print('hol<')
     json_file = request.FILES.get('json_file')
+    print(json_file)
     csv_file = request.FILES.get('csv_file')
+    print(csv_file)
     scenario = request.data.get('scenario')
+    print(json_file)
+    print(csv_file)
+    print(scenario)
     if not json_file or not csv_file or not scenario:
         return JsonResponse({'error': 'JSON file, CSV file, and scenario are required'}, status=400)
-
+    print('si?')
     # Parse the JSON file
     try:
         json_data = json.load(json_file)
     except json.JSONDecodeError:
+        print('cague?')
         return JsonResponse({'error': 'Invalid JSON file'}, status=400)
 
     # Read the CSV file
     try:
+        print('joujou')
         csv_content = csv_file.read().decode('utf-8').splitlines()
         csv_data = list(csv.DictReader(csv_content))
         csv_file.seek(0)  
@@ -130,7 +138,7 @@ def upload_combined(request):
     # Extract JSON keys and CSV headers
     json_labels = {step['label'] for flow in json_data['flows'] for step in flow['steps']}
     csv_labels_count = {label: 0 for label in json_labels}
-
+    print('jaja')
     for row in csv_data:
         label = row.get('Label')
         if label in csv_labels_count:

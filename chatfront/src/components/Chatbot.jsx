@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback  } from 'react';
+import React, { useState, useEffect,useCallback,useMemo  } from 'react';
 import axios from 'axios';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
@@ -18,10 +18,10 @@ function Chatbot() {
         return savedShowHelp ? JSON.parse(savedShowHelp) : false;
     });
 
-    const axiosInstance = axios.create({
+    const axiosInstance = useMemo(() => axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true
-    });
+      }), []);
 
     const handleClearMessages = () => {
         setMessages([]);
