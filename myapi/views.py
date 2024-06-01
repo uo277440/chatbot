@@ -61,12 +61,15 @@ def scenarios(request):
 @permission_classes([IsAuthenticated])
 def update_flow_manager(request):
     flow_id = request.GET.get('flow_id')
-
+    first_charge = False
     try:
         flow = Flow.objects.get(id=flow_id)
     except Flow.DoesNotExist:
         return JsonResponse({'error': 'Flujo no encontrado'}, status=status.HTTP_404_NOT_FOUND)
-
+    global flowManager
+    global chatbot
+    if(not flowManager):
+        first_charge = True
     # Definir la ruta del archivo del modelo específico para el flujo
     model_path = f'models/svm_model_{flow_id}.pkl'
     # Crear la carpeta models si no existe
@@ -76,11 +79,9 @@ def update_flow_manager(request):
     if not new_chatbot.load_model():
         new_chatbot.load_data()  
         new_chatbot.train_model()
-    global flowManager
-    global chatbot
     flowManager = new_flow_manager
     chatbot = new_chatbot
-    return JsonResponse({'message': 'flowManager actualizado correctamente'})
+    return JsonResponse({'message': 'flowManager actualizado correctamente','first_charge':first_charge})
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])

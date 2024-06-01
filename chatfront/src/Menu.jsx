@@ -59,6 +59,9 @@ function Menu() {
         axiosInstance.get(`/api/start_flow?flow_id=${flowId}`)
             .then(response => {
                 console.log(response.data.message);
+                if(response.data.first_charge){
+                    localStorage.removeItem('chatMessages');
+                }
                 navigate('/chatbot');
             })
             .catch(error => {
