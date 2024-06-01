@@ -332,8 +332,10 @@ def delete_flow(request):
     try:
         flow = Flow.objects.get(id=flow_id)
         scenery = flow.scenery
+        model_path = f'models/svm_model_{flow_id}.pkl'
         flow.delete()
-        
+        if os.path.exists(model_path):
+            os.remove(model_path)
         if not scenery.flows.exists():
             scenery.delete()
         return Response({'message': 'Flow deleted successfully'}, status=status.HTTP_200_OK)
