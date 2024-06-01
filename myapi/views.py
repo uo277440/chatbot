@@ -40,9 +40,6 @@ flowManager = None
 def is_admin(user):
     return user.is_superuser
 @api_view(['GET'])
-def hello_world(request):
-    return Response({'message': 'Hello, world!'})
-@api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def check_chatbot(request):
     if chatbot and flowManager:
