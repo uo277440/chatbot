@@ -163,7 +163,7 @@ const Forum = () => {
                         {isSuperUser && (
                             <div className="message-actions">
                                 <button onClick={handleUnpin} className="unpin-button">
-                                    <img src="multimedia/chincheta.png" alt="Unpin" />
+                                    <img src="assets/chincheta.png" alt="Unpin" />
                                 </button>
                             </div>
                         )}
@@ -178,17 +178,17 @@ const Forum = () => {
                             <div className="message-actions">
                                 {msg.user.user_id === userId && (
                                     <button onClick={() => handleEdit(msg.id)} className="edit-button">
-                                        <img src="/multimedia/editar.png" alt="Edit" />
+                                        <img src="/assets/editar.png" alt="Edit" />
                                     </button>
                                 )}
                                 {(msg.user.user_id === userId || isSuperUser) && (
                                     <button onClick={() => handleDelete(msg.id)} className="delete-button">
-                                        <img src="/multimedia/borrar.png" alt="Delete" />
+                                        <img src="/assets/borrar.png" alt="Delete" />
                                     </button>
                                 )}
                                 {isSuperUser && msg.user.user_id === userId &&(
                                     <button onClick={() => handlePin(msg.id)} className="pin-button">
-                                        <img src="/multimedia/chincheta.png" alt="Pin" />
+                                        <img src="/assets/chincheta.png" alt="Pin" />
                                     </button>
                                 )}
                             </div>

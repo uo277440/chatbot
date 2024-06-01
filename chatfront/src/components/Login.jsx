@@ -7,7 +7,7 @@ import Button from 'react-bootstrap/Button';
 import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from './AuthContext';
-import logo from '../multimedia/logo.png'; // Import the logo image
+import logo from '../assets/logo.png'; // Import the logo image
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';

@@ -29,7 +29,7 @@
   color: #61dafb;
 }
 .background {
-  background-image: url('multimedia/fondo.jpg');
+  background-image: url('assets/fondo.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
