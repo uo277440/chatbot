@@ -5,8 +5,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 import Nav from 'react-bootstrap/Nav';
-import AuthContext from './AuthContext';
-import './NavigationBar.css';
+import AuthContext from './components/AuthContext';
+import './css/NavigationBar.css';
 
 const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
   const { currentUser, setCurrentUser, newForumMessage } = useContext(AuthContext);
@@ -28,7 +28,7 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
           console.log('Error fetching user data:', error);
         });
     }
-  }, [currentUser]);
+  }, [currentUser,axiosInstance]);
 
   const handleLogout = (e) => {
     e.preventDefault();

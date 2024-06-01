@@ -151,15 +151,15 @@
 }
 
 .edit-button img {
-    content: url('multimedia/editar.png');
+    content: url('../multimedia/editar.png');
 }
 
 .delete-button img {
-    content: url('multimedia/borrar.png');
+    content: url('../multimedia/borrar.png');
 }
 
 .pin-button img,.unpin-button img  {
-    content: url('multimedia/chincheta.png');
+    content: url('../multimedia/chincheta.png');
 }
 
 

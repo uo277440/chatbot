@@ -1,5 +1,5 @@
 import React from 'react';
-import './ChatHeader.css';
+import '../css/ChatHeader.css';
 import Mascot from './Mascot';
 
 function ChatHeader({ handleClearMessages, restartFlow, showHelp, setShowHelp }) {

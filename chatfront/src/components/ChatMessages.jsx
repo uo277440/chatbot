@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import './ChatMessages.css';
-import altavoz from './assets/altavoz.png';
-import traducir from './assets/translate.png';
+import '../css/ChatMessages.css';
+import altavoz from '../assets/altavoz.png';
+import traducir from '../assets/translate.png';
 
 function ChatMessages({ messages, setMessages }) {
     const messagesRef = useRef(null);

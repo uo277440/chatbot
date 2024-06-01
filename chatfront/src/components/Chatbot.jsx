@@ -1,12 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect,useCallback  } from 'react';
 import axios from 'axios';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
-import AuthContext from './AuthContext';
-import NavigationBar from './NavigationBar';
+import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
-import './Chatbot.css';
+import '../css/Chatbot.css';
 
 function Chatbot() {
     const [messages, setMessages] = useState(() => {
@@ -71,7 +70,7 @@ function Chatbot() {
                 console.log(error);
             });
     };
-    const checkBot = () => {
+    const checkBot = useCallback(() => {
         axiosInstance.get(`/api/check_chatbot`)
         .then(response => {
             const chatbot = response.data.chatbot;
@@ -83,13 +82,13 @@ function Chatbot() {
         .catch(error => {
             console.log(error);
         });
-    };
+    }, [navigate, axiosInstance]);
         
 
     useEffect(() => {
         checkBot()
         localStorage.setItem('chatMessages', JSON.stringify(messages));
-    }, [messages]);
+    }, [messages,checkBot]);
 
     return (
         <div className="chatbot">

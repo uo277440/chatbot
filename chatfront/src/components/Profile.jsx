@@ -1,13 +1,11 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
-import AuthContext from './AuthContext';
-import './Profile.css';
-import NavigationBar from './NavigationBar';
+import '../css/Profile.css';
+import NavigationBar from '../NavigationBar';
 
 function Profile() {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
-    const { currentUser } = useContext(AuthContext);
     const axiosInstance = axios.create({
         baseURL: 'http://localhost:8000',
         withCredentials: true
@@ -23,7 +21,7 @@ function Profile() {
                 console.error('Error fetching profile data:', error);
                 setLoading(false);
             });
-    }, []);
+    }, [axiosInstance]);
 
     const getMarkClass = (mark) => {
         if (mark >= 0 && mark <= 4) {

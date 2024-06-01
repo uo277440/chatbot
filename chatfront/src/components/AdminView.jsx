@@ -1,8 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useEffect, useCallback  } from 'react';
 import axios from 'axios';
-import AuthContext from './AuthContext';
-import './Admin.css';
-import NavigationBar from './NavigationBar';
+import '../css/Admin.css';
+import NavigationBar from '../NavigationBar';
 
 
 axios.defaults.xsrfCookieName = 'csrftoken';
@@ -17,40 +16,40 @@ function AdminView() {
   const [csvFile, setCSVFile] = useState(null);
   const [flows, setFlows] = useState([]);
   const [selectedFlow, setSelectedFlow] = useState('');
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
   const axiosInstance = axios.create({
     baseURL: 'http://localhost:8000'
   });
 
+
+
+  const fetchScenarios = useCallback(() => {
+    axiosInstance.get('/api/scenarios')
+        .then(response => {
+            setScenarios(response.data.scenarios);
+        })
+        .catch(error => {
+            console.error('Error fetching scenarios:', error);
+        });
+}, [axiosInstance]);
+
+const fetchFlows = useCallback((scenarioId) => {
+    axiosInstance.get(`/api/scenarios/${scenarioId}/flows`)
+        .then(response => {
+            setFlows(response.data.flows);
+        })
+        .catch(error => {
+            console.error('Error fetching flows:', error);
+        });
+}, [axiosInstance]);
   useEffect(() => {
     fetchScenarios();
-  }, []);
+  }, [fetchScenarios]);
 
   useEffect(() => {
     if (selectedScenario) {
       fetchFlows(selectedScenario);
     }
-  }, [selectedScenario]);
-
-  const fetchScenarios = () => {
-    axiosInstance.get('/api/scenarios')
-      .then(response => {
-        setScenarios(response.data.scenarios);
-      })
-      .catch(error => {
-        console.error('Error fetching scenarios:', error);
-      });
-  };
-
-  const fetchFlows = (scenarioId) => {
-    axiosInstance.get(`/api/scenarios/${scenarioId}/flows`)
-      .then(response => {
-        setFlows(response.data.flows);
-      })
-      .catch(error => {
-        console.error('Error fetching flows:', error);
-      });
-  };
+  }, [selectedScenario,fetchFlows]);
 
   const handleFileChange = (event) => {
     setFile(event.target.files[0]);
@@ -103,7 +102,6 @@ function AdminView() {
       }
     })
     .then(response => {
-      const flow = response.data.flow;
       alert('El JSON y el CSV se han subido correctamente');
     })
     .catch(error => {

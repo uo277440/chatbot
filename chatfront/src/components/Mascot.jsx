@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import './Mascot.css';
+import '../css/Mascot.css';
 
 function Mascot({ showHelp, setShowHelp }) {
     const [message, setMessage] = useState(() => {

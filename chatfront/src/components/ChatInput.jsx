@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import './ChatInput.css'; // Estilos CSS personalizados
-import micro from './assets/micro.png';
+import '../css/ChatInput.css'; // Estilos CSS personalizados
+import micro from '../assets/micro.png';
 
 function ChatInput({ onSubmit }) {
     const [message, setMessage] = useState('');

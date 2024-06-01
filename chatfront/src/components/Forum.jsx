@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef, useContext } from 'react';
 import axios from 'axios';
-import './Forum.css';
-import NavigationBar from './NavigationBar';
+import '../css/Forum.css';
+import NavigationBar from '../NavigationBar';
 import AuthContext from './AuthContext';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -12,7 +12,7 @@ const client = axios.create({
 });
 
 const Forum = () => {
-    const { currentUser, newForumMessage, setNewForumMessage } = useContext(AuthContext);
+    const {setNewForumMessage } = useContext(AuthContext);
     const [messages, setMessages] = useState([]);
     const [pinnedMessage, setPinnedMessage] = useState(null); // Estado para el mensaje fijado
     const [content, setContent] = useState('');
@@ -146,7 +146,7 @@ const Forum = () => {
         if (window.location.pathname === '/forumMessage') {
             setNewForumMessage(false);  
         }
-    }, [window.location.pathname]);
+    }, [setNewForumMessage]);
 
     return (
         <div>

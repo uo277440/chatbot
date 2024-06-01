@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './AdminMarks.css';
-import NavigationBar from './NavigationBar';
+import '../css/AdminMarks.css';
+import NavigationBar from '../NavigationBar';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
