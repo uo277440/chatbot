@@ -7,7 +7,6 @@ router = routers.DefaultRouter()
 #router.register(r'users',views.UserView,'users')
 
 urlpatterns = [
-    path('hello-world/', views.hello_world, name='hello_world'),
     path("chatbot_response/",views.chatbot_response, name='chatbot_response'),
     path("mascot_message/",views.mascot_message, name='mascot_message'),
     path('register', views.UserRegister.as_view(), name='register'),
