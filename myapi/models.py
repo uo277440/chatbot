@@ -83,7 +83,7 @@ class Scenery(models.Model):
         db_table = 'scenery'
     
 class Flow(models.Model):
-    name = models.CharField(max_length=100,unique=True)
+    name = models.CharField(max_length=100,unique=False)
     objects = FlowService()
     scenery = models.ForeignKey(Scenery, on_delete=models.CASCADE, related_name='flows')
     class Meta:
