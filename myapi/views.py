@@ -107,18 +107,11 @@ from django.db import transaction
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def upload_combined(request):
-    print('hol<')
     json_file = request.FILES.get('json_file')
-    print(json_file)
     csv_file = request.FILES.get('csv_file')
-    print(csv_file)
     scenario = request.data.get('scenario')
-    print(json_file)
-    print(csv_file)
-    print(scenario)
     if not json_file or not csv_file or not scenario:
         return JsonResponse({'error': 'JSON file, CSV file, and scenario are required'}, status=400)
-    print('si?')
     # Parse the JSON file
     try:
         json_data = json.load(json_file)

@@ -1,10 +1,11 @@
 import json
 from .models import Flow, Step,Scenery
 
-def cargar_datos_a_bd(json_data, scenario_id):
+def cargar_datos_a_bd(json_data, scenario_name):
     flow=None 
-    print(scenario_id)
-    scenario,created = Scenery.objects.get_or_create(id=scenario_id)
+    print('ENTRE AL METODO')
+    print(scenario_name)
+    scenario,created = Scenery.objects.get_or_create(name=scenario_name)
     print(scenario)
     print(created)
     for flow_data in json_data['flows']:

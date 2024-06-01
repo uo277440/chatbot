@@ -156,7 +156,7 @@ const fetchFlows = useCallback((scenarioId) => {
           <select id="existingScenarioSelect" onChange={handleScenarioChange}>
             <option value="">Seleccione un escenario existente</option>
             {scenarios.map(scenario => (
-              <option key={scenario.id} value={scenario.id}>{scenario.name}</option>
+              <option key={scenario.name} value={scenario.name}>{scenario.name}</option>
             ))}
           </select>
 
