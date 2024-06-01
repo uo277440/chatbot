@@ -45,9 +45,11 @@ class SentenceChecker:
                 has_subject = True
             if token.pos_ == 'VERB':  # Verificar si hay un verbo
                 has_verb = True
+                if token.tag_ == 'VB':
+                    is_imperative = True
 
         # La frase es coherente si tiene al menos un sujeto y un verbo
-        return has_subject and has_verb
+        return (has_subject and has_verb) or is_imperative
 
 # Ejemplo de uso
 '''

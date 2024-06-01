@@ -25,7 +25,7 @@ function Mascot({ showHelp, setShowHelp }) {
                 console.error('Error fetching mascot message:', error);
             });
     };
-
+   
     const handleCloseMascot = () => {
         setShowHelp(false);
         localStorage.setItem('showHelp', JSON.stringify(false));
@@ -40,11 +40,12 @@ function Mascot({ showHelp, setShowHelp }) {
 
     return (
         <div className="mascot-container">
-            <button onClick={handleMascotClick}>Help</button>
+            {!showHelp && (
+                <button onClick={handleMascotClick}>Help</button>
+            )}
             {showHelp && (
                 <div>
                     <p className="mascot-message">{message}</p>
-                    <button onClick={handleCloseMascot}>Close</button>
                 </div>
             )}
         </div>

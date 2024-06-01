@@ -32,6 +32,7 @@ function Chatbot() {
     const navigate = useNavigate();
 
     const handleSubmitMessage = (message) => {
+        checkBot()
         const newUserMessage = { text: message, from: 'user' };
         const updatedMessages = [...messages, newUserMessage];
         setMessages(updatedMessages);
@@ -70,8 +71,7 @@ function Chatbot() {
                 console.log(error);
             });
     };
-
-    useEffect(() => {
+    const checkBot = () => {
         axiosInstance.get(`/api/check_chatbot`)
         .then(response => {
             const chatbot = response.data.chatbot;
@@ -83,9 +83,11 @@ function Chatbot() {
         .catch(error => {
             console.log(error);
         });
-    }, []);
+    };
+        
 
     useEffect(() => {
+        checkBot()
         localStorage.setItem('chatMessages', JSON.stringify(messages));
     }, [messages]);
 
