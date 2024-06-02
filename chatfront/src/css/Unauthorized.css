@@ -1,0 +1,39 @@
+.unauthorized-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f8f9fa;
+    color: #343a40;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .unauthorized-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .unauthorized-message {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+  }
+  
+  .unauthorized-button {
+    background-color: #007bff;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .unauthorized-button:hover {
+    background-color: #0056b3;
+  }
+  
