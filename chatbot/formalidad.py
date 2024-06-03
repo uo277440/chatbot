@@ -21,10 +21,3 @@ class TextFormalityAnalyzer:
         formality_score = (sentiment_score + (entity_count * 0.5)) / (average_token_length * 0.1)
         
         return formality_score
-'''
-# Ejemplo de uso
-analyzer = TextFormalityAnalyzer()
-text = "Fuck you."
-formality_score = analyzer.analyze_formality(text)
-print("Formality Score:", formality_score)
-'''

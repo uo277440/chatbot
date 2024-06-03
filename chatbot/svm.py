@@ -43,16 +43,8 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         
         # Eliminar stopwords
         filtered_tokens = [word for word in tokens if word not in self.stop_words]
+        # Lematización
         lemmatized_tokens = [lemmatizer.lemmatize(word) for word in filtered_tokens]
-        # Lematización y búsqueda de sinónimos
-        synonyms = set()
-        '''
-        for word in filtered_tokens:
-            word_synonyms = [synset.lemmas()[0].name() for synset in wordnet.synsets(word)]
-            synonyms.update(word_synonyms[:3])
-        print('Hola') 
-        print(synonyms)
-        '''
         return ' '.join(lemmatized_tokens)
 class SVMChatbot:
     def __init__(self, csv_user_content,model_path,confidence_threshold=0.10):
