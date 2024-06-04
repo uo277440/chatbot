@@ -55,13 +55,10 @@ function Menu() {
         if (currentFlowId.toString() !== flowId.toString()) {
             localStorage.removeItem('chatMessages');
             localStorage.setItem('currentFlowId', flowId.toString());
+            localStorage.setItem('showHelp', JSON.stringify(false));
         }
         axiosInstance.get(`/api/start_flow?flow_id=${flowId}`)
             .then(response => {
-                console.log(response.data.message);
-                if(response.data.first_charge){
-                    localStorage.removeItem('chatMessages');
-                }
                 navigate('/chatbot');
             })
             .catch(error => {

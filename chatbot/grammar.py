@@ -39,7 +39,7 @@ class SentenceChecker:
         doc = self.nlp(sentence)
         has_subject = False
         has_verb = False
-
+        is_imperative = False 
         for token in doc:
             if token.dep_ in ('nsubj', 'csubj', 'nsubjpass', 'csubjpass'):  
                 has_subject = True

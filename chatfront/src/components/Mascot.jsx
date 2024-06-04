@@ -19,7 +19,7 @@ function Mascot({ showHelp, setShowHelp }) {
                 setMessage(response.data.response);
                 setShowHelp(true);
                 localStorage.setItem('mascotMessage', response.data.response);
-                localStorage.setItem('showHelp', JSON.stringify(true));
+                localStorage.setItem('showHelp',true);
             })
             .catch(error => {
                 console.error('Error fetching mascot message:', error);
@@ -32,18 +32,20 @@ function Mascot({ showHelp, setShowHelp }) {
     };
 
     useEffect(() => {
-        if (!showHelp) {
+        if (!localStorage.getItem('showHelp')) {
             setMessage('');
             localStorage.removeItem('mascotMessage');
         }
+        console.log('MASCOTA')
+        console.log(localStorage.getItem('showHelp'))
     }, [showHelp]);
 
     return (
         <div className="mascot-container">
-            {!showHelp && (
+            {localStorage.getItem('showHelp')==JSON.stringify(false) && (
                 <button onClick={handleMascotClick}>Help</button>
             )}
-            {showHelp && (
+            {localStorage.getItem('showHelp')==JSON.stringify(true) && (
                 <div>
                     <p className="mascot-message">{message}</p>
                 </div>
