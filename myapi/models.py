@@ -41,15 +41,9 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 	def __str__(self):
 		return self.username
 
-class Flow(models.Model):
-    name = models.CharField(max_length=100)
 
-class Step(models.Model):
-    flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='steps')
-    label = models.CharField(max_length=100)
-    message = models.TextField()
-    suggestion = models.TextField()
-    options = ArrayField(models.CharField(max_length=100), blank=True)
+
+
 
 
 class FlowService(models.Manager):
@@ -88,7 +82,6 @@ class Flow(models.Model):
     scenery = models.ForeignKey(Scenery, on_delete=models.CASCADE, related_name='flows')
     class Meta:
         db_table = 'flow'
-		
 
 class Step(models.Model):
     flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='steps')
