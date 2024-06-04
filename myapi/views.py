@@ -1,6 +1,6 @@
 from django.contrib.auth import get_user_model,login,logout
 from rest_framework.authentication import SessionAuthentication
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes,authentication_classes
 from rest_framework.response import Response
 from rest_framework import permissions,status
 from rest_framework.views import APIView
@@ -182,6 +182,8 @@ def chatbot_response(request):
         if not sentence_checker.is_sentence_coherent(user_message):
             return Response({'response':'La frase debe ser coherente y bien ligada','suggestion':True})
         bot_response = chatbot.predict_response_with_confidence(user_message)
+        if(not bot_response):
+            return Response({'response': 'Creo que no te entiendo del todo'})
         if(flowManager.advance(bot_response)):
             response=flowManager.response + bot_response
             if flowManager.is_finished():
@@ -353,7 +355,7 @@ def get_flows_by_scenario(request, scenario_id):
         return Response({'flows': flows_data}, status=status.HTTP_200_OK)
     except Scenery.DoesNotExist:
         return Response({'error': 'Scenario not found'}, status=status.HTTP_404_NOT_FOUND)
-
+'''
 class UserLogin(APIView):
     permission_classes = (permissions.AllowAny,)
     authentication_classes = (SessionAuthentication,)
@@ -391,3 +393,39 @@ class UserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+        '''
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@authentication_classes([SessionAuthentication])
+def user_login(request):
+    data = request.data
+    try:
+        validate_email(data)
+        validate_password(data)
+    except ValidationError as e:
+        return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
+    
+    serializer = UserLoginSerializer(data=data)
+    try:
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.check_user(data)
+            login(request, user)
+            user_data = UserSerializer(user).data
+            return Response({'user': user_data }, status=status.HTTP_200_OK)
+        else:
+            return Response({'message': 'No autorizado'}, status=status.HTTP_401_UNAUTHORIZED)
+    except ValidationError as e:
+        return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
+@api_view(['POST'])
+@permission_classes([AllowAny])
+@authentication_classes([])
+def user_logout(request):
+    logout(request)
+    return Response(status=status.HTTP_200_OK)
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+@authentication_classes([SessionAuthentication])
+def user_view(request):
+    serializer = UserSerializer(request.user)
+    return Response({'user': serializer.data}, status=status.HTTP_200_OK)
+
