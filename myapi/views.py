@@ -185,7 +185,7 @@ def chatbot_response(request):
         if(not bot_response):
             return Response({'response': 'Creo que no te entiendo del todo'})
         if(flowManager.advance(bot_response)):
-            response=flowManager.response + bot_response
+            response=flowManager.response 
             if flowManager.is_finished():
                 mark_value = marker.mark
                 try:
@@ -310,7 +310,7 @@ def forum_messages(request):
         return Response({'messages':serializer.data,'pinnedMessage': pinned_serializer.data if pinned_serializer else None}, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
+'''
 class UserRegister(APIView):
     permission_classes = (permissions.AllowAny,)
     def post(self, request):
@@ -324,6 +324,20 @@ class UserRegister(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
         except ValidationError as e:
             return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
+'''
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def user_register(request):
+    try:
+        clean_data = custom_validation(request.data)
+        serializer = UserRegisterSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.save()
+            if user:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    except ValidationError as e:
+        return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
