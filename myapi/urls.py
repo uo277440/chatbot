@@ -28,7 +28,7 @@ urlpatterns = [
     path('user_profile', views.user_profile, name='user_profile'),
     path('messages/<int:message_id>/delete/', views.delete_message, name='delete_message'),
     path('messages/<int:message_id>/edit/', views.edit_message, name='edit_message'),
-    path('scenarios/<int:scenario_id>/flows', views.get_flows_by_scenario, name='get-flows-by-scenario'),
+    path('scenarios/<str:scenario_name>/flows', views.get_flows_by_scenario, name='get-flows-by-scenario'),
     path('forum/messages', views.forum_messages, name='forum-messages'),
     path('check_chatbot', views.check_chatbot, name='forum-check_chatbot'),
 ]

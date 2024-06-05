@@ -82,6 +82,7 @@ class Flow(models.Model):
     scenery = models.ForeignKey(Scenery, on_delete=models.CASCADE, related_name='flows')
     class Meta:
         db_table = 'flow'
+        unique_together = ('name', 'scenery')
 
 class Step(models.Model):
     flow = models.ForeignKey(Flow, on_delete=models.CASCADE, related_name='steps')
@@ -100,6 +101,7 @@ class Mark(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     class Meta:
         db_table = 'mark'
+        
         
 class ChatbotData(models.Model):
     user_input = models.TextField()

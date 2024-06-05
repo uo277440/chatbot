@@ -50,9 +50,12 @@ def check_chatbot(request):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def scenarios(request):
-    scenarios = scenary_service.get_all_scenarios()
-    serializer = ScenerySerializer(scenarios, many=True)
-    return Response({'scenarios': serializer.data})
+    try:
+        scenarios = scenary_service.get_all_scenarios()
+        serializer = ScenerySerializer(scenarios, many=True)
+        return Response({'scenarios': serializer.data},status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': 'Error en el servidor'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -78,7 +81,7 @@ def update_flow_manager(request):
         new_chatbot.train_model()
     flowManager = new_flow_manager
     chatbot = new_chatbot
-    return JsonResponse({'message': 'flowManager actualizado correctamente','first_charge':first_charge})
+    return JsonResponse({'message': 'flowManager actualizado correctamente','first_charge':first_charge},status=status.HTTP_200_OK)
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
@@ -163,7 +166,7 @@ def get_flows_by_scenario_url(request):
         try:
             flows = Flow.objects.filter(scenery_id=scenery_id)
             serializer = FlowSerializer(flows, many=True)
-            return Response({'flows': serializer.data})
+            return Response({'flows': serializer.data},status=200)
         except Flow.DoesNotExist:
             return Response({'error': 'No se encontraron flujos para el escenario dado'}, status=status.HTTP_404_NOT_FOUND)
     else:
@@ -178,12 +181,12 @@ def chatbot_response(request):
         if suggestions:
             marker.decrease()
             response_text = '\n'.join(suggestions)
-            return Response({'response': response_text,'suggestion':True})
+            return Response({'response': response_text,'suggestion':True},status=200)
         if not sentence_checker.is_sentence_coherent(user_message):
-            return Response({'response':'La frase debe ser coherente y bien ligada','suggestion':True})
+            return Response({'response':'La frase debe ser coherente y bien ligada','suggestion':True},status=200)
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(not bot_response):
-            return Response({'response': 'Creo que no te entiendo del todo'})
+            return Response({'response': 'Creo que no te entiendo del todo'},status=200)
         if(flowManager.advance(bot_response)):
             response=flowManager.response 
             if flowManager.is_finished():
@@ -200,14 +203,14 @@ def chatbot_response(request):
         else:
             response="FLUJO NO VA BIEN" + bot_response
         if(response is None):
-            return Response({'response': 'La respuesta es incoherente'})
-        return Response({'response': response,'is_finished':flowManager.is_finished(),'mark': marker.mark,'suggestion':False})
+            return Response({'response': 'La respuesta es incoherente'},status=200)
+        return Response({'response': response,'is_finished':flowManager.is_finished(),'mark': marker.mark,'suggestion':False},status=200)
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def mascot_message(request):
     if request.method == 'GET':
         marker.decrease()
-        return Response({'response': flowManager.suggest()})
+        return Response({'response': flowManager.suggest()},status=200)
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def search_student(request):
@@ -231,7 +234,7 @@ def transform(request):
     if request.method == 'GET':
         text = request.GET.get('text', '')
         sourceLang = request.GET.get('source', '')
-        return Response({'delay': text_to_audio(text,sourceLang)})
+        return Response({'delay': text_to_audio(text,sourceLang)},status=200)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -250,7 +253,7 @@ def translate(request):
         translated_text=grammarCorrector.translate_to_spanish(text,targetLang)
         if(targetLang == 'es'):
             marker.decrease()
-        return Response({'translated_text': translated_text})
+        return Response({'translated_text': translated_text},status=200)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
@@ -297,7 +300,7 @@ def edit_message(request,message_id):
     serializer = ForumMessageSerializer(message, data=request.data, partial=True)
     if serializer.is_valid():
         serializer.save()
-        return Response(serializer.data)
+        return Response(serializer.data,status=200)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -361,9 +364,9 @@ def delete_flow(request):
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
-def get_flows_by_scenario(request, scenario_id):
+def get_flows_by_scenario(request, scenario_name):
     try:
-        scenario = Scenery.objects.get(id=scenario_id)
+        scenario = Scenery.objects.get(name=scenario_name)
         flows = scenario.flows.all()
         flows_data = [{'id': flow.id, 'name': flow.name} for flow in flows]
         return Response({'flows': flows_data}, status=status.HTTP_200_OK)
