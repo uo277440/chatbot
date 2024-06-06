@@ -6,6 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import AuthContext from './AuthContext';
 import logo from '../assets/logo.png'; // Import the logo image
 
@@ -76,7 +77,12 @@ function Login() {
     .catch(error => {
       if (error.response) {
         console.log('Código de estado HTTP: ' + error.response.status);
-        alert(error.response.data.message);
+        Swal.fire({
+          title: 'Error',
+          text: error.response.data.message,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+      });
       } else if (error.request) {
         console.error('No se recibió ninguna respuesta del servidor:', error.request);
       } else {
@@ -104,7 +110,12 @@ function Login() {
     .catch(error => {
       if (error.response) {
         console.log('Código de estado HTTP: ' + error.response.status);
-        alert(error.response.data.message);
+        Swal.fire({
+          title: 'Error',
+          text: error.response.data.message,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+      });
       } else if (error.request) {
         console.error('No se recibió ninguna respuesta del servidor:', error.request);
       } else {

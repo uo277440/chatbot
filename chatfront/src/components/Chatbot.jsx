@@ -5,6 +5,7 @@ import ChatMessages from './ChatMessages';
 import ChatInput from './ChatInput';
 import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import '../css/Chatbot.css';
 
 function Chatbot() {
@@ -50,7 +51,21 @@ function Chatbot() {
 
                 if (response.data.is_finished) {
                     setTimeout(() => {
-                        alert('Flujo terminado con una nota de ' + response.data.mark);
+                        var message 
+                        var icon
+                        if(response.data.mark > 5){
+                             message = 'Felicidades has terminado el flujo con éxito. Tu nota es un '
+                             icon='success'
+                        }else{
+                             message = 'Debes practicar más. Tu nota es un '
+                             icon='error'
+                        }
+                        Swal.fire({
+                            title: 'Nota del flujo',
+                            text: message+ response.data.mark,
+                            icon: icon,
+                            confirmButtonText: 'Aceptar'
+                        });
                         handleClearMessages();
                         navigate('/menu');
                     }, 2000); 
@@ -77,10 +92,20 @@ function Chatbot() {
             const description = response.data.description;
             if (!chatbot){
                 navigate('/menu');
-                alert('Escoge un flujo antes de interactuar con el bot !');
+                Swal.fire({
+                    title: 'Flujo no seleccionado',
+                    text: 'Escoge un flujo antes de interactuar con el bot !',
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                });
             }else{
                 if((localStorage.getItem('first'))==JSON.stringify(true)){
-                    alert(description)
+                    Swal.fire({
+                        title: 'Descripción del flujp',
+                        text: description,
+                        icon: 'info',
+                        confirmButtonText: 'Aceptar'
+                    });
                     localStorage.setItem('first', JSON.stringify(false));
                 }
                 
