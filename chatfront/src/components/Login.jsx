@@ -145,24 +145,24 @@ function Login() {
     return (
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control type="email" placeholder="Enter email" value={email} onChange={e => setEmail(e.target.value)} />
+          <Form.Label>Correo</Form.Label>
+          <Form.Control type="email" placeholder="Introduce correo" value={email} onChange={e => setEmail(e.target.value)} />
           <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
+            Nunca compartiremos su contraseña con nadie.
           </Form.Text>
         </Form.Group>
         {registrationToggle && (
           <Form.Group className="mb-3" controlId="formBasicUsername">
-            <Form.Label>Username</Form.Label>
-            <Form.Control type="text" placeholder="Enter username" value={username} onChange={e => setUsername(e.target.value)} />
+            <Form.Label>Usuario</Form.Label>
+            <Form.Control type="text" placeholder="Introduce usuario" value={username} onChange={e => setUsername(e.target.value)} />
           </Form.Group>
         )}
         <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control type="password" placeholder="Password" value={password} onChange={e => setPassword(e.target.value)} />
+          <Form.Label>Contraseña</Form.Label>
+          <Form.Control type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          Iniciar sesión
         </Button>
       </Form>
     );

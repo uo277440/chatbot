@@ -143,8 +143,10 @@ def upload_combined(request):
     # Check if all JSON labels are in CSV and have at least 10 phrases
     for label, count in csv_labels_count.items():
         if count < 10:
+            print(count)
+            print(label)
             return JsonResponse({'error': f'Label {label} has less than 10 phrases in the CSV file'}, status=400)
-
+    print('perdi?')
     # Proceed with saving JSON and CSV data to the database
     try:
         with transaction.atomic():

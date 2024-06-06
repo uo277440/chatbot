@@ -5,9 +5,9 @@ import '../css/Unauthorized.css';
 const Unauthorized = () => {
   return (
     <div className="unauthorized-container">
-      <h1 className="unauthorized-heading">Unauthorized</h1>
-      <p className="unauthorized-message">You do not have the required permissions to view this page.</p>
-      <Link to="/" className="unauthorized-button">Go to Home</Link>
+      <h1 className="unauthorized-heading">Desautorizado</h1>
+      <p className="unauthorized-message">No tienes permiso para acceder a esta página.</p>
+      <Link to="/" className="unauthorized-button">Volver al menú</Link>
     </div>
   );
 };

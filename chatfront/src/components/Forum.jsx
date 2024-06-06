@@ -201,7 +201,7 @@ const Forum = () => {
                     <textarea
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        placeholder="Write your message..."
+                        placeholder="Escribe tu mensaje ..."
                         required
                         id="message-input"
                     />

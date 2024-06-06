@@ -73,7 +73,7 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
                 </Nav>
               )}
               <form onSubmit={handleLogout} className="ml-auto">
-                <Button type="submit" variant="light">Log out</Button>
+                <Button type="submit" variant="light">Cerrar sesión</Button>
               </form>
             </>
           ) : (
