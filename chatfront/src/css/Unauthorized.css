@@ -9,6 +9,10 @@
     text-align: center;
     padding: 20px;
     box-sizing: border-box;
+    background-image: url('../assets/fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
   }
   
   .unauthorized-heading {
