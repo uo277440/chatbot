@@ -77,7 +77,7 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
               </form>
             </>
           ) : (
-            <Button id="form_btn" onClick={updateFormBtn} variant="light">{registrationToggle ? 'Log in' : 'Register'}</Button>
+            <Button id="form_btn" onClick={updateFormBtn} variant="light">{registrationToggle ? 'Iniciar sesión' : 'Registrarse'}</Button>
           )}
         </Navbar.Collapse>
       </Container>
