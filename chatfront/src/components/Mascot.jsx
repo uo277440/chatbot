@@ -43,7 +43,7 @@ function Mascot({ showHelp, setShowHelp }) {
     return (
         <div className="mascot-container">
             {localStorage.getItem('showHelp')==JSON.stringify(false) && (
-                <button onClick={handleMascotClick}>Help</button>
+                <button onClick={handleMascotClick}>Ayuda</button>
             )}
             {localStorage.getItem('showHelp')==JSON.stringify(true) && (
                 <div>
