@@ -56,6 +56,7 @@ function Menu() {
             localStorage.removeItem('chatMessages');
             localStorage.setItem('currentFlowId', flowId.toString());
             localStorage.setItem('showHelp', JSON.stringify(false));
+            localStorage.setItem('first', JSON.stringify(true));
         }
         axiosInstance.get(`/api/start_flow?flow_id=${flowId}`)
             .then(response => {

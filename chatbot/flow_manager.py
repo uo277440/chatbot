@@ -10,10 +10,12 @@ class FlowManager:
         self.finished = False
         self.response = None
         
+        
 
     def load_flow(self, flow_id):
         try:
             flow = Flow.objects.get(id=flow_id)
+            self.description=flow.description
             steps = Step.objects.filter(flow=flow)
             self.flow = flow
             self.steps = steps

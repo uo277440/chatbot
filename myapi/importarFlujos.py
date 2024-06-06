@@ -18,6 +18,7 @@ def cargar_datos_a_bd(json_data, scenario_name):
                 label=step_data['label'],
                 message=step_data['message'],
                 suggestion=step_data['suggestion'],
-                options=step_data['options']
+                options=step_data['options'],
+                description=step_data['description']
             )
     return flow

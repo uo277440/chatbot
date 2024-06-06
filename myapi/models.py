@@ -80,6 +80,7 @@ class Flow(models.Model):
     name = models.CharField(max_length=100,unique=False)
     objects = FlowService()
     scenery = models.ForeignKey(Scenery, on_delete=models.CASCADE, related_name='flows')
+    description= models.CharField(max_length=100,unique=False,default="Bienvenido al flujo. Recuerda empezar saludando !")
     class Meta:
         db_table = 'flow'
         unique_together = ('name', 'scenery')

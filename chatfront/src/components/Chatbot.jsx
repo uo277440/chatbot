@@ -74,9 +74,16 @@ function Chatbot() {
         axiosInstance.get(`/api/check_chatbot`)
         .then(response => {
             const chatbot = response.data.chatbot;
+            const description = response.data.description;
             if (!chatbot){
                 navigate('/menu');
                 alert('Escoge un flujo antes de interactuar con el bot !');
+            }else{
+                if((localStorage.getItem('first'))==JSON.stringify(true)){
+                    alert(description)
+                    localStorage.setItem('first', JSON.stringify(false));
+                }
+                
             }
         })
         .catch(error => {

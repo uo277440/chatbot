@@ -43,7 +43,9 @@ def is_admin(user):
 @permission_classes([IsAuthenticated])
 def check_chatbot(request):
     if chatbot and flowManager:
-        return Response({'chatbot': True},status=status.HTTP_200_OK)
+        print(flowManager.description)
+        print(flowManager.id)
+        return Response({'chatbot': True,'description':flowManager.description},status=status.HTTP_200_OK)
     else:
         return Response({'chatbot': False},status=status.HTTP_200_OK)
         
