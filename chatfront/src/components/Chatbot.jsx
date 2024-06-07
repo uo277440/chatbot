@@ -101,7 +101,7 @@ function Chatbot() {
             }else{
                 if((localStorage.getItem('first'))==JSON.stringify(true)){
                     Swal.fire({
-                        title: 'Descripción del flujp',
+                        title: 'Descripción del flujo',
                         text: description,
                         icon: 'info',
                         confirmButtonText: 'Aceptar'

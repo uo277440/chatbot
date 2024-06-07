@@ -1,7 +1,19 @@
 import requests
-from googletrans import Translator
 import spacy
+from django.conf import settings
+from deep_translator import GoogleTranslator
+from openai import OpenAI
+from django.conf import settings
+import json
 class GrammarCorrector:
+    SYSTEM_MESSAGE = "You are a helpful assistant that provides synonyms in English."
+    API_KEY = settings.OPENAI_API_KEY
+    API_URL = 'https://api.openai.com/v1/chat/completions'
+    def __init__(self):
+        client = OpenAI(
+        api_key=settings.OPENAI_API_KEY
+        )
+        self.client = client
     def correct_text(self,text):
         url = 'https://languagetool.org/api/v2/check'
         params = {'text': text, 'language': 'en-US'}
@@ -26,11 +38,52 @@ class GrammarCorrector:
                     suggestion_messages.append("Suggestion: "+ correction[2] + " In word: " +word)
                 current_offset += len(word) + 1
         return suggestion_messages
-    def translate_to_spanish(self,text,targetLang):
-        translator = Translator()
-        translation = translator.translate(text, dest=targetLang)
+    '''
+     def translate_to_spanish(self,text,targetLang):
+        translator = Translator(to_lang='en')
+        translation = translator.translate(text)
         translated_text = translation.text
         return translated_text
+    '''
+    def translate(self,text, target_language):
+        translator = GoogleTranslator(source='auto', target=target_language)
+        translated_text = translator.translate(text)
+        return translated_text
+    def get_synonym_phrase(self,input_text):
+        # Construir el cuerpo de la solicitud JSON
+        prompt = f"Please provide a synonym for the following phrase: '{input_text}'"
+        json_body = {
+            "model": "gpt-3.5-turbo",
+            "messages": [
+                {"role": "system", "content": GrammarCorrector.SYSTEM_MESSAGE},
+                {"role": "user", "content": prompt}
+            ]
+        }
+
+        # Convertir el cuerpo de la solicitud a formato JSON
+        json_data = json.dumps(json_body)
+
+        # Configurar las cabeceras de la solicitud
+        headers = {
+            "Content-Type": "application/json",
+            "Authorization": f"Bearer {GrammarCorrector.API_KEY}"
+        }
+
+        try:
+            # Enviar la solicitud POST y obtener la respuesta
+            response = requests.post(GrammarCorrector.API_URL, headers=headers, data=json_data)
+            
+            # Parsear la respuesta JSON
+            json_response = response.json()
+
+            # Extraer el contenido del mensaje
+            choices = json_response["choices"]
+            content = choices[0]["message"]["content"].strip()
+            print("CONTENIDO", content)
+            return content
+        except Exception as e:
+            print(e)
+            return None
 class SentenceChecker:
     def __init__(self):
         self.nlp = spacy.load('en_core_web_sm')

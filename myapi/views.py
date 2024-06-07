@@ -24,6 +24,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.core.exceptions import ValidationError
 from django.db.models import Q
 import csv
+import random
 import json
 import os
 from django.db import transaction
@@ -193,6 +194,9 @@ def chatbot_response(request):
             return Response({'response': 'Creo que no te entiendo del todo'},status=200)
         if(flowManager.advance(bot_response)):
             response=flowManager.response 
+            if random.random() < 0.5:
+                print('TOCO')
+                response=grammarCorrector.get_synonym_phrase(response)
             if flowManager.is_finished():
                 mark_value = marker.mark
                 try:
@@ -254,7 +258,7 @@ def translate(request):
     if request.method == 'GET':
         text = request.GET.get('text', '')
         targetLang = request.GET.get('target', '')
-        translated_text=grammarCorrector.translate_to_spanish(text,targetLang)
+        translated_text=grammarCorrector.translate(text,targetLang)
         if(targetLang == 'es'):
             marker.decrease()
         return Response({'translated_text': translated_text},status=200)

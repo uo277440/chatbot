@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -171,6 +172,7 @@ CORS_ALLOWED_ORIGINS = [
 
     
 ]
+OPENAI_API_KEY = 'sk-proj-LmJSUHPSx8pjbJyBfFcBT3BlbkFJHjswbR9zJ8DqIOIVDAqD'
 CORS_ALLOWED_CREDENTIALS = True
 CORS_ALLOW_CREDENTIAL = True
 CORS_ORIGIN_ALLOW_ALL = True
