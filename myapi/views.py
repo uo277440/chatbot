@@ -194,9 +194,12 @@ def chatbot_response(request):
             return Response({'response': 'Creo que no te entiendo del todo'},status=200)
         if(flowManager.advance(bot_response)):
             response=flowManager.response 
-            if random.random() < 0.5:
+            if random.random() < 0.25:
                 print('TOCO')
-                response=grammarCorrector.get_synonym_phrase(response)
+                try:
+                    response=grammarCorrector.get_synonym_phrase(response)
+                except Exception as e:
+                    pass
             if flowManager.is_finished():
                 mark_value = marker.mark
                 try:
