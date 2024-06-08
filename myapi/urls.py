@@ -45,6 +45,7 @@ urlpatterns = [
     path('scenarios/<str:scenario_name>/flows', views.get_flows_by_scenario, name='get_flows_by_scenario'),
     path('forum/messages', views.forum_messages, name='forum_messages'),
     path('check_chatbot', views.check_chatbot, name='check_chatbot'),
+    path('submit_conversation', views.submit_conversation, name='submit_conversation'),
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

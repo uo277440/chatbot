@@ -4,8 +4,8 @@ from rest_framework.decorators import api_view, permission_classes,authenticatio
 from rest_framework.response import Response
 from rest_framework import permissions,status
 from rest_framework.views import APIView
-from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer,FlowSerializer,UserSerializer,MarkSerializer,AverageMarkSerializer,ForumMessageSerializer
-from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser,ForumMessage,Scenery
+from .serializer import UserSerializer,UserRegisterSerializer,UserLoginSerializer,ScenerySerializer,FlowSerializer,UserSerializer,MarkSerializer,AverageMarkSerializer,ForumMessageSerializer,ChatConversationSerializer
+from .models import Flow, Step,FlowService,ScenaryService,Mark,AppUser,ForumMessage,Scenery,ChatConversation
 from chatbot.svm import SVMChatbot
 from chatbot.grammar import GrammarCorrector
 from chatbot.grammar import SentenceChecker
@@ -97,6 +97,20 @@ def upload_scenary(request):
         return JsonResponse({'message': 'El JSON se ha subido correctamente', 'flow': {'id': flow.id, 'name': flow.name}}, status=200)
     else:
         return JsonResponse({'error': 'No se proporcionó ningún archivo JSON'}, status=400)
+@api_view(['POST'])
+@permission_classes([permissions.IsAuthenticated])
+def submit_conversation(request):
+    conversation_data = request.data.get('conversation', None)
+    if conversation_data:
+        user = request.user
+        conversation = ChatConversation.objects.create(
+            user=user,
+            conversation=conversation_data
+        )
+        serializer = ChatConversationSerializer(conversation)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
+    else:
+        return Response({'error': 'Conversation data is required'}, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def upload_training(request):
@@ -235,7 +249,16 @@ def search_student(request):
             user_serializer = UserSerializer(user)
             marks = Mark.objects.filter(user=user)
             marks_serializer = MarkSerializer(marks, many=True)
-            return Response({'user': user_serializer.data, 'marks': marks_serializer.data}, status=status.HTTP_200_OK)
+            
+            # Añadir conversaciones
+            conversations = {}
+            for mark in marks:
+                chat_conversations = ChatConversation.objects.filter(user=user, date__date=mark.date.date())
+                for chat in chat_conversations:
+                    print(chat.conversation)
+                    conversations[mark.id] = (chat.conversation)
+            
+            return Response({'user': user_serializer.data, 'marks': marks_serializer.data, 'conversations': conversations}, status=status.HTTP_200_OK)
         else:
             return Response({'error': 'User not found'}, status=status.HTTP_404_NOT_FOUND)
     else:

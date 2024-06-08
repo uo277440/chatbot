@@ -43,9 +43,6 @@ class AppUser(AbstractBaseUser, PermissionsMixin):
 
 
 
-
-
-
 class FlowService(models.Manager):
     def get_flow_by_name(self, name):
         try:
@@ -136,3 +133,10 @@ class ForumMessage(models.Model):
                 'message': self.message,
             }
         )
+class ChatConversation(models.Model):
+    user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='conversations')
+    conversation = models.JSONField()
+    date = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'chat_conversation'

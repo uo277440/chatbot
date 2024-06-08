@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import get_user_model, authenticate
 from django.core.exceptions import ValidationError
-from .models import Scenery,Mark,Flow,Step,ForumMessage
+from .models import Scenery,Mark,Flow,Step,ForumMessage,ChatConversation
 
 UserModel = get_user_model()
 
@@ -58,4 +58,8 @@ class ForumMessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ForumMessage
         fields = ['id', 'message', 'user', 'date', 'pinned']
+class ChatConversationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ChatConversation
+        fields = ['conversation', 'date']
   

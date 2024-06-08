@@ -8,6 +8,10 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import '../css/Chatbot.css';
 
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
 function Chatbot() {
     const [messages, setMessages] = useState(() => {
         const savedMessages = localStorage.getItem('chatMessages');
@@ -51,6 +55,7 @@ function Chatbot() {
 
                 if (response.data.is_finished) {
                     generateTextFile();
+                    submitConversation(updatedMessagesWithBot);
                     setTimeout(() => {
                         var message 
                         var icon
@@ -76,6 +81,29 @@ function Chatbot() {
                 console.log(error);
             });
     };
+    const submitConversation = (conversation) => {
+        const formData = new FormData();
+        formData.append('conversation', JSON.stringify(conversation));
+
+        const csrftoken = getCookie('csrftoken');
+        axiosInstance.post('/api/submit_conversation', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'X-CSRFToken': csrftoken
+            }
+        })
+            .then(response => {
+                console.log('Conversation submitted successfully.');
+            })
+            .catch(error => {
+                console.log('Error submitting conversation:', error);
+            });
+    };
+
+    function getCookie(name) {
+        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return cookieValue ? cookieValue.pop() : '';
+    }
     const generateTextFile = () => {
         return new Promise((resolve) => {
             const element = document.createElement('a');
