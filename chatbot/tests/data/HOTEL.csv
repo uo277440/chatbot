@@ -1,0 +1,1749 @@
+User Input,Label
+"Good morning how can I assist you?",GREETING
+"Welcome to our hotel how may I help you today?",GREETING
+"Welcome to our hotel! Is there anything I can assist you with today?",GREETING
+"Good [morning/afternoon/evening] and welcome to our hotel! How may I be of service to you?",GREETING
+"Greetings and welcome! How can I help make your stay more comfortable?",GREETING
+"Hello and a warm welcome to our hotel! What can I do to assist you during your visit?",GREETING
+"Welcome to [hotel name]! How may I help you make the most of your time here?",GREETING
+"Hi there, and welcome! Is there anything specific you need assistance with today?",GREETING
+"A pleasant welcome to our hotel! How can I make your stay with us more enjoyable?",GREETING
+"Greetings and a hearty welcome! Please let me know how I can assist you during your stay.",GREETING
+"Hello and welcome to our hotel! What can I do to ensure you have a pleasant experience?",GREETING
+"Welcome, traveler! How can I make your visit to our hotel more memorable?",GREETING
+"Hi! How can I help you today?",GREETING
+"Welcome! How may I assist you this fine day?",GREETING
+"Hello! How can I be of service to you today?",GREETING
+"Good day! How may I assist you today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of help today?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hi there! How can I help you today?",GREETING
+"Hello! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Good [morning/afternoon/evening]! How can I help you today?",GREETING
+"Welcome! How can I assist you today?",GREETING
+"Hello! What can I do for you today?",GREETING
+"Hi! How can I assist you?",GREETING
+"Good day! How may I be of help today?",GREETING
+"Greetings! How can I help you today?",GREETING
+"Welcome! How may I be of service to you?",GREETING
+"Good [morning/afternoon/evening]! How can I assist you today?",GREETING
+"Hello! How can I help you today?",GREETING
+"Hi there! How may I assist you?",GREETING
+"Good day! What can I do for you today?",GREETING
+"Welcome to our hotel! How can I help you today?",GREETING
+"Hi! How can I be of service today?",GREETING
+"Greetings! How may I assist you?",GREETING
+"Have a pleasant day!",FAREWELL
+"Thank you for choosing our hotel. Have a wonderful day!",FAREWELL
+"We hope you enjoyed your stay. Safe travels!",FAREWELL
+"It was a pleasure serving you. Until next time!",FAREWELL
+"Wishing you a fantastic day ahead. Goodbye for now!",FAREWELL
+"If you need any assistance in the future, don't hesitate to reach out. Goodbye!",FAREWELL
+"Take care and have a great day!",FAREWELL
+"We appreciate your visit. Farewell and best wishes!",FAREWELL
+"Goodbye and thank you for staying with us!",FAREWELL
+"We hope to welcome you back soon. Goodbye!",FAREWELL
+"May the rest of your day be filled with joy. Goodbye!",FAREWELL
+"Goodbye and have a fantastic day ahead!",FAREWELL
+"Thank you for staying with us. Goodbye!",FAREWELL
+"We hope you had a pleasant stay. Safe travels!",FAREWELL
+"It was wonderful having you here. Goodbye!",FAREWELL
+"Wishing you all the best. Farewell!",FAREWELL
+"If you need anything, don't hesitate to ask. Goodbye!",FAREWELL
+"Take care and enjoy the rest of your day!",FAREWELL
+"We're grateful for your visit. Farewell!",FAREWELL
+"Goodbye and we look forward to seeing you again!",FAREWELL
+"May the rest of your day be great. Goodbye!",FAREWELL
+"Goodbye and thank you for choosing our hotel!",FAREWELL
+"We hope to see you again soon. Goodbye!",FAREWELL
+"Safe travels and have a great day!",FAREWELL
+"Goodbye and take care!",FAREWELL
+"Thank you for your visit. Have a wonderful day!",FAREWELL
+"It was a pleasure having you here. Goodbye!",FAREWELL
+"Have a great day ahead. Goodbye!",FAREWELL
+"We look forward to your next visit. Farewell!",FAREWELL
+"Goodbye and best wishes!",FAREWELL
+"May your day be fantastic. Goodbye!",FAREWELL
+"Goodbye and thank you for your stay!",FAREWELL
+"We hope to welcome you back. Safe travels!",FAREWELL
+"Take care and see you next time!",FAREWELL
+"Farewell and have a lovely day!",FAREWELL
+"Goodbye and enjoy the rest of your day!",FAREWELL
+"We appreciate your stay. Farewell!",FAREWELL
+"Thank you for being with us. Goodbye!",FAREWELL
+"Goodbye and have a wonderful day ahead!",FAREWELL
+"We hope you enjoyed your time here. Safe travels!",FAREWELL
+"It was a pleasure to serve you. Goodbye!",FAREWELL
+"Wishing you a great day. Farewell!",FAREWELL
+"Goodbye and feel free to visit us again!",FAREWELL
+"Take care and goodbye!",FAREWELL
+"We're grateful for your stay. Farewell!",FAREWELL
+"Goodbye and we hope to see you soon!",FAREWELL
+"May your day be filled with joy. Goodbye!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"Thank you for visiting. Have a fantastic day!",FAREWELL
+"It was wonderful having you. Goodbye!",FAREWELL
+"Have a wonderful day. Goodbye!",FAREWELL
+"We look forward to your return. Farewell!",FAREWELL
+"Goodbye and best of luck!",FAREWELL
+"May the rest of your day be great. Farewell!",FAREWELL
+"Goodbye and thank you for your visit!",FAREWELL
+"We hope you had a great time. Safe travels!",FAREWELL
+"Take care and have a fantastic day!",FAREWELL
+"Farewell and we hope to see you again!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your stay. Goodbye!",FAREWELL
+"Thank you for being here. Farewell!",FAREWELL
+"Goodbye and have a pleasant day ahead!",FAREWELL
+"We hope you enjoyed your visit. Safe travels!",FAREWELL
+"It was a pleasure to have you here. Goodbye!",FAREWELL
+"Wishing you a wonderful day. Farewell!",FAREWELL
+"Goodbye and come back soon!",FAREWELL
+"Take care and farewell!",FAREWELL
+"We're thankful for your visit. Goodbye!",FAREWELL
+"Goodbye and we hope to see you again soon!",FAREWELL
+"May your day be filled with happiness. Goodbye!",FAREWELL
+"Goodbye and take care!",FAREWELL
+"Thank you for your stay. Have a wonderful day!",FAREWELL
+"It was great having you. Goodbye!",FAREWELL
+"Have a fantastic day. Goodbye!",FAREWELL
+"We look forward to seeing you again. Farewell!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"May your day be amazing. Goodbye!",FAREWELL
+"Goodbye and thank you for staying with us!",FAREWELL
+"We hope to welcome you back soon. Safe travels!",FAREWELL
+"Take care and see you next time!",FAREWELL
+"Farewell and have a lovely day!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your visit. Farewell!",FAREWELL
+"Thank you for being our guest. Goodbye!",FAREWELL
+"Goodbye and have a wonderful day ahead!",FAREWELL
+"We hope you had a great stay. Safe travels!",FAREWELL
+"It was our pleasure to serve you. Goodbye!",FAREWELL
+"Wishing you a great day. Farewell!",FAREWELL
+"Goodbye and visit us again!",FAREWELL
+"Take care and goodbye!",FAREWELL
+"We're thankful for your stay. Farewell!",FAREWELL
+"Goodbye and we hope to see you soon!",FAREWELL
+"May your day be joyful. Goodbye!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"Thank you for your visit. Have a fantastic day!",FAREWELL
+"It was wonderful having you here. Goodbye!",FAREWELL
+"Have a wonderful day. Goodbye!",FAREWELL
+"We look forward to your return. Farewell!",FAREWELL
+"Goodbye and best wishes!",FAREWELL
+"May the rest of your day be great. Farewell!",FAREWELL
+"Goodbye and thank you for your stay!",FAREWELL
+"We hope you had a pleasant time. Safe travels!",FAREWELL
+"Take care and have a fantastic day!",FAREWELL
+"Farewell and we hope to see you again!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your stay. Goodbye!",FAREWELL
+"Thank you for being here. Farewell!",FAREWELL
+"Goodbye and have a pleasant day ahead!",FAREWELL
+"We hope you enjoyed your stay. Safe travels!",FAREWELL
+"It was a pleasure to have you here. Goodbye!",FAREWELL
+"Wishing you a wonderful day. Farewell!",FAREWELL
+"Goodbye and come back soon!",FAREWELL
+"Take care and farewell!",FAREWELL
+"We're grateful for your visit. Goodbye!",FAREWELL
+"Goodbye and we hope to see you again soon!",FAREWELL
+"May your day be filled with joy. Goodbye!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"Thank you for visiting. Have a fantastic day!",FAREWELL
+"It was great having you. Goodbye!",FAREWELL
+"Have a wonderful day. Goodbye!",FAREWELL
+"We look forward to seeing you again. Farewell!",FAREWELL
+"Goodbye and best wishes!",FAREWELL
+"May the rest of your day be great. Goodbye!",FAREWELL
+"Goodbye and thank you for staying with us!",FAREWELL
+"We hope to welcome you back. Safe travels!",FAREWELL
+"Take care and see you next time!",FAREWELL
+"Farewell and have a lovely day!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your visit. Farewell!",FAREWELL
+"Thank you for being our guest. Goodbye!",FAREWELL
+"Goodbye and have a wonderful day ahead!",FAREWELL
+"We hope you had a great time. Safe travels!",FAREWELL
+"It was a pleasure to serve you. Goodbye!",FAREWELL
+"Wishing you a great day. Farewell!",FAREWELL
+"Goodbye and visit us again!",FAREWELL
+"Take care and goodbye!",FAREWELL
+"We're thankful for your stay. Farewell!",FAREWELL
+"Goodbye and we hope to see you soon!",FAREWELL
+"May your day be joyful. Goodbye!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"Thank you for your visit. Have a fantastic day!",FAREWELL
+"It was wonderful having you here. Goodbye!",FAREWELL
+"Have a wonderful day. Goodbye!",FAREWELL
+"We look forward to your return. Farewell!",FAREWELL
+"Goodbye and best wishes!",FAREWELL
+"May the rest of your day be great. Farewell!",FAREWELL
+"Goodbye and thank you for your stay!",FAREWELL
+"We hope you had a pleasant time. Safe travels!",FAREWELL
+"Take care and have a fantastic day!",FAREWELL
+"Farewell and we hope to see you again!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your stay. Goodbye!",FAREWELL
+"Thank you for being here. Farewell!",FAREWELL
+"Goodbye and have a pleasant day ahead!",FAREWELL
+"We hope you enjoyed your stay. Safe travels!",FAREWELL
+"It was a pleasure to have you here. Goodbye!",FAREWELL
+"Wishing you a wonderful day. Farewell!",FAREWELL
+"Goodbye and come back soon!",FAREWELL
+"Take care and farewell!",FAREWELL
+"We're grateful for your visit. Goodbye!",FAREWELL
+"Goodbye and we hope to see you again soon!",FAREWELL
+"May your day be filled with joy. Goodbye!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"Thank you for visiting. Have a fantastic day!",FAREWELL
+"It was great having you. Goodbye!",FAREWELL
+"Have a wonderful day. Goodbye!",FAREWELL
+"We look forward to seeing you again. Farewell!",FAREWELL
+"Goodbye and best wishes!",FAREWELL
+"May the rest of your day be great. Goodbye!",FAREWELL
+"Goodbye and thank you for staying with us!",FAREWELL
+"We hope to welcome you back. Safe travels!",FAREWELL
+"Take care and see you next time!",FAREWELL
+"Farewell and have a lovely day!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your visit. Farewell!",FAREWELL
+"Thank you for being our guest. Goodbye!",FAREWELL
+"Goodbye and have a wonderful day ahead!",FAREWELL
+"We hope you had a great time. Safe travels!",FAREWELL
+"It was our pleasure to serve you. Goodbye!",FAREWELL
+"Wishing you a great day. Farewell!",FAREWELL
+"Goodbye and visit us again!",FAREWELL
+"Take care and goodbye!",FAREWELL
+"We're thankful for your stay. Farewell!",FAREWELL
+"Goodbye and we hope to see you soon!",FAREWELL
+"May your day be joyful. Goodbye!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"Thank you for your visit. Have a fantastic day!",FAREWELL
+"It was wonderful having you here. Goodbye!",FAREWELL
+"Have a wonderful day. Goodbye!",FAREWELL
+"We look forward to your return. Farewell!",FAREWELL
+"Goodbye and best wishes!",FAREWELL
+"May the rest of your day be great. Farewell!",FAREWELL
+"Goodbye and thank you for your stay!",FAREWELL
+"We hope you had a pleasant time. Safe travels!",FAREWELL
+"Take care and have a fantastic day!",FAREWELL
+"Farewell and we hope to see you again!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your stay. Goodbye!",FAREWELL
+"Thank you for being here. Farewell!",FAREWELL
+"Goodbye and have a pleasant day ahead!",FAREWELL
+"We hope you enjoyed your stay. Safe travels!",FAREWELL
+"It was a pleasure to have you here. Goodbye!",FAREWELL
+"Wishing you a wonderful day. Farewell!",FAREWELL
+"Goodbye and come back soon!",FAREWELL
+"Take care and farewell!",FAREWELL
+"We're grateful for your visit. Goodbye!",FAREWELL
+"Goodbye and we hope to see you again soon!",FAREWELL
+"May your day be filled with joy. Goodbye!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"Thank you for visiting. Have a fantastic day!",FAREWELL
+"It was great having you. Goodbye!",FAREWELL
+"Have a wonderful day. Goodbye!",FAREWELL
+"We look forward to seeing you again. Farewell!",FAREWELL
+"Goodbye and best wishes!",FAREWELL
+"May the rest of your day be great. Goodbye!",FAREWELL
+"Goodbye and thank you for staying with us!",FAREWELL
+"We hope to welcome you back. Safe travels!",FAREWELL
+"Take care and see you next time!",FAREWELL
+"Farewell and have a lovely day!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your visit. Farewell!",FAREWELL
+"Thank you for being our guest. Goodbye!",FAREWELL
+"Goodbye and have a wonderful day ahead!",FAREWELL
+"We hope you had a great time. Safe travels!",FAREWELL
+"It was a pleasure to serve you. Goodbye!",FAREWELL
+"Wishing you a great day. Farewell!",FAREWELL
+"Goodbye and visit us again!",FAREWELL
+"Take care and goodbye!",FAREWELL
+"We're thankful for your stay. Farewell!",FAREWELL
+"Goodbye and we hope to see you soon!",FAREWELL
+"May your day be joyful. Goodbye!",FAREWELL
+"Goodbye and all the best!",FAREWELL
+"Thank you for your visit. Have a fantastic day!",FAREWELL
+"It was wonderful having you here. Goodbye!",FAREWELL
+"Have a wonderful day. Goodbye!",FAREWELL
+"We look forward to your return. Farewell!",FAREWELL
+"Goodbye and best wishes!",FAREWELL
+"May the rest of your day be great. Farewell!",FAREWELL
+"Goodbye and thank you for your stay!",FAREWELL
+"We hope you had a pleasant time. Safe travels!",FAREWELL
+"Take care and have a fantastic day!",FAREWELL
+"Farewell and we hope to see you again!",FAREWELL
+"Goodbye and enjoy your day!",FAREWELL
+"We appreciate your stay. Goodbye!",FAREWELL
+"Thank you for being here. Farewell!",FAREWELL
+"Goodbye and have a pleasant day ahead!",FAREWELL
+"We hope you enjoyed your stay. Safe travels!",FAREWELL
+"It was a pleasure to have you here. Goodbye!",FAREWELL
+"Wishing you a wonderful day. Farewell!",FAREWELL
+"Goodbye and come back soon!",FAREWELL
+"I'm sorry, but we're fully booked for tonight.",CHECK_NO_AVAILABILITY
+"Unfortunately, we don't have any availability for that night.",CHECK_NO_AVAILABILITY
+"I'm afraid we're completely booked up for that particular evening.",CHECK_NO_AVAILABILITY
+"I'm sorry, but all our rooms are reserved for tonight.",CHECK_NO_AVAILABILITY
+"Regrettably, we're unable to accommodate you on tonight as we're at full capacity.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available for tonight.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we're unable to fulfill your request for that particular date.",CHECK_NO_AVAILABILITY
+"I'm afraid we're fully occupied on the date you're looking for.",CHECK_NO_AVAILABILITY
+"I regret to inform you that we're fully reserved for the date in question.",CHECK_NO_AVAILABILITY
+"I apologize, but there are no vacancies for the date you've chosen.",CHECK_NO_AVAILABILITY
+"Sadly, we are fully booked for the night you requested.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no available rooms for tonight.",CHECK_NO_AVAILABILITY
+"Unfortunately, tonight is fully booked.",CHECK_NO_AVAILABILITY
+"Apologies, but all rooms are taken for tonight.",CHECK_NO_AVAILABILITY
+"We're at full capacity for the requested date.",CHECK_NO_AVAILABILITY
+"I'm afraid we can't accommodate you tonight as we are fully booked.",CHECK_NO_AVAILABILITY
+"We're sorry, but there are no rooms available on the date you requested.",CHECK_NO_AVAILABILITY
+"Unfortunately, we are booked solid for the night.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no vacancies available for tonight.",CHECK_NO_AVAILABILITY
+"All our rooms are booked for the date you mentioned.",CHECK_NO_AVAILABILITY
+"We're sorry, but we cannot accommodate your stay for tonight.",CHECK_NO_AVAILABILITY
+"I'm afraid we have no availability for the night in question.",CHECK_NO_AVAILABILITY
+"Sadly, there are no rooms available for the night you need.",CHECK_NO_AVAILABILITY
+"We apologize, but we are fully booked for tonight.",CHECK_NO_AVAILABILITY
+"There are no rooms available for the requested date, sorry.",CHECK_NO_AVAILABILITY
+"Regrettably, we are at full capacity for tonight.",CHECK_NO_AVAILABILITY
+"I'm sorry, but there are no rooms available for the date you want.",CHECK_NO_AVAILABILITY
+"Unfortunately, all our rooms are booked for tonight.",CHECK_NO_AVAILABILITY
+"Apologies, but we cannot accommodate any more guests for tonight.",CHECK_NO_AVAILABILITY
+"We regret to inform you that we are fully booked for tonight.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available for the night you requested.",CHECK_NO_AVAILABILITY
+"I'm afraid we have no availability for the night you need.",CHECK_NO_AVAILABILITY
+"We're fully booked for the date in question, sorry.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we cannot accommodate your request for tonight.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms free for tonight.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the night you need, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but there are no available rooms for tonight.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you mentioned.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for tonight.",CHECK_NO_AVAILABILITY
+"We regret to inform you that we have no availability for tonight.",CHECK_NO_AVAILABILITY
+"There are no rooms available on the date you need, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are booked up for tonight.",CHECK_NO_AVAILABILITY
+"All our rooms are taken for the date you requested.",CHECK_NO_AVAILABILITY
+"We're at full capacity for the night you need.",CHECK_NO_AVAILABILITY
+"Sorry, but we can't accommodate your stay for tonight.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the date in question.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no vacancies for tonight.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no rooms available for the requested date.",CHECK_NO_AVAILABILITY
+"All rooms are booked for the date you need, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no availability for tonight.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no vacancies for the night you requested.",CHECK_NO_AVAILABILITY
+"I'm afraid we cannot accommodate your stay for tonight.",CHECK_NO_AVAILABILITY
+"Unfortunately, we have no rooms available for tonight.",CHECK_NO_AVAILABILITY
+"We're sorry, but we are at full capacity for tonight.",CHECK_NO_AVAILABILITY
+"Sadly, we have no availability for the night you need.",CHECK_NO_AVAILABILITY
+"There are no available rooms for the date you mentioned, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but all rooms are booked for tonight.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no rooms available for the requested date.",CHECK_NO_AVAILABILITY
+"I'm afraid we have no vacancies for the date you need.",CHECK_NO_AVAILABILITY
+"We regret to inform you that we are fully occupied for tonight.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms free on the date you want.",CHECK_NO_AVAILABILITY
+"We're fully booked for the night you need, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we cannot accommodate you for tonight.",CHECK_NO_AVAILABILITY
+"All rooms are taken for the night you requested, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the date you need, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no available rooms for the night you need.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay for the requested date.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free for tonight.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the night you mentioned.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the date you need, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available for tonight.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the requested date.",CHECK_NO_AVAILABILITY
+"I'm afraid we are booked up for the night you need.",CHECK_NO_AVAILABILITY
+"Unfortunately, we are fully booked for tonight.",CHECK_NO_AVAILABILITY
+"There are no rooms available on the date you requested, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we have no availability for the night you need.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the night you mentioned, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity for the date you want, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available for the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, we cannot accommodate your stay for tonight.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free for the date you need.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the requested date.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the night you mentioned, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available for the date you need.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the night you mentioned.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the date you need.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the night you want.",CHECK_NO_AVAILABILITY
+"There are no rooms free for the night you mentioned, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the date you requested.",CHECK_NO_AVAILABILITY
+"All rooms are taken for the night you need, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night you requested, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the date you want.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay for the night you requested.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms available for the night you need.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the night in question.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the night you want, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the date you requested.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the night in question.",CHECK_NO_AVAILABILITY
+"I'm afraid we are booked up for the date you want.",CHECK_NO_AVAILABILITY
+"Unfortunately, we are fully booked on the night you need.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the date you requested, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we have no availability for the night you want.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the night you need, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night you want, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the date in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, we cannot accommodate your stay on the night you need.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free on the date you requested.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the night you requested.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the date you mentioned, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night you need.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you requested.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the night you mentioned.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the night in question.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the date in question, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the date you need.",CHECK_NO_AVAILABILITY
+"All rooms are taken for the date you want, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night in question, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night you requested.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the date you want.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms available for the night you requested.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the date you mentioned.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the night in question, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night you want.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you want.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the night you requested.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the date you need.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the night you requested, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we have no availability for the date you mentioned.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the date you need, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the date you requested, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night you need.",CHECK_NO_AVAILABILITY
+"Unfortunately, we cannot accommodate your stay on the night you requested.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free on the night you need.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the night you need.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the date you requested, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night you need.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the night you need.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the date you want.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the night in question, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the night you need.",CHECK_NO_AVAILABILITY
+"All rooms are taken for the date you mentioned, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the date you want, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night you want.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the night you need.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms available for the night you requested.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the date in question.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the night you need, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night you requested.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date in question.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the date you want.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the date in question.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the date you need, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the night you mentioned.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the date you mentioned, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night you need, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, we cannot accommodate your stay on the date in question.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free on the date you requested.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the date you requested.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the night you requested, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night in question.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you need.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the date in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the night you need.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the night in question, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the night you requested.",CHECK_NO_AVAILABILITY
+"All rooms are taken for the date in question, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the date you need, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the date in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the night in question.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free on the night in question.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the night you requested.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the date you need, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night you requested.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you requested.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the date in question.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the night you need, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the date you requested.",CHECK_NO_AVAILABILITY
+"All rooms are taken for the date you need, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night in question, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night you requested.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the date you requested.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms available for the night you need.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the night in question.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the night you need, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night you requested.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you need.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the night in question.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the date you need, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the date you requested.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the night you mentioned, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night in question, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the date in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the night in question.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free on the date you need.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the date in question.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the date in question, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night in question.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the night in question.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the date in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the night you need.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the night in question, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the date you requested.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the night you requested, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night you need, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night you need.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the night you need.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms available for the date you need.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the date in question.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the date you requested, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night you need.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you requested.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the date you need.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the night you requested, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the date in question.",CHECK_NO_AVAILABILITY
+"All rooms are taken for the night in question, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the date in question, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the night you requested.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free on the date you requested.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the night you requested.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the date you need, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night you requested.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you requested.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the date you requested.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the night in question, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the date you need.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the date in question, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night in question, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night you need.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the date you need.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free on the date in question.",CHECK_NO_AVAILABILITY
+"Regrettably, there are no vacancies for the date you requested.",CHECK_NO_AVAILABILITY
+"All rooms are booked up for the night you need, sorry.",CHECK_NO_AVAILABILITY
+"We apologize, but we have no rooms available on the night in question.",CHECK_NO_AVAILABILITY
+"Sorry, but we have no vacancies for the date you need.",CHECK_NO_AVAILABILITY
+"I'm afraid we are fully booked for the night you requested.",CHECK_NO_AVAILABILITY
+"Unfortunately, there are no rooms available on the date you need.",CHECK_NO_AVAILABILITY
+"There are no rooms free on the night you requested, sorry.",CHECK_NO_AVAILABILITY
+"Apologies, but we are fully booked for the date you requested.",CHECK_NO_AVAILABILITY
+"All rooms are reserved for the date you need, sorry.",CHECK_NO_AVAILABILITY
+"We're at full capacity on the night you requested, sorry.",CHECK_NO_AVAILABILITY
+"Sorry, but there are no rooms available on the night in question.",CHECK_NO_AVAILABILITY
+"Unfortunately, we can't accommodate your stay on the night in question.",CHECK_NO_AVAILABILITY
+"I'm sorry, but we have no rooms free on the date you requested.",CHECK_NO_AVAILABILITY
+"Yes, we have availability for tonight.",CHECK_AVAILABILITY
+"Certainly, your reservation is confirmed for the selected date.",CHECK_AVAILABILITY
+"Absolutely, we can accommodate you tonight.",CHECK_AVAILABILITY
+"Yes, your booking is secured for the requested date.",CHECK_AVAILABILITY
+"Confirmed, your reservation is set for the chosen date.",CHECK_AVAILABILITY
+"Affirmative, we have space available tonight.",CHECK_AVAILABILITY
+"Confirmed, we'll be expecting you tonight.",CHECK_AVAILABILITY
+"Yes, your reservation is confirmed and scheduled for tonight.",CHECK_AVAILABILITY
+"Certainly, we can reserve a room for you tonight.",CHECK_AVAILABILITY
+"Yes, we do have rooms available for your requested date.",CHECK_AVAILABILITY
+"Indeed, there is availability for tonight.",CHECK_AVAILABILITY
+"Your reservation for tonight is confirmed.",CHECK_AVAILABILITY
+"Yes, rooms are available for tonight.",CHECK_AVAILABILITY
+"Sure, we can book a room for you tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms open for your requested date.",CHECK_AVAILABILITY
+"Confirmed, there is availability for the selected date.",CHECK_AVAILABILITY
+"Yes, we can accommodate your stay for tonight.",CHECK_AVAILABILITY
+"Absolutely, there are rooms available tonight.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is secured.",CHECK_AVAILABILITY
+"Certainly, rooms are available for the date you requested.",CHECK_AVAILABILITY
+"Yes, we have rooms free for tonight.",CHECK_AVAILABILITY
+"Confirmed, your booking for tonight is in place.",CHECK_AVAILABILITY
+"Affirmative, we can book you for tonight.",CHECK_AVAILABILITY
+"Yes, your room is reserved for tonight.",CHECK_AVAILABILITY
+"Certainly, we can confirm your stay for tonight.",CHECK_AVAILABILITY
+"Yes, there is availability for the date you want.",CHECK_AVAILABILITY
+"Indeed, your reservation for tonight is confirmed.",CHECK_AVAILABILITY
+"Absolutely, we have rooms available tonight.",CHECK_AVAILABILITY
+"Yes, your booking is confirmed for tonight.",CHECK_AVAILABILITY
+"Confirmed, there is space for you tonight.",CHECK_AVAILABILITY
+"Yes, your stay for tonight is confirmed.",CHECK_AVAILABILITY
+"Certainly, we have rooms available for your date.",CHECK_AVAILABILITY
+"Yes, there are rooms free for tonight.",CHECK_AVAILABILITY
+"Confirmed, your room is booked for tonight.",CHECK_AVAILABILITY
+"Affirmative, your reservation is confirmed for tonight.",CHECK_AVAILABILITY
+"Yes, we can accommodate your booking for tonight.",CHECK_AVAILABILITY
+"Certainly, there is availability for tonight.",CHECK_AVAILABILITY
+"Yes, your room for tonight is confirmed.",CHECK_AVAILABILITY
+"Indeed, we have space for you tonight.",CHECK_AVAILABILITY
+"Absolutely, your reservation for tonight is secured.",CHECK_AVAILABILITY
+"Yes, we have rooms for tonight.",CHECK_AVAILABILITY
+"Confirmed, your stay for the selected date is booked.",CHECK_AVAILABILITY
+"Certainly, we can confirm your room for tonight.",CHECK_AVAILABILITY
+"Yes, your booking for tonight is secured.",CHECK_AVAILABILITY
+"Affirmative, we have availability for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is booked.",CHECK_AVAILABILITY
+"Indeed, rooms are available for your date.",CHECK_AVAILABILITY
+"Absolutely, we can reserve a room for tonight.",CHECK_AVAILABILITY
+"Yes, there is space available for tonight.",CHECK_AVAILABILITY
+"Confirmed, your booking for the requested date is in place.",CHECK_AVAILABILITY
+"Certainly, we have rooms for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation is set for tonight.",CHECK_AVAILABILITY
+"Affirmative, there are rooms free for tonight.",CHECK_AVAILABILITY
+"Yes, we can accommodate your stay for the requested date.",CHECK_AVAILABILITY
+"Indeed, your room is booked for tonight.",CHECK_AVAILABILITY
+"Absolutely, there is availability for tonight.",CHECK_AVAILABILITY
+"Yes, your booking is confirmed for the selected date.",CHECK_AVAILABILITY
+"Confirmed, we have rooms available for tonight.",CHECK_AVAILABILITY
+"Certainly, your stay for tonight is confirmed.",CHECK_AVAILABILITY
+"Yes, there are rooms available for tonight.",CHECK_AVAILABILITY
+"Affirmative, your booking for tonight is confirmed.",CHECK_AVAILABILITY
+"Yes, we have rooms open for tonight.",CHECK_AVAILABILITY
+"Indeed, your reservation is set for tonight.",CHECK_AVAILABILITY
+"Absolutely, we have rooms free for tonight.",CHECK_AVAILABILITY
+"Yes, your stay for tonight is booked.",CHECK_AVAILABILITY
+"Confirmed, there is availability for your requested date.",CHECK_AVAILABILITY
+"Certainly, we have space available for tonight.",CHECK_AVAILABILITY
+"Yes, your booking for the selected date is confirmed.",CHECK_AVAILABILITY
+"Affirmative, there are rooms available for tonight.",CHECK_AVAILABILITY
+"Yes, we can confirm your reservation for tonight.",CHECK_AVAILABILITY
+"Indeed, rooms are free for tonight.",CHECK_AVAILABILITY
+"Absolutely, your stay for tonight is confirmed.",CHECK_AVAILABILITY
+"Yes, there is availability for tonight.",CHECK_AVAILABILITY
+"Confirmed, your reservation is booked for tonight.",CHECK_AVAILABILITY
+"Certainly, we have rooms open for your date.",CHECK_AVAILABILITY
+"Yes, your booking is set for tonight.",CHECK_AVAILABILITY
+"Affirmative, we can accommodate your stay for tonight.",CHECK_AVAILABILITY
+"Yes, your room is available for tonight.",CHECK_AVAILABILITY
+"Indeed, your reservation is confirmed for tonight.",CHECK_AVAILABILITY
+"Absolutely, we can book you for the selected date.",CHECK_AVAILABILITY
+"Yes, we have rooms available for the date you need.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is secured.",CHECK_AVAILABILITY
+"Certainly, your reservation for tonight is booked.",CHECK_AVAILABILITY
+"Yes, there are rooms open for the requested date.",CHECK_AVAILABILITY
+"Affirmative, your booking is set for tonight.",CHECK_AVAILABILITY
+"Yes, we can confirm your stay for the date you need.",CHECK_AVAILABILITY
+"Indeed, there is availability for the selected date.",CHECK_AVAILABILITY
+"Absolutely, we have rooms available for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is secured.",CHECK_AVAILABILITY
+"Confirmed, we can accommodate you tonight.",CHECK_AVAILABILITY
+"Certainly, rooms are available for the date you want.",CHECK_AVAILABILITY
+"Yes, we have availability for the requested date.",CHECK_AVAILABILITY
+"Affirmative, your room for tonight is confirmed.",CHECK_AVAILABILITY
+"Yes, your booking for tonight is set.",CHECK_AVAILABILITY
+"Indeed, rooms are open for the selected date.",CHECK_AVAILABILITY
+"Absolutely, we can book a room for you tonight.",CHECK_AVAILABILITY
+"Yes, there is space for the date you requested.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is arranged.",CHECK_AVAILABILITY
+"Certainly, we have availability for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation is confirmed for tonight.",CHECK_AVAILABILITY
+"Affirmative, we can accommodate your stay for tonight.",CHECK_AVAILABILITY
+"Yes, your room is booked for the selected date.",CHECK_AVAILABILITY
+"Indeed, your booking for tonight is confirmed.",CHECK_AVAILABILITY
+"Absolutely, there are rooms available for tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms available for the date you requested.",CHECK_AVAILABILITY
+"Confirmed, we can reserve a room for you tonight.",CHECK_AVAILABILITY
+"Certainly, your stay for the requested date is confirmed.",CHECK_AVAILABILITY
+"Yes, there is availability for the selected date.",CHECK_AVAILABILITY
+"Affirmative, we have rooms free for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is arranged.",CHECK_AVAILABILITY
+"Indeed, we can confirm your stay for tonight.",CHECK_AVAILABILITY
+"Absolutely, we have space available for tonight.",CHECK_AVAILABILITY
+"Yes, your booking is confirmed for the requested date.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is set.",CHECK_AVAILABILITY
+"Certainly, we have rooms open for tonight.",CHECK_AVAILABILITY
+"Yes, there are rooms available for the date you need.",CHECK_AVAILABILITY
+"Affirmative, your reservation is secured for tonight.",CHECK_AVAILABILITY
+"Yes, your booking for tonight is arranged.",CHECK_AVAILABILITY
+"Indeed, there is availability for tonight.",CHECK_AVAILABILITY
+"Absolutely, we can accommodate your stay for tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms available for the selected date.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is confirmed.",CHECK_AVAILABILITY
+"Certainly, we have rooms available for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation is confirmed for the requested date.",CHECK_AVAILABILITY
+"Affirmative, there are rooms available for the date you want.",CHECK_AVAILABILITY
+"Yes, your booking for tonight is confirmed.",CHECK_AVAILABILITY
+"Indeed, we can accommodate your stay for the requested date.",CHECK_AVAILABILITY
+"Absolutely, there is availability for tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms open for tonight.",CHECK_AVAILABILITY
+"Confirmed, your reservation is arranged for tonight.",CHECK_AVAILABILITY
+"Certainly, your stay for tonight is secured.",CHECK_AVAILABILITY
+"Yes, there are rooms available for the selected date.",CHECK_AVAILABILITY
+"Affirmative, we can confirm your booking for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is set.",CHECK_AVAILABILITY
+"Indeed, there is availability for the date you need.",CHECK_AVAILABILITY
+"Absolutely, we can book you for tonight.",CHECK_AVAILABILITY
+"Yes, we have space available for the requested date.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is in place.",CHECK_AVAILABILITY
+"Certainly, we have rooms available for your date.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is confirmed.",CHECK_AVAILABILITY
+"Affirmative, there are rooms free for the selected date.",CHECK_AVAILABILITY
+"Yes, your booking is set for tonight.",CHECK_AVAILABILITY
+"Indeed, we have availability for the requested date.",CHECK_AVAILABILITY
+"Absolutely, your stay for tonight is secured.",CHECK_AVAILABILITY
+"Yes, we have rooms for the date you need.",CHECK_AVAILABILITY
+"Confirmed, your reservation is set for tonight.",CHECK_AVAILABILITY
+"Certainly, we can accommodate you tonight.",CHECK_AVAILABILITY
+"Yes, your booking for the selected date is arranged.",CHECK_AVAILABILITY
+"Affirmative, we have rooms available for tonight.",CHECK_AVAILABILITY
+"Yes, there is availability for the requested date.",CHECK_AVAILABILITY
+"Indeed, your reservation is confirmed for tonight.",CHECK_AVAILABILITY
+"Absolutely, we can confirm your stay for tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms free for the selected date.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is booked.",CHECK_AVAILABILITY
+"Certainly, we have availability for the date you need.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is in place.",CHECK_AVAILABILITY
+"Affirmative, we can accommodate your stay for the selected date.",CHECK_AVAILABILITY
+"Yes, there are rooms available for tonight.",CHECK_AVAILABILITY
+"Indeed, your booking for tonight is set.",CHECK_AVAILABILITY
+"Absolutely, we can reserve a room for the requested date.",CHECK_AVAILABILITY
+"Yes, we have availability for tonight.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is arranged.",CHECK_AVAILABILITY
+"Certainly, we have rooms available for the date you requested.",CHECK_AVAILABILITY
+"Yes, your booking is confirmed for tonight.",CHECK_AVAILABILITY
+"Affirmative, there is space available for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is arranged.",CHECK_AVAILABILITY
+"Indeed, we can accommodate you tonight.",CHECK_AVAILABILITY
+"Absolutely, there is availability for the date you need.",CHECK_AVAILABILITY
+"Yes, we have rooms open for the selected date.",CHECK_AVAILABILITY
+"Confirmed, your booking for tonight is confirmed.",CHECK_AVAILABILITY
+"Certainly, we have space available for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation for the requested date is confirmed.",CHECK_AVAILABILITY
+"Affirmative, we can accommodate your stay for tonight.",CHECK_AVAILABILITY
+"Yes, there are rooms free for tonight.",CHECK_AVAILABILITY
+"Indeed, your stay for tonight is secured.",CHECK_AVAILABILITY
+"Absolutely, we have availability for the selected date.",CHECK_AVAILABILITY
+"Yes, we have rooms available for the night.",CHECK_AVAILABILITY
+"Confirmed, your booking for the requested date is set.",CHECK_AVAILABILITY
+"Certainly, we have rooms for tonight.",CHECK_AVAILABILITY
+"Yes, your reservation for tonight is confirmed.",CHECK_AVAILABILITY
+"Affirmative, there are rooms available for the date you need.",CHECK_AVAILABILITY
+"Yes, your booking for tonight is arranged.",CHECK_AVAILABILITY
+"Indeed, there is availability for the requested date.",CHECK_AVAILABILITY
+"Absolutely, we can accommodate your stay for tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms available for the selected date.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is arranged.",CHECK_AVAILABILITY
+"Certainly, your room for tonight is confirmed.",CHECK_AVAILABILITY
+"Yes, your reservation is secured for the requested date.",CHECK_AVAILABILITY
+"Affirmative, we have rooms available tonight.",CHECK_AVAILABILITY
+"Indeed, we can accommodate you tonight.",CHECK_AVAILABILITY
+"Absolutely, there are rooms available for the selected date.",CHECK_AVAILABILITY
+"Yes, your stay for tonight is booked.",CHECK_AVAILABILITY
+"Confirmed, we have space available for tonight.",CHECK_AVAILABILITY
+"Certainly, your reservation is set for tonight.",CHECK_AVAILABILITY
+"Yes, your room is confirmed for the requested date.",CHECK_AVAILABILITY
+"Affirmative, there are rooms available for tonight.",CHECK_AVAILABILITY
+"Indeed, your reservation for tonight is confirmed.",CHECK_AVAILABILITY
+"Absolutely, we have rooms available for the date you need.",CHECK_AVAILABILITY
+"Yes, we have availability for tonight.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is booked.",CHECK_AVAILABILITY
+"Certainly, your room for tonight is booked.",CHECK_AVAILABILITY
+"Yes, your reservation is confirmed for the selected date.",CHECK_AVAILABILITY
+"Affirmative, we can accommodate your stay tonight.",CHECK_AVAILABILITY
+"Indeed, there is availability for the requested date.",CHECK_AVAILABILITY
+"Absolutely, there are rooms free for tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms available for tonight.",CHECK_AVAILABILITY
+"Confirmed, your reservation is set for tonight.",CHECK_AVAILABILITY
+"Certainly, we can book your stay for tonight.",CHECK_AVAILABILITY
+"Yes, your room is secured for the selected date.",CHECK_AVAILABILITY
+"Affirmative, we have availability for tonight.",CHECK_AVAILABILITY
+"Indeed, we can confirm your booking for tonight.",CHECK_AVAILABILITY
+"Absolutely, your reservation for tonight is set.",CHECK_AVAILABILITY
+"Yes, there are rooms free for the requested date.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is secured.",CHECK_AVAILABILITY
+"Certainly, your reservation for tonight is arranged.",CHECK_AVAILABILITY
+"Yes, your booking is confirmed for the selected date.",CHECK_AVAILABILITY
+"Affirmative, we have rooms available for tonight.",CHECK_AVAILABILITY
+"Indeed, your reservation is booked for tonight.",CHECK_AVAILABILITY
+"Absolutely, there is availability for tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms available for the date you need.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is confirmed.",CHECK_AVAILABILITY
+"Certainly, your room for tonight is set.",CHECK_AVAILABILITY
+"Yes, your reservation is secured for the date you want.",CHECK_AVAILABILITY
+"Affirmative, there are rooms available tonight.",CHECK_AVAILABILITY
+"Indeed, your booking for tonight is arranged.",CHECK_AVAILABILITY
+"Absolutely, we can accommodate you for the selected date.",CHECK_AVAILABILITY
+"Yes, we have availability for the requested date.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is in place.",CHECK_AVAILABILITY
+"Certainly, your reservation is confirmed for tonight.",CHECK_AVAILABILITY
+"Yes, your room is booked for the requested date.",CHECK_AVAILABILITY
+"Affirmative, we can book your stay for tonight.",CHECK_AVAILABILITY
+"Indeed, there are rooms available for tonight.",CHECK_AVAILABILITY
+"Absolutely, your reservation for tonight is confirmed.",CHECK_AVAILABILITY
+"Yes, we have space available for tonight.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is set.",CHECK_AVAILABILITY
+"Certainly, your room for tonight is confirmed.",CHECK_AVAILABILITY
+"Yes, your reservation is secured for the date you need.",CHECK_AVAILABILITY
+"Affirmative, there are rooms available for the requested date.",CHECK_AVAILABILITY
+"Indeed, we can confirm your stay for tonight.",CHECK_AVAILABILITY
+"Absolutely, there are rooms available for tonight.",CHECK_AVAILABILITY
+"Yes, we have rooms available for the selected date.",CHECK_AVAILABILITY
+"Confirmed, your booking for tonight is confirmed.",CHECK_AVAILABILITY
+"Certainly, your reservation is set for the date you want.",CHECK_AVAILABILITY
+"Yes, your room is secured for tonight.",CHECK_AVAILABILITY
+"Affirmative, we can accommodate your stay for the requested date.",CHECK_AVAILABILITY
+"Indeed, there is availability for tonight.",CHECK_AVAILABILITY
+"Absolutely, your booking for tonight is set.",CHECK_AVAILABILITY
+"Yes, we have availability for the date you need.",CHECK_AVAILABILITY
+"Confirmed, your stay for tonight is secured.",CHECK_AVAILABILITY
+"Could you please provide your full name and NIF for the reservation?",TAKE_DETAILS
+"We'll need your complete name and NIF to proceed with the booking. May I have them, please?",TAKE_DETAILS
+"To finalize the reservation, could you share your full name and NIF?",TAKE_DETAILS
+"Before confirming your reservation, we require your full name and NIF. Could you provide them?",TAKE_DETAILS
+"In order to secure your booking, we'll need your name and NIF. Could you kindly share them with us?",TAKE_DETAILS
+"To complete the reservation process, we kindly ask for your full name and NIF. Could you provide them, please?",TAKE_DETAILS
+"Before we proceed with the reservation, could you confirm your full name and NIF for our records?",TAKE_DETAILS
+"For our records, we'll need your full name and NIF to confirm the reservation. Could you provide them now?",TAKE_DETAILS
+"May I have your full name and NIF to finalize the booking?",TAKE_DETAILS
+"To continue with the reservation, please provide your complete name and NIF.",TAKE_DETAILS
+"We'll need your full name and NIF to complete the reservation. Could you share them?",TAKE_DETAILS
+"To confirm your booking, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your full name and NIF to proceed with the reservation?",TAKE_DETAILS
+"To secure your booking, please share your full name and NIF.",TAKE_DETAILS
+"We require your full name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"Could you provide your full name and NIF to confirm the reservation?",TAKE_DETAILS
+"We'll need your full name and NIF to proceed with the reservation. May I have them?",TAKE_DETAILS
+"To complete the booking, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for the reservation?",TAKE_DETAILS
+"We require your name and NIF to finalize the booking. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to complete the reservation.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your full name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your booking, could you provide your name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to confirm the reservation.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the reservation. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to finalize the booking?",TAKE_DETAILS
+"To secure your reservation, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the reservation?",TAKE_DETAILS
+"To finalize the booking, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the reservation.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the booking. May I have them, please?",TAKE_DETAILS
+"To proceed with the reservation, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for our records?",TAKE_DETAILS
+"We require your name and NIF to secure the reservation. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to finalize the reservation.",TAKE_DETAILS
+"To confirm your booking, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your reservation, could you provide your name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the booking.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the booking. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the reservation?",TAKE_DETAILS
+"To finalize your booking, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the booking?",TAKE_DETAILS
+"To complete the reservation, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the booking.",TAKE_DETAILS
+"To confirm your reservation, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the booking. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the reservation?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the reservation. May I have them?",TAKE_DETAILS
+"To proceed with your booking, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for the booking?",TAKE_DETAILS
+"We require your name and NIF to finalize the reservation. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to secure the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the reservation?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the booking. Could you provide them?",TAKE_DETAILS
+"To complete your reservation, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the reservation.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the reservation. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the booking?",TAKE_DETAILS
+"To finalize your reservation, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the reservation?",TAKE_DETAILS
+"To complete the booking, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the booking.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the booking. May I have them, please?",TAKE_DETAILS
+"To proceed with the reservation, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for our records?",TAKE_DETAILS
+"We require your name and NIF to secure the booking. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to finalize the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your booking, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the booking.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the booking. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the reservation?",TAKE_DETAILS
+"To finalize your booking, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the booking?",TAKE_DETAILS
+"To complete the reservation, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the reservation.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the booking. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the reservation?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the reservation. May I have them?",TAKE_DETAILS
+"To proceed with your booking, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for the booking?",TAKE_DETAILS
+"We require your name and NIF to finalize the reservation. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to secure the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the reservation?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the booking. Could you provide them?",TAKE_DETAILS
+"To complete your reservation, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the reservation.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the reservation. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the booking?",TAKE_DETAILS
+"To finalize your reservation, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the reservation?",TAKE_DETAILS
+"To complete the booking, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the booking.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the booking. May I have them, please?",TAKE_DETAILS
+"To proceed with the reservation, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for our records?",TAKE_DETAILS
+"We require your name and NIF to secure the booking. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to finalize the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your booking, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the booking.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the booking. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the reservation?",TAKE_DETAILS
+"To finalize your booking, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the booking?",TAKE_DETAILS
+"To complete the reservation, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the reservation.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the booking. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the reservation?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the reservation. May I have them?",TAKE_DETAILS
+"To proceed with your booking, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for the booking?",TAKE_DETAILS
+"We require your name and NIF to finalize the reservation. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to secure the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your reservation, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the booking.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the reservation. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the booking?",TAKE_DETAILS
+"To finalize your reservation, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the reservation?",TAKE_DETAILS
+"To complete the booking, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the booking.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the booking. May I have them, please?",TAKE_DETAILS
+"To proceed with the reservation, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for our records?",TAKE_DETAILS
+"We require your name and NIF to secure the booking. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to finalize the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your booking, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the reservation.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the reservation. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the booking?",TAKE_DETAILS
+"To finalize your reservation, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the reservation?",TAKE_DETAILS
+"To complete the booking, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the reservation.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the booking. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the reservation?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the reservation. May I have them?",TAKE_DETAILS
+"To proceed with your booking, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for the booking?",TAKE_DETAILS
+"We require your name and NIF to finalize the reservation. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to secure the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your booking, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the booking.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the booking. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the reservation?",TAKE_DETAILS
+"To finalize your booking, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the booking?",TAKE_DETAILS
+"To complete the reservation, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the reservation.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the booking. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the reservation?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the reservation. May I have them?",TAKE_DETAILS
+"To proceed with your booking, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for the booking?",TAKE_DETAILS
+"We require your name and NIF to finalize the reservation. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to secure the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your booking, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the reservation.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the reservation. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the booking?",TAKE_DETAILS
+"To finalize your reservation, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the reservation?",TAKE_DETAILS
+"To complete the booking, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the booking.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the booking. May I have them, please?",TAKE_DETAILS
+"To proceed with the reservation, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for our records?",TAKE_DETAILS
+"We require your name and NIF to secure the booking. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to finalize the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your booking, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the reservation.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the reservation. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the booking?",TAKE_DETAILS
+"To finalize your reservation, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the reservation?",TAKE_DETAILS
+"To complete the booking, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the booking.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the reservation. May I have them?",TAKE_DETAILS
+"To proceed with your booking, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for the booking?",TAKE_DETAILS
+"We require your name and NIF to finalize the reservation. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to secure the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Could you share your name and NIF to proceed with the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to confirm the reservation. Could you provide them?",TAKE_DETAILS
+"To complete your booking, could you provide your full name and NIF?",TAKE_DETAILS
+"Please share your full name and NIF to finalize the reservation.",TAKE_DETAILS
+"We require your full name and NIF to proceed with the reservation. Could you provide them?",TAKE_DETAILS
+"May I have your complete name and NIF to secure the booking?",TAKE_DETAILS
+"To finalize your reservation, please provide your full name and NIF.",TAKE_DETAILS
+"Could you give us your name and NIF to complete the reservation?",TAKE_DETAILS
+"To complete the booking, we'll need your full name and NIF. Could you provide them?",TAKE_DETAILS
+"Please provide your full name and NIF to proceed with the booking.",TAKE_DETAILS
+"To confirm your booking, could you share your full name and NIF?",TAKE_DETAILS
+"We require your complete name and NIF to finalize the reservation. Could you provide them?",TAKE_DETAILS
+"Could you provide your name and NIF to confirm the booking?",TAKE_DETAILS
+"We'll need your full name and NIF to complete the booking. May I have them, please?",TAKE_DETAILS
+"To proceed with the reservation, could you share your full name and NIF?",TAKE_DETAILS
+"Could you provide your complete name and NIF for our records?",TAKE_DETAILS
+"We require your name and NIF to secure the booking. Could you provide them, please?",TAKE_DETAILS
+"Please provide your full name and NIF to finalize the booking.",TAKE_DETAILS
+"To confirm your reservation, we'll need your full name and NIF.",TAKE_DETAILS
+"Is there anything else I can assist you with?",ASK_QUESTION
+"Do you have any other requests or questions?",ASK_QUESTION
+"Do you have any other questions or requests?",ASK_QUESTION
+"Would you like assistance with anything else?",ASK_QUESTION
+"Do you need help with anything else?",ASK_QUESTION
+"Are there any other concerns or inquiries you have?",ASK_QUESTION
+"Is there any further assistance you need?",ASK_QUESTION
+"Are there any other matters I can help you with?",ASK_QUESTION
+"Would you like to inquire about anything else?",ASK_QUESTION
+"Do you require assistance with any other arrangements?",ASK_QUESTION
+"Is there anything more I can do for you?",ASK_QUESTION
+"Do you have any additional questions or requests?",ASK_QUESTION
+"Is there any other way I can assist you?",ASK_QUESTION
+"Can I help you with anything else today?",ASK_QUESTION
+"Is there anything else you need help with?",ASK_QUESTION
+"Are there any other issues you need assistance with?",ASK_QUESTION
+"Do you need help with any other matters?",ASK_QUESTION
+"Is there any other support you require?",ASK_QUESTION
+"Would you like help with anything else?",ASK_QUESTION
+"Do you have any other inquiries or needs?",ASK_QUESTION
+"Is there anything more you need assistance with?",ASK_QUESTION
+"Are there any additional questions or requests you have?",ASK_QUESTION
+"Can I assist you with anything else?",ASK_QUESTION
+"Do you need help with any other questions?",ASK_QUESTION
+"Is there any other information you need?",ASK_QUESTION
+"Would you like to ask anything else?",ASK_QUESTION
+"Do you have any other concerns or needs?",ASK_QUESTION
+"Is there anything else you would like to know?",ASK_QUESTION
+"Can I help you with any other questions?",ASK_QUESTION
+"Do you require any other assistance?",ASK_QUESTION
+"Is there any further information you need?",ASK_QUESTION
+"Would you like to inquire about anything else?",ASK_QUESTION
+"Are there any other requests you have?",ASK_QUESTION
+"Is there anything else I can do for you today?",ASK_QUESTION
+"Do you need help with any additional matters?",ASK_QUESTION
+"Is there any other help you require?",ASK_QUESTION
+"Would you like any further assistance?",ASK_QUESTION
+"Do you have any other questions?",ASK_QUESTION
+"Is there anything else you need?",ASK_QUESTION
+"Can I assist you with any other matters?",ASK_QUESTION
+"Do you require any further assistance?",ASK_QUESTION
+"Is there any other way I can help you?",ASK_QUESTION
+"Would you like to ask any other questions?",ASK_QUESTION
+"Do you have any other inquiries?",ASK_QUESTION
+"Is there anything else you would like assistance with?",ASK_QUESTION
+"Can I help with any other requests?",ASK_QUESTION
+"Do you need assistance with anything else?",ASK_QUESTION
+"Is there any other support you need?",ASK_QUESTION
+"Would you like to know anything else?",ASK_QUESTION
+"Do you have any further questions?",ASK_QUESTION
+"Is there anything more you need help with?",ASK_QUESTION
+"Can I assist you with anything else today?",ASK_QUESTION
+"Do you require any other support?",ASK_QUESTION
+"Is there any further assistance you require?",ASK_QUESTION
+"Would you like to ask anything else today?",ASK_QUESTION
+"Do you have any additional inquiries?",ASK_QUESTION
+"Is there anything else you need assistance with?",ASK_QUESTION
+"Can I help with any other questions?",ASK_QUESTION
+"Do you need help with any other issues?",ASK_QUESTION
+"Is there any other way I can assist you today?",ASK_QUESTION
+"Would you like to inquire about anything else today?",ASK_QUESTION
+"Do you have any other needs?",ASK_QUESTION
+"Is there anything else you would like to ask?",ASK_QUESTION
+"Can I help with any other concerns?",ASK_QUESTION
+"Do you need any other information?",ASK_QUESTION
+"Is there any further help you need?",ASK_QUESTION
+"Would you like to know anything else today?",ASK_QUESTION
+"Do you have any further inquiries?",ASK_QUESTION
+"Is there anything more you would like assistance with?",ASK_QUESTION
+"Can I assist you with any other needs?",ASK_QUESTION
+"Do you require any other information?",ASK_QUESTION
+"Is there any other assistance you need today?",ASK_QUESTION
+"Would you like any additional help?",ASK_QUESTION
+"Do you have any other requests?",ASK_QUESTION
+"Is there anything else you need support with?",ASK_QUESTION
+"Can I help with any additional matters?",ASK_QUESTION
+"Do you need help with anything else today?",ASK_QUESTION
+"Is there any further support you need?",ASK_QUESTION
+"Would you like assistance with anything else today?",ASK_QUESTION
+"Do you have any other questions today?",ASK_QUESTION
+"Is there anything else you would like help with?",ASK_QUESTION
+"Can I assist you with any other issues?",ASK_QUESTION
+"Do you require any other help?",ASK_QUESTION
+"Is there any other information you need today?",ASK_QUESTION
+"Would you like to ask any other questions today?",ASK_QUESTION
+"Do you have any further needs?",ASK_QUESTION
+"Is there anything more you need assistance with?",ASK_QUESTION
+"Can I help with any other inquiries?",ASK_QUESTION
+"Do you need any other support?",ASK_QUESTION
+"Is there any further help you require?",ASK_QUESTION
+"Would you like to know anything else today?",ASK_QUESTION
+"Do you have any other inquiries today?",ASK_QUESTION
+"Is there anything else you would like assistance with today?",ASK_QUESTION
+"Can I help with any other needs?",ASK_QUESTION
+"Do you need assistance with any other issues?",ASK_QUESTION
+"Is there any other support you require today?",ASK_QUESTION
+"Would you like any further information?",ASK_QUESTION
+"Do you have any other questions or concerns?",ASK_QUESTION
+"Is there anything else you need today?",ASK_QUESTION
+"Can I assist you with any other requests?",ASK_QUESTION
+"Do you require any other assistance today?",ASK_QUESTION
+"Is there any other way I can help you today?",ASK_QUESTION
+"Would you like to ask anything else today?",ASK_QUESTION
+"Do you have any additional needs?",ASK_QUESTION
+"Is there anything else you need help with today?",ASK_QUESTION
+"Can I help with any other questions today?",ASK_QUESTION
+"Do you need help with any other matters today?",ASK_QUESTION
+"Is there any other support you need today?",ASK_QUESTION
+"Would you like any further assistance today?",ASK_QUESTION
+"Do you have any other requests today?",ASK_QUESTION
+"Is there anything else you would like to know today?",ASK_QUESTION
+"Can I assist you with any additional matters?",ASK_QUESTION
+"Do you require any other help today?",ASK_QUESTION
+"Is there any further assistance you need today?",ASK_QUESTION
+"Would you like to inquire about anything else today?",ASK_QUESTION
+"Do you have any other concerns today?",ASK_QUESTION
+"Is there anything else you need assistance with today?",ASK_QUESTION
+"Can I help with any other inquiries today?",ASK_QUESTION
+"Do you need any other help today?",ASK_QUESTION
+"Is there any further help you need today?",ASK_QUESTION
+"Would you like to ask any other questions today?",ASK_QUESTION
+"Do you have any other needs today?",ASK_QUESTION
+"Is there anything else you would like to ask today?",ASK_QUESTION
+"Can I assist you with any other concerns?",ASK_QUESTION
+"Do you need any other assistance today?",ASK_QUESTION
+"Is there any other information you need today?",ASK_QUESTION
+"Would you like to know anything else?",ASK_QUESTION
+"Do you have any other questions or concerns today?",ASK_QUESTION
+"Is there anything more you need today?",ASK_QUESTION
+"Can I help with any other questions or requests?",ASK_QUESTION
+"Do you need help with any other arrangements?",ASK_QUESTION
+"Is there any other way I can assist you with?",ASK_QUESTION
+"Would you like to ask about anything else?",ASK_QUESTION
+"Do you have any other inquiries or requests?",ASK_QUESTION
+"Is there anything else you need help with today?",ASK_QUESTION
+"Can I assist you with any other information?",ASK_QUESTION
+"Do you require any other details?",ASK_QUESTION
+"Is there any other support I can provide?",ASK_QUESTION
+"Would you like to know any further information?",ASK_QUESTION
+"Do you have any further requests?",ASK_QUESTION
+"Is there anything else you would like to know?",ASK_QUESTION
+"Can I help you with any other needs today?",ASK_QUESTION
+"Do you need help with any other questions or concerns?",ASK_QUESTION
+"Is there any other way I can support you?",ASK_QUESTION
+"Would you like assistance with any other questions?",ASK_QUESTION
+"Do you have any other inquiries or needs today?",ASK_QUESTION
+"Is there anything else you require assistance with?",ASK_QUESTION
+"Can I assist you with any other requests today?",ASK_QUESTION
+"Do you need help with any other details?",ASK_QUESTION
+"Is there any further support I can offer?",ASK_QUESTION
+"Would you like to ask about anything else today?",ASK_QUESTION
+"Do you have any other needs or requests?",ASK_QUESTION
+"Is there anything else you would like assistance with today?",ASK_QUESTION
+"Can I help you with any additional questions?",ASK_QUESTION
+"Do you need help with any other information?",ASK_QUESTION
+"Is there any other way I can help you with today?",ASK_QUESTION
+"Would you like assistance with any other concerns?",ASK_QUESTION
+"Do you have any further inquiries or needs?",ASK_QUESTION
+"Is there anything else you need assistance with today?",ASK_QUESTION
+"Can I assist you with any additional concerns?",ASK_QUESTION
+"Do you need help with any other issues or requests?",ASK_QUESTION
+"Is there any other support you require today?",ASK_QUESTION
+"Would you like to know any other information?",ASK_QUESTION
+"Do you have any other questions or inquiries?",ASK_QUESTION
+"Is there anything else you need help with?",ASK_QUESTION
+"Can I help you with any other matters today?",ASK_QUESTION
+"Do you need any other assistance or information?",ASK_QUESTION
+"Is there any other way I can assist you today?",ASK_QUESTION
+"Would you like assistance with any additional questions?",ASK_QUESTION
+"Do you have any other needs or concerns?",ASK_QUESTION
+"Is there anything else you require assistance with today?",ASK_QUESTION
+"Can I assist you with any other questions?",ASK_QUESTION
+"Do you need help with any other information today?",ASK_QUESTION
+"Is there any further support you need today?",ASK_QUESTION
+"Would you like to ask any other questions or requests?",ASK_QUESTION
+"Do you have any further inquiries or requests?",ASK_QUESTION
+"Is there anything else you would like to ask?",ASK_QUESTION
+"Can I help you with any additional concerns?",ASK_QUESTION
+"Do you need any other assistance or support?",ASK_QUESTION
+"Is there any other way I can help?",ASK_QUESTION
+"Would you like assistance with any other needs?",ASK_QUESTION
+"Do you have any other questions or concerns?",ASK_QUESTION
+"Is there anything else you need help with today?",ASK_QUESTION
+"Can I assist you with any other matters today?",ASK_QUESTION
+"Do you need help with any other information or details?",ASK_QUESTION
+"Is there any further assistance you need today?",ASK_QUESTION
+"Would you like to ask anything else?",ASK_QUESTION
+"Do you have any other needs or inquiries?",ASK_QUESTION
+"Is there anything else you require today?",ASK_QUESTION
+"Can I help you with any other details?",ASK_QUESTION
+"Do you need any other assistance or requests?",ASK_QUESTION
+"Is there any other way I can assist you?",ASK_QUESTION
+"Would you like assistance with any other issues?",ASK_QUESTION
+"Do you have any other questions or needs?",ASK_QUESTION
+"Is there anything else you need assistance with today?",ASK_QUESTION
+"Can I assist you with any other support?",ASK_QUESTION
+"Do you need help with any other inquiries?",ASK_QUESTION
+"Is there any other support you need?",ASK_QUESTION
+"Would you like to ask any other questions or concerns?",ASK_QUESTION
+"Do you have any further needs or requests?",ASK_QUESTION
+"Is there anything else you would like to know today?",ASK_QUESTION
+"Can I help you with any additional requests?",ASK_QUESTION
+"Do you need help with any other details today?",ASK_QUESTION
+"Is there any other way I can support you today?",ASK_QUESTION
+"Would you like assistance with any further questions?",ASK_QUESTION
+"Do you have any other questions or information needs?",ASK_QUESTION
+"Is there anything else you require assistance with today?",ASK_QUESTION
+"Can I assist you with any other questions or requests?",ASK_QUESTION
+"Do you need help with any other matters or information?",ASK_QUESTION
+"Is there any further support you need today?",ASK_QUESTION
+"Would you like to ask any other inquiries?",ASK_QUESTION
+"Do you have any further questions or needs?",ASK_QUESTION
+"Is there anything else you would like help with today?",ASK_QUESTION
+"Can I help you with any additional matters?",ASK_QUESTION
+"Do you need any other assistance or inquiries?",ASK_QUESTION
+"Is there any other way I can help you today?",ASK_QUESTION
+"Would you like assistance with any additional concerns?",ASK_QUESTION
+"Do you have any other needs or questions today?",ASK_QUESTION
+"Is there anything else you require today?",ASK_QUESTION
+"Can I assist you with any additional information?",ASK_QUESTION
+"Do you need help with any other support?",ASK_QUESTION
+"Is there any further assistance you need?",ASK_QUESTION
+"Would you like to ask any other questions or requests today?",ASK_QUESTION
+"Do you have any further inquiries or concerns?",ASK_QUESTION
+"Is there anything else you would like assistance with today?",ASK_QUESTION
+"Can I help you with any additional needs?",ASK_QUESTION
+"Do you need any other information or details?",ASK_QUESTION
+"Is there any other way I can assist you with today?",ASK_QUESTION
+"Would you like assistance with any additional inquiries?",ASK_QUESTION
+"Do you have any other questions or concerns today?",ASK_QUESTION
+"Is there anything else you need help with today?",ASK_QUESTION
+"Can I assist you with any other matters?",ASK_QUESTION
+"Do you need help with any other questions or requests?",ASK_QUESTION
+"Is there any other support you need today?",ASK_QUESTION
+"Would you like to ask anything else?",ASK_QUESTION
+"Do you have any further needs or inquiries today?",ASK_QUESTION
+"Is there anything else you would like to ask today?",ASK_QUESTION
+"Can I help you with any additional information?",ASK_QUESTION
+"Do you need any other assistance or support?",ASK_QUESTION
+"Is there any further assistance you require?",ASK_QUESTION
+"Would you like assistance with any other needs?",ASK_QUESTION
+"Do you have any other questions or information requests?",ASK_QUESTION
+"Is there anything else you need help with?",ASK_QUESTION
+"Can I assist you with any additional concerns today?",ASK_QUESTION
+"Do you need help with any other matters?",ASK_QUESTION
+"Is there any other way I can assist you today?",ASK_QUESTION
+"Would you like to ask any other questions?",ASK_QUESTION
+"Do you have any other needs or concerns today?",ASK_QUESTION
+"Is there anything else you require assistance with today?",ASK_QUESTION
+"Can I help you with any additional needs today?",ASK_QUESTION
+"Your reservation has been successfully confirmed.",CONFIRM_RESERVATION
+"I'm pleased to inform you that your booking has been confirmed.",CONFIRM_RESERVATION
+"Great news! Your reservation is now confirmed.",CONFIRM_RESERVATION
+"I'm happy to confirm that your booking has been secured.",CONFIRM_RESERVATION
+"Your reservation is all set and confirmed.",CONFIRM_RESERVATION
+"Consider your reservation confirmed and ready to go.",CONFIRM_RESERVATION
+"You're all set! Your booking is confirmed and guaranteed.",CONFIRM_RESERVATION
+"Your reservation is now officially confirmed.",CONFIRM_RESERVATION
+"Confirmation of your booking has been processed.",CONFIRM_RESERVATION
+"Rest assured, your reservation is confirmed and guaranteed.",CONFIRM_RESERVATION
+"We are pleased to confirm your reservation.",CONFIRM_RESERVATION
+"Your booking has been successfully confirmed.",CONFIRM_RESERVATION
+"Good news! Your reservation is confirmed.",CONFIRM_RESERVATION
+"I'm delighted to confirm that your booking is now secured.",CONFIRM_RESERVATION
+"Your reservation is confirmed and in our system.",CONFIRM_RESERVATION
+"Your booking is officially confirmed.",CONFIRM_RESERVATION
+"Your reservation has been confirmed successfully.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and set.",CONFIRM_RESERVATION
+"Your booking has been confirmed and secured.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed.",CONFIRM_RESERVATION
+"Confirmation of your reservation is complete.",CONFIRM_RESERVATION
+"I'm happy to let you know that your booking is confirmed.",CONFIRM_RESERVATION
+"Your reservation is now confirmed.",CONFIRM_RESERVATION
+"Your booking has been confirmed.",CONFIRM_RESERVATION
+"Your reservation has been processed and confirmed.",CONFIRM_RESERVATION
+"Your booking is now officially confirmed.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and secured.",CONFIRM_RESERVATION
+"We have confirmed your reservation.",CONFIRM_RESERVATION
+"Your booking has been confirmed successfully.",CONFIRM_RESERVATION
+"Your reservation is confirmed.",CONFIRM_RESERVATION
+"Your booking is confirmed.",CONFIRM_RESERVATION
+"Your reservation confirmation is complete.",CONFIRM_RESERVATION
+"Your booking has been processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and secured.",CONFIRM_RESERVATION
+"Your booking has been officially confirmed.",CONFIRM_RESERVATION
+"Your reservation is secured and confirmed.",CONFIRM_RESERVATION
+"Your booking confirmation is now complete.",CONFIRM_RESERVATION
+"We have successfully confirmed your reservation.",CONFIRM_RESERVATION
+"Your reservation has been confirmed officially.",CONFIRM_RESERVATION
+"Your booking is now confirmed.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and in our system.",CONFIRM_RESERVATION
+"Your booking has been processed successfully.",CONFIRM_RESERVATION
+"Your reservation is confirmed and ready.",CONFIRM_RESERVATION
+"Your booking is now confirmed and secured.",CONFIRM_RESERVATION
+"We have confirmed your booking.",CONFIRM_RESERVATION
+"Your reservation is successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your booking is confirmed and in our system.",CONFIRM_RESERVATION
+"Your reservation confirmation has been processed.",CONFIRM_RESERVATION
+"Your booking is now officially confirmed and secured.",CONFIRM_RESERVATION
+"Your reservation is processed and confirmed.",CONFIRM_RESERVATION
+"We have successfully processed and confirmed your booking.",CONFIRM_RESERVATION
+"Your booking is confirmed and ready.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and processed.",CONFIRM_RESERVATION
+"Your booking is officially confirmed and secured.",CONFIRM_RESERVATION
+"We are happy to confirm your reservation.",CONFIRM_RESERVATION
+"Your booking confirmation is now processed.",CONFIRM_RESERVATION
+"Your reservation is now secured and confirmed.",CONFIRM_RESERVATION
+"Your booking has been confirmed and processed.",CONFIRM_RESERVATION
+"Your reservation is confirmed successfully.",CONFIRM_RESERVATION
+"Your booking confirmation is complete.",CONFIRM_RESERVATION
+"Your reservation is now officially confirmed and secured.",CONFIRM_RESERVATION
+"Your booking is processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation confirmation is now official.",CONFIRM_RESERVATION
+"Your booking is now successfully confirmed.",CONFIRM_RESERVATION
+"We have processed and confirmed your reservation.",CONFIRM_RESERVATION
+"Your booking is now confirmed and in our system.",CONFIRM_RESERVATION
+"Your reservation is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking has been successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and officially in our system.",CONFIRM_RESERVATION
+"Your booking is now confirmed and processed.",CONFIRM_RESERVATION
+"Your reservation has been successfully processed.",CONFIRM_RESERVATION
+"Your booking is now officially secured and confirmed.",CONFIRM_RESERVATION
+"Your reservation is now processed and confirmed.",CONFIRM_RESERVATION
+"Your booking confirmation has been successfully processed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and set to go.",CONFIRM_RESERVATION
+"Your booking has been confirmed and is ready.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and ready.",CONFIRM_RESERVATION
+"Your booking is now confirmed successfully.",CONFIRM_RESERVATION
+"We have successfully confirmed your booking.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your booking confirmation is now secured.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and is ready.",CONFIRM_RESERVATION
+"Your booking is processed and confirmed successfully.",CONFIRM_RESERVATION
+"Your reservation is now officially secured.",CONFIRM_RESERVATION
+"Your booking is now secured and confirmed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and good to go.",CONFIRM_RESERVATION
+"Your booking has been successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your reservation is now in our system and confirmed.",CONFIRM_RESERVATION
+"Your booking confirmation is processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation is officially confirmed and secured.",CONFIRM_RESERVATION
+"Your booking has been confirmed and is now ready.",CONFIRM_RESERVATION
+"Your reservation is confirmed and processed successfully.",CONFIRM_RESERVATION
+"Your booking is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your reservation has been processed and is confirmed.",CONFIRM_RESERVATION
+"Your booking is confirmed and set.",CONFIRM_RESERVATION
+"Your reservation is successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your booking confirmation is now processed and secured.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and is secured.",CONFIRM_RESERVATION
+"Your booking is now confirmed and ready to go.",CONFIRM_RESERVATION
+"Your reservation is processed and secured.",CONFIRM_RESERVATION
+"Your booking is now officially processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation confirmation is successfully processed.",CONFIRM_RESERVATION
+"Your booking is confirmed and in our system.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed and set.",CONFIRM_RESERVATION
+"Your booking confirmation is processed and secured.",CONFIRM_RESERVATION
+"Your reservation has been successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your booking is now in our system and confirmed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed successfully.",CONFIRM_RESERVATION
+"Your reservation is now successfully confirmed.",CONFIRM_RESERVATION
+"Your booking is now confirmed and officially secured.",CONFIRM_RESERVATION
+"Your reservation is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation is successfully processed and secured.",CONFIRM_RESERVATION
+"Your booking is now confirmed and ready.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and processed successfully.",CONFIRM_RESERVATION
+"Your booking is officially confirmed and set.",CONFIRM_RESERVATION
+"Your reservation is confirmed and secured successfully.",CONFIRM_RESERVATION
+"Your booking confirmation is now official and processed.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and processed.",CONFIRM_RESERVATION
+"Your booking has been confirmed successfully.",CONFIRM_RESERVATION
+"Your reservation is now in our system and ready to go.",CONFIRM_RESERVATION
+"Your booking is confirmed and successfully processed.",CONFIRM_RESERVATION
+"Your reservation is now successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your booking confirmation is processed and ready.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and is now in our system.",CONFIRM_RESERVATION
+"Your booking is successfully confirmed and ready.",CONFIRM_RESERVATION
+"Your reservation is now processed and successfully confirmed.",CONFIRM_RESERVATION
+"Your booking confirmation is processed and ready to go.",CONFIRM_RESERVATION
+"Your reservation is confirmed and successfully processed.",CONFIRM_RESERVATION
+"Your booking is now confirmed and processed successfully.",CONFIRM_RESERVATION
+"Your reservation has been successfully confirmed and is ready.",CONFIRM_RESERVATION
+"Your booking is now in our system and successfully confirmed.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and good to go.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed and is ready.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed and in our system.",CONFIRM_RESERVATION
+"Your booking is now successfully confirmed and set.",CONFIRM_RESERVATION
+"Your reservation is now processed and ready.",CONFIRM_RESERVATION
+"Your booking confirmation is complete and processed.",CONFIRM_RESERVATION
+"Your reservation has been successfully confirmed and set.",CONFIRM_RESERVATION
+"Your booking is now confirmed and officially processed.",CONFIRM_RESERVATION
+"Your reservation is now successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed and is now official.",CONFIRM_RESERVATION
+"Your reservation is now in our system and confirmed successfully.",CONFIRM_RESERVATION
+"Your booking is successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your reservation is processed and successfully confirmed.",CONFIRM_RESERVATION
+"Your booking confirmation is now official and ready.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and is ready to go.",CONFIRM_RESERVATION
+"Your booking is now confirmed and secured successfully.",CONFIRM_RESERVATION
+"Your reservation is now successfully processed.",CONFIRM_RESERVATION
+"Your booking confirmation has been successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and set to go.",CONFIRM_RESERVATION
+"Your booking is now successfully confirmed and in our system.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and officially processed.",CONFIRM_RESERVATION
+"Your booking confirmation is processed and complete.",CONFIRM_RESERVATION
+"Your reservation has been successfully confirmed and officially processed.",CONFIRM_RESERVATION
+"Your booking is now confirmed and good to go.",CONFIRM_RESERVATION
+"Your reservation is now in our system and confirmed officially.",CONFIRM_RESERVATION
+"Your booking confirmation is processed and successfully confirmed.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking is successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and successfully processed.",CONFIRM_RESERVATION
+"Your booking confirmation is now processed successfully.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and is now ready to go.",CONFIRM_RESERVATION
+"Your booking is now confirmed and ready to go.",CONFIRM_RESERVATION
+"Your reservation is now processed and set.",CONFIRM_RESERVATION
+"Your booking confirmation has been successfully processed and is ready.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking is now successfully confirmed and ready.",CONFIRM_RESERVATION
+"Your reservation is confirmed and good to go.",CONFIRM_RESERVATION
+"Your booking confirmation is now official and secured.",CONFIRM_RESERVATION
+"Your reservation has been successfully processed and is now confirmed.",CONFIRM_RESERVATION
+"Your booking is confirmed and successfully processed.",CONFIRM_RESERVATION
+"Your reservation is now successfully processed and ready.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed and secured successfully.",CONFIRM_RESERVATION
+"Your reservation is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking is now confirmed and processed.",CONFIRM_RESERVATION
+"Your reservation has been successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your booking is successfully confirmed and set.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and officially secured.",CONFIRM_RESERVATION
+"Your booking confirmation is now processed and ready to go.",CONFIRM_RESERVATION
+"Your reservation is confirmed and successfully processed.",CONFIRM_RESERVATION
+"Your booking is now confirmed and officially processed.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and is in our system.",CONFIRM_RESERVATION
+"Your booking is successfully processed and secured.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and good to go.",CONFIRM_RESERVATION
+"Your booking confirmation is now processed and complete.",CONFIRM_RESERVATION
+"Your reservation is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking is now successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your reservation is successfully processed and ready to go.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed successfully and is ready.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and set.",CONFIRM_RESERVATION
+"Your booking is confirmed and successfully processed.",CONFIRM_RESERVATION
+"Your reservation has been processed and confirmed successfully.",CONFIRM_RESERVATION
+"Your booking is successfully confirmed and ready to go.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and secured.",CONFIRM_RESERVATION
+"Your booking confirmation is processed and set.",CONFIRM_RESERVATION
+"Your reservation is now in our system and ready to go.",CONFIRM_RESERVATION
+"Your booking is successfully processed and ready to go.",CONFIRM_RESERVATION
+"Your reservation is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking confirmation has been successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation is now successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your booking is now confirmed and in our system.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and ready to go.",CONFIRM_RESERVATION
+"Your booking confirmation is processed and ready to go.",CONFIRM_RESERVATION
+"Your reservation has been successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your booking is now successfully confirmed.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and officially processed.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed and confirmed.",CONFIRM_RESERVATION
+"Your reservation is successfully processed and set.",CONFIRM_RESERVATION
+"Your booking is now confirmed and successfully processed.",CONFIRM_RESERVATION
+"Your reservation is confirmed and ready.",CONFIRM_RESERVATION
+"Your booking confirmation has been successfully processed and set.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and set.",CONFIRM_RESERVATION
+"Your booking is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your reservation has been successfully processed and confirmed.",CONFIRM_RESERVATION
+"Your booking is successfully confirmed and in our system.",CONFIRM_RESERVATION
+"Your reservation is now officially confirmed and processed.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed successfully and is now official.",CONFIRM_RESERVATION
+"Your reservation is confirmed and good to go.",CONFIRM_RESERVATION
+"Your booking is now successfully processed and set.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your booking confirmation is now processed successfully and complete.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and officially in our system.",CONFIRM_RESERVATION
+"Your booking is confirmed and set.",CONFIRM_RESERVATION
+"Your reservation has been successfully confirmed and is now official.",CONFIRM_RESERVATION
+"Your booking is now confirmed and ready.",CONFIRM_RESERVATION
+"Your reservation is now processed and secured.",CONFIRM_RESERVATION
+"Your booking confirmation has been successfully processed and secured.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed and in our system.",CONFIRM_RESERVATION
+"Your booking is confirmed and ready to go.",CONFIRM_RESERVATION
+"Your reservation has been successfully processed and ready to go.",CONFIRM_RESERVATION
+"Your booking is now officially confirmed and secured.",CONFIRM_RESERVATION
+"Your reservation is confirmed and processed.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed successfully and set.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed and set.",CONFIRM_RESERVATION
+"Your booking is now in our system and ready to go.",CONFIRM_RESERVATION
+"Your reservation has been confirmed and is successfully processed.",CONFIRM_RESERVATION
+"Your booking is now officially confirmed and set.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and successfully processed.",CONFIRM_RESERVATION
+"Your booking confirmation has been processed and is ready to go.",CONFIRM_RESERVATION
+"Your reservation is successfully confirmed and processed.",CONFIRM_RESERVATION
+"Your booking is now confirmed and secured.",CONFIRM_RESERVATION
+"Your reservation has been successfully processed and is now ready.",CONFIRM_RESERVATION
+"Your booking is confirmed and processed successfully.",CONFIRM_RESERVATION
+"Your reservation is now confirmed and officially processed.",CONFIRM_RESERVATION
+"Your booking confirmation is now processed and ready.",CONFIRM_RESERVATION
+"Your reservation is confirmed and set.",CONFIRM_RESERVATION
+"Your booking has been successfully processed and confirmed.",CONFIRM_RESERVATION

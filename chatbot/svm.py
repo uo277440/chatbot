@@ -12,11 +12,14 @@ import numpy as np
 import string
 from io import StringIO
 from sklearn.metrics import accuracy_score, classification_report
+from sklearn.model_selection import learning_curve,StratifiedKFold,GridSearchCV
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.preprocessing import LabelEncoder
 from sklearn.feature_extraction.text import TfidfVectorizer
 import joblib
 import os
+import matplotlib.pyplot as plt
+from sklearn.metrics import ConfusionMatrixDisplay
 
 
 class TextTokenizer(BaseEstimator, TransformerMixin):
@@ -55,10 +58,11 @@ class SVMChatbot:
         self.label_encoder = LabelEncoder()
         self.model_path = model_path
     def save_model(self):
-        joblib.dump((self.pipeline, self.label_encoder), self.model_path)  
+        if(self.model_path):
+            joblib.dump((self.pipeline, self.label_encoder), self.model_path)  
         
     def load_model(self):
-        if os.path.exists(self.model_path):
+        if self.model_path and os.path.exists(self.model_path):
             print('lo cargo')
             self.pipeline, self.label_encoder = joblib.load(self.model_path)
             return True
@@ -71,13 +75,16 @@ class SVMChatbot:
         self.X = data['User Input']
         self.y = data['Label']
         # Dividir los datos en conjuntos de entrenamiento y prueba
-        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42)
+        self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42,shuffle=True)
+        print("Training set size:", len(self.X_train))
+        print("Test set size:", len(self.X_test))
+        print("Class distribution in training set:\n", self.y_train.value_counts())
         
 
     def train_model(self):
-        
-        base_classifier = SVC(kernel='linear')
-        calibrated_classifier = CalibratedClassifierCV(base_classifier)
+        param_grid = {'classifier__estimator__C': [0.1, 1, 10]}
+        base_classifier = SVC(kernel='linear', C=1.0)
+        calibrated_classifier = CalibratedClassifierCV(base_classifier,cv=StratifiedKFold(n_splits=3))
         self.pipeline = Pipeline([
             ('tokenizer', TextTokenizer()),  # Tokenización y lematización personalizadas
             ('vectorizer', TfidfVectorizer()),  # Convertir el texto en vectores de características
@@ -85,7 +92,16 @@ class SVMChatbot:
             ('classifier', calibrated_classifier)
         ])
         self.y_train_encoded = self.label_encoder.fit_transform(self.y_train)
-        self.pipeline.fit(self.X_train, self.y_train_encoded)
+         # Realizar una búsqueda en cuadrícula para encontrar el mejor valor de C
+        grid_search = GridSearchCV(self.pipeline, param_grid, cv=StratifiedKFold(n_splits=3), n_jobs=-1, scoring='accuracy')
+        grid_search.fit(self.X_train, self.y_train_encoded)
+
+        # Guardar el mejor modelo encontrado
+        self.pipeline = grid_search.best_estimator_
+        # Debugging prints
+        print("Best C value:", grid_search.best_params_)
+        print("Unique labels in training set:", np.unique(self.y_train_encoded))
+        print("Training set size after encoding:", len(self.y_train_encoded))
         print('A evaluar el modelo')
         self.evaluate_model()
         self.save_model()
@@ -123,6 +139,38 @@ class SVMChatbot:
         else:
             #return None,probabilities,predicted_label,probability
             return None
+    def plot_confusion_matrix(self):
+        y_test_encoded = self.label_encoder.transform(self.y_test)
+        ConfusionMatrixDisplay.from_estimator(self.pipeline, self.X_test, y_test_encoded)
+        plt.title("Confusion Matrix")
+        plt.show()
+
+    def plot_learning_curve(self):
+        """Plot the learning curve for the model."""
+        # Ajustar los tamaños de entrenamiento para evitar tamaños demasiado pequeños
+        train_sizes = np.linspace(0.2, 1.0, 5) * len(self.X)
+        train_sizes = train_sizes[train_sizes <= len(self.X_train)]
+        train_sizes = train_sizes.astype(int)
+
+        train_sizes, train_scores, test_scores = learning_curve(
+            self.pipeline, self.X, self.label_encoder.transform(self.y), cv=3, n_jobs=-1,
+            train_sizes=train_sizes, random_state=42
+        )
+        
+        print("Train sizes:", train_sizes)
+        print("Train scores:\n", train_scores)
+        print("Test scores:\n", test_scores)
+
+        train_scores_mean = np.mean(train_scores, axis=1)
+        test_scores_mean = np.mean(test_scores, axis=1)
+        plt.figure()
+        plt.plot(train_sizes, train_scores_mean, 'o-', color='r', label='Training score')
+        plt.plot(train_sizes, test_scores_mean, 'o-', color='g', label='Cross-validation score')
+        plt.title("Learning Curve")
+        plt.xlabel("Training examples")
+        plt.ylabel("Score")
+        plt.legend(loc="best")
+        plt.show()
     
 '''
 # Uso de la clase SVMChatbot
