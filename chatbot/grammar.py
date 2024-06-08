@@ -6,7 +6,7 @@ from openai import OpenAI
 from django.conf import settings
 import json
 class GrammarCorrector:
-    SYSTEM_MESSAGE = "You are a helpful assistant that provides synonyms in English."
+    SYSTEM_MESSAGE = "You are a helpful assistant that provides synonyms in English. Only provide the synonym phrase without any introductions or explanations."
     API_KEY = settings.OPENAI_API_KEY
     API_URL = 'https://api.openai.com/v1/chat/completions'
     def __init__(self):
@@ -51,7 +51,7 @@ class GrammarCorrector:
         return translated_text
     def get_synonym_phrase(self,input_text):
         # Construir el cuerpo de la solicitud JSON
-        prompt = f"Please provide a synonym for the following phrase: '{input_text}'"
+        prompt = f"Provide a synonym for the following phrase: '{input_text}'"
         json_body = {
             "model": "gpt-3.5-turbo",
             "messages": [

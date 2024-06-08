@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useCallback,useMemo  } from 'react';
+import React, { useState, useEffect,useCallback,useMemo,useRef } from 'react';
 import axios from 'axios';
 import ChatHeader from './ChatHeader';
 import ChatMessages from './ChatMessages';
@@ -23,7 +23,7 @@ function Chatbot() {
         baseURL: 'http://localhost:8000',
         withCredentials: true
       }), []);
-
+    const chatRef = useRef(null);
     const handleClearMessages = () => {
         setMessages([]);
         localStorage.removeItem('chatMessages');
@@ -50,6 +50,7 @@ function Chatbot() {
                 localStorage.setItem('chatMessages', JSON.stringify(updatedMessagesWithBot));
 
                 if (response.data.is_finished) {
+                    generateTextFile();
                     setTimeout(() => {
                         var message 
                         var icon
@@ -74,6 +75,26 @@ function Chatbot() {
             .catch(error => {
                 console.log(error);
             });
+    };
+    const generateTextFile = () => {
+        return new Promise((resolve) => {
+            const element = document.createElement('a');
+            let fileContent = '';
+
+            messages.forEach(message => {
+                const from = message.from === 'user' ? 'User: ' : 'Bot: ';
+                fileContent += `${from}${message.text}\n`;
+            });
+
+            const file = new Blob([fileContent], { type: 'text/plain' });
+            element.href = URL.createObjectURL(file);
+            element.download = 'chat_conversation.txt';
+            document.body.appendChild(element); // Required for this to work in FireFox
+            element.click();
+            document.body.removeChild(element);
+
+            resolve();
+        });
     };
 
     const restartFlow = () => {
@@ -126,7 +147,7 @@ function Chatbot() {
         <div className="chatbot">
             <NavigationBar/>
             <ChatHeader handleClearMessages={handleClearMessages} restartFlow={restartFlow} showHelp={showHelp} setShowHelp={setShowHelp} />
-            <div className="messages-section">
+            <div className="messages-section" ref={chatRef}>
                 <ChatMessages messages={messages} setMessages={setMessages}/>
             </div>
             <div className="input-section">

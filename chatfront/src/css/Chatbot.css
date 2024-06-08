@@ -16,6 +16,8 @@
     height: 100vh; 
     background-size: cover;
     background-position: center;
+    max-height: none; 
+    overflow: visible; 
 }
 
 .messages-section {
