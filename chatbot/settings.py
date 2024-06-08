@@ -118,6 +118,7 @@ if 'test' in sys.argv or 'test_coverage' in sys.argv:
             'NAME': ':memory:',
         }
     }
+print(f'Final DATABASES settings: {DATABASES}')
 AUTH_USER_MODEL = 'myapi.AppUser'
 
 REST_FRAMEWORK = {
