@@ -1,10 +1,24 @@
 from django.urls import path, include
 from myapi import views
 from rest_framework import routers
+from rest_framework_swagger.views import get_swagger_view
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework import permissions
 
 
 router = routers.DefaultRouter()
 #router.register(r'users',views.UserView,'users')
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="Tu API",
+        default_version='v1',
+        description="Descripción de tu API",
+    ),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 urlpatterns = [
     path("chatbot_response/",views.chatbot_response, name='chatbot_response'),
@@ -31,4 +45,6 @@ urlpatterns = [
     path('scenarios/<str:scenario_name>/flows', views.get_flows_by_scenario, name='get_flows_by_scenario'),
     path('forum/messages', views.forum_messages, name='forum_messages'),
     path('check_chatbot', views.check_chatbot, name='check_chatbot'),
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]
