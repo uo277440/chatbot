@@ -136,7 +136,9 @@ def upload_combined(request):
 
     # Extract JSON keys and CSV headers
     json_labels = {step['label'] for flow in json_data['flows'] for step in flow['steps']}
-    csv_labels_count = {label: 0 for label in json_labels}
+    json_options = {option for flow in json_data['flows'] for step in flow['steps'] for option in step['options']}
+    all_labels = json_labels.union(json_options)
+    csv_labels_count = {label: 0 for label in all_labels}
     print('jaja')
     for row in csv_data:
         label = row.get('Label')

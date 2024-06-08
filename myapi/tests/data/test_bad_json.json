@@ -1,0 +1,57 @@
+{
+  "flows": [
+    {
+      "name": "RESERVA",
+      "description": "Eres el recepcionista de un hotel y un usuario va a venir a solicitar una reserva. Tu trabajo es guiar al usuario a través del proceso de reserva, verificando la disponibilidad, recopilando sus datos y confirmando la reserva.",
+      "steps": [
+        {
+          "label": "GREETING",
+          "message": "Hello! I would like to make a reservation for tonight.",
+          "suggestion": "En este momento, debes verificar si hay disponibilidad para la reserva solicitada. Dado que es un escenario ficticio, puedes decidir. Comunica la disponibilidad o no disponibilidad de la reserva.",
+          "options": ["CHECK_AVAILABILITY", "CHECK_NO_AVAILABILITY"]
+        },
+        {
+          "label": "CHECK_NO_AVAILABILITY",
+          "message": "Ok, I'm sorry to hear that.",
+          "suggestion": "Siempre pregunte al cliente si le gustaría preguntar algo más o si tiene alguna pregunta.",
+          "options": ["BAD_LABEL"]
+        },
+        {
+          "label": "CHECK_AVAILABILITY",
+          "message": "Ok, that's fine to me.",
+          "suggestion": "Pide al cliente su nombre y su NIF (Número de Identificación Nacional) para completar la reserva.",
+          "options": ["TAKE_DETAILS"]
+        },
+        {
+          "label": "TAKE_DETAILS",
+          "message": "My name is Pepito, my DNI is x.",
+          "suggestion": "Comunica al cliente que su reserva ha sido confirmada.",
+          "options": ["CONFIRM_RESERVATION"]
+        },
+        {
+          "label": "CONFIRM_RESERVATION",
+          "message": "Thank you so much.",
+          "suggestion": "Siempre pregunte al cliente si le gustaría preguntar algo más o si tiene alguna pregunta.",
+          "options": ["ASK_QUESTION"]
+        },
+        {
+          "label": "ASK_QUESTION",
+          "message": "No, thanks.",
+          "suggestion": "Despídete educadamente.",
+          "options": ["FAREWELL"]
+        },
+        {
+          "label": "FAREWELL",
+          "message": "Have a nice day!",
+          "suggestion": "¡Bien hecho! Reinicia el flujo si quieres volver a practicar este escenario.",
+          "options": []
+        }
+      ]
+    }
+  ]
+}
+
+
+  
+
+  
