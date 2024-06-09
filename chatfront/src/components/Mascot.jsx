@@ -1,6 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect,useMemo } from 'react';
 import axios from 'axios';
 import '../css/Mascot.css';
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
 
 function Mascot({ showHelp, setShowHelp }) {
     const [message, setMessage] = useState(() => {
@@ -8,10 +12,10 @@ function Mascot({ showHelp, setShowHelp }) {
         return savedMessage ? savedMessage : '';
     });
 
-    const axiosInstance = axios.create({
-        baseURL: 'http://127.0.0.1:8000',
+    const axiosInstance = useMemo(() => axios.create({
+        baseURL: 'http://localhost:8000',
         withCredentials: true
-    });
+      }), []);
 
     const handleMascotClick = () => {
         axiosInstance.get('/api/mascot_message')

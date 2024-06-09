@@ -40,7 +40,7 @@ function AdminMarks() {
         return '';
     };
 
-    const downloadConversation = (conversation) => {
+    const downloadConversation = (conversation, date) => {
         const element = document.createElement('a');
         let fileContent = '';
 
@@ -63,6 +63,7 @@ function AdminMarks() {
         } else {
             console.error('Conversation is not an array:', messages);
         }
+        fileContent += `\nFecha: ${date}\n`;
 
         const file = new Blob([fileContent], { type: 'text/plain' });
         element.href = URL.createObjectURL(file);
@@ -99,7 +100,7 @@ function AdminMarks() {
                                 {marks.map(mark => (
                                     <li key={mark.id} className={getMarkClass(mark.mark)}>
                                         Escenario: {mark.flow.scenery.name} - Flujo: {mark.flow.name} - Nota: {mark.mark} - Fecha: {mark.date}
-                                        <button onClick={() => downloadConversation(conversations[mark.id])}>
+                                        <button onClick={() => downloadConversation(conversations[mark.id], mark.date)}>
                                             Descargar Conversación
                                         </button>
                                     </li>

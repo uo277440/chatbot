@@ -32,23 +32,44 @@ from django.db import transaction
 
 
 sentence_checker = SentenceChecker()
-marker = Marker()
-chatbot = None
+#marker = Marker()
+#chatbot = None
 scenary_service = ScenaryService()
 grammarCorrector = GrammarCorrector()  
-flowManager = None
+#flowManager = None
 
 def is_admin(user):
     return user.is_superuser
+def get_session_objects(session):
+    chatbot_data = session.get('chatbot')
+    flow_manager_data = session.get('flowManager')
+    marker_data = session.get('marker')
+
+    chatbot = SVMChatbot.deserialize(chatbot_data) if chatbot_data else None
+    flow_manager = FlowManager.deserialize(flow_manager_data) if flow_manager_data else None
+    marker = Marker.deserialize(marker_data) if marker_data else Marker()
+
+    return chatbot, flow_manager, marker
+def set_session_objects(session, chatbot=None, flow_manager=None, marker=None):
+    if chatbot is not None:
+        session['chatbot'] = chatbot.serialize()
+    if flow_manager is not None:
+        session['flowManager'] = flow_manager.serialize()
+    if marker is not None:
+        session['marker'] = marker.serialize()
+    session.modified = True
+
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def check_chatbot(request):
+    chatbot, flowManager, marker = get_session_objects(request.session)
     if chatbot and flowManager:
         print(flowManager.description)
         print(flowManager.id)
         return Response({'chatbot': True,'description':flowManager.description},status=status.HTTP_200_OK)
     else:
         return Response({'chatbot': False},status=status.HTTP_200_OK)
+
         
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -69,8 +90,7 @@ def update_flow_manager(request):
         flow = Flow.objects.get(id=flow_id)
     except Flow.DoesNotExist:
         return JsonResponse({'error': 'Flujo no encontrado'}, status=status.HTTP_404_NOT_FOUND)
-    global flowManager
-    global chatbot
+    chatbot, flowManager, marker = get_session_objects(request.session)
     if(not flowManager):
         first_charge = True
     # Definir la ruta del archivo del modelo específico para el flujo
@@ -82,8 +102,11 @@ def update_flow_manager(request):
     if not new_chatbot.load_model():
         new_chatbot.load_data()  
         new_chatbot.train_model()
-    flowManager = new_flow_manager
-    chatbot = new_chatbot
+    #flowManager = new_flow_manager
+    #chatbot = new_chatbot
+    print(new_flow_manager)
+    set_session_objects(request.session, new_chatbot, new_flow_manager, marker)
+    print(request.session.get('flowManager'))
     return JsonResponse({'message': 'flowManager actualizado correctamente','first_charge':first_charge},status=status.HTTP_200_OK)
 
 @api_view(['POST'])
@@ -199,18 +222,22 @@ def chatbot_response(request):
     if request.method == 'GET':
         user_message = request.GET.get('message', '')
         suggestions = grammarCorrector.correct_text(user_message)
+        chatbot, flowManager, marker = get_session_objects(request.session)
         if suggestions:
             marker.decrease()
             response_text = '\n'.join(suggestions)
+            set_session_objects(request.session, chatbot, flowManager, marker)
             return Response({'response': response_text,'suggestion':True},status=200)
         if not sentence_checker.is_sentence_coherent(user_message):
+            set_session_objects(request.session, chatbot, flowManager, marker)
             return Response({'response':'La frase debe ser coherente y bien ligada','suggestion':True},status=200)
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(not bot_response):
+            set_session_objects(request.session, chatbot, flowManager, marker)
             return Response({'response': 'Creo que no te entiendo del todo'},status=200)
         if(flowManager.advance(bot_response)):
             response=flowManager.response 
-            if random.random() < 0.25:
+            if random.random() < 0.01:
                 print('TOCO')
                 try:
                     response=grammarCorrector.get_synonym_phrase(response)
@@ -231,13 +258,17 @@ def chatbot_response(request):
             response="FLUJO NO VA BIEN" + bot_response
         if(response is None):
             return Response({'response': 'La respuesta es incoherente'},status=200)
+        set_session_objects(request.session, chatbot, flowManager, marker)
         return Response({'response': response,'is_finished':flowManager.is_finished(),'mark': marker.mark,'suggestion':False},status=200)
 @api_view(['GET'])
 @permission_classes([AllowAny])
 def mascot_message(request):
     if request.method == 'GET':
+        chatbot, flowManager, marker = get_session_objects(request.session)
         marker.decrease()
-        return Response({'response': flowManager.suggest()},status=200)
+        suggestion=flowManager.suggest()
+        set_session_objects(request.session, chatbot, flowManager, marker)
+        return Response({'response': suggestion},status=200)
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def search_student(request):
@@ -276,8 +307,10 @@ def transform(request):
 @permission_classes([IsAuthenticated])
 def restart_flow(request):
     if request.method == 'GET':
+        chatbot, flowManager, marker = get_session_objects(request.session)
         flowManager.reset_flow()
         marker.restart()
+        set_session_objects(request.session, chatbot, flowManager, marker)
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
@@ -288,7 +321,9 @@ def translate(request):
         targetLang = request.GET.get('target', '')
         translated_text=grammarCorrector.translate(text,targetLang)
         if(targetLang == 'es'):
+            chatbot, flowManager, marker = get_session_objects(request.session)
             marker.decrease()
+            set_session_objects(request.session, chatbot, flowManager, marker)
         return Response({'translated_text': translated_text},status=200)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])

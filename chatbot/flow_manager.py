@@ -48,6 +48,24 @@ class FlowManager:
 
     def is_finished(self):
         return self.finished
+    def serialize(self):
+        return {
+            'id': self.id,
+            'current_label': self.current_label,
+            'next_options': self.next_options,
+            'finished': self.finished,
+            'response': self.response,
+        }
+
+    @classmethod
+    def deserialize(cls, data):
+        instance = cls(data['id'])
+        instance.current_label = data['current_label']
+        instance.next_options = data['next_options']
+        instance.finished = data['finished']
+        instance.response = data['response']
+        instance.load_flow(data['id'])
+        return instance
 
 class Marker:
     def __init__(self):
@@ -59,5 +77,16 @@ class Marker:
         
     def restart(self):
         self.mark = 10
+    
+    def serialize(self):
+        return {
+            'mark': self.mark
+        }
+
+    @classmethod
+    def deserialize(cls, data):
+        instance = cls()
+        instance.mark = data['mark']
+        return instance
 
 # Uso del FlowManager

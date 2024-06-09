@@ -171,6 +171,17 @@ class SVMChatbot:
         plt.ylabel("Score")
         plt.legend(loc="best")
         plt.show()
+    def serialize(self):
+        return {
+            'model_path': self.model_path
+
+        }
+
+    @classmethod
+    def deserialize(cls, data):
+        instance = cls(None, model_path=data['model_path'])
+        instance.load_model()  # Cargar el modelo durante la deserialización
+        return instance
     
 '''
 # Uso de la clase SVMChatbot
