@@ -61,3 +61,14 @@
     color: #155724;
     border-color: #c3e6cb;
 }
+.download-button {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+.download-icon {
+    width: 20px;
+    height: 20px;
+}

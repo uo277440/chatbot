@@ -2,6 +2,7 @@ import React, { useState, useMemo } from 'react';
 import axios from 'axios';
 import '../css/AdminMarks.css';
 import NavigationBar from '../NavigationBar';
+import downloadIcon from '../assets/descargar.png';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
@@ -100,8 +101,8 @@ function AdminMarks() {
                                 {marks.map(mark => (
                                     <li key={mark.id} className={getMarkClass(mark.mark)}>
                                         Escenario: {mark.flow.scenery.name} - Flujo: {mark.flow.name} - Nota: {mark.mark} - Fecha: {mark.date}
-                                        <button onClick={() => downloadConversation(conversations[mark.id], mark.date)}>
-                                            Descargar Conversación
+                                        <button className="download-button" onClick={() => downloadConversation(conversations[mark.id], mark.date)}>
+                                            <img src={downloadIcon} alt="Download" className="download-icon" />
                                         </button>
                                     </li>
                                 ))}
