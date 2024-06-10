@@ -4,6 +4,8 @@ from chatbot.svm import SVMChatbot  # Ajusta esto a tu estructura de proyecto
 import pandas as pd
 from sklearn.metrics import accuracy_score, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 import os
 ##
 # \brief Fixture que carga los datos CSV desde un archivo.
@@ -27,6 +29,30 @@ def csv_data():
 @pytest.fixture
 def svm_chatbot(csv_data):
     return SVMChatbot(csv_user_content=csv_data, model_path=None)
+##
+# \brief Prueba que verifica si la clase se inicializa correctamente.
+#
+# 
+#
+# \param csv_data datos de entrenamiento
+#
+def test_constructor(csv_data):
+    bot = SVMChatbot(csv_user_content=csv_data, model_path="dummy_path")
+    assert bot.csv_user_content == csv_data
+    assert bot.model_path == "dummy_path"
+    assert bot.confidence_threshold == 0.10
+
+##
+# \brief Prueba que verifica si el método test_load_data es llamado durante el entrenamiento del modelo.
+#
+# 
+#
+# \param svm_chatbot Fixture que proporciona una instancia de SVMChatbot.
+#
+def test_load_data(svm_chatbot):
+    svm_chatbot.load_data()
+    assert len(svm_chatbot.X_train) > 0
+    assert len(svm_chatbot.X_test) > 0
 ##
 # \brief Prueba que verifica si el método evaluate_model es llamado durante el entrenamiento del modelo.
 #
