@@ -30,10 +30,6 @@ function Mascot({ showHelp, setShowHelp }) {
             });
     };
    
-    const handleCloseMascot = () => {
-        setShowHelp(false);
-        localStorage.setItem('showHelp', JSON.stringify(false));
-    };
 
     useEffect(() => {
         if (!localStorage.getItem('showHelp')) {
@@ -46,10 +42,10 @@ function Mascot({ showHelp, setShowHelp }) {
 
     return (
         <div className="mascot-container">
-            {localStorage.getItem('showHelp')==JSON.stringify(false) && (
+            {localStorage.getItem('showHelp')===JSON.stringify(false) && (
                 <button onClick={handleMascotClick}>Ayuda</button>
             )}
-            {localStorage.getItem('showHelp')==JSON.stringify(true) && (
+            {localStorage.getItem('showHelp')===JSON.stringify(true) && (
                 <div>
                     <p className="mascot-message">{message}</p>
                 </div>

@@ -1,9 +1,13 @@
 import pytest
 from unittest.mock import patch, Mock
 import pyttsx3
-from chatbot.reproductor import text_to_audio, probar_voces  # Ajusta el import según tu estructura de proyecto
+from chatbot.reproductor import text_to_audio, probar_voces  
 
-# Test para text_to_audio
+##
+# \brief Prueba que verifica la función text_to_audio para el idioma inglés.
+#
+# Utiliza un mock para la inicialización de pyttsx3 y verifica que se llamen las funciones correctas con los parámetros adecuados.
+#
 def test_text_to_audio_english():
     with patch('pyttsx3.init') as mock_init:
         mock_engine = Mock()
@@ -18,7 +22,11 @@ def test_text_to_audio_english():
         mock_engine.runAndWait.assert_called_once()
         
         assert duration == pytest.approx((len(text) / 150) * 60)
-
+##
+# \brief Prueba que verifica la función text_to_audio para el idioma español.
+#
+# Utiliza un mock para la inicialización de pyttsx3 y verifica que se llamen las funciones correctas con los parámetros adecuados.
+#
 def test_text_to_audio_spanish():
     with patch('pyttsx3.init') as mock_init:
         mock_engine = Mock()
@@ -34,7 +42,11 @@ def test_text_to_audio_spanish():
         
         assert duration == pytest.approx((len(text) / 150) * 60)
 
-# Test para probar_voces
+##
+# \brief Prueba que verifica la función probar_voces.
+#
+# Utiliza un mock para la inicialización de pyttsx3 y verifica que se llamen las funciones correctas para cada voz disponible.
+#
 def test_probar_voces():
     with patch('pyttsx3.init') as mock_init:
         mock_engine = Mock()

@@ -21,18 +21,46 @@ import os
 import matplotlib.pyplot as plt
 from sklearn.metrics import ConfusionMatrixDisplay
 
-
+##
+# \class TextTokenizer
+# \brief Transformer personalizado para tokenizar y lematizar texto.
+#
+# Esta clase convierte el texto de entrada en tokens lematizados, eliminando signos de puntuación y stopwords.
+#
 class TextTokenizer(BaseEstimator, TransformerMixin):
+    ##
+    # \brief Constructor de la clase.
+    #
+    # Inicializa el lematizador de WordNet y las stopwords en inglés.
+    #
     def __init__(self):
         self.lemmatizer = WordNetLemmatizer()
         self.stop_words = set(stopwords.words('english'))
-
+    ##
+    # \brief Método fit, necesario para cumplir con la API de scikit-learn.
+    #
+    # \param X Datos de entrada.
+    # \param y Etiquetas, por defecto None.
+    # \return La instancia de sí mismo.
+    #
     def fit(self, X, y=None):
         return self
-
+    
+    ##
+    # \brief Método transform, aplica la tokenización y lematización al texto de entrada.
+    #
+    # \param X Lista de textos a procesar.
+    # \return Lista de textos procesados.
+    #
     def transform(self, X):
         return [self.tokenize_and_lemmatize(text) for text in X]  
-
+    
+    ##
+    # \brief Método que tokeniza y lematiza un texto de entrada.
+    #
+    # \param input_text Texto de entrada.
+    # \return Texto procesado, tokenizado y lematizado.
+    #
     def tokenize_and_lemmatize(self, input_text):
         lemmatizer = WordNetLemmatizer()
         # Convertir el texto a minúsculas
@@ -49,7 +77,22 @@ class TextTokenizer(BaseEstimator, TransformerMixin):
         # Lematización
         lemmatized_tokens = [lemmatizer.lemmatize(word) for word in filtered_tokens]
         return ' '.join(lemmatized_tokens)
+##
+# \class SVMChatbot
+# \brief Chatbot basado en SVM que procesa entradas de usuario y genera respuestas.
+#
+# Esta clase carga datos, entrena un modelo SVM, evalúa el modelo, realiza predicciones y guarda/carga el modelo entrenado.
+#
 class SVMChatbot:
+    ##
+    # \brief Constructor de la clase.
+    #
+    # Inicializa las variables necesarias para el chatbot.
+    #
+    # \param csv_user_content Contenido CSV con datos de usuario.
+    # \param model_path Ruta para guardar/cargar el modelo.
+    # \param confidence_threshold Umbral de confianza para las predicciones.
+    #
     def __init__(self, csv_user_content,model_path,confidence_threshold=0.10):
         self.csv_user_content = csv_user_content
         self.text_processor = TextTokenizer()
@@ -57,10 +100,17 @@ class SVMChatbot:
         self.confidence_threshold = confidence_threshold
         self.label_encoder = LabelEncoder()
         self.model_path = model_path
+    ##
+    # \brief Guarda el modelo entrenado en la ruta especificada.
+    #
     def save_model(self):
         if(self.model_path):
             joblib.dump((self.pipeline, self.label_encoder), self.model_path)  
-        
+    ##
+    # \brief Carga el modelo entrenado desde la ruta especificada.
+    #
+    # \return True si el modelo se cargó correctamente, False en caso contrario.
+    #
     def load_model(self):
         if self.model_path and os.path.exists(self.model_path):
             print('lo cargo')
@@ -68,6 +118,9 @@ class SVMChatbot:
             return True
         print('no lo cargo')
         return False
+    ##
+    # \brief Carga los datos desde un archivo CSV y los divide en conjuntos de entrenamiento y prueba.
+    #
     def load_data(self):
         # Cargar el archivo CSV
         data = pd.read_csv(StringIO(self.csv_user_content))
@@ -80,7 +133,9 @@ class SVMChatbot:
         print("Test set size:", len(self.X_test))
         print("Class distribution in training set:\n", self.y_train.value_counts())
         
-
+    ##
+    # \brief Entrena el modelo SVM utilizando GridSearchCV para encontrar el mejor hiperparámetro C.
+    #
     def train_model(self):
         param_grid = {'classifier__estimator__C': [0.1, 1, 10]}
         base_classifier = SVC(kernel='linear', C=1.0)
@@ -105,7 +160,9 @@ class SVMChatbot:
         print('A evaluar el modelo')
         self.evaluate_model()
         self.save_model()
-
+    ##
+    # \brief Evalúa el modelo utilizando el conjunto de prueba y muestra el reporte de clasificación.
+    #
     def evaluate_model(self):
         y_test_encoded = self.label_encoder.transform(self.y_test)
         y_pred = self.pipeline.predict(self.X_test)
@@ -113,12 +170,24 @@ class SVMChatbot:
         report = classification_report(y_test_encoded, y_pred, target_names=self.label_encoder.classes_)
         print(f'Accuracy: {accuracy}')
         print(f'Classification Report:\n{report}')
-    
+    ##
+    # \brief Predice la respuesta del chatbot para un texto de entrada.
+    #
+    # \param input_text Texto de entrada del usuario.
+    # \return Etiqueta predicha por el modelo.
+    #
     def predict_response(self, input_text):
         processed_input_text = (self.text_processor.tokenize_and_lemmatize(input_text))
         predicted_response = self.pipeline.predict([processed_input_text])
         predicted_label = predicted_response[0]
         return predicted_label
+    
+    ##
+    # \brief Predice la respuesta del chatbot con un umbral de confianza.
+    #
+    # \param input_text Texto de entrada del usuario.
+    # \return Etiqueta predicha por el modelo si la confianza es suficiente, None en caso contrario.
+    #
     def predict_response_with_confidence(self, input_text):
         
     # Preprocesar el texto
@@ -139,12 +208,19 @@ class SVMChatbot:
         else:
             #return None,probabilities,predicted_label,probability
             return None
+    
+    ##
+    # \brief Dibuja la matriz de confusión para el conjunto de prueba.
+    #
     def plot_confusion_matrix(self):
         y_test_encoded = self.label_encoder.transform(self.y_test)
         ConfusionMatrixDisplay.from_estimator(self.pipeline, self.X_test, y_test_encoded)
         plt.title("Confusion Matrix")
         plt.show()
 
+    ##
+    # \brief Dibuja la curva de aprendizaje del modelo.
+    #
     def plot_learning_curve(self):
         """Plot the learning curve for the model."""
         # Ajustar los tamaños de entrenamiento para evitar tamaños demasiado pequeños
@@ -183,14 +259,5 @@ class SVMChatbot:
         instance.load_model()  # Cargar el modelo durante la deserialización
         return instance
     
-'''
-# Uso de la clase SVMChatbot
-chatbot = SVMChatbot('hotel_usuario.csv')  # Crear una instancia del chatbot
-chatbot.load_data()  # Cargar los datos de entrenamiento
-chatbot.train_model()  # Entrenar el modelo SVM
 
-input_text = "Yes, we have availability for tonight."
-predicted_response = chatbot.predict_response_with_confidence(input_text)
-print("Chatbot Response:", predicted_response)
-'''
 

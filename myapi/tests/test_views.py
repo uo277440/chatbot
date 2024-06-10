@@ -7,28 +7,53 @@ from django.urls import reverse
 from django.conf import settings
 from myapi.models import AppUser,Flow,Scenery,ForumMessage,Mark
 import json
-
+##
+# \brief Fixture que inicializa una instancia de APIClient.
+#
+# \return Instancia de APIClient.
+#
 @pytest.fixture
 def api_client():
     return APIClient()
-
+##
+# \brief Fixture que crea un usuario con los atributos proporcionados.
+#
+# \return Función que crea un usuario.
+#
 @pytest.fixture
 def create_user():
     def make_user(**kwargs):
         return get_user_model().objects.create_user(**kwargs)
     return make_user
-
+##
+# \brief Fixture que crea y autentica un usuario superusuario.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \return Usuario autenticado.
+#
 @pytest.fixture
 def authenticated_user(api_client):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
     api_client.force_authenticate(user=user)
     return user
+##
+# \brief Fixture que crea y autentica un usuario normal.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \return Usuario autenticado.
+#
 @pytest.fixture
 def default_user(api_client):
     user = AppUser.objects.create_user(username='testuser', email='testuser@example.com', password='testpassword')
     api_client.force_authenticate(user=user)
     return user
-
+##
+# \brief Prueba que verifica el registro de usuario.
+#
+# Verifica que el registro de un nuevo usuario retorna el código de estado HTTP 201 y que el registro duplicado retorna HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+#
 @pytest.mark.django_db
 def test_user_registration(api_client):
     response = api_client.post(reverse('register'), {
@@ -43,7 +68,14 @@ def test_user_registration(api_client):
     })
     assert response.status_code == status.HTTP_201_CREATED
     assert bad_response.status_code == status.HTTP_400_BAD_REQUEST
-
+##
+# \brief Prueba que verifica el inicio de sesión de usuario.
+#
+# Verifica que el inicio de sesión con credenciales correctas retorna HTTP 200 y con credenciales incorrectas o vacías retorna HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param create_user Fixture que proporciona una función para crear un usuario.
+#
 @pytest.mark.django_db
 def test_user_login(api_client, create_user):
     user = create_user(username='testuser', password='testpassword', email='testuser@example.com')
@@ -62,21 +94,41 @@ def test_user_login(api_client, create_user):
     assert response.status_code == status.HTTP_200_OK
     assert empty_response.status_code == status.HTTP_400_BAD_REQUEST
     assert bad_response.status_code == status.HTTP_400_BAD_REQUEST
-
+##
+# \brief Prueba que verifica el cierre de sesión de usuario.
+#
+# Verifica que el cierre de sesión de un usuario autenticado retorna el código de estado HTTP 200.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param create_user Fixture que proporciona una función para crear un usuario.
+#
 @pytest.mark.django_db
 def test_user_logout(api_client, create_user):
     user = create_user(username='testuser', password='testpassword', email='testuser@example.com')
     api_client.force_authenticate(user=user)
     response = api_client.post(reverse('logout'))
     assert response.status_code == status.HTTP_200_OK
-
+##
+# \brief Prueba que verifica el acceso al chatbot por un usuario autenticado.
+#
+# Verifica que el acceso al chatbot retorna el código de estado HTTP 200.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param create_user Fixture que proporciona una función para crear un usuario.
+#
 @pytest.mark.django_db
 def test_check_chatbot(api_client, create_user):
     user = create_user(username='testuser', password='testpassword', email='testuser@example.com')
     api_client.force_authenticate(user=user)
     response = api_client.get(reverse('check_chatbot'))
     assert response.status_code == status.HTTP_200_OK
-
+##
+# \brief Prueba que verifica la subida combinada de archivos JSON y CSV.
+#
+# Verifica que la subida de archivos correctos retorna el código de estado HTTP 200 y el mensaje de éxito.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+#
 @pytest.mark.django_db
 def test_upload_combined_success(api_client):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -101,7 +153,13 @@ def test_upload_combined_success(api_client):
     assert response_data['message'] == 'Files uploaded and verified successfully'
     assert 'flow' in response_data
     
-    
+##
+# \brief Prueba que verifica la subida combinada de archivos sin archivos adjuntos.
+#
+# Verifica que la subida de archivos sin los archivos necesarios retorna el código de estado HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+#    
 @pytest.mark.django_db
 def test_upload_combined_missing_files(api_client):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -116,7 +174,13 @@ def test_upload_combined_missing_files(api_client):
     )
     
     assert response.status_code == status.HTTP_400_BAD_REQUEST
-
+##
+# \brief Prueba que verifica la subida combinada de archivos con JSON inválido.
+#
+# Verifica que la subida de un archivo JSON inválido retorna el código de estado HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+#
 @pytest.mark.django_db
 def test_upload_combined_invalid_json(api_client):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -139,7 +203,13 @@ def test_upload_combined_invalid_json(api_client):
     
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     
-
+##
+# \brief Prueba que verifica la subida combinada de archivos con CSV inválido.
+#
+# Verifica que la subida de un archivo CSV inválido retorna el código de estado HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+#
 @pytest.mark.django_db
 def test_upload_combined_invalid_csv(api_client):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -159,7 +229,13 @@ def test_upload_combined_invalid_csv(api_client):
         )
     
     assert response.status_code == status.HTTP_400_BAD_REQUEST
-
+##
+# \brief Prueba que verifica la subida combinada de archivos con CSV incorrecto.
+#
+# Verifica que la subida de un archivo CSV incorrecto retorna el código de estado HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+#
 @pytest.mark.django_db
 def test_upload_combined_bad_csv(api_client):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -181,7 +257,13 @@ def test_upload_combined_bad_csv(api_client):
     
     assert response.status_code == status.HTTP_400_BAD_REQUEST
 
-
+##
+# \brief Prueba que verifica la subida combinada de archivos con JSON incorrecto.
+#
+# Verifica que la subida de un archivo JSON incorrecto retorna el código de estado HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+#
 @pytest.mark.django_db
 def test_upload_combined_bad_json(api_client):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -202,7 +284,14 @@ def test_upload_combined_bad_json(api_client):
         )
     
     assert response.status_code == status.HTTP_400_BAD_REQUEST
-    
+##
+# \brief Prueba que verifica la eliminación exitosa de un flujo.
+#
+# Verifica que la eliminación de un flujo retorna el código de estado HTTP 200 y el mensaje de éxito.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param create_user Fixture que proporciona una función para crear un usuario.
+#
 @pytest.mark.django_db
 def test_delete_flow_success(api_client, create_user):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -215,7 +304,14 @@ def test_delete_flow_success(api_client, create_user):
 
     assert response.status_code == status.HTTP_200_OK
     assert response.data['message'] == 'Flow deleted successfully'
-
+##
+# \brief Prueba que verifica la eliminación de un flujo sin proporcionar el ID del flujo.
+#
+# Verifica que la eliminación sin ID del flujo retorna el código de estado HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param create_user Fixture que proporciona una función para crear un usuario.
+#
 @pytest.mark.django_db
 def test_delete_flow_missing_flow_id(api_client, create_user):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -225,7 +321,14 @@ def test_delete_flow_missing_flow_id(api_client, create_user):
 
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert response.data['error'] == 'Flow ID is required'
-
+##
+# \brief Prueba que verifica la eliminación de un flujo no encontrado.
+#
+# Verifica que la eliminación de un flujo inexistente retorna el código de estado HTTP 404.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param create_user Fixture que proporciona una función para crear un usuario.
+#
 @pytest.mark.django_db
 def test_delete_flow_not_found(api_client, create_user):
     user = AppUser.objects.create_superuser(username='testuser', email='testuser@example.com', password='testpassword')
@@ -235,7 +338,14 @@ def test_delete_flow_not_found(api_client, create_user):
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert response.data['error'] == 'Flow not found'
-
+##
+# \brief Prueba que verifica la obtención de flujos por escenario.
+#
+# Verifica que la obtención de flujos por un escenario existente retorna el código de estado HTTP 200 y los flujos correspondientes.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param create_user Fixture que proporciona una función para crear un usuario.
+#
 @pytest.mark.django_db
 def test_get_flows_by_scenario_success(api_client, create_user):
     user = create_user(username='testuser', password='testpassword', email='testuser@example.com')
@@ -251,7 +361,14 @@ def test_get_flows_by_scenario_success(api_client, create_user):
     assert len(response.data['flows']) == 2
     assert response.data['flows'][0]['name'] == 'test_flow_1'
     assert response.data['flows'][1]['name'] == 'test_flow_2'
-
+##
+# \brief Prueba que verifica la obtención de flujos por un escenario no encontrado.
+#
+# Verifica que la obtención de flujos por un escenario inexistente retorna el código de estado HTTP 404.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param create_user Fixture que proporciona una función para crear un usuario.
+#
 @pytest.mark.django_db
 def test_get_flows_by_scenario_not_found(api_client, create_user):
     user = create_user(username='testuser', password='testpassword', email='testuser@example.com')
@@ -261,6 +378,14 @@ def test_get_flows_by_scenario_not_found(api_client, create_user):
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert response.data['error'] == 'Scenario not found'
+##
+# \brief Prueba que verifica la eliminación exitosa de un mensaje del foro.
+#
+# Verifica que la eliminación de un mensaje existente retorna el código de estado HTTP 204 y que el mensaje es eliminado de la base de datos.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_delete_message_success(api_client, authenticated_user):
     message = ForumMessage.objects.create(user=authenticated_user, message="Test message")
@@ -269,13 +394,27 @@ def test_delete_message_success(api_client, authenticated_user):
 
     assert response.status_code == status.HTTP_204_NO_CONTENT
     assert ForumMessage.objects.filter(id=message.id).count() == 0
-
+##
+# \brief Prueba que verifica la eliminación de un mensaje del foro no encontrado.
+#
+# Verifica que la eliminación de un mensaje inexistente retorna el código de estado HTTP 404.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_delete_message_not_found(api_client, authenticated_user):
     response = api_client.delete(reverse('delete_message', args=[999]))
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
-
+##
+# \brief Prueba que verifica la edición exitosa de un mensaje del foro.
+#
+# Verifica que la edición de un mensaje existente retorna el código de estado HTTP 200 y que el mensaje es actualizado en la base de datos.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_edit_message_success(api_client, authenticated_user):
     message = ForumMessage.objects.create(user=authenticated_user, message="Test message")
@@ -286,7 +425,14 @@ def test_edit_message_success(api_client, authenticated_user):
     assert response.status_code == status.HTTP_200_OK
     assert response.data['message'] == updated_message_data['message']
     assert ForumMessage.objects.get(id=message.id).message == updated_message_data['message']
-
+##
+# \brief Prueba que verifica la edición de un mensaje del foro no encontrado.
+#
+# Verifica que la edición de un mensaje inexistente retorna el código de estado HTTP 404.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_edit_message_not_found(api_client, authenticated_user):
     updated_message_data = {'message': 'Updated message'}
@@ -295,7 +441,13 @@ def test_edit_message_not_found(api_client, authenticated_user):
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
 
-
+# \brief Prueba que verifica la obtención de mensajes del foro.
+#
+# Verifica que la obtención de mensajes del foro retorna el código de estado HTTP 200 y la lista de mensajes, incluyendo el mensaje fijado.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_forum_messages(api_client, authenticated_user):
     pinned_message = ForumMessage.objects.create(user=authenticated_user, message="Pinned message", pinned=True)
@@ -307,6 +459,14 @@ def test_forum_messages(api_client, authenticated_user):
     assert response.status_code == status.HTTP_200_OK
     assert len(response.data['messages']) == 3
     assert response.data['pinnedMessage']['message'] == pinned_message.message
+##
+# \brief Prueba que verifica la obtención del perfil de usuario.
+#
+# Verifica que la obtención del perfil de usuario retorna el código de estado HTTP 200 y los datos del usuario, incluyendo las marcas promedio.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_user_profile(api_client, authenticated_user):
     scenery = Scenery.objects.create(name='Test Scenery')
@@ -334,7 +494,14 @@ def test_user_profile(api_client, authenticated_user):
 
     assert flow2_avg_mark is not None
     assert flow2_avg_mark['average_mark'] == 6.0
-
+##
+# \brief Prueba que verifica la obtención del perfil de usuario sin marcas.
+#
+# Verifica que la obtención del perfil de usuario sin marcas retorna el código de estado HTTP 200 y una lista vacía de marcas promedio.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_user_profile_no_marks(api_client, authenticated_user):
     response = api_client.get(reverse('user_profile'))
@@ -343,6 +510,14 @@ def test_user_profile_no_marks(api_client, authenticated_user):
     assert 'user' in response.data
     assert 'average_marks' in response.data
     assert len(response.data['average_marks']) == 0
+##
+# \brief Prueba que verifica la búsqueda de un estudiante existente.
+#
+# Verifica que la búsqueda de un estudiante existente retorna el código de estado HTTP 200 y los datos del usuario y sus marcas.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_search_student_success(api_client, authenticated_user):
     # Crear otro usuario para buscar
@@ -363,7 +538,14 @@ def test_search_student_success(api_client, authenticated_user):
     assert 'marks' in response.data
     assert response.data['user']['username'] == 'searcheduser'
     assert len(response.data['marks']) == 2
-
+##
+# \brief Prueba que verifica la búsqueda de un estudiante no encontrado.
+#
+# Verifica que la búsqueda de un estudiante no encontrado retorna el código de estado HTTP 404.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_search_student_not_found(api_client, authenticated_user):
     response = api_client.get(reverse('search_student'), {'search_param': 'nonexistentuser'})
@@ -371,7 +553,14 @@ def test_search_student_not_found(api_client, authenticated_user):
     assert response.status_code == status.HTTP_404_NOT_FOUND
     assert 'error' in response.data
     assert response.data['error'] == 'User not found'
-
+##
+# \brief Prueba que verifica la búsqueda de un estudiante sin el parámetro de búsqueda.
+#
+# Verifica que la búsqueda de un estudiante sin el parámetro de búsqueda retorna el código de estado HTTP 400.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
 @pytest.mark.django_db
 def test_search_student_missing_param(api_client, authenticated_user):
     response = api_client.get(reverse('search_student'))
