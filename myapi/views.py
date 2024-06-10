@@ -503,7 +503,7 @@ def user_login(request):
         else:
             return Response({'message': 'No autorizado'}, status=status.HTTP_401_UNAUTHORIZED)
     except ValidationError as e:
-        return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
+        return Response({'message': 'Usuario no encontrado'}, status=status.HTTP_400_BAD_REQUEST)
     except Exception:
         return Response({'message': 'Los datos introducidos son incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['POST'])
