@@ -28,6 +28,7 @@ import random
 import json
 import os
 from django.db import transaction
+from django.shortcuts import render
 
 
 
@@ -482,6 +483,8 @@ class UserView(APIView):
         serializer = UserSerializer(request.user)
         return Response({'user': serializer.data}, status=status.HTTP_200_OK)
         '''
+def index(request):
+    return render(request, 'index.html')
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @authentication_classes([SessionAuthentication])

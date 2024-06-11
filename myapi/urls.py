@@ -1,4 +1,4 @@
-from django.urls import path, include
+from django.urls import path, include, re_path
 from myapi import views
 from rest_framework import routers
 from rest_framework_swagger.views import get_swagger_view
@@ -21,6 +21,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    re_path(r'^.*$', views.index, name='index'),
     path("chatbot_response/",views.chatbot_response, name='chatbot_response'),
     path("mascot_message/",views.mascot_message, name='mascot_message'),
     path('register', views.user_register, name='register'),
