@@ -125,7 +125,14 @@ WSGI_APPLICATION = 'chatbot.wsgi.application'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
-    'default': dj_database_url.config(default=config('DATABASE_URL'))
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'd7ot54pjv2p6b4',
+        'USER': 'uvccl1gsflvr5',
+        'PASSWORD': 'p3854c11aadfe2d17eaf6fb48bc0df8cc829c9287300bf27055a6a5ae5ba49133',
+        'HOST': 'cav8p52l9arddb.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com',
+        'PORT': '5432',
+    }
 }
 '''
 
