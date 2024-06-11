@@ -7,10 +7,7 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
-const client = useMemo(() => axios.create({
-    baseURL: process.env.REACT_APP_API_URL || 'https://chatbot-tfg-863d13080855.herokuapp.com', // URL de tu aplicación Heroku
-    withCredentials: true
-}), []);
+
 
 const Forum = () => {
     const {setNewForumMessage } = useContext(AuthContext);
@@ -21,6 +18,10 @@ const Forum = () => {
     const [isSuperUser, setIsSuperUser] = useState(false);
     const websocket = useRef(null);
     const messagesEndRef = useRef(null);
+    const client = useMemo(() => axios.create({
+        baseURL: process.env.REACT_APP_API_URL || 'https://chatbot-tfg-863d13080855.herokuapp.com', // URL de tu aplicación Heroku
+        withCredentials: true
+    }), []);
 
     useEffect(() => {
         const fetchMessages = async () => {
