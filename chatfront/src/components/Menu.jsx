@@ -10,7 +10,7 @@ function Menu() {
     const [flows, setFlows] = useState([]);
     const navigate = useNavigate();
     const axiosInstance = useMemo(() => axios.create({
-        baseURL: 'http://chatbot-tfg-863d13080855.herokuapp.com',
+        baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com',
         withCredentials: true
     }), []);
 

@@ -7,7 +7,7 @@ function Profile() {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
     const axiosInstance = useMemo(() => axios.create({
-        baseURL: 'http://chatbot-tfg-863d13080855.herokuapp.com',
+        baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com',
         withCredentials: true
     }), []);
 

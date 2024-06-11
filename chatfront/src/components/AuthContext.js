@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
   const axiosInstance = useMemo(() => axios.create({
-    baseURL: 'http://chatbot-tfg-863d13080855.herokuapp.com',
+    baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com',
     withCredentials: true
 }), []);
   const [newForumMessage, setNewForumMessage] = useState(false);

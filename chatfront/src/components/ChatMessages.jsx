@@ -7,7 +7,7 @@ import traducir from '../assets/translate.png';
 function ChatMessages({ messages, setMessages }) {
     const messagesRef = useRef(null);
     const axiosInstance = useMemo(() => axios.create({
-        baseURL: 'http://chatbot-tfg-863d13080855.herokuapp.com',
+        baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com',
         withCredentials: true
     }), []);
 
