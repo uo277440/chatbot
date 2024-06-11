@@ -18,9 +18,9 @@ axios.defaults.withCredentials = true;
 
 function Login() {
   const client = useMemo(() => axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: process.env.REACT_APP_API_URL || 'https://chatbot-tfg-863d13080855.herokuapp.com', // URL de tu aplicación Heroku
     withCredentials: true
-  }), []);
+}), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
