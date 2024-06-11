@@ -17,9 +17,9 @@ function AdminView() {
   const [flows, setFlows] = useState([]);
   const [selectedFlow, setSelectedFlow] = useState('');
   const axiosInstance = useMemo(() => axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: process.env.REACT_APP_API_URL || 'https://chatbot-tfg-863d13080855.herokuapp.com', // URL de tu aplicación Heroku
     withCredentials: true
-  }), []);
+}), []);
 
 
 

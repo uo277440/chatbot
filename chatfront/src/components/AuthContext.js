@@ -8,7 +8,10 @@ export const AuthProvider = ({ children }) => {
     const savedUser = localStorage.getItem('currentUser');
     return savedUser ? JSON.parse(savedUser) : null;
   });
-
+  const axiosInstance = useMemo(() => axios.create({
+    baseURL: process.env.REACT_APP_API_URL || 'https://chatbot-tfg-863d13080855.herokuapp.com', // URL de tu aplicación Heroku
+    withCredentials: true
+}), []);
   const [newForumMessage, setNewForumMessage] = useState(false);
 
   const websocket = useRef(null);
@@ -30,7 +33,7 @@ export const AuthProvider = ({ children }) => {
     console.log('no paro')
     const fetchCurrentUser = async () => {
       try {
-        const response = await axios.get('/api/user');
+        const response = await axiosInstance.get('/api/user');
         setCurrentUser(response.data.user);
       } catch (error) {
         console.error('Error fetching user:', error);

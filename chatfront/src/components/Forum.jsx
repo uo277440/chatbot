@@ -7,9 +7,10 @@ axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
-const client = axios.create({
-  baseURL: "http://localhost:8000"
-});
+const client = useMemo(() => axios.create({
+    baseURL: process.env.REACT_APP_API_URL || 'https://chatbot-tfg-863d13080855.herokuapp.com', // URL de tu aplicación Heroku
+    withCredentials: true
+}), []);
 
 const Forum = () => {
     const {setNewForumMessage } = useContext(AuthContext);
