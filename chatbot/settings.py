@@ -92,13 +92,6 @@ CHANNEL_LAYERS = {
 }
 CORS_ORIGIN_ALLOW_ALL = True
 
-CORS_ORIGIN_WHITELIST = (
-    'http://chatbot-tfg-863d13080855.herokuapp.com',
-    'https://chatbot-tfg-863d13080855.herokuapp.com',
-    'http://localhost:3000',
-    'http://localhost:8000',
-)
-
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'chatbot.urls'
@@ -217,11 +210,6 @@ CORS_ALLOWED_ORIGINS = [
     'http://chatbot-tfg-863d13080855.herokuapp.com',
     'https://chatbot-tfg-863d13080855.herokuapp.com',
     'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:8000',
-    'http://127.0.0.1:8000',
-
-    
 ]
 OPENAI_API_KEY = 'sk-proj-LmJSUHPSx8pjbJyBfFcBT3BlbkFJHjswbR9zJ8DqIOIVDAqD'
 CORS_ALLOWED_CREDENTIALS = True
@@ -231,8 +219,5 @@ CSRF_TRUSTED_ORIGINS = [
     'http://chatbot-tfg-863d13080855.herokuapp.com',
     'https://chatbot-tfg-863d13080855.herokuapp.com',
     'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://127.0.0.1:8000',
-    'http://localhost:8000',
 ]
 django_heroku.settings(locals(), staticfiles=False)
