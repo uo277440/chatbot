@@ -14,7 +14,7 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
   const navigate = useNavigate();
   
   const axiosInstance = useMemo(() => axios.create({
-    baseURL: 'http://localhost:8000',
+    baseURL: 'https://localhost:8000',
     withCredentials: true
   }), []);
 
