@@ -10,16 +10,12 @@ import Swal from 'sweetalert2';
 import AuthContext from './AuthContext';
 import logo from '../assets/logo.png'; // Import the logo image
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
 
 
 
 function Login() {
   const client = useMemo(() => axios.create({
-    baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com',
-    withCredentials: true
+    baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com'
 }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
@@ -92,9 +88,6 @@ function Login() {
   }
 
   function submitLogin() {
-    document.cookie.split(";").forEach((c) => {
-      document.cookie = c.trim().startsWith("csrftoken") ? c : c.replace(/^ +/, "").replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`);
-    });
     client.post(
       "/api/login",
       {
