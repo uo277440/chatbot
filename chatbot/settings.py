@@ -36,6 +36,7 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'channels',
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -45,7 +46,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'corsheaders',
     'myapi.apps.MyapiConfig',
-    'channels',
     'drf_yasg',
     'rest_framework',
 ]
