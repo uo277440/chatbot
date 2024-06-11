@@ -14,9 +14,13 @@ import logo from '../assets/logo.png'; // Import the logo image
 
 
 function Login() {
-  const client = useMemo(() => axios.create({
-    baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com'
-}), []);
+  const client = axios.create({
+    baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
@@ -49,7 +53,7 @@ function Login() {
   function updateFormBtn() {
     setRegistrationToggle(!registrationToggle);
   }
-
+ 
   function handleSubmit(e) {
     e.preventDefault();
     if (registrationToggle) {
