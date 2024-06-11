@@ -71,7 +71,8 @@ MIDDLEWARE = [
      
 ]
 
-
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_SSL_REDIRECT = True
 
 ASGI_APPLICATION = 'chatbot.asgi.application'
 '''
