@@ -4,8 +4,10 @@
     "private": true,
     "scripts": {
       "start": "cd chatfront && npm start",
-      "build": "cd chatfront && npm run build",
       "heroku-postbuild": "cd chatfront && npm install && npm run build"
+    },
+    "dependencies": {
+      "express": "^4.17.1"
     }
   }
   
