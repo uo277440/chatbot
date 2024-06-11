@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-      "start": "cd chatfront && npm start",
+      "start": "cd chatfront && react-scripts --max-http-header-size=16384 start",
       "heroku-postbuild": "cd chatfront && npm install && npm run build"
     },
     "dependencies": {
