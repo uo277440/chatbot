@@ -92,6 +92,9 @@ function Login() {
   }
 
   function submitLogin() {
+    document.cookie.split(";").forEach((c) => {
+      document.cookie = c.trim().startsWith("csrftoken") ? c : c.replace(/^ +/, "").replace(/=.*/, `=;expires=${new Date(0).toUTCString()};path=/`);
+    });
     client.post(
       "/api/login",
       {
