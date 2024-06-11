@@ -19,11 +19,7 @@ axios.defaults.withCredentials = true;
 function Login() {
   const client = useMemo(() => axios.create({
     baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com',
-    withCredentials: true,
-     headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-    }
+    withCredentials: true
 }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
