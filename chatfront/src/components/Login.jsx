@@ -12,17 +12,18 @@ import logo from '../assets/logo.png'; // Import the logo image
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
 
 
 function Login() {
   const client = useMemo(() => axios.create({
     baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com',
     withCredentials: true,
-    headers: {
-      'Content-Type': 'application/json',
-      'Accept': 'application/json',
-      'X-CSRFToken': getCookie('csrftoken'),
-  }
+     headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+    }
 }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
@@ -30,7 +31,7 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  
+
   useEffect(() => {
     console.log('login')
     client.get("/api/user")
@@ -154,10 +155,6 @@ function Login() {
       </Container>
     </div>
   );
-  function getCookie(name) {
-    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-    return cookieValue ? cookieValue.pop() : '';
-  }
 
   function renderLoginForm() {
     return (
