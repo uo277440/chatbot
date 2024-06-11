@@ -1,0 +1,11 @@
+{
+    "name": "root_project",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "start": "cd chatfront && npm start",
+      "build": "cd chatfront && npm run build",
+      "heroku-postbuild": "cd chatfront && npm install && npm run build"
+    }
+  }
+  
