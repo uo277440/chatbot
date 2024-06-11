@@ -12,7 +12,7 @@ import logo from '../assets/logo.png'; // Import the logo image
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = false;
+axios.defaults.withCredentials = true;
 
 
 
