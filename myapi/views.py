@@ -491,7 +491,7 @@ def user_login(request):
         validate_email(data)
         validate_password(data)
     except ValidationError as e:
-        return Response({'message': e.message}, status=status.HTTP_511_NETWORK_AUTHENTICATION_REQUIRED)
+        return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
     
     serializer = UserLoginSerializer(data=data)
     try:
@@ -503,9 +503,9 @@ def user_login(request):
         else:
             return Response({'message': 'No autorizado'}, status=status.HTTP_401_UNAUTHORIZED)
     except ValidationError as e:
-        return Response({'message': 'Usuario no encontrado'}, status=status.HTTP_501_NOT_IMPLEMENTED)
+        return Response({'message': 'Usuario no encontrado'}, status=status.HTTP_400_BAD_REQUEST)
     except Exception:
-        return Response({'message': 'Los datos introducidos son incorrectos'}, status=status.HTTP_201_CREATED)
+        return Response({'message': 'Los datos introducidos son incorrectos'}, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @authentication_classes([])
