@@ -97,7 +97,15 @@ function Login() {
   }
 
   function submitLogin() {
-    const csrftoken = getCookie('csrftoken');
+    const csrftoken = null;
+    client.get("/api/token")
+      .then(function (res) {
+        csrftoken=(res.data.token);
+      })
+      .catch(function (error) {
+        setCurrentUser(null);
+      });
+       
     console.log(csrftoken)
     client.post(
       "/api/login",

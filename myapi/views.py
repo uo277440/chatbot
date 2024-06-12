@@ -29,6 +29,7 @@ import json
 import os
 from django.db import transaction
 from django.shortcuts import render
+from django.middleware.csrf import get_token
 
 
 
@@ -38,7 +39,9 @@ sentence_checker = SentenceChecker()
 scenary_service = ScenaryService()
 grammarCorrector = GrammarCorrector()  
 #flowManager = None
-
+def getCSRFToken(request):
+    token = get_token(request)
+    return JsonResponse({"token": token}, status=200)
 def is_admin(user):
     return user.is_superuser
 def get_session_objects(session):
