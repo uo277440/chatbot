@@ -29,7 +29,20 @@ function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+  const getCookie = (name) => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+};
   useEffect(() => {
     console.log('login')
     client.get("/api/user")
@@ -102,7 +115,7 @@ function Login() {
         password: password
       }, {
         headers: {
-          'X-CSRFToken': csrftoken
+          'X-CSRFToken': getCookie('csrftoken')
         }
       }
     ).then(function (res) {
@@ -158,10 +171,7 @@ function Login() {
       </Container>
     </div>
   );
-  function getCookie(name) {
-    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-    return cookieValue ? cookieValue.pop() : '';
-  }
+  
 
   function renderLoginForm() {
     return (
