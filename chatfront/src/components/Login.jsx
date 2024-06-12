@@ -115,7 +115,7 @@ function Login() {
         password: password
       }, {
         headers: {
-          'X-CSRFToken': getCookie('csrftoken')
+          'X-CSRFToken': csrftoken
         }
       }
     ).then(function (res) {
