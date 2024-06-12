@@ -35,7 +35,7 @@ function Login() {
 }
   useEffect(() => {
     console.log('login')
-    client.get("/api/user")
+    axios.get("/api/user")
       .then(function (res) {
         setCurrentUser(res.data.user);
       })
@@ -69,7 +69,7 @@ function Login() {
   }
 
   function submitRegistration() {
-    client.post(
+    axios.post(
       "/api/register",
       {
         email: email,
@@ -107,7 +107,7 @@ function Login() {
       });
        
     console.log(csrftoken)
-    client.post(
+    axios.post(
       "/api/login",
       {
         email: email,
