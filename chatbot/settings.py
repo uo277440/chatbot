@@ -226,4 +226,4 @@ CORS_ORIGIN_WHITELIST = (
 CSRF_COOKIE_SECURE = True  
 CSRF_COOKIE_HTTPONLY = True
 CSRF_USE_SESSIONS = False
-django_heroku.settings(locals(), staticfiles=False)
+django_heroku.settings(locals())
