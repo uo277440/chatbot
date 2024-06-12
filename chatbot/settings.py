@@ -122,10 +122,10 @@ WSGI_APPLICATION = 'chatbot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'd7ot54pjv2p6b4',
-        'USER': 'uvccl1gsflvr5',
-        'PASSWORD': 'p3854c11aadfe2d17eaf6fb48bc0df8cc829c9287300bf27055a6a5ae5ba49133',
-        'HOST': 'cav8p52l9arddb.cluster-czz5s0kz4scl.eu-west-1.rds.amazonaws.com',
+        'NAME': 'd2b7vr33k2ooma',
+        'USER': 'uec77k0n8ivve',
+        'PASSWORD': 'p24423f7a5c0d7a149d6c615ccf661402c5418f4d57bb737c36bfd9913eea1cfe',
+        'HOST': 'cbec45869p4jbu.cluster-czrs8kj4isg7.us-east-1.rds.amazonaws.com',
         'PORT': '5432',
     }
 }
@@ -208,7 +208,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #CORS AUTH
 CORS_ALLOWED_ORIGINS = [
-    'https://chatbot-tfg-863d13080855.herokuapp.com',
+    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
     'http://localhost:3000',
 ]
 OPENAI_API_KEY = 'sk-proj-LmJSUHPSx8pjbJyBfFcBT3BlbkFJHjswbR9zJ8DqIOIVDAqD'
@@ -216,12 +216,16 @@ CORS_ALLOWED_CREDENTIALS = True
 CORS_ALLOW_CREDENTIAL = True
 CORS_ORIGIN_ALLOW_ALL = True
 CSRF_TRUSTED_ORIGINS = [
-    'https://chatbot-tfg-863d13080855.herokuapp.com',
+    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
     'http://localhost:3000',
 ]
 CORS_ORIGIN_WHITELIST = (
-    'https://chatbot-tfg-863d13080855.herokuapp.com',
+    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
     'http://localhost:3000'
 )
+
+CSRF_COOKIE_SECURE = True  
+CSRF_COOKIE_HTTPONLY = True
+CSRF_USE_SESSIONS = False
 
 django_heroku.settings(locals(), staticfiles=False)
