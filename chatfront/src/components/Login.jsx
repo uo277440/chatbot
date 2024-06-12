@@ -108,6 +108,7 @@ function Login() {
 
   function submitLogin() {
     const csrftoken = getCookie('csrftoken');
+    console.log(csrftoken)
     client.post(
       "/api/login",
       {

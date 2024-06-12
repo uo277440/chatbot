@@ -222,4 +222,5 @@ CSRF_TRUSTED_ORIGINS = [
 CORS_ORIGIN_WHITELIST = (
     'https://chatbot-tfg-863d13080855.herokuapp.com',
 )
+CSRF_USE_SESSIONS = True
 django_heroku.settings(locals(), staticfiles=False)
