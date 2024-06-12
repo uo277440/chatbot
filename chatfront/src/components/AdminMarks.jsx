@@ -13,7 +13,7 @@ function AdminMarks() {
     const [marks, setMarks] = useState([]);
     const [conversations, setConversations] = useState([]);
     const axiosInstance = useMemo(() => axios.create({
-        baseURL: 'https://chatbot-tfg-863d13080855.herokuapp.com', 
+        baseURL: 'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com', 
         withCredentials: true
     }), []);
 

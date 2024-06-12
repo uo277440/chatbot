@@ -14,7 +14,7 @@ const NavigationBar = ({ registrationToggle, updateFormBtn }) => {
   const navigate = useNavigate();
   
   const axiosInstance = useMemo(() => axios.create({
-    baseURL: 'https://localhost:8000',
+    baseURL: 'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
     withCredentials: true
   }), []);
 
