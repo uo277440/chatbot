@@ -8,7 +8,7 @@ app.use(express.static(path.join(__dirname, 'chatfront/build')));
 
 // Proxy requests to /api to Django
 app.use('/api', createProxyMiddleware({
-  target: 'https://chatbot-tfg-863d13080855.herokuapp.com', // Cambia esto a tu dominio de Heroku
+  target: 'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com/', // Cambia esto a tu dominio de Heroku
   changeOrigin: true,
   pathRewrite: {
     '^/api': '/api', // asegúrate de que /api se mantenga en el backend
