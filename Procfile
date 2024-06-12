@@ -1,4 +1,3 @@
 release: python manage.py migrate
-web: sh -c 'cd chatfront && npm install && npm run build && cd .. && node server.js
-backend: daphne -b 0.0.0.0 -p $PORT chatbot.asgi:application
-
+web: sh -c 'cd chatfront && npm install && npm run build && cd .. && python manage.py collectstatic --noinput && gunicorn chatbot.wsgi:application --bind 0.0.0.0:8000 && server.js'
+daphne: daphne -b 0.0.0.0 -p $PORT chatbot.asgi:application
