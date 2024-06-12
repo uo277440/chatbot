@@ -208,19 +208,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #CORS AUTH
 CORS_ALLOWED_ORIGINS = [
-    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
+    'https://chatbot-tfg-863d13080855.herokuapp.com',
     'http://localhost:3000',
 ]
 OPENAI_API_KEY = 'sk-proj-LmJSUHPSx8pjbJyBfFcBT3BlbkFJHjswbR9zJ8DqIOIVDAqD'
 CORS_ALLOWED_CREDENTIALS = True
 CORS_ALLOW_CREDENTIAL = True
 CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = [
-    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
+CSRF_TRUSTED_ORIGINS = [ 
+    'https://chatbot-tfg-863d13080855.herokuapp.com',
     'http://localhost:3000',
 ]
 CORS_ORIGIN_WHITELIST = (
-    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
+    'https://chatbot-tfg-863d13080855.herokuapp.com',
     'http://localhost:3000'
 )
 
