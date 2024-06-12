@@ -39,7 +39,7 @@ SECRET_KEY = 'django-insecure-my)^4f+c3yn+q^5@6r#+ht4*7yh2+^(m$w&z$f8du$uvys!$h7
 DEBUG=False
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['chatbot-tfg-backend-6793e1567ffc.herokuapp.com','https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com', '127.0.0.1:8000', 'localhost']
 
 
 # Application definition
