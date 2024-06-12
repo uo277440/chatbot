@@ -116,10 +116,10 @@ function Login() {
         password: password
       }, {
         headers: {
-          'X-CSRFToken': csrftoken
+            'Content-Type': 'multipart/form-data',
+            'X-CSRFToken': csrftoken
         }
-      }
-    ).then(function (res) {
+    }).then(function (res) {
       const user = res.data.user;
       setCurrentUser(user);
       if (user.is_superuser) {
