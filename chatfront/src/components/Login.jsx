@@ -97,7 +97,7 @@ function Login() {
   }
 
   function submitLogin() {
-    const csrftoken = null;
+    const csrftoken = getCookie("csrftoken");
     client.get("/api/token")
       .then(function (res) {
         csrftoken=(res.data.token);
