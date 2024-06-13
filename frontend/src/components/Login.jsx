@@ -18,7 +18,7 @@ axios.defaults.withCredentials = true;
 
 function Login() {
   const client = useMemo(() => axios.create({
-    baseURL: '/choreo-apis/awbo/backend/rest-api-be2/v1.0',
+    baseURL: 'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev/chatbottfg/backend/v1',
     withCredentials: true
   }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
