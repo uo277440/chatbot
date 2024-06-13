@@ -1,6 +1,5 @@
 import '../css/Login.css';
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -11,10 +10,6 @@ import AuthContext from './AuthContext';
 import api from '../api';
 import logo from '../assets/logo.png';
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
-
 function Login() {
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
@@ -24,12 +19,11 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('login');
     api.get("/api/user")
-      .then(function (res) {
+      .then(res => {
         setCurrentUser(res.data.user);
       })
-      .catch(function (error) {
+      .catch(error => {
         setCurrentUser(null);
       });
   }, [setCurrentUser]);
@@ -73,12 +67,10 @@ function Login() {
 
   async function submitLogin() {
     try {
-
-      const loginRes = await axios.post("/api/login", {
+      const loginRes = await api.post("/api/login", {
         email: email,
         password: password
-      }
-      );
+      });
 
       const user = loginRes.data.user;
       setCurrentUser(user);
@@ -110,8 +102,8 @@ function Login() {
 
   function handleLogout(e) {
     e.preventDefault();
-    api.post("/api/logout", { withCredentials: true })
-      .then(function (res) {
+    api.post("/api/logout")
+      .then(res => {
         setCurrentUser(null);
         navigate('/');
       });
@@ -163,6 +155,7 @@ function Login() {
 }
 
 export default Login;
+
 
 
 
