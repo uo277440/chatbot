@@ -30,6 +30,7 @@ import os
 from django.db import transaction
 from django.shortcuts import render
 from django.middleware.csrf import get_token
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 
 
@@ -41,6 +42,7 @@ grammarCorrector = GrammarCorrector()
 #flowManager = None
 @api_view(['GET'])
 @permission_classes([AllowAny])
+@ensure_csrf_cookie
 def getCSRFToken(request):
     token = get_token(request)
     return JsonResponse({"token": token}, status=200)
@@ -493,6 +495,7 @@ def index(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 @authentication_classes([SessionAuthentication])
+@ensure_csrf_cookie
 def user_login(request):
     data = request.data
     try:

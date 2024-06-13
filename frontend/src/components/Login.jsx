@@ -4,6 +4,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+
 import Cookies from 'js-cookie';
 import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
@@ -15,7 +16,7 @@ import logo from '../assets/logo.png'; // Import the logo image
 function Login() {
   const client = useMemo(() => axios.create({
     baseURL: 'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev/chatbottfg/backend/v1',
-    withCredentials: false
+    withCredentials: true
   }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
@@ -48,7 +49,6 @@ function Login() {
         navigate('/menu');
       }
     }
-    getCsrfToken();
   }, [currentUser, navigate]);
 
   function updateFormBtn() {
