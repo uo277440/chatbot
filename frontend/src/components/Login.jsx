@@ -34,7 +34,11 @@ function Login() {
         setCurrentUser(null);
       });
   }, [setCurrentUser]);
-
+  async function getCsrfToken() {
+    const response = await client.get('/api/token');
+    axios.defaults.headers.common['X-CSRFToken'] = response.data.token;
+    return response.data.token;
+  }
   useEffect(() => {
     if (currentUser) {
       const user = currentUser;
@@ -44,6 +48,7 @@ function Login() {
         navigate('/menu');
       }
     }
+    getCsrfToken();
   }, [currentUser, navigate]);
 
   function updateFormBtn() {
