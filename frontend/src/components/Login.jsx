@@ -97,50 +97,52 @@ function Login() {
     });
   }
 
-  function submitLogin() {
-    api.get("/api/token")
-      .then(function (res) {
-        csrftoken=(res.data.token);
-      })
-      .catch(function (error) {
-        setCurrentUser(null);
-      });
-       
-    console.log(csrftoken)
-    axios.post(
-      "/api/login",
-      {
-        email: email,
-        password: password
-      }, {
-        headers: {
-            'Content-Type': 'multipart/form-data',
-            'X-CSRFToken': csrftoken
+  function submitLogin(email, password, setCurrentUser) {
+    const navigate = useNavigate();
+  
+    const login = async () => {
+      try {
+        const res = await api.get("/api/token");
+        const csrftoken = res.data.token;
+  
+        const loginRes = await axios.post(
+          "/api/login",
+          {
+            email: email,
+            password: password
+          }, {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'X-CSRFToken': csrftoken
+            }
+          }
+        );
+  
+        const user = loginRes.data.user;
+        setCurrentUser(user);
+        if (user.is_superuser) {
+          navigate('/admin');
+        } else {
+          navigate('/menu');
         }
-    }).then(function (res) {
-      const user = res.data.user;
-      setCurrentUser(user);
-      if (user.is_superuser) {
-        navigate('/admin');
-      } else {
-        navigate('/menu');
+      } catch (error) {
+        if (error.response) {
+          console.log('Código de estado HTTP: ' + error.response.status);
+          Swal.fire({
+            title: 'Error',
+            text: error.response.data.message,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+          });
+        } else if (error.request) {
+          console.error('No se recibió ninguna respuesta del servidor:', error.request);
+        } else {
+          console.error('Error al configurar la solicitud:', error.message);
+        }
       }
-    })
-    .catch(error => {
-      if (error.response) {
-        console.log('Código de estado HTTP: ' + error.response.status);
-        Swal.fire({
-          title: 'Error',
-          text: error.response.data.message,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
-      });
-      } else if (error.request) {
-        console.error('No se recibió ninguna respuesta del servidor:', error.request);
-      } else {
-        console.error('Error al configurar la solicitud:', error.message);
-      }
-    });
+    };
+  
+    login();
   }
 
   function handleLogout(e) {
