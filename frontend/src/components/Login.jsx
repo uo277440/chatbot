@@ -14,6 +14,7 @@ import logo from '../assets/logo.png'; // Import the logo image
 function Login() {
   const client = useMemo(() => axios.create({
     baseURL: 'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev/chatbottfg/backend/v1',
+    withCredentials: false
   }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
