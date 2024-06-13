@@ -1,5 +1,5 @@
 import '../css/Login.css';
-import React, { useState, useEffect, useContext,useMemo } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
@@ -9,33 +9,22 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthContext from './AuthContext';
 import api from '../api';
-import logo from '../assets/logo.png'; // Import the logo image
+import logo from '../assets/logo.png';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
 function Login() {
-  const client = axios.create({
-    baseURL: 'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
-    withCredentials: true,
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    },
-  });
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-  function getCookie(name) {
-    const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-    return cookieValue ? cookieValue.pop() : '';
-}
+
   useEffect(() => {
-    console.log('login')
+    console.log('login');
     api.get("/api/user")
       .then(function (res) {
         setCurrentUser(res.data.user);
@@ -59,7 +48,7 @@ function Login() {
   function updateFormBtn() {
     setRegistrationToggle(!registrationToggle);
   }
- 
+
   function handleSubmit(e) {
     e.preventDefault();
     if (registrationToggle) {
@@ -69,91 +58,69 @@ function Login() {
     }
   }
 
-  function submitRegistration() {
-    api.post(
-      "/api/register",
-      {
+  async function submitRegistration() {
+    try {
+      await api.post("/api/register", {
         email: email,
         username: username,
         password: password
-      }
-    ).then(function (res) {
-      submitLogin();
-    })
-    .catch(error => {
-      if (error.response) {
-        console.log('Código de estado HTTP: ' + error.response.status);
-        Swal.fire({
-          title: 'Error',
-          text: error.response.data.message,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
       });
-      } else if (error.request) {
-        console.error('No se recibió ninguna respuesta del servidor:', error.request);
-      } else {
-        console.error('Error al configurar la solicitud:', error.message);
-      }
-    });
+      await submitLogin();  // Intentar iniciar sesión después de registrarse
+    } catch (error) {
+      handleError(error);
+    }
   }
 
-  function submitLogin(email, password, setCurrentUser) {
-    const navigate = useNavigate();
-  
-    const login = async () => {
-      try {
-        const res = await api.get("/api/token");
-        const csrftoken = res.data.token;
-  
-        const loginRes = await axios.post(
-          "/api/login",
-          {
-            email: email,
-            password: password
-          }, {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-              'X-CSRFToken': csrftoken
-            }
-          }
-        );
-  
-        const user = loginRes.data.user;
-        setCurrentUser(user);
-        if (user.is_superuser) {
-          navigate('/admin');
-        } else {
-          navigate('/menu');
+  async function submitLogin() {
+    try {
+      const res = await api.get("/api/token");
+      const csrftoken = res.data.token;
+
+      const loginRes = await axios.post("/api/login", {
+        email: email,
+        password: password
+      }, {
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken
         }
-      } catch (error) {
-        if (error.response) {
-          console.log('Código de estado HTTP: ' + error.response.status);
-          Swal.fire({
-            title: 'Error',
-            text: error.response.data.message,
-            icon: 'error',
-            confirmButtonText: 'Aceptar'
-          });
-        } else if (error.request) {
-          console.error('No se recibió ninguna respuesta del servidor:', error.request);
-        } else {
-          console.error('Error al configurar la solicitud:', error.message);
-        }
+      });
+
+      const user = loginRes.data.user;
+      setCurrentUser(user);
+      if (user.is_superuser) {
+        navigate('/admin');
+      } else {
+        navigate('/menu');
       }
-    };
-  
-    login();
+    } catch (error) {
+      handleError(error);
+    }
+  }
+
+  function handleError(error) {
+    if (error.response) {
+      console.log('Código de estado HTTP: ' + error.response.status);
+      Swal.fire({
+        title: 'Error',
+        text: error.response.data.message,
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+    } else if (error.request) {
+      console.error('No se recibió ninguna respuesta del servidor:', error.request);
+    } else {
+      console.error('Error al configurar la solicitud:', error.message);
+    }
   }
 
   function handleLogout(e) {
     e.preventDefault();
-    client.post(
-      "/api/logout",
-      { withCredentials: true }
-    ).then(function (res) {
-      setCurrentUser(null);
-      navigate('/');
-    });
+    api.post("/api/logout", { withCredentials: true })
+      .then(function (res) {
+        setCurrentUser(null);
+        navigate('/');
+      });
   }
 
   return (
@@ -172,7 +139,6 @@ function Login() {
       </Container>
     </div>
   );
-  
 
   function renderLoginForm() {
     return (
@@ -195,7 +161,7 @@ function Login() {
           <Form.Control type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Iniciar sesión
+          {registrationToggle ? 'Registrar' : 'Iniciar sesión'}
         </Button>
       </Form>
     );
@@ -203,5 +169,6 @@ function Login() {
 }
 
 export default Login;
+
 
 
