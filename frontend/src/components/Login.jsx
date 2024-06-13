@@ -4,6 +4,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import Cookies from 'js-cookie';
 import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -85,12 +86,16 @@ function Login() {
       }
     });
   }
-  function submitLogin() {
+  async function submitLogin() {
     client.post(
       "/api/login",
       {
         email: email,
         password: password
+      },{
+        headers: {
+          'X-CSRFToken': Cookies.get('csrftoken')
+        }
       }
     ).then(function (res) {
       const user = res.data.user;
