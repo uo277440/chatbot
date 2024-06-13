@@ -72,8 +72,12 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 X_FRAME_OPTIONS = 'SAMEORIGIN'
@@ -228,6 +232,7 @@ CORS_ORIGIN_WHITELIST = (
     'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
     'http://localhost:3000'
 )
+
 
 CSRF_COOKIE_SECURE = True  
 CSRF_COOKIE_HTTPONLY = True
