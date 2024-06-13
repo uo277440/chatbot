@@ -85,12 +85,7 @@ function Login() {
       }
     });
   }
-  async function getCsrfToken() {
-    const response = await client.get('/api/token');
-    return response.data.token;
-  }
   async function submitLogin() {
-    const csrftoken = await getCsrfToken();
     client.post(
       "/api/login",
       {
