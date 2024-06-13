@@ -1,5 +1,6 @@
 import '../css/Login.css';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext,useMemo } from 'react';
+import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -7,10 +8,19 @@ import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthContext from './AuthContext';
-import api from '../api';
-import logo from '../assets/logo.png';
+import logo from '../assets/logo.png'; // Import the logo image
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
+
 
 function Login() {
+  const client = useMemo(() => axios.create({
+    baseURL: '/choreo-apis/awbo/backend/rest-api-be2/v1.0',
+    withCredentials: true
+  }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
   const [email, setEmail] = useState('');
@@ -19,11 +29,12 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    api.get("/api/user")
-      .then(res => {
+    console.log('login')
+    client.get("/api/user")
+      .then(function (res) {
         setCurrentUser(res.data.user);
       })
-      .catch(error => {
+      .catch(function (error) {
         setCurrentUser(null);
       });
   }, [setCurrentUser]);
@@ -52,61 +63,76 @@ function Login() {
     }
   }
 
-  async function submitRegistration() {
-    try {
-      await api.post("/api/register", {
+  function submitRegistration() {
+    client.post(
+      "/api/register",
+      {
         email: email,
         username: username,
         password: password
+      }
+    ).then(function (res) {
+      submitLogin();
+    })
+    .catch(error => {
+      if (error.response) {
+        console.log('Código de estado HTTP: ' + error.response.status);
+        Swal.fire({
+          title: 'Error',
+          text: error.response.data.message,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
       });
-      await submitLogin();  // Intentar iniciar sesión después de registrarse
-    } catch (error) {
-      handleError(error);
-    }
+      } else if (error.request) {
+        console.error('No se recibió ninguna respuesta del servidor:', error.request);
+      } else {
+        console.error('Error al configurar la solicitud:', error.message);
+      }
+    });
   }
 
-  async function submitLogin() {
-    try {
-      const loginRes = await api.post("/api/login", {
+  function submitLogin() {
+    client.post(
+      "/api/login",
+      {
         email: email,
         password: password
-      });
-
-      const user = loginRes.data.user;
+      }
+    ).then(function (res) {
+      const user = res.data.user;
       setCurrentUser(user);
       if (user.is_superuser) {
         navigate('/admin');
       } else {
         navigate('/menu');
       }
-    } catch (error) {
-      handleError(error);
-    }
-  }
-
-  function handleError(error) {
-    if (error.response) {
-      console.log('Código de estado HTTP: ' + error.response.status);
-      Swal.fire({
-        title: 'Error',
-        text: error.response.data.message,
-        icon: 'error',
-        confirmButtonText: 'Aceptar'
+    })
+    .catch(error => {
+      if (error.response) {
+        console.log('Código de estado HTTP: ' + error.response.status);
+        Swal.fire({
+          title: 'Error',
+          text: error.response.data.message,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
       });
-    } else if (error.request) {
-      console.error('No se recibió ninguna respuesta del servidor:', error.request);
-    } else {
-      console.error('Error al configurar la solicitud:', error.message);
-    }
+      } else if (error.request) {
+        console.error('No se recibió ninguna respuesta del servidor:', error.request);
+      } else {
+        console.error('Error al configurar la solicitud:', error.message);
+      }
+    });
   }
 
   function handleLogout(e) {
     e.preventDefault();
-    api.post("/api/logout")
-      .then(res => {
-        setCurrentUser(null);
-        navigate('/');
-      });
+    client.post(
+      "/api/logout",
+      { withCredentials: true }
+    ).then(function (res) {
+      setCurrentUser(null);
+      navigate('/');
+    });
   }
 
   return (
@@ -147,7 +173,7 @@ function Login() {
           <Form.Control type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
         <Button variant="primary" type="submit">
-          {registrationToggle ? 'Registrar' : 'Iniciar sesión'}
+          Iniciar sesión
         </Button>
       </Form>
     );
