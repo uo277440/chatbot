@@ -39,6 +39,8 @@ sentence_checker = SentenceChecker()
 scenary_service = ScenaryService()
 grammarCorrector = GrammarCorrector()  
 #flowManager = None
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def getCSRFToken(request):
     token = get_token(request)
     return JsonResponse({"token": token}, status=200)
