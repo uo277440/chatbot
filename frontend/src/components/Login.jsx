@@ -10,14 +10,10 @@ import Swal from 'sweetalert2';
 import AuthContext from './AuthContext';
 import logo from '../assets/logo.png'; // Import the logo image
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
 
 function Login() {
   const client = useMemo(() => axios.create({
     baseURL: 'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev/chatbottfg/backend/v1',
-    withCredentials: true
   }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);
   const [registrationToggle, setRegistrationToggle] = useState(false);
