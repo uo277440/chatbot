@@ -95,6 +95,7 @@ CHANNEL_LAYERS = {
 }
 
 
+
 CORS_ALLOW_CREDENTIALS = True
 
 ROOT_URLCONF = 'chatbot.urls'
