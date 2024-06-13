@@ -208,11 +208,11 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000'
 )
 
-
+'''
 CSRF_COOKIE_SECURE = True  
 CSRF_COOKIE_HTTPONLY = True
 CSRF_USE_SESSIONS = False
-'''
+
 CORS_ALLOWED_ORIGINS = [
     'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev/chatbottfg/backend/v1',
     'https://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev',
@@ -225,6 +225,7 @@ CORS_ALLOWED_ORIGINS = [
 ]
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
+CORS_ALLOW_CREDENTIAL = True
 CORS_ORIGIN_ALLOW_ALL = True
 CORS_ORIGIN_WHITELIST = (
     'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev/chatbottfg/backend/v1',
