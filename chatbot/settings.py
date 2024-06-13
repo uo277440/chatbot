@@ -16,8 +16,10 @@ import sys
 from decouple import config
 
 import dj_database_url
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+
 
 
 # Quick-start development settings - unsuitable for production
@@ -30,7 +32,7 @@ SECRET_KEY = 'django-insecure-my)^4f+c3yn+q^5@6r#+ht4*7yh2+^(m$w&z$f8du$uvys!$h7
 DEBUG=False
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['chatbot-tfg-backend-6793e1567ffc.herokuapp.com','https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com', '127.0.0.1:8000', 'localhost']
+ALLOWED_HOSTS = ['chatbot-tfg-backend-6793e1567ffc.herokuapp.com','https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com','https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com/', '127.0.0.1:8000', 'localhost']
 
 
 # Application definition
@@ -72,7 +74,9 @@ STATICFILES_DIRS = [
 ]
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 
@@ -84,7 +88,6 @@ CHANNEL_LAYERS = {
     },
 }
 '''
-
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
