@@ -73,18 +73,12 @@ function Login() {
 
   async function submitLogin() {
     try {
-      const res = await api.get("/api/token");
-      const csrftoken = res.data.token;
 
       const loginRes = await axios.post("/api/login", {
         email: email,
         password: password
-      }, {
-        headers: {
-          'Content-Type': 'application/json',
-          'X-CSRFToken': csrftoken
-        }
-      });
+      }
+      );
 
       const user = loginRes.data.user;
       setCurrentUser(user);
