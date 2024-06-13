@@ -33,11 +33,7 @@ SECRET_KEY = 'django-insecure-my)^4f+c3yn+q^5@6r#+ht4*7yh2+^(m$w&z$f8du$uvys!$h7
 DEBUG=False
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev',
-    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
-    'localhost',
-    '127.0.0.1',
-    ]
+ALLOWED_HOSTS = ["*"]
 
 
 INSTALLED_APPS = [
@@ -56,9 +52,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -68,10 +64,6 @@ MIDDLEWARE = [
      
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOWS_CREDENTIALS = True
-CORS_ALLOWED_CREDENTIALS = True
-CORS_ORIGIN_ALLOW_ALL = True
 
 CSRF_COOKIE_SECURE = True  
 CSRF_COOKIE_HTTPONLY = True
@@ -221,3 +213,7 @@ CORS_ORIGIN_WHITELIST = (
 )
 
 '''
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWS_CREDENTIALS = True
+CORS_ALLOWED_CREDENTIALS = True
+CORS_ORIGIN_ALLOW_ALL = True
