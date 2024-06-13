@@ -59,7 +59,8 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware'
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'chatbot.middleware.CustomCorsMiddleware',
     
      
 ]
@@ -71,28 +72,12 @@ CSRF_COOKIE_HTTPONLY = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = '/static/'
-'''
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static')
-]
-STORAGES = {
-    "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    },
-}
-'''
+
 
 
 
 ASGI_APPLICATION = 'chatbot.asgi.application'
-'''
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "channels.layers.InMemoryChannelLayer",
-    },
-}
-'''
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -191,29 +176,15 @@ USE_TZ = True
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
+CSRF_TRUSTED_ORIGINS = [
+    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
+    'http://localhost:3000',
+    'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev',
+    'https://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev',
+]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-'''
-#CORS AUTH
-CORS_ALLOWED_ORIGINS = [
-    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
-    'http://localhost:3000',
-]
-OPENAI_API_KEY = 'sk-proj-LmJSUHPSx8pjbJyBfFcBT3BlbkFJHjswbR9zJ8DqIOIVDAqD'
-CORS_ALLOWED_CREDENTIALS = True
-CORS_ALLOW_CREDENTIAL = True
-CORS_ORIGIN_ALLOW_ALL = True
-CSRF_TRUSTED_ORIGINS = [ 
-    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
-    'http://localhost:3000',
-]
-CORS_ORIGIN_WHITELIST = (
-    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
-    'http://localhost:3000'
-)
-
-'''
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOWS_CREDENTIALS = True
 CORS_ALLOWED_CREDENTIALS = True
 CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
