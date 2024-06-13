@@ -67,7 +67,7 @@ MIDDLEWARE = [
     
      
 ]
-CORS_ALLOW_CREDENTIALS = True
+
 
 CORS_ALLOWED_ORIGINS = [
     'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev',
