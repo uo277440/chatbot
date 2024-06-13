@@ -85,16 +85,12 @@ function Login() {
       }
     });
   }
-  async function submitLogin() {
+  function submitLogin() {
     client.post(
       "/api/login",
       {
         email: email,
         password: password
-      },{
-        headers: {
-          'X-CSRFToken': csrftoken
-        }
       }
     ).then(function (res) {
       const user = res.data.user;
