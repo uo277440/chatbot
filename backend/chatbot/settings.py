@@ -33,7 +33,11 @@ SECRET_KEY = 'django-insecure-my)^4f+c3yn+q^5@6r#+ht4*7yh2+^(m$w&z$f8du$uvys!$h7
 DEBUG=False
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ['https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev',
+    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
+    'localhost',
+    '127.0.0.1',
+    ]
 
 
 INSTALLED_APPS = [
@@ -82,10 +86,15 @@ CSRF_TRUSTED_ORIGINS = [
     'http://localhost:8000',
     'http://127.0.0.1:8000',
 ]
+CORS_ORIGIN_WHITELIST = (
+    'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev',
+    'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
+    'http://localhost:3000'
+)
 
 CSRF_COOKIE_SECURE = True  
 CSRF_COOKIE_HTTPONLY = True
-CSRF_USE_SESSIONS = False
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 STATIC_URL = '/static/'
