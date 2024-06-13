@@ -23,6 +23,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     re_path(r'^.*$', views.index, name='index'),
     path("chatbot_response/",views.chatbot_response, name='chatbot_response'),
+    path("token",views.get_token, name='token'),
     path("mascot_message/",views.mascot_message, name='mascot_message'),
     path('register', views.user_register, name='register'),
 	path('login', views.user_login, name='login'),
