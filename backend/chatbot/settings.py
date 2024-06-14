@@ -181,12 +181,6 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-CORS_ALLOWED_ORIGINS = [
-    'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev',
-    'https://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev',
-    'http://localhost:3000',
-    'http://localhost:8000',
-]
 CSRF_TRUSTED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:8000',
@@ -197,6 +191,10 @@ CSRF_TRUSTED_ORIGINS = [
 CSRF_COOKIE_SECURE = True  
 CSRF_COOKIE_HTTPONLY = True
 CSRF_USE_SESSIONS = False
-CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS =True
-CORS_ORIGIN_ALLOW_ALL = True 
+CORS_ALLOWED_ORIGINS = [
+    'https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev',
+    'https://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev',
+    'http://localhost:3000',
+    'http://localhost:8000',
+]
