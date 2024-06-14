@@ -28,7 +28,7 @@ function App() {
               }
             />
             <Route
-              path="/admin_panel"
+              path="/admin"
               element={
                 <ProtectedRoute requireSuperuser={true}>
                   <AdminView />

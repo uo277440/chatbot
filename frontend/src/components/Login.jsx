@@ -111,7 +111,7 @@ function Login() {
       const user = res.data.user;
       setCurrentUser(user);
       if (user.is_superuser) {
-        navigate('/admin_panel');
+        navigate('/admin');
       } else {
         navigate('/menu');
       }
