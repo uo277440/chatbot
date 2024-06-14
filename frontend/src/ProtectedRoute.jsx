@@ -7,8 +7,9 @@ const ProtectedRoute = ({ children, requireSuperuser }) => {
   const { currentUser } = useContext(AuthContext);
 
   if (!currentUser) {
-    return <Navigate to="/" replace />;
+    console.log("no deberias")
   }
+ 
 
   if (requireSuperuser && !currentUser.is_superuser) {
     return <Navigate to="/unauthorized" replace />; // Redirigir a una página de no autorizado si no es superusuario
