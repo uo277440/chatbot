@@ -68,7 +68,7 @@ MIDDLEWARE = [
 
 
 CSRF_COOKIE_SECURE = True  
-CSRF_COOKIE_HTTPONLY = True
+CSRF_COOKIE_HTTPONLY = False
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -189,8 +189,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev',
 ]
 CSRF_COOKIE_SECURE = True  
-CSRF_COOKIE_HTTPONLY = True
-CSRF_USE_SESSIONS = False
 CORS_ALLOW_CREDENTIALS =True
 CORS_ALLOWED_ORIGINS = [
     'https://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev',
