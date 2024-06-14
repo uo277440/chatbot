@@ -50,7 +50,7 @@ export const AuthProvider = ({ children }) => {
         websocket.current = null; 
     }
 
-      websocket.current = new WebSocket('ws://https://3c3af374-cdeb-4fc9-899b-d84d9130496d-dev.e1-eu-north-azure.choreoapis.dev/chatbottfg/backend/v1/ws/forum/');
+      websocket.current = new WebSocket('ws://localhost:8000/ws/forum/');
 
       websocket.current.onopen = () => {
         console.log('WebSocket connected');
