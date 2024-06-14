@@ -278,6 +278,8 @@ def mascot_message(request):
         chatbot, flowManager, marker = get_session_objects(request.session)
         marker.decrease()
         suggestion=flowManager.suggest()
+        print("SUGERENCIA")
+        print(suggestion)
         set_session_objects(request.session, chatbot, flowManager, marker)
         return Response({'response': suggestion},status=200)
 @api_view(['GET'])
