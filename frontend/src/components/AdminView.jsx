@@ -96,12 +96,7 @@ const fetchFlows = useCallback((scenarioId) => {
     formData.append('csv_file', csvFile);
     formData.append('scenario', selectedScenario || newScenario);
     const csrftoken = getCookie('csrftoken');
-    axiosInstance.post('/api/upload_combined', formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-        'X-CSRFToken': csrftoken
-      }
-    })
+    axiosInstance.post('/api/upload_combined', formData)
     .then(response => {
       alert('El JSON y el CSV se han subido correctamente');
     })
