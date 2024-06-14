@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback,useMemo  } from 'react';
 import axios from 'axios';
 import '../css/Admin.css';
 import NavigationBar from '../NavigationBar';
-
+import Cookies from 'js-cookie';
 
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
@@ -96,7 +96,12 @@ const fetchFlows = useCallback((scenarioId) => {
     formData.append('csv_file', csvFile);
     formData.append('scenario', selectedScenario || newScenario);
     const csrftoken = getCookie('csrftoken');
-    axiosInstance.post('/api/upload_combined', formData)
+    axiosInstance.post('/api/upload_combined', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+        'X-CSRFToken': Cookies.get('csrftoken')
+      }
+    })
     .then(response => {
       alert('El JSON y el CSV se han subido correctamente');
     })
