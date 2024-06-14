@@ -195,27 +195,6 @@ CSRF_TRUSTED_ORIGINS = [
     'https://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev',
 ]
 
-CORS_ALLOW_METHODS = (
-    "DELETE",
-    "GET",
-    "OPTIONS",
-    "PATCH",
-    "POST",
-    "PUT",
-)
-CORS_EXPOSE_HEADERS=[
-    *default_headers
-]
-CORS_ALLOW_HEADERS = (
-    *default_headers,
-    "accept",
-    "authorization",
-    "content-type",
-    "user-agent",
-    "x-csrftoken",
-    "x-requested-with",
-    
-)
 
 CORS_ALLOW_CREDENTIALS =True
 CORS_ORIGIN_ALLOW_ALL = True 
