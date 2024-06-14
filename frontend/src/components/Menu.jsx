@@ -1,13 +1,15 @@
-import React, { useState, useEffect,useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import '../css/Menu.css';
 import NavigationBar from '../NavigationBar';
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 function Menu() {
     const [scenarios, setScenarios] = useState([]);
     const [selectedScenario, setSelectedScenario] = useState(null);
     const [flows, setFlows] = useState([]);
+    const [loading, setLoading] = useState(false); // Loader state
     const navigate = useNavigate();
     const axiosInstance = useMemo(() => axios.create({
         baseURL: '/choreo-apis/chatbottfg/backend/v1',
@@ -45,14 +47,16 @@ function Menu() {
         setSelectedScenario(scenario);
         fetchFlowsByScenario(scenario.id);
     };
+
     const handleScenarioLeave = () => {
         setSelectedScenario(null);
         setFlows([]);
     };
 
     const handleFlowClick = (flowId) => {
+        setLoading(true); // Start loader
         const currentFlowId = localStorage.getItem('currentFlowId');
-        if(currentFlowId!=null){
+        if (currentFlowId != null) {
             if (currentFlowId.toString() !== flowId.toString()) {
                 localStorage.removeItem('chatMessages');
                 localStorage.setItem('currentFlowId', flowId.toString());
@@ -66,12 +70,15 @@ function Menu() {
             })
             .catch(error => {
                 console.error('Error al iniciar el flujo:', error);
+            })
+            .finally(() => {
+                setLoading(false); // Stop loader
             });
     };
 
     return (
         <div className="menu">
-            <NavigationBar/>
+            <NavigationBar />
             <h1>Selecciona un escenario:</h1>
             <div className="scenario-container">
                 {scenarios.map(scenario => (
@@ -91,8 +98,14 @@ function Menu() {
                     </div>
                 ))}
             </div>
+            {loading && (
+                <Dimmer active>
+                    <Loader>Loading</Loader>
+                </Dimmer>
+            )}
         </div>
     );
 }
 
 export default Menu;
+

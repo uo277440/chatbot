@@ -205,11 +205,12 @@ def upload_combined(request):
             flow = cargar_datos_a_bd(json_data, scenario)
             csv_file.seek(0)  # Reset the file pointer again before re-reading for saving
             csv_data = csv.DictReader(csv_content)  # Re-read for actual processing
+            print("CARGAR DATOS A BD")
             cargar_datos_csv_a_bd(csv_data, flow)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=400)
-
-    return JsonResponse({'message': 'Files uploaded and verified successfully', 'flow': {'id': flow.id, 'name': flow.name}}, status=200)
+    print("ACABE LA FAENA")
+    return JsonResponse({'message': 'Files uploaded and verified successfully'}, status=200)
 
     
 @api_view(['GET'])
