@@ -96,9 +96,9 @@ const fetchFlows = useCallback((scenarioId) => {
     formData.append('json_file', file);
     formData.append('csv_file', csvFile);
     formData.append('scenario', selectedScenario || newScenario);
-    print(file)
-    print(csvFile)
-    print(newScenario)
+    console.log(file)
+    console.log(csvFile)
+    console.log(newScenario)
     const csrftoken = Cookies.get('csrftoken')
     axiosInstance.post('/api/upload_combined', formData)
     .then(response => {
