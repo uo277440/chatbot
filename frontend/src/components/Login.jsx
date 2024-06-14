@@ -4,7 +4,7 @@ import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-
+import LoadingIndicator from "./LoadingIndicator";
 import Cookies from 'js-cookie';
 import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
@@ -23,6 +23,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -92,40 +93,47 @@ function Login() {
     });
   }
   async function submitLogin() {
-    client.post(
-      "/api/login",
-      {
-        email: email,
-        password: password
-      },{
-        headers: {
-          'X-CSRFToken': Cookies.get('csrftoken')
+    setLoading(true);
+    try{
+      client.post(
+        "/api/login",
+        {
+          email: email,
+          password: password
+        },{
+          headers: {
+            'X-CSRFToken': Cookies.get('csrftoken')
+          }
         }
-      }
-    ).then(function (res) {
-      const user = res.data.user;
-      setCurrentUser(user);
-      if (user.is_superuser) {
-        navigate('/admin');
-      } else {
-        navigate('/menu');
-      }
-    })
-    .catch(error => {
-      if (error.response) {
-        console.log('Código de estado HTTP: ' + error.response.status);
-        Swal.fire({
-          title: 'Error',
-          text: error.response.data.message,
-          icon: 'error',
-          confirmButtonText: 'Aceptar'
+      ).then(function (res) {
+        const user = res.data.user;
+        setCurrentUser(user);
+        if (user.is_superuser) {
+          navigate('/admin');
+        } else {
+          navigate('/menu');
+        }
+      })
+      .catch(error => {
+        if (error.response) {
+          console.log('Código de estado HTTP: ' + error.response.status);
+          Swal.fire({
+            title: 'Error',
+            text: error.response.data.message,
+            icon: 'error',
+            confirmButtonText: 'Aceptar'
+        });
+        } else if (error.request) {
+          console.error('No se recibió ninguna respuesta del servidor:', error.request);
+        } else {
+          console.error('Error al configurar la solicitud:', error.message);
+        }
       });
-      } else if (error.request) {
-        console.error('No se recibió ninguna respuesta del servidor:', error.request);
-      } else {
-        console.error('Error al configurar la solicitud:', error.message);
-      }
-    });
+    }catch (error){
+      alert(error)
+    }finally{
+      setLoading(false)
+    }
   }
 
   function handleLogout(e) {
@@ -176,6 +184,7 @@ function Login() {
           <Form.Label>Contraseña</Form.Label>
           <Form.Control type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
+        {loading && <LoadingIndicator />}
         <Button variant="primary" type="submit">
           Iniciar sesión
         </Button>
