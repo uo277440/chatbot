@@ -160,7 +160,6 @@ from django.db import transaction
 @authentication_classes([SessionAuthentication])
 @ensure_csrf_cookie
 def upload_combined(request):
-    return JsonResponse({'message': 'Files uploaded and verified successfully'}, status=200)
     json_file = request.FILES.get('json_file')
     csv_file = request.FILES.get('csv_file')
     scenario = request.data.get('scenario')

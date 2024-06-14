@@ -3,7 +3,12 @@ import axios from 'axios';
 import '../css/Admin.css';
 import NavigationBar from '../NavigationBar';
 import Cookies from 'js-cookie';
+import Swal from 'sweetalert2';
+import { Dimmer, Loader, Segment } from 'semantic-ui-react';
 
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
 
 function AdminView() {
   const [file, setFile] = useState(null);
@@ -13,6 +18,8 @@ function AdminView() {
   const [csvFile, setCSVFile] = useState(null);
   const [flows, setFlows] = useState([]);
   const [selectedFlow, setSelectedFlow] = useState('');
+  const [loading, setLoading] = useState(false); // Loader state
+
   const axiosInstance = useMemo(() => axios.create({
     baseURL: '/choreo-apis/chatbottfg/backend/v1',
     withCredentials: true
@@ -75,17 +82,21 @@ function AdminView() {
 
   const handleUpload = (event) => {
     event.preventDefault();
+    setLoading(true); // Start loader
 
     if (!file) {
       alert('Seleccione un archivo JSON');
+      setLoading(false); // Stop loader
       return;
     }
     if (!csvFile) {
       alert('Seleccione un archivo CSV');
+      setLoading(false); // Stop loader
       return;
     }
     if (!selectedScenario && !newScenario) {
       alert('Seleccione un escenario existente o ingrese un nuevo escenario');
+      setLoading(false); // Stop loader
       return;
     }
 
@@ -96,11 +107,24 @@ function AdminView() {
 
     axiosInstance.post('/api/upload_combined', formData)
       .then(response => {
-        alert('El JSON y el CSV se han subido correctamente');
+        Swal.fire({
+          title: 'Error',
+          text: "El flujo se ha añadido correctamente",
+          icon: 'sucess',
+          confirmButtonText: 'Aceptar'
+        });
       })
       .catch(error => {
         console.error('Error during upload:', error);
-        alert('Ha habido un error durante la subida del archivo');
+        Swal.fire({
+          title: 'Error',
+          text: "Ha habido un error durante la subida del flujo",
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
+      })
+      .finally(() => {
+        setLoading(false); // Stop loader
       });
   };
 
@@ -164,6 +188,14 @@ function AdminView() {
           <button type="submit">Añadir Flujo</button>
         </form>
 
+        {loading && (
+          <Segment>
+            <Dimmer active>
+              <Loader>Loading</Loader>
+            </Dimmer>
+          </Segment>
+        )}
+
         <div className="flow-selection">
           <h3>Eliminar Flujo</h3>
           <label htmlFor="flowSelect">Seleccione un flujo:</label>
@@ -181,6 +213,7 @@ function AdminView() {
 }
 
 export default AdminView;
+
 
 
 
