@@ -4,9 +4,6 @@ import '../css/Admin.css';
 import NavigationBar from '../NavigationBar';
 import Cookies from 'js-cookie';
 
-axios.defaults.xsrfCookieName = 'csrftoken';
-axios.defaults.xsrfHeaderName = 'X-CSRFToken';
-axios.defaults.withCredentials = true;
 
 function AdminView() {
   const [file, setFile] = useState(null);
