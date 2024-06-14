@@ -61,7 +61,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'chatbot.middleware.open_access_middleware',
+    
 
     
      
@@ -218,7 +218,5 @@ CORS_ALLOW_HEADERS = (
     
 )
 print('ALLOW')
-CORS_ALLOWED_ORIGINS = ['*']
-CSRF_TRUSTED_ORIGINS = ['*']
 CORS_ALLOW_CREDENTIALS =True
 CORS_ORIGIN_ALLOW_ALL = True 
