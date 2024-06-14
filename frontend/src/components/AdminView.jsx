@@ -102,6 +102,7 @@ const fetchFlows = useCallback((scenarioId) => {
       alert('El JSON y el CSV se han subido correctamente');
     })
     .catch(error => {
+      alert(error.message);
       alert('Ha habido un error durante la subida del archivo');
     });
   };
