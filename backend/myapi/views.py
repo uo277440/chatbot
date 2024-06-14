@@ -156,7 +156,7 @@ def upload_training(request):
 from django.db import transaction
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
+@permission_classes([IsAuthenticated])
 @authentication_classes([SessionAuthentication])
 @ensure_csrf_cookie
 def upload_combined(request):

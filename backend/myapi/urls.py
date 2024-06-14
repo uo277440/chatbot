@@ -35,7 +35,6 @@ urlpatterns = [
     path('upload_training', views.upload_training, name='upload_training'),
     path('upload_combined', views.upload_combined, name='upload_combined'),
     path('delete_flow', views.delete_flow, name='delete_flow'),
-    path('upload_combined', views.upload_combined, name='upload_combined'),
     path('scenarios', views.scenarios, name='scenarios'),
     path('flows/', views.get_flows_by_scenario_url, name='get_flows_by_scenario_url'),
     path('start_flow', views.update_flow_manager, name='start_flow'),
