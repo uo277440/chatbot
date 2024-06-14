@@ -19,7 +19,7 @@ const Forum = () => {
     const websocket = useRef(null);
     const messagesEndRef = useRef(null);
     const client = useMemo(() => axios.create({
-        baseURL: 'https://chatbot-tfg-backend-6793e1567ffc.herokuapp.com',
+        baseURL: '/choreo-apis/chatbottfg/backend/v1',
         withCredentials: true
     }), []);
 

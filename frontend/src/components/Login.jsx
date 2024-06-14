@@ -1,17 +1,16 @@
 import '../css/Login.css';
-import React, { useState, useEffect, useContext,useMemo } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import LoadingIndicator from "./LoadingIndicator";
 import Cookies from 'js-cookie';
 import NavigationBar from '../NavigationBar';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthContext from './AuthContext';
 import logo from '../assets/logo.png'; // Import the logo image
-
+import { Dimmer, Loader, Segment } from 'semantic-ui-react'; // Import Loader from semantic-ui-react
 
 function Login() {
   const client = useMemo(() => axios.create({
@@ -23,7 +22,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false); // Loader state
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -58,6 +57,7 @@ function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setLoading(true); // Start loader
     if (registrationToggle) {
       submitRegistration();
     } else {
@@ -84,36 +84,38 @@ function Login() {
           text: error.response.data.message,
           icon: 'error',
           confirmButtonText: 'Aceptar'
-      });
+        });
       } else if (error.request) {
         console.error('No se recibió ninguna respuesta del servidor:', error.request);
       } else {
         console.error('Error al configurar la solicitud:', error.message);
       }
+    })
+    .finally(() => {
+      setLoading(false); // Stop loader
     });
   }
+
   async function submitLogin() {
-    setLoading(true);
-    try{
-      client.post(
-        "/api/login",
-        {
-          email: email,
-          password: password
-        },{
-          headers: {
-            'X-CSRFToken': Cookies.get('csrftoken')
-          }
-        }
-      ).then(function (res) {
-        const user = res.data.user;
-        setCurrentUser(user);
-        if (user.is_superuser) {
-          navigate('/admin');
-        } else {
-          navigate('/menu');
-        }
-      })
+    client.post(
+      "/api/login",
+      {
+        email: email,
+        password: password
+      }, {
+      headers: {
+        'X-CSRFToken': Cookies.get('csrftoken')
+      }
+    }
+    ).then(function (res) {
+      const user = res.data.user;
+      setCurrentUser(user);
+      if (user.is_superuser) {
+        navigate('/admin');
+      } else {
+        navigate('/menu');
+      }
+    })
       .catch(error => {
         if (error.response) {
           console.log('Código de estado HTTP: ' + error.response.status);
@@ -122,18 +124,16 @@ function Login() {
             text: error.response.data.message,
             icon: 'error',
             confirmButtonText: 'Aceptar'
-        });
+          });
         } else if (error.request) {
           console.error('No se recibió ninguna respuesta del servidor:', error.request);
         } else {
           console.error('Error al configurar la solicitud:', error.message);
         }
+      })
+      .finally(() => {
+        setLoading(false); // Stop loader
       });
-    }catch (error){
-      alert(error)
-    }finally{
-      setLoading(false)
-    }
   }
 
   function handleLogout(e) {
@@ -158,7 +158,15 @@ function Login() {
       <Container className="login">
         <div className="login-content">
           <img src={logo} alt="App Logo" className="login-logo" />
-          {renderLoginForm()}
+          {loading ? (
+            <Segment>
+              <Dimmer active>
+                <Loader>Loading</Loader>
+              </Dimmer>
+            </Segment>
+          ) : (
+            renderLoginForm()
+          )}
         </div>
       </Container>
     </div>
@@ -184,9 +192,8 @@ function Login() {
           <Form.Label>Contraseña</Form.Label>
           <Form.Control type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
-        {loading && <LoadingIndicator />}
         <Button variant="primary" type="submit">
-          Iniciar sesión
+          {registrationToggle ? 'Registrarse' : 'Iniciar sesión'}
         </Button>
       </Form>
     );
@@ -194,6 +201,7 @@ function Login() {
 }
 
 export default Login;
+
 
 
 
