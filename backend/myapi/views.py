@@ -157,6 +157,8 @@ from django.db import transaction
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
+@authentication_classes([SessionAuthentication])
+@ensure_csrf_cookie
 def upload_combined(request):
     return JsonResponse({'message': 'Files uploaded and verified successfully'}, status=200)
     json_file = request.FILES.get('json_file')
