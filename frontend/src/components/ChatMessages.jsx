@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState,useMemo } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import axios from 'axios';
 import '../css/ChatMessages.css';
 import altavoz from '../assets/altavoz.png';
@@ -25,17 +25,19 @@ function ChatMessages({ messages, setMessages }) {
         const sourceLang = lang || 'en';
         if (!isButtonEnabled) return;
         setIsButtonEnabled(false);
-        axiosInstance.get(`api/transform?text=${encodeURIComponent(text)}&source=${sourceLang}`)
-            .then(response => {
-                console.log('Respuesta de text_to_audio:', response);
-                setTimeout(() => {
-                    setIsButtonEnabled(true);
-                }, response.data.delay);
-            })
-            .catch(error => {
-                console.error('Error al llamar a text_to_audio:', error);
-                setIsButtonEnabled(true);
-            });
+
+        // Usar la Web Speech API para sintetizar el texto
+        const synth = window.speechSynthesis;
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = sourceLang === 'es' ? 'es-ES' : 'en-US'; // Configurar el idioma de la voz
+
+        // Callback cuando la síntesis de voz termine
+        utterance.onend = () => {
+            setIsButtonEnabled(true);
+        };
+
+        // Iniciar la síntesis de voz
+        synth.speak(utterance);
     };
 
     const handleTranslate = (text, lang, index) => {
@@ -70,7 +72,7 @@ function ChatMessages({ messages, setMessages }) {
                             className={`image-button ${isButtonEnabled ? '' : 'disabled'}`}
                         />
                     )}
-                    {message.from === 'bot' &&  !message.suggestion && (
+                    {message.from === 'bot' && !message.suggestion && (
                         <img
                             src={traducir}
                             alt="Traducir"
@@ -85,6 +87,7 @@ function ChatMessages({ messages, setMessages }) {
 }
 
 export default ChatMessages;
+
 
 
 
