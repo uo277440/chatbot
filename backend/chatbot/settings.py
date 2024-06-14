@@ -53,15 +53,15 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "corsheaders.middleware.CorsMiddleware",
     'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'chatbot.middleware.open_access_middleware',
-    "corsheaders.middleware.CorsMiddleware",
 
     
      
@@ -218,4 +218,7 @@ CORS_ALLOW_HEADERS = (
     
 )
 print('ALLOW')
+CORS_ALLOWED_ORIGINS = ['*']
+CSRF_TRUSTED_ORIGINS = ['*']
 CORS_ALLOW_CREDENTIALS =True
+CORS_ORIGIN_ALLOW_ALL = True 
