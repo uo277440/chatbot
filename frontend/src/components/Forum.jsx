@@ -22,11 +22,7 @@ const Forum = () => {
         baseURL: '/choreo-apis/chatbottfg/backend/v1',
         withCredentials: true
     }), []);
-    const constructWebSocketURL = (baseURL) => {
-        const origin = window.location.origin;
-        const protocol = origin.startsWith('https') ? 'wss' : 'ws';
-        return `${protocol}://${origin}${baseURL.replace('http', '')}/ws/forum/`;
-    };
+    
 
     useEffect(() => {
         const fetchMessages = async () => {
@@ -46,7 +42,7 @@ const Forum = () => {
             }
 
             console.log("Initializing WebSocket");
-            const websocketURL = constructWebSocketURL('/choreo-apis/chatbottfg/backend/v1');
+            const websocketURL = constructWebSocketURL('wss://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev/choreo-apis/chatbottfg/backend/v1/ws/forum/');
             websocket.current = new WebSocket(websocketURL);
 
             websocket.current.onopen = () => {
