@@ -159,11 +159,9 @@ function Login() {
         <div className="login-content">
           <img src={logo} alt="App Logo" className="login-logo" />
           {loading ? (
-            <Segment>
               <Dimmer active>
-                <Loader>Loading</Loader>
+                <Loader>Cargando</Loader>
               </Dimmer>
-            </Segment>
           ) : (
             renderLoginForm()
           )}

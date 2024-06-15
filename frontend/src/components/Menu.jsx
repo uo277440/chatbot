@@ -100,7 +100,7 @@ function Menu() {
             </div>
             {loading && (
                 <Dimmer active>
-                    <Loader>Loading</Loader>
+                    <Loader>Cargando</Loader>
                 </Dimmer>
             )}
         </div>
