@@ -273,10 +273,12 @@ def chatbot_response(request):
         return Response({'response': response,'is_finished':flowManager.is_finished(),'mark': marker.mark,'suggestion':False},status=200)
 @api_view(['GET'])
 @permission_classes([AllowAny])
+@authentication_classes([SessionAuthentication])
 def mascot_message(request):
     print("HOLA")
     print("ERA GET")
     chatbot, flowManager, marker = get_session_objects(request.session)
+    print("MARKER DECREASE")
     marker.decrease()
     suggestion=flowManager.suggest()
     print("SUGERENCIA")

@@ -23,8 +23,6 @@ function Mascot({ showHelp, setShowHelp }) {
                 console.log("llame al suggestions")
                 setMessage(response.data.suggestion);
                 setShowHelp(true);
-                console.log("MENSAJE OBTENIDO")
-                console.log(response.data.suggestion)
                 localStorage.setItem('mascotMessage', response.data.suggestion);
                 localStorage.setItem('showHelp',true);
             })
@@ -39,8 +37,6 @@ function Mascot({ showHelp, setShowHelp }) {
             setMessage('');
             localStorage.removeItem('mascotMessage');
         }
-        console.log('MASCOTA')
-        console.log(localStorage.getItem('showHelp'))
     }, [showHelp]);
 
     return (
