@@ -34,6 +34,7 @@ class FlowManager:
             steps = Step.objects.filter(flow=flow)
             self.flow = flow
             self.steps = steps
+
         except Flow.DoesNotExist:
             return None
     ##
@@ -52,6 +53,9 @@ class FlowManager:
     def suggest(self):
         for step in self.steps:
             if step.label == self.current_label:
+                print(step)
+                print("sugerencia")
+                print(step.suggestion)
                 return step.suggestion
         return 'Start with a greeting message!'
     ##
