@@ -20,9 +20,12 @@ function Mascot({ showHelp, setShowHelp }) {
     const handleMascotClick = () => {
         axiosInstance.get('/api/mascot_message')
             .then(response => {
-                setMessage(response.data.response);
+                console.log("llame al suggestions")
+                setMessage(response.data.suggestion);
                 setShowHelp(true);
-                localStorage.setItem('mascotMessage', response.data.response);
+                console.log("MENSAJE OBTENIDO")
+                console.log(response.data.suggestion)
+                localStorage.setItem('mascotMessage', response.data.suggestion);
                 localStorage.setItem('showHelp',true);
             })
             .catch(error => {

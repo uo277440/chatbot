@@ -36,7 +36,7 @@ function Chatbot() {
     const navigate = useNavigate();
 
     const handleSubmitMessage = (message) => {
-        checkBot()
+        //checkBot()
         const newUserMessage = { text: message, from: 'user' };
         const updatedMessages = [...messages, newUserMessage];
         setMessages(updatedMessages);
@@ -166,10 +166,14 @@ function Chatbot() {
     }, [navigate, axiosInstance]);
         
 
+    
     useEffect(() => {
         checkBot()
+    }, [checkBot]);
+
+    useEffect(() => {
         localStorage.setItem('chatMessages', JSON.stringify(messages));
-    }, [messages,checkBot]);
+    }, [messages]);
 
     return (
         <div className="chatbot">

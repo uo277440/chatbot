@@ -282,7 +282,7 @@ def mascot_message(request):
     print("SUGERENCIA")
     print(suggestion)
     set_session_objects(request.session, chatbot, flowManager, marker)
-    return Response({'response': suggestion},status=200)
+    return Response({'suggestion': suggestion},status=200)
 @api_view(['GET'])
 @permission_classes([permissions.IsAuthenticated])
 def search_student(request):
