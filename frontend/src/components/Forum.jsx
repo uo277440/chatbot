@@ -42,7 +42,7 @@ const Forum = () => {
             }
 
             console.log("Initializing WebSocket");
-            websocket.current = new WebSocket('wss://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev/choreo-apis/chatbottfg/backend/v1/ws/forum/');
+            websocket.current = new WebSocket('wss://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev/choreo-apis/chatbottfg/backend/v1/ws/forums/');
 
             websocket.current.onopen = () => {
                 console.log("WebSocket connected");
