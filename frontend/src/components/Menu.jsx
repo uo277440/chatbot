@@ -7,9 +7,8 @@ import { Dimmer, Loader } from 'semantic-ui-react';
 
 function Menu() {
     const [scenarios, setScenarios] = useState([]);
-    const [selectedScenario, setSelectedScenario] = useState(null);
-    const [flows, setFlows] = useState([]);
-    const [loading, setLoading] = useState(false); // Loader state
+    const [flowsByScenario, setFlowsByScenario] = useState({});
+    const [loading, setLoading] = useState(true); // Loader state
     const navigate = useNavigate();
     const axiosInstance = useMemo(() => axios.create({
         baseURL: '/choreo-apis/chatbottfg/backend/v1',
@@ -17,47 +16,34 @@ function Menu() {
     }), []);
 
     useEffect(() => {
-        // Fetch existing scenarios when component mounts
-        fetchScenarios();
+        // Fetch scenarios and flows when component mounts
+        fetchScenariosAndFlows();
     }, []);
 
-    const fetchScenarios = () => {
-        // Fetch existing scenarios from the backend
-        axiosInstance.get('/api/scenarios')
-            .then(response => {
-                setScenarios(response.data.scenarios);
-            })
-            .catch(error => {
-                console.error('Error fetching scenarios:', error);
-            });
-    };
+    const fetchScenariosAndFlows = async () => {
+        try {
+            const scenariosResponse = await axiosInstance.get('/api/scenarios');
+            const scenarios = scenariosResponse.data.scenarios;
+            setScenarios(scenarios);
 
-    const fetchFlowsByScenario = (scenarioId) => {
-        axiosInstance.get(`/api/flows/?scenery_id=${scenarioId}`)
-            .then(response => {
-                const flows = response.data.flows;
-                setFlows(flows);
-            })
-            .catch(error => {
-                console.error('Error fetching flows:', error);
-            });
-    };
-
-    const handleScenarioHover = (scenario) => {
-        setSelectedScenario(scenario);
-        fetchFlowsByScenario(scenario.id);
-    };
-
-    const handleScenarioLeave = () => {
-        setSelectedScenario(null);
-        setFlows([]);
+            const flowsByScenario = {};
+            await Promise.all(scenarios.map(async (scenario) => {
+                const flowsResponse = await axiosInstance.get(`/api/flows/?scenery_id=${scenario.id}`);
+                flowsByScenario[scenario.id] = flowsResponse.data.flows;
+            }));
+            setFlowsByScenario(flowsByScenario);
+        } catch (error) {
+            console.error('Error fetching scenarios and flows:', error);
+        } finally {
+            setLoading(false); // Stop loader
+        }
     };
 
     const handleFlowClick = (flowId) => {
         let currentFlowId = localStorage.getItem('currentFlowId');
-        if (currentFlowId == null){
+        if (currentFlowId == null) {
             localStorage.setItem('currentFlowId', flowId.toString());
-            currentFlowId=flowId.toString()
+            currentFlowId = flowId.toString();
         }
 
         if (currentFlowId != null) {
@@ -87,19 +73,15 @@ function Menu() {
             <h1>Selecciona un escenario:</h1>
             <div className="scenario-container">
                 {scenarios.map(scenario => (
-                    <div key={scenario.id} className="scenario"
-                        onMouseEnter={() => handleScenarioHover(scenario)}
-                        onMouseLeave={() => handleScenarioLeave()}>
+                    <div key={scenario.id} className="scenario">
                         <h2>{scenario.name}</h2>
-                        {selectedScenario && selectedScenario.id === scenario.id &&
-                            <ul className="flow-list">
-                                {flows.map(flow => (
-                                    <li key={flow.id} onClick={() => handleFlowClick(flow.id)}>
-                                        {flow.name}
-                                    </li>
-                                ))}
-                            </ul>
-                        }
+                        <ul className="flow-list">
+                            {flowsByScenario[scenario.id]?.map(flow => (
+                                <li key={flow.id} onClick={() => handleFlowClick(flow.id)}>
+                                    {flow.name}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
                 ))}
             </div>
@@ -113,4 +95,5 @@ function Menu() {
 }
 
 export default Menu;
+
 
