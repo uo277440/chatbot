@@ -538,3 +538,61 @@ def user_view(request):
     serializer = UserSerializer(request.user)
     return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 
+class ForumView(APIView):
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
+    def get(self, request, *args, **kwargs):
+        messages = ForumMessage.objects.all()
+        serialized_messages = ForumMessageSerializer(messages, many=True)
+        pinned_message = ForumMessage.objects.filter(pinned=True).first()
+        serialized_pinned_message = ForumMessageSerializer(pinned_message).data if pinned_message else None
+        return JsonResponse({'messages': serialized_messages.data, 'pinnedMessage': serialized_pinned_message})
+
+    def post(self, request, *args, **kwargs):
+        action = request.POST.get('action')
+        user_id = request.POST.get('user_id')
+        message_id = request.POST.get('id')
+        message_content = request.POST.get('message')
+
+        if action == 'send':
+            user = self.get_user_from_id(user_id)
+            if user:
+                forum_message = ForumMessage.objects.create(message=message_content, user=user)
+                new_data = self.serialize_message(forum_message)
+                return JsonResponse({'action': 'send', 'data': new_data})
+
+        elif action == 'delete':
+            forum_message = ForumMessage.objects.get(id=message_id)
+            forum_message.delete()
+            return JsonResponse({'action': 'delete', 'id': message_id})
+
+        elif action == 'edit':
+            forum_message = ForumMessage.objects.get(id=message_id)
+            forum_message.message = message_content
+            forum_message.save()
+            return JsonResponse({'action': 'edit', 'id': message_id, 'message': message_content})
+
+        elif action == 'pin':
+            forum_message = ForumMessage.objects.get(id=message_id)
+            forum_message.pinned = True
+            forum_message.save()
+            return JsonResponse({'action': 'pin', 'message': self.serialize_message(forum_message)})
+
+        elif action == 'unpin':
+            forum_message = ForumMessage.objects.filter(pinned=True).first()
+            if forum_message:
+                forum_message.pinned = False
+                forum_message.save()
+            return JsonResponse({'action': 'unpin'})
+
+    @staticmethod
+    def get_user_from_id(user_id):
+        try:
+            return AppUser.objects.get(user_id=user_id)
+        except AppUser.DoesNotExist:
+            return None
+
+    @staticmethod
+    def serialize_message(message):
+        return ForumMessageSerializer(message).data
+

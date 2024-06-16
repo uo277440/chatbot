@@ -23,6 +23,7 @@ schema_view = get_schema_view(
 urlpatterns = [
     path("chatbot_response/",views.chatbot_response, name='chatbot_response'),
     path("token",views.getCSRFToken, name='token'),
+    path('forum', views.ForumView.as_view(), name='forum'),
     path('register', views.user_register, name='register'),
 	path('login', views.user_login, name='login'),
 	path('logout', views.user_logout, name='logout'),
