@@ -266,7 +266,7 @@ def chatbot_response(request):
                 except Flow.DoesNotExist:
                     return Response({'response': 'Flujo no encontrado'},status=status.HTTP_404_NOT_FOUND)
         else:
-            response="FLUJO NO VA BIEN" + bot_response
+            response="Lo siento, parece que no entendí tu mensaje. Si te encuentras perdido en el flujo, no dudes en usar el botón de ayuda"
         if(response is None):
             return Response({'response': 'La respuesta es incoherente'},status=200)
         set_session_objects(request.session, chatbot, flowManager, marker)

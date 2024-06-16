@@ -5,6 +5,7 @@ import NavigationBar from '../NavigationBar';
 import downloadIcon from '../assets/descargar.png';
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+import Swal from 'sweetalert2';
 axios.defaults.withCredentials = true;
 
 function AdminMarks() {
@@ -30,7 +31,12 @@ function AdminMarks() {
                 setUser(null);
                 setMarks([]);
                 setConversations([]);
-                alert('No se encontró ningun usuario');
+                Swal.fire({
+                    title: 'Error',
+                    text: "Ningún usuario coincide con el criterio de búsqueda",
+                    icon: 'error',
+                    confirmButtonText: 'Aceptar'
+                  });
             });
     };
 

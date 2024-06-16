@@ -85,17 +85,32 @@ function AdminView() {
     setLoading(true); // Start loader
 
     if (!file) {
-      alert('Seleccione un archivo JSON');
+      Swal.fire({
+        title: 'Datos faltantes',
+        text: "Seleccione un fichero JSON",
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
       setLoading(false); // Stop loader
       return;
     }
     if (!csvFile) {
-      alert('Seleccione un archivo CSV');
+      Swal.fire({
+        title: 'Datos faltantes',
+        text: "Seleccione un fichero CSV",
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
       setLoading(false); // Stop loader
       return;
     }
     if (!selectedScenario && !newScenario) {
-      alert('Seleccione un escenario existente o ingrese un nuevo escenario');
+      Swal.fire({
+        title: 'Datos faltantes',
+        text: "Seleccione un escenario existente o ingrese un nuevo escenario",
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
       setLoading(false); // Stop loader
       return;
     }
@@ -108,9 +123,9 @@ function AdminView() {
     axiosInstance.post('/api/upload_combined', formData)
       .then(response => {
         Swal.fire({
-          title: 'Error',
+          title: 'Flujo añadido',
           text: "El flujo se ha añadido correctamente",
-          icon: 'sucess',
+          icon: 'success',
           confirmButtonText: 'Aceptar'
         });
       })
@@ -130,13 +145,23 @@ function AdminView() {
 
   const handleDeleteFlow = () => {
     if (!selectedFlow) {
-      alert('Seleccione un flujo para eliminar');
+      Swal.fire({
+        title: 'Flujo no seleccionado',
+        text: "Seleccione un flujo para eliminar",
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
       return;
     }
 
     axiosInstance.post('/api/delete_flow', { flow_id: selectedFlow })
       .then(response => {
-        alert('Flujo eliminado correctamente');
+        Swal.fire({
+          title: 'Flujo eliminado',
+          text: "Flujo eliminado correctamente",
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
         setFlows(flows.filter(flow => flow.id !== selectedFlow));
         if (selectedScenario) {
           fetchFlows(selectedScenario);
@@ -145,7 +170,12 @@ function AdminView() {
       })
       .catch(error => {
         console.error('Error during delete:', error);
-        alert('Ha habido un error durante la eliminación del flujo');
+        Swal.fire({
+          title: 'Error',
+          text: "Ha habido un error durante la eliminación del flujo",
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        });
       });
   };
 
