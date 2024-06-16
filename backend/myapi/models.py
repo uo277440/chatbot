@@ -4,8 +4,29 @@ from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.postgres.fields import ArrayField
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
+import os
 import json
+from dotenv import load_dotenv
+import firebase_admin
+from firebase_admin import credentials
+from firebase_admin import firestore
 
+load_dotenv()
+cred = credentials.Certificate({
+    "type": "service_account",
+    "project_id": os.getenv("GOOGLE_PROJECT_ID"),
+    "private_key_id": os.getenv("GOOGLE_PRIVATE_KEY_ID"),
+    "private_key": os.getenv("GOOGLE_PRIVATE_KEY").replace('\\n', '\n'),
+    "client_email": os.getenv("GOOGLE_CLIENT_EMAIL"),
+    "client_id": os.getenv("GOOGLE_CLIENT_ID"),
+    "auth_uri": os.getenv("GOOGLE_AUTH_URI"),
+    "token_uri": os.getenv("GOOGLE_TOKEN_URI"),
+    "auth_provider_x509_cert_url": os.getenv("GOOGLE_AUTH_PROVIDER_X509_CERT_URL"),
+    "client_x509_cert_url": os.getenv("GOOGLE_CLIENT_X509_CERT_URL")
+})
+firebase_admin.initialize_app(cred)
+
+db = firestore.client()
 class AppUserManager(BaseUserManager):
 	def create_user(self,email,username, password=None):
 		if not email:
@@ -125,14 +146,30 @@ class ForumMessage(models.Model):
         
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(
-            'forum_group',
-            {
-                'type': 'send_message',
-                'message': self.message,
-            }
-        )
+        self.update_firestore('send')
+
+    def delete(self, *args, **kwargs):
+        self.update_firestore('delete')
+        super().delete(*args, **kwargs)
+
+    def update_firestore(self, action):
+        message_data = {
+            'id': self.id,
+            'message': self.message,
+            'user_id': self.user.user_id,
+            'username': self.user.username,
+            'timestamp': self.date,
+            'isPinned': self.pinned
+        }
+
+        if action == 'send' or action == 'edit':
+            db.collection('messages').document(str(self.id)).set(message_data)
+        elif action == 'delete':
+            db.collection('messages').document(str(self.id)).delete()
+        elif action == 'pin':
+            db.collection('messages').document(str(self.id)).update({'isPinned': True})
+        elif action == 'unpin':
+            db.collection('messages').document(str(self.id)).update({'isPinned': False})
 class ChatConversation(models.Model):
     user = models.ForeignKey(AppUser, on_delete=models.CASCADE, related_name='conversations')
     conversation = models.JSONField()

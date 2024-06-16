@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
 }), []);
   const [newForumMessage, setNewForumMessage] = useState(false);
 
-  const websocket = useRef(null);
+
 
 
   useEffect(() => {
@@ -30,7 +30,6 @@ export const AuthProvider = ({ children }) => {
   }, [newForumMessage]);
 
   useEffect(() => {
-    console.log('no paro')
     const fetchCurrentUser = async () => {
       try {
         const response = await axiosInstance.get('/api/user');
@@ -43,54 +42,6 @@ export const AuthProvider = ({ children }) => {
     if (!currentUser) {
       fetchCurrentUser();
     }
-
-    const connectWebSocket = () => {
-      if (websocket.current) {
-        websocket.current.close();
-        websocket.current = null; 
-    }
-
-      websocket.current = new WebSocket('wss://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev/choreo-apis/chatbottfg/backend/v1/ws/forum/');
-
-      websocket.current.onopen = () => {
-        console.log('WebSocket connected');
-      };
-
-      websocket.current.onmessage = (event) => {
-        const data = JSON.parse(event.data);
-        if (data.action === 'send') {
-          if (parseInt(data.user.user_id) !== parseInt(currentUser?.user_id)) {
-            setNewForumMessage(true);
-          }else{
-            console.log('falso')
-            setNewForumMessage(false);
-          }
-        }
-      };
-
-      websocket.current.onclose = function(event) {
-        console.error('WebSocket closed unexpectedly');
-        websocket.current = null; 
-    };
-
-      websocket.current.onerror = (error) => {
-        console.error('WebSocket error:', error);
-        if (websocket.current) {
-          websocket.current.close();
-        }
-      };
-    };
-
-    connectWebSocket();
-
-    return () => {
-      if (websocket.current) {
-        websocket.current.onclose = null;
-        websocket.current.onerror = null;
-        websocket.current.close();
-        websocket.current = null;
-      }
-    };
   }, [currentUser]);
 
   return (

@@ -1,96 +1,65 @@
-import React, { useEffect, useState, useRef, useContext,useMemo } from 'react';
-import axios from 'axios';
+import React, { useEffect, useState, useRef, useContext, useMemo } from 'react';
+import { collection, addDoc, onSnapshot, query, orderBy, doc, deleteDoc, updateDoc, where, getDocs } from 'firebase/firestore';
+import { db } from '../firebaseConfig';
 import '../css/Forum.css';
 import NavigationBar from '../NavigationBar';
 import AuthContext from './AuthContext';
+import axios from 'axios';
+
 axios.defaults.xsrfCookieName = 'csrftoken';
 axios.defaults.xsrfHeaderName = 'X-CSRFToken';
 axios.defaults.withCredentials = true;
 
-
-
 const Forum = () => {
-    const {setNewForumMessage } = useContext(AuthContext);
+    const { setNewForumMessage } = useContext(AuthContext);
     const [messages, setMessages] = useState([]);
     const [pinnedMessage, setPinnedMessage] = useState(null); // Estado para el mensaje fijado
     const [content, setContent] = useState('');
     const [userId, setUserId] = useState(null);
     const [isSuperUser, setIsSuperUser] = useState(false);
-    const websocket = useRef(null);
     const messagesEndRef = useRef(null);
-    const client = useMemo(() => axios.create({
-        baseURL: '/choreo-apis/chatbottfg/backend/v1',
+    const axiosInstance = useMemo(() => axios.create({
+        baseURL: 'http://localhost:8000',
         withCredentials: true
     }), []);
-    
 
     useEffect(() => {
-        const fetchMessages = async () => {
+        const fetchUser = async () => {
             try {
-                const response = await client.get('/api/forum/messages');
-                setMessages(response.data.messages);
-                setPinnedMessage(response.data.pinnedMessage); // Asignar mensaje fijado
-            } catch (error) {
-                console.error('Error fetching messages:', error);
-            }
-        };
-
-        const initializeWebSocket = () => {
-            if (websocket.current) {
-                console.log("WebSocket already initialized");
-                return;
-            }
-
-            console.log("Initializing WebSocket");
-            websocket.current = new WebSocket('wss://48163e47-6126-4fd1-90c5-8f9c0943df84.e1-eu-north-azure.choreoapps.dev/choreo-apis/chatbottfg/backend/v1/ws/forum/');
-
-            websocket.current.onopen = () => {
-                console.log("WebSocket connected");
-            };
-
-            websocket.current.onmessage = function(event) {
-                const data = JSON.parse(event.data);
-                console.log('Received data:', data);
-                if (data.action === 'delete') {
-                    setMessages(prevMessages => prevMessages.filter(msg => msg.id !== data.id));
-                } else if (data.action === 'edit') {
-                    setMessages(prevMessages => prevMessages.map(msg => 
-                        msg.id === data.id ? { ...msg, message: data.message } : msg
-                    ));
-                } else if (data.action === 'pin') {
-                    setPinnedMessage(data.message); // Fijar mensaje
-                } else if (data.action === 'unpin') {
-                    setPinnedMessage(null); // Despinar mensaje
-                } else {
-                    setMessages(prevMessages => [...prevMessages, { id: data.id, message: data.message, user: data.user }]);
-                }
-            };
-
-            websocket.current.onclose = function(event) {
-                console.error('WebSocket closed unexpectedly');
-                websocket.current = null; // Reset the ref to null when the connection is closed
-            };
-        };
-
-        client.get('/api/user')
-            .then(response => {
-                console.log('forum')
-                console.log(response.data)
+                const response = await axiosInstance.get('/api/user');
                 setUserId(response.data.user.user_id);
                 setIsSuperUser(response.data.user.is_superuser);
-                fetchMessages();
-                initializeWebSocket();
-            })
-            .catch(error => {
+            } catch (error) {
                 console.error('Error fetching user:', error);
-            });
+            }
+        };
+
+        fetchUser();
+    }, [axiosInstance]);
+
+    useEffect(() => {
+        const messagesQuery = query(collection(db, 'messages'), orderBy('timestamp'));
+        const unsubscribeMessages = onSnapshot(messagesQuery, (snapshot) => {
+            const fetchedMessages = snapshot.docs.map(doc => ({
+                id: doc.id,
+                ...doc.data()
+            }));
+            setMessages(fetchedMessages);
+        });
+
+        const pinnedQuery = query(collection(db, 'messages'), where('isPinned', '==', true));
+        const unsubscribePinned = onSnapshot(pinnedQuery, (snapshot) => {
+            if (!snapshot.empty) {
+                const pinnedDoc = snapshot.docs[0];
+                setPinnedMessage({ id: pinnedDoc.id, ...pinnedDoc.data() });
+            } else {
+                setPinnedMessage(null);
+            }
+        });
 
         return () => {
-            console.log("Cleaning up WebSocket");
-            if (websocket.current) {
-                websocket.current.close();
-                websocket.current = null; // Reset the ref to null on cleanup
-            }
+            unsubscribeMessages();
+            unsubscribePinned();
         };
     }, []);
 
@@ -100,49 +69,101 @@ const Forum = () => {
         }
     }, [messages]);
 
-    const handleSubmit = (event) => {
+    function getCookie(name) {
+        const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+        return cookieValue ? cookieValue.pop() : '';
+    }
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
+        if (content.trim() === '') return;
 
-        if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
-            websocket.current.send(JSON.stringify({ message: content, user: userId }));
+        const csrftoken = getCookie('csrftoken');
+        const formData = new FormData();
+        formData.append('action', 'send');
+        formData.append('user_id', userId);
+        formData.append('message', content);
+
+        try {
+            await axiosInstance.post('/api/forum', formData, {
+                headers: {
+                    'X-CSRFToken': csrftoken
+                }
+            });
             setContent('');
-        } else {
-            console.error('WebSocket is not open');
+        } catch (error) {
+            console.error('Error sending message:', error);
         }
     };
 
-    const handleDelete = (messageId) => {
-        if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
-            websocket.current.send(JSON.stringify({ action: 'delete', id: messageId }));
-        } else {
-            console.error('WebSocket is not open');
+    const handleDelete = async (messageId) => {
+        const csrftoken = getCookie('csrftoken');
+        const formData = new FormData();
+        formData.append('action', 'delete');
+        formData.append('id', messageId);
+
+        try {
+            await axiosInstance.post('/api/forum', formData, {
+                headers: {
+                    'X-CSRFToken': csrftoken
+                }
+            });
+        } catch (error) {
+            console.error('Error deleting message:', error);
         }
     };
 
-    const handleEdit = (messageId) => {
+    const handleEdit = async (messageId) => {
         const newContent = prompt('Enter new content:');
         if (newContent) {
-            if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
-                websocket.current.send(JSON.stringify({ action: 'edit', id: messageId, message: newContent }));
-            } else {
-                console.error('WebSocket is not open');
+            const csrftoken = getCookie('csrftoken');
+            const formData = new FormData();
+            formData.append('action', 'edit');
+            formData.append('id', messageId);
+            formData.append('message', newContent);
+
+            try {
+                await axiosInstance.post('/api/forum', formData, {
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    }
+                });
+            } catch (error) {
+                console.error('Error editing message:', error);
             }
         }
     };
 
-    const handlePin = (messageId) => {
-        if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
-            websocket.current.send(JSON.stringify({ action: 'pin', id: messageId }));
-        } else {
-            console.error('WebSocket is not open');
+    const handlePin = async (messageId) => {
+        const csrftoken = getCookie('csrftoken');
+        const formData = new FormData();
+        formData.append('action', 'pin');
+        formData.append('id', messageId);
+
+        try {
+            await axiosInstance.post('/api/forum', formData, {
+                headers: {
+                    'X-CSRFToken': csrftoken
+                }
+            });
+        } catch (error) {
+            console.error('Error pinning message:', error);
         }
     };
 
-    const handleUnpin = () => {
-        if (websocket.current && websocket.current.readyState === WebSocket.OPEN) {
-            websocket.current.send(JSON.stringify({ action: 'unpin' }));
-        } else {
-            console.error('WebSocket is not open');
+    const handleUnpin = async () => {
+        const csrftoken = getCookie('csrftoken');
+        const formData = new FormData();
+        formData.append('action', 'unpin');
+
+        try {
+            await axiosInstance.post('/api/forum', formData, {
+                headers: {
+                    'X-CSRFToken': csrftoken
+                }
+            });
+        } catch (error) {
+            console.error('Error unpinning message:', error);
         }
     };
 
@@ -162,7 +183,7 @@ const Forum = () => {
                 {pinnedMessage && pinnedMessage.message && (
                     <div className="pinned-message">
                         <div className="message-content">
-                            <strong className="message-user">{pinnedMessage.user.username}</strong>: {pinnedMessage.message}
+                            <strong className="message-user">{pinnedMessage.username}</strong>: {pinnedMessage.message}
                         </div>
                         {isSuperUser && (
                             <div className="message-actions">
@@ -175,22 +196,22 @@ const Forum = () => {
                 )}
                 <ul id="forum-messages">
                     {messages.map((msg, index) => (
-                        <li key={index} className={`forum-message ${msg.user.user_id === userId ? 'own-message' : ''}`}>
+                        <li key={index} className={`forum-message ${msg.user_id === userId ? 'own-message' : ''}`}>
                             <div className="message-content">
-                                <strong className="message-user">{msg.user.username}</strong>: {msg.message}
+                                <strong className="message-user">{msg.username}</strong>: {msg.message}
                             </div>
                             <div className="message-actions">
-                                {msg.user.user_id === userId && (
+                                {msg.user_id === userId && (
                                     <button onClick={() => handleEdit(msg.id)} className="edit-button">
                                         <img src="/assets/editar.png" alt="Edit" />
                                     </button>
                                 )}
-                                {(msg.user.user_id === userId || isSuperUser) && (
+                                {(msg.user_id === userId || isSuperUser) && (
                                     <button onClick={() => handleDelete(msg.id)} className="delete-button">
                                         <img src="/assets/borrar.png" alt="Delete" />
                                     </button>
                                 )}
-                                {isSuperUser && msg.user.user_id === userId &&(
+                                {isSuperUser && (
                                     <button onClick={() => handlePin(msg.id)} className="pin-button">
                                         <img src="/assets/chincheta.png" alt="Pin" />
                                     </button>
