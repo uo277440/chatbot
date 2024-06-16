@@ -54,10 +54,12 @@ function Menu() {
     };
 
     const handleFlowClick = (flowId) => {
+        let currentFlowId = localStorage.getItem('currentFlowId');
         if (currentFlowId == null){
             localStorage.setItem('currentFlowId', flowId.toString());
+            currentFlowId=flowId.toString()
         }
-        const currentFlowId = localStorage.getItem('currentFlowId');
+
         if (currentFlowId != null) {
             if (currentFlowId.toString() !== flowId.toString()) {
                 localStorage.removeItem('chatMessages');
