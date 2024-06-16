@@ -8,7 +8,7 @@ load_dotenv()
 
 # Obtener las credenciales desde las variables de entorno
 cred = credentials.Certificate({
-    "type": "service_account",
+    "type": os.getenv("GOOGLE_TYPE"),
     "project_id": os.getenv("GOOGLE_PROJECT_ID"),
     "private_key_id": os.getenv("GOOGLE_PRIVATE_KEY_ID"),
     "private_key": os.getenv("GOOGLE_PRIVATE_KEY").replace('\\n', '\n'),
