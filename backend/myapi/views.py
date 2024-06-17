@@ -68,7 +68,7 @@ def set_session_objects(session, chatbot=None, flow_manager=None, marker=None):
     session.modified = True
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def check_chatbot(request):
     chatbot, flowManager, marker = get_session_objects(request.session)
     if chatbot and flowManager:
@@ -80,7 +80,7 @@ def check_chatbot(request):
 
         
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def scenarios(request):
     try:
         scenarios = scenary_service.get_all_scenarios()
@@ -90,7 +90,7 @@ def scenarios(request):
         return Response({'error': 'Error en el servidor'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def update_flow_manager(request):
     flow_id = request.GET.get('flow_id')
     first_charge = False
@@ -118,7 +118,7 @@ def update_flow_manager(request):
     return JsonResponse({'message': 'flowManager actualizado correctamente','first_charge':first_charge},status=status.HTTP_200_OK)
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def upload_scenary(request):
     json_file = request.FILES.get('json_file')
     scenario = request.data.get('scenario')
@@ -129,7 +129,7 @@ def upload_scenary(request):
     else:
         return JsonResponse({'error': 'No se proporcionó ningún archivo JSON'}, status=400)
 @api_view(['POST'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([permissions.AllowAny])
 def submit_conversation(request):
     conversation_data = request.data.get('conversation', None)
     if conversation_data:
@@ -143,7 +143,7 @@ def submit_conversation(request):
     else:
         return Response({'error': 'Conversation data is required'}, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def upload_training(request):
     csv_file = request.FILES.get('csv_file')
     flow = request.data.get('flow')
@@ -156,9 +156,9 @@ def upload_training(request):
 from django.db import transaction
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([SessionAuthentication])
-@ensure_csrf_cookie
+@permission_classes([AllowAny])
+#@authentication_classes([SessionAuthentication])
+#@ensure_csrf_cookie
 def upload_combined(request):
     json_file = request.FILES.get('json_file')
     csv_file = request.FILES.get('csv_file')
@@ -214,7 +214,7 @@ def upload_combined(request):
 
     
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def get_flows_by_scenario_url(request):
     scenery_id = request.GET.get('scenery_id')
     if scenery_id is not None:
@@ -228,7 +228,7 @@ def get_flows_by_scenario_url(request):
         return Response({'error': 'Se requiere el parámetro "scenery_id"'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def chatbot_response(request):
     if request.method == 'GET':
         user_message = request.GET.get('message', '')
@@ -286,7 +286,7 @@ def mascot_message(request):
     set_session_objects(request.session, chatbot, flowManager, marker)
     return Response({'suggestion': suggestion},status=200)
 @api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([permissions.AllowAny])
 def search_student(request):
     search_param = request.query_params.get('search_param', None)
     if search_param:
@@ -312,7 +312,7 @@ def search_student(request):
         return Response({'error': 'Username parameter is required'}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def transform(request):
     if request.method == 'GET':
         text = request.GET.get('text', '')
@@ -320,7 +320,7 @@ def transform(request):
         return Response({'delay': text_to_audio(text,sourceLang)},status=200)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def restart_flow(request):
     if request.method == 'GET':
         chatbot, flowManager, marker = get_session_objects(request.session)
@@ -330,7 +330,7 @@ def restart_flow(request):
         return Response(status=status.HTTP_200_OK)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def translate(request):
     if request.method == 'GET':
         text = request.GET.get('text', '')
@@ -343,7 +343,7 @@ def translate(request):
         return Response({'translated_text': translated_text},status=200)
     return Response(status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
-@permission_classes([permissions.IsAuthenticated])
+@permission_classes([permissions.AllowAny])
 def user_profile(request):
     user = request.user
 
@@ -367,7 +367,7 @@ def user_profile(request):
     }, status=status.HTTP_200_OK)
 	    
 @api_view(['DELETE'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def delete_message(request,message_id):
     try:
         message = ForumMessage.objects.get(id=message_id)
@@ -377,7 +377,7 @@ def delete_message(request,message_id):
         return Response(status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['PUT'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def edit_message(request,message_id):
     try:
         message = ForumMessage.objects.get(id=message_id, user=request.user)
@@ -390,7 +390,7 @@ def edit_message(request,message_id):
         return Response(serializer.data,status=200)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def forum_messages(request):
     try:
         messages = ForumMessage.objects.all().order_by('date')
@@ -430,7 +430,7 @@ def user_register(request):
         return Response({'message': e.message}, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['POST'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def delete_flow(request):
     flow_id = request.data.get('flow_id')
     if not flow_id:
@@ -450,7 +450,7 @@ def delete_flow(request):
         return Response({'error': 'Flow not found'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
+@permission_classes([AllowAny])
 def get_flows_by_scenario(request, scenario_name):
     try:
         scenario = Scenery.objects.get(name=scenario_name)
@@ -532,15 +532,15 @@ def user_logout(request):
     logout(request)
     return Response(status=status.HTTP_200_OK)
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])
-@authentication_classes([SessionAuthentication])
+@permission_classes([AllowAny])
+#@authentication_classes([SessionAuthentication])
 def user_view(request):
     serializer = UserSerializer(request.user)
     return Response({'user': serializer.data}, status=status.HTTP_200_OK)
 
 class ForumView(APIView):
-    permission_classes = (permissions.IsAuthenticated,)
-    authentication_classes = (SessionAuthentication,)
+    permission_classes = (permissions.AllowAny,)
+    #authentication_classes = (SessionAuthentication,)
     def get(self, request, *args, **kwargs):
         messages = ForumMessage.objects.all()
         serialized_messages = ForumMessageSerializer(messages, many=True)
