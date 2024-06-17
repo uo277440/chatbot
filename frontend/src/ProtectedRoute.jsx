@@ -7,7 +7,7 @@ const ProtectedRoute = ({ children, requireSuperuser }) => {
   const { currentUser } = useContext(AuthContext);
 
   if (!currentUser) {
-    //return <Navigate to="/" replace />;
+    return <Navigate to="/" replace />;
   }
  
 

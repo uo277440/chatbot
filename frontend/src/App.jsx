@@ -30,7 +30,7 @@ function App() {
             <Route
               path="/admin"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireSuperuser={true}>
                   <AdminView />
                 </ProtectedRoute>
               }
@@ -46,7 +46,7 @@ function App() {
             <Route
               path="/marks"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute requireSuperuser={true}>
                   <AdminMarks />
                 </ProtectedRoute>
               }
