@@ -31,7 +31,7 @@
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    word-wrap: break-word; 
+    word-wrap: break-word;
     overflow-wrap: break-word;
 }
 
@@ -44,7 +44,7 @@
     border-radius: 5px;
     padding: 10px;
     margin-bottom: 10px;
-    word-wrap: break-word; 
+    word-wrap: break-word;
     overflow-wrap: break-word;
     color: red;
     font-weight: bold;
@@ -52,14 +52,15 @@
 
 .message-content {
     flex-grow: 1;
-    word-break: break-word; 
+    word-break: break-word;
     white-space: pre-wrap;
 }
+
 .pinned-content {
     flex-grow: 1;
-    word-break: break-word; 
+    word-break: break-word;
     white-space: pre-wrap;
-    color:red;
+    color: red;
 }
 
 .message-user {
@@ -68,18 +69,24 @@
 
 .message-actions {
     display: flex;
+    gap: 5px; /* Add some space between buttons */
 }
 
 .edit-button,
 .delete-button,
-.pin-button {
+.pin-button,
+.unpin-button {
     background-color: #007BFF;
     color: white;
     border: none;
-    padding: 5px 10px;
-    margin-left: 5px;
+    padding: 5px;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Set a fixed width */
+    height: 30px; /* Set a fixed height */
 }
 
 .edit-button:hover {
@@ -94,14 +101,12 @@
     background-color: #c82333;
 }
 
-.pin-button {
+.pin-button,
+.unpin-button {
     background-color: #ffc107;
 }
 
-.pin-button:hover {
-    background-color: #e0a800;
-}
-
+.pin-button:hover,
 .unpin-button:hover {
     background-color: #e0a800;
 }
@@ -136,7 +141,7 @@
 }
 
 .own-message {
-    background-color: #d4edda; 
+    background-color: #d4edda;
 }
 
 .message-actions button {
@@ -158,7 +163,8 @@
     content: url('../assets/borrar.png');
 }
 
-.pin-button img,.unpin-button img  {
+.pin-button img,
+.unpin-button img {
     content: url('../assets/chincheta.png');
 }
 
