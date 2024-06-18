@@ -137,9 +137,28 @@ const Forum = () => {
     const handlePin = async (messageId) => {
         const csrftoken = getCookie('csrftoken');
         const formData = new FormData();
+    
+        // Unpin the currently pinned message if it exists
+        if (pinnedMessage) {
+            const unpinFormData = new FormData();
+            unpinFormData.append('action', 'unpin');
+            unpinFormData.append('id', pinnedMessage.id);
+    
+            try {
+                await axiosInstance.post('/api/forum', unpinFormData, {
+                    headers: {
+                        'X-CSRFToken': csrftoken
+                    }
+                });
+            } catch (error) {
+                console.error('Error unpinning message:', error);
+            }
+        }
+    
+        // Pin the new message
         formData.append('action', 'pin');
         formData.append('id', messageId);
-
+    
         try {
             await axiosInstance.post('/api/forum', formData, {
                 headers: {
@@ -150,6 +169,7 @@ const Forum = () => {
             console.error('Error pinning message:', error);
         }
     };
+    
 
     const handleUnpin = async () => {
         const csrftoken = getCookie('csrftoken');
