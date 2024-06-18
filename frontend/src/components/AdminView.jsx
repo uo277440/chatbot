@@ -224,9 +224,9 @@ function AdminView() {
         </div>
 
         {loading && (
-          <Segment>
+          <Dimmer active>
               <Loader>Cargando</Loader>
-          </Segment>
+          </Dimmer>
         )}
 
         <div className="section">
