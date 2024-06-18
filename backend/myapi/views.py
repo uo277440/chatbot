@@ -241,15 +241,14 @@ def chatbot_response(request):
             return Response({'response': response_text,'suggestion':True},status=200)
         if not sentence_checker.is_sentence_coherent(user_message):
             set_session_objects(request.session, chatbot, flowManager, marker)
-            return Response({'response':'La frase debe ser coherente y bien ligada','suggestion':True},status=200)
+            return Response({'response':'La frase no parece ser coherente. Asegúrate de que contenga al menos un sujeto y un verbo, o que sea una frase imperativa.','suggestion':True},status=200)
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(not bot_response):
             set_session_objects(request.session, chatbot, flowManager, marker)
             return Response({'response': 'Creo que no te entiendo del todo'},status=200)
         if(flowManager.advance(bot_response)):
             response=flowManager.response 
-            if random.random() < 0.01:
-                print('TOCO')
+            if random.random() < 0.5:
                 try:
                     response=grammarCorrector.get_synonym_phrase(response)
                 except Exception as e:

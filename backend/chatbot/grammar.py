@@ -10,7 +10,7 @@ import json
 # \brief Clase para corregir la gramática de un texto, proporcionar sinónimos y traducciones.
 #
 class GrammarCorrector:
-    SYSTEM_MESSAGE = "You are a helpful assistant that provides synonyms in English. Only provide the synonym phrase without any introductions or explanations."
+    SYSTEM_MESSAGE = "You are a helpful assistant that provides synonyms in English. Only provide the synonym phrase without any introductions or explanations. Do not include quotation marks in your response, only provide the phrase."
     API_KEY = settings.OPENAI_API_KEY
     API_URL = 'https://api.openai.com/v1/chat/completions'
     ##
