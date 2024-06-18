@@ -82,7 +82,7 @@ function AdminView() {
 
   const handleUpload = (event) => {
     event.preventDefault();
-    setLoading(true); // Start loader
+    
 
     if (!file) {
       Swal.fire({
@@ -119,7 +119,7 @@ function AdminView() {
     formData.append('json_file', file);
     formData.append('csv_file', csvFile);
     formData.append('scenario', selectedScenario || newScenario);
-
+    setLoading(true); // Start loader
     axiosInstance.post('/api/upload_combined', formData)
       .then(response => {
         Swal.fire({
@@ -153,7 +153,7 @@ function AdminView() {
       });
       return;
     }
-
+    setLoading(true);
     axiosInstance.post('/api/delete_flow', { flow_id: selectedFlow })
       .then(response => {
         Swal.fire({
@@ -176,6 +176,8 @@ function AdminView() {
           icon: 'error',
           confirmButtonText: 'Aceptar'
         });
+      }).finally(() => {
+        setLoading(false); // Stop loader
       });
   };
 
@@ -223,9 +225,7 @@ function AdminView() {
 
         {loading && (
           <Segment>
-            <Dimmer active>
-              <Loader>Loading</Loader>
-            </Dimmer>
+              <Loader>Cargando</Loader>
           </Segment>
         )}
 
