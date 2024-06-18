@@ -46,6 +46,8 @@ class GrammarCorrector:
                 print(length)
                 problematic_word = text[offset:offset+length]
                 corrections.append((problematic_word, message, offset))
+            if not corrections:
+                return False
             return self.messaje(corrections, text)
         else:
             print("Error:", response.status_code)
