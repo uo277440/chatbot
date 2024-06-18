@@ -445,9 +445,9 @@ def delete_flow(request):
             os.remove(model_path)
         if not scenery.flows.exists():
             scenery.delete()
-        return Response({'message': 'Flow deleted successfully'}, status=status.HTTP_200_OK)
+        return Response({'message': 'EL flujo se ha eliminado correctamente'}, status=status.HTTP_200_OK)
     except Flow.DoesNotExist:
-        return Response({'error': 'Flow not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'No se ha encontrado el flujo'}, status=status.HTTP_404_NOT_FOUND)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -458,7 +458,7 @@ def get_flows_by_scenario(request, scenario_name):
         flows_data = [{'id': flow.id, 'name': flow.name} for flow in flows]
         return Response({'flows': flows_data}, status=status.HTTP_200_OK)
     except Scenery.DoesNotExist:
-        return Response({'error': 'Scenario not found'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'no se ha encontrado el escenario'}, status=status.HTTP_404_NOT_FOUND)
 '''
 class UserLogin(APIView):
     permission_classes = (permissions.AllowAny,)
