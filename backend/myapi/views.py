@@ -31,8 +31,8 @@ from django.db import transaction
 from django.shortcuts import render
 from django.middleware.csrf import get_token
 from django.views.decorators.csrf import ensure_csrf_cookie
-
-
+from firebase_admin import firestore
+from .firebase_config import db
 
 sentence_checker = SentenceChecker()
 #marker = Marker()
@@ -541,12 +541,13 @@ def user_view(request):
 class ForumView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
     authentication_classes = (SessionAuthentication,)
+
     def get(self, request, *args, **kwargs):
-        messages = ForumMessage.objects.all()
-        serialized_messages = ForumMessageSerializer(messages, many=True)
-        pinned_message = ForumMessage.objects.filter(pinned=True).first()
-        serialized_pinned_message = ForumMessageSerializer(pinned_message).data if pinned_message else None
-        return JsonResponse({'messages': serialized_messages.data, 'pinnedMessage': serialized_pinned_message})
+        messages_ref = db.collection('messages').order_by('timestamp')
+        messages = [doc.to_dict() for doc in messages_ref.stream()]
+        pinned_message = next((msg for msg in messages if msg.get('isPinned')), None)
+        
+        return JsonResponse({'messages': messages, 'pinnedMessage': pinned_message})
 
     def post(self, request, *args, **kwargs):
         action = request.POST.get('action')
@@ -557,32 +558,33 @@ class ForumView(APIView):
         if action == 'send':
             user = self.get_user_from_id(user_id)
             if user:
-                forum_message = ForumMessage.objects.create(message=message_content, user=user)
-                new_data = self.serialize_message(forum_message)
-                return JsonResponse({'action': 'send', 'data': new_data})
+                message_data = {
+                    'message': message_content,
+                    'user_id': user.user_id,
+                    'username': user.username,
+                    'timestamp': firestore.SERVER_TIMESTAMP,
+                    'isPinned': False
+                }
+                db.collection('messages').add(message_data)
+                return JsonResponse({'action': 'send'})
 
         elif action == 'delete':
-            forum_message = ForumMessage.objects.get(id=message_id)
-            forum_message.delete()
+            db.collection('messages').document(message_id).delete()
             return JsonResponse({'action': 'delete', 'id': message_id})
 
         elif action == 'edit':
-            forum_message = ForumMessage.objects.get(id=message_id)
-            forum_message.message = message_content
-            forum_message.save()
+            doc_ref = db.collection('messages').document(message_id)
+            doc_ref.update({'message': message_content})
             return JsonResponse({'action': 'edit', 'id': message_id, 'message': message_content})
 
         elif action == 'pin':
-            forum_message = ForumMessage.objects.get(id=message_id)
-            forum_message.pinned = True
-            forum_message.save()
-            return JsonResponse({'action': 'pin', 'message': self.serialize_message(forum_message)})
+            self.unpin_current_message()
+            doc_ref = db.collection('messages').document(message_id)
+            doc_ref.update({'isPinned': True})
+            return JsonResponse({'action': 'pin', 'message': self.serialize_message(message_id, {'isPinned': True})})
 
         elif action == 'unpin':
-            forum_message = ForumMessage.objects.filter(pinned=True).first()
-            if forum_message:
-                forum_message.pinned = False
-                forum_message.save()
+            self.unpin_current_message()
             return JsonResponse({'action': 'unpin'})
 
     @staticmethod
@@ -593,6 +595,11 @@ class ForumView(APIView):
             return None
 
     @staticmethod
-    def serialize_message(message):
-        return ForumMessageSerializer(message).data
+    def serialize_message(doc_id, message_data):
+        message_data['id'] = doc_id
+        return message_data
 
+    def unpin_current_message(self):
+        pinned_messages = db.collection('messages').where('isPinned', '==', True).stream()
+        for msg in pinned_messages:
+            msg.reference.update({'isPinned': False})
