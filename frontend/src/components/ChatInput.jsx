@@ -1,14 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../css/ChatInput.css'; // Estilos CSS personalizados
 import micro from '../assets/micro.png';
 
 function ChatInput({ onSubmit }) {
     const [message, setMessage] = useState('');
     const [isListening, setIsListening] = useState(false);
+    const [isSpeechRecognitionSupported, setIsSpeechRecognitionSupported] = useState(false);
+
+    useEffect(() => {
+        // Verificar si la API de reconocimiento de voz está disponible
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        setIsSpeechRecognitionSupported(!!SpeechRecognition);
+    }, []);
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
+
     const handleChange = (event) => {
         setMessage(event.target.value);
     };
@@ -20,8 +28,15 @@ function ChatInput({ onSubmit }) {
             setMessage('');
         }
     };
+
     const handleMicrophoneClick = () => {
-        const recognition = new window.webkitSpeechRecognition();
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert('API de reconocimiento de voz no soportada por este navegador. Por favor, usa Chrome.');
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
         recognition.continuous = false;
         recognition.lang = 'en-US'; 
 
@@ -32,7 +47,7 @@ function ChatInput({ onSubmit }) {
 
         recognition.onresult = (event) => {
             const transcript = event.results[0][0].transcript;
-            const capitalizedTranscript = capitalizeFirstLetter(transcript)
+            const capitalizedTranscript = capitalizeFirstLetter(transcript);
             console.log('Transcript:', capitalizedTranscript);
             setMessage(capitalizedTranscript);
         };
@@ -63,12 +78,14 @@ function ChatInput({ onSubmit }) {
                 onChange={handleChange}
             />
             <button type="submit">Enviar</button>
-            <img 
-                src={micro}
-                alt="Hablar"
-                className={'image-button'}
-                onClick={handleMicrophoneClick}
+            {isSpeechRecognitionSupported && (
+                <img 
+                    src={micro}
+                    alt="Hablar"
+                    className={'image-button'}
+                    onClick={handleMicrophoneClick}
                 />
+            )}
         </form>
     );
 }
