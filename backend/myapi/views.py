@@ -72,8 +72,6 @@ def set_session_objects(session, chatbot=None, flow_manager=None, marker=None):
 def check_chatbot(request):
     chatbot, flowManager, marker = get_session_objects(request.session)
     if chatbot and flowManager:
-        print(flowManager.description)
-        print(flowManager.id)
         return Response({'chatbot': True,'description':flowManager.description},status=status.HTTP_200_OK)
     else:
         return Response({'chatbot': False},status=status.HTTP_200_OK)
@@ -112,9 +110,7 @@ def update_flow_manager(request):
         new_chatbot.train_model()
     #flowManager = new_flow_manager
     #chatbot = new_chatbot
-    print(new_flow_manager)
     set_session_objects(request.session, new_chatbot, new_flow_manager, marker)
-    print(request.session.get('flowManager'))
     return JsonResponse({'message': 'flowManager actualizado correctamente','first_charge':first_charge},status=status.HTTP_200_OK)
 
 @api_view(['POST'])
@@ -169,12 +165,10 @@ def upload_combined(request):
     try:
         json_data = json.load(json_file)
     except json.JSONDecodeError:
-        print('cague?')
         return JsonResponse({'error': 'Invalid JSON file'}, status=400)
 
     # Read the CSV file
     try:
-        print('joujou')
         csv_content = csv_file.read().decode('utf-8').splitlines()
         csv_data = list(csv.DictReader(csv_content))
         csv_file.seek(0)  
@@ -186,7 +180,6 @@ def upload_combined(request):
     json_options = {option for flow in json_data['flows'] for step in flow['steps'] for option in step['options']}
     all_labels = json_labels.union(json_options)
     csv_labels_count = {label: 0 for label in all_labels}
-    print('jaja')
     for row in csv_data:
         label = row.get('Label')
         if label in csv_labels_count:
@@ -195,21 +188,16 @@ def upload_combined(request):
     # Check if all JSON labels are in CSV and have at least 10 phrases
     for label, count in csv_labels_count.items():
         if count < 10:
-            print(count)
-            print(label)
             return JsonResponse({'error': f'Label {label} has less than 10 phrases in the CSV file'}, status=400)
-    print('perdi?')
     # Proceed with saving JSON and CSV data to the database
     try:
         with transaction.atomic():
             flow = cargar_datos_a_bd(json_data, scenario)
             csv_file.seek(0)  # Reset the file pointer again before re-reading for saving
             csv_data = csv.DictReader(csv_content)  # Re-read for actual processing
-            print("CARGAR DATOS A BD")
             cargar_datos_csv_a_bd(csv_data, flow)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=400)
-    print("ACABE LA FAENA")
     return JsonResponse({'message': 'Files uploaded and verified successfully'}, status=200)
 
     
@@ -274,14 +262,9 @@ def chatbot_response(request):
 @permission_classes([AllowAny])
 @authentication_classes([SessionAuthentication])
 def mascot_message(request):
-    print("HOLA")
-    print("ERA GET")
     chatbot, flowManager, marker = get_session_objects(request.session)
-    print("MARKER DECREASE")
-    marker.decrease()
+    marker.decrease(0.3)
     suggestion=flowManager.suggest()
-    print("SUGERENCIA")
-    print(suggestion)
     set_session_objects(request.session, chatbot, flowManager, marker)
     return Response({'suggestion': suggestion},status=200)
 @api_view(['GET'])
@@ -301,7 +284,6 @@ def search_student(request):
             for mark in marks:
                 chat_conversations = ChatConversation.objects.filter(user=user, date__date=mark.date.date())
                 for chat in chat_conversations:
-                    print(chat.conversation)
                     conversations[mark.id] = (chat.conversation)
             
             return Response({'user': user_serializer.data, 'marks': marks_serializer.data, 'conversations': conversations}, status=status.HTTP_200_OK)

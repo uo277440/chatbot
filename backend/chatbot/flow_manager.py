@@ -124,9 +124,9 @@ class Marker:
     ##
     # \brief Disminuye el valor de la marca en uno.
     #
-    def decrease(self):
+    def decrease(self,quantity=1):
         if self.mark > 0:
-            self.mark = self.mark -1 
+            self.mark = self.mark - quantity 
     ##
     # \brief Reinicia el valor de la marca a 10.
     #
