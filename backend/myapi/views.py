@@ -27,6 +27,7 @@ import csv
 import random
 import json
 import os
+import pandas as pd
 from django.db import transaction
 from django.shortcuts import render
 from django.middleware.csrf import get_token
@@ -153,14 +154,13 @@ from django.db import transaction
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
-@authentication_classes([SessionAuthentication])
-@ensure_csrf_cookie
 def upload_combined(request):
     json_file = request.FILES.get('json_file')
     csv_file = request.FILES.get('csv_file')
     scenario = request.data.get('scenario')
     if not json_file or not csv_file or not scenario:
         return JsonResponse({'error': 'JSON file, CSV file, and scenario are required'}, status=400)
+
     # Parse the JSON file
     try:
         json_data = json.load(json_file)
@@ -169,9 +169,7 @@ def upload_combined(request):
 
     # Read the CSV file
     try:
-        csv_content = csv_file.read().decode('utf-8').splitlines()
-        csv_data = list(csv.DictReader(csv_content))
-        csv_file.seek(0)  
+        csv_df = pd.read_csv(csv_file)
     except Exception as e:
         return JsonResponse({'error': 'Invalid CSV file'}, status=400)
 
@@ -179,25 +177,23 @@ def upload_combined(request):
     json_labels = {step['label'] for flow in json_data['flows'] for step in flow['steps']}
     json_options = {option for flow in json_data['flows'] for step in flow['steps'] for option in step['options']}
     all_labels = json_labels.union(json_options)
-    csv_labels_count = {label: 0 for label in all_labels}
-    for row in csv_data:
-        label = row.get('Label')
-        if label in csv_labels_count:
-            csv_labels_count[label] += 1
+
+    # Count occurrences of each label in the CSV
+    csv_labels_count = csv_df['Label'].value_counts().to_dict()
 
     # Check if all JSON labels are in CSV and have at least 10 phrases
-    for label, count in csv_labels_count.items():
-        if count < 10:
+    for label in all_labels:
+        if csv_labels_count.get(label, 0) < 10:
             return JsonResponse({'error': f'Label {label} has less than 10 phrases in the CSV file'}, status=400)
+
     # Proceed with saving JSON and CSV data to the database
     try:
         with transaction.atomic():
             flow = cargar_datos_a_bd(json_data, scenario)
-            csv_file.seek(0)  # Reset the file pointer again before re-reading for saving
-            csv_data = csv.DictReader(csv_content)  # Re-read for actual processing
-            cargar_datos_csv_a_bd(csv_data, flow)
+            cargar_datos_csv_a_bd(csv_df.to_dict('records'), flow)
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=400)
+
     return JsonResponse({'message': 'Files uploaded and verified successfully'}, status=200)
 
     
