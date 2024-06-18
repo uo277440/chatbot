@@ -10,7 +10,7 @@ import json
 # \brief Clase para corregir la gramática de un texto, proporcionar sinónimos y traducciones.
 #
 class GrammarCorrector:
-    SYSTEM_MESSAGE = "You are a helpful assistant that provides synonyms in English. Only provide the synonym phrase without any introductions or explanations. Do not include quotation marks in your response, only provide the phrase."
+    SYSTEM_MESSAGE = "You are a helpful assistant that provides synonyms in English. Only provide the synonym phrase without any introductions or explanations."
     API_KEY = settings.OPENAI_API_KEY
     API_URL = 'https://api.openai.com/v1/chat/completions'
     ##
@@ -29,7 +29,7 @@ class GrammarCorrector:
     # \param text Texto a corregir.
     # \return Lista de correcciones sugeridas.
     #
-    def correct_text(self,text):
+    def correct_text(self, text):
         url = 'https://languagetool.org/api/v2/check'
         params = {'text': text, 'language': 'en-US'}
         response = requests.post(url, data=params)
@@ -37,10 +37,19 @@ class GrammarCorrector:
             data = response.json()
             corrections = []
             for match in data['matches']:
-                corrections.append((match['offset'], match['length'], match['message']))
-            return self.messaje(corrections,text)
+                offset = int(match['offset'])
+                length = int(match['length'])
+                message = match['message']
+                print('offset')
+                print(offset)
+                print('lengt')
+                print(length)
+                problematic_word = text[offset:offset+length]
+                corrections.append((problematic_word, message, offset))
+            return self.messaje(corrections, text)
         else:
             print("Error:", response.status_code)
+            return []
     ##
     # \brief Genera un mensaje de corrección basado en las sugerencias proporcionadas.
     #
@@ -48,18 +57,21 @@ class GrammarCorrector:
     # \param text Texto original.
     # \return Lista de mensajes de sugerencia.
     #
-    def messaje(self,corrections,text):
-        suggestion_messages = []
-        for correction in corrections:
-            #print("Sugerencia:", correction[2], "En posición:", correction[0])
-            error_offset = correction[0]
-            words = text.split()
-            current_offset = 0
-            for word in words:
-                if current_offset <= error_offset < current_offset + len(word):
-                    suggestion_messages.append("Suggestion: "+ correction[2] + " In word: " +word)
-                current_offset += len(word) + 1
-        return suggestion_messages
+    def messaje(self, corrections, text):
+        translated_corrections = []
+        for problematic_word, message, offset in corrections:
+            translated_message = self.translate(message, 'es')
+            translated_corrections.append((problematic_word, translated_message, offset))
+        return self.apply_corrections(translated_corrections, text)
+    def apply_corrections(self, corrections, text):
+        corrected_text = ""
+        last_index = 0
+        for problematic_word, translated_message, offset in corrections:
+            corrected_text += text[last_index:offset]  # Añadir el texto hasta el error
+            corrected_text += f"[{problematic_word} -> {translated_message}]"  # Añadir la corrección
+            last_index = offset + len(problematic_word)  # Actualizar el índice para el siguiente segmento
+        corrected_text += text[last_index:]  # Añadir el resto del texto
+        return corrected_text
     ##
     # \brief Traduce el texto dado al idioma especificado.
     #
@@ -79,6 +91,8 @@ class GrammarCorrector:
     #
     def get_synonym_phrase(self,input_text):
         # Construir el cuerpo de la solicitud JSON
+        print("INPUT")
+        print(input_text)
         prompt = f"Provide a synonym for the following phrase: '{input_text}'"
         json_body = {
             "model": "gpt-3.5-turbo",
@@ -104,13 +118,18 @@ class GrammarCorrector:
             # Parsear la respuesta JSON
             json_response = response.json()
 
-            # Extraer el contenido del mensaje
-            choices = json_response["choices"]
-            content = choices[0]["message"]["content"].strip()
-            print("CONTENIDO", content)
-            return content
-        except Exception as e:
-            print(e)
+            if "choices" in json_response and len(json_response["choices"]) > 0:
+                message_content = json_response["choices"][0]["message"]["content"].strip()
+                print("CONTENIDO:", message_content)
+                return message_content
+            else:
+                print("Respuesta inesperada de la API:", json_response)
+                return None
+        except requests.exceptions.RequestException as e:
+            print(f"Error en la solicitud: {e}")
+            return None
+        except ValueError as e:
+            print(f"Error al parsear la respuesta JSON: {e}")
             return None
 ##
 # \class SentenceChecker

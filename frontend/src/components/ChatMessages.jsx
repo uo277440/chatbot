@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState, useMemo } from 'react';
+import React, { useEffect, useRef, useState,useMemo } from 'react';
 import axios from 'axios';
 import '../css/ChatMessages.css';
 import altavoz from '../assets/altavoz.png';
@@ -9,7 +9,7 @@ function ChatMessages({ messages, setMessages }) {
     const axiosInstance = useMemo(() => axios.create({
         baseURL: '/choreo-apis/chatbottfg/backend/v1',
         withCredentials: true
-    }), []);
+      }), []);
 
     useEffect(() => {
         scrollToBottom();
@@ -25,19 +25,17 @@ function ChatMessages({ messages, setMessages }) {
         const sourceLang = lang || 'en';
         if (!isButtonEnabled) return;
         setIsButtonEnabled(false);
-
-        // Usar la Web Speech API para sintetizar el texto
-        const synth = window.speechSynthesis;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = sourceLang === 'es' ? 'es-ES' : 'en-US'; // Configurar el idioma de la voz
-
-        // Callback cuando la síntesis de voz termine
-        utterance.onend = () => {
-            setIsButtonEnabled(true);
-        };
-
-        // Iniciar la síntesis de voz
-        synth.speak(utterance);
+        axiosInstance.get(`api/transform?text=${encodeURIComponent(text)}&source=${sourceLang}`)
+            .then(response => {
+                console.log('Respuesta de text_to_audio:', response);
+                setTimeout(() => {
+                    setIsButtonEnabled(true);
+                }, response.data.delay);
+            })
+            .catch(error => {
+                console.error('Error al llamar a text_to_audio:', error);
+                setIsButtonEnabled(true);
+            });
     };
 
     const handleTranslate = (text, lang, index) => {
@@ -60,7 +58,11 @@ function ChatMessages({ messages, setMessages }) {
     return (
         <div className="chat-messages" ref={messagesRef}>
             {messages.map((message, index) => (
-                <div key={index} className={`message ${message.from}`} lang={message.lang || 'en'}>
+                <div 
+                    key={index} 
+                    className={`message ${message.from} ${message.suggestion ? 'suggestion' : ''}`} 
+                    lang={message.lang || 'en'}
+                >
                     {message.text.split('\n').map((line, idx) => (
                         <p key={idx}>{line}</p>
                     ))}
