@@ -187,36 +187,39 @@ function AdminView() {
       <div className="admin">
         <h2>Admin View</h2>
 
-        <form onSubmit={handleUpload} encType="multipart/form-data">
-          <div className="upload-section">
-            <label htmlFor="jsonFileInput">Subir archivo JSON (Flujo):</label>
-            <input id="jsonFileInput" type="file" onChange={handleFileChange} />
+        <div className="section">
+          <h3>Añadir Flujo</h3>
+          <form onSubmit={handleUpload} encType="multipart/form-data">
+            <div className="upload-section">
+              <label htmlFor="jsonFileInput">Subir archivo JSON (Flujo):</label>
+              <input id="jsonFileInput" type="file" onChange={handleFileChange} />
 
-            <label htmlFor="csvFileInput">Subir archivo CSV (Datos de Entrenamiento):</label>
-            <input id="csvFileInput" type="file" onChange={handleCSVChange} />
-          </div>
+              <label htmlFor="csvFileInput">Subir archivo CSV (Datos de Entrenamiento):</label>
+              <input id="csvFileInput" type="file" onChange={handleCSVChange} />
+            </div>
 
-          <div className="scenario-selection">
-            <label htmlFor="existingScenarioSelect">Seleccione un escenario existente:</label>
-            <select id="existingScenarioSelect" onChange={handleScenarioChange}>
-              <option value="">Seleccione un escenario existente</option>
-              {scenarios.map(scenario => (
-                <option key={scenario.name} value={scenario.name}>{scenario.name}</option>
-              ))}
-            </select>
+            <div className="scenario-selection">
+              <label htmlFor="existingScenarioSelect">Seleccione un escenario existente:</label>
+              <select id="existingScenarioSelect" onChange={handleScenarioChange}>
+                <option value="">Seleccione un escenario existente</option>
+                {scenarios.map(scenario => (
+                  <option key={scenario.name} value={scenario.name}>{scenario.name}</option>
+                ))}
+              </select>
 
-            <label htmlFor="newScenarioInput">O ingrese el nombre de un nuevo escenario:</label>
-            <input
-              id="newScenarioInput"
-              type="text"
-              placeholder="Nombre del nuevo escenario"
-              value={newScenario}
-              onChange={handleNewScenarioChange}
-            />
-          </div>
+              <label htmlFor="newScenarioInput">O ingrese el nombre de un nuevo escenario:</label>
+              <input
+                id="newScenarioInput"
+                type="text"
+                placeholder="Nombre del nuevo escenario"
+                value={newScenario}
+                onChange={handleNewScenarioChange}
+              />
+            </div>
 
-          <button type="submit">Añadir Flujo</button>
-        </form>
+            <button type="submit">Añadir Flujo</button>
+          </form>
+        </div>
 
         {loading && (
           <Segment>
@@ -226,16 +229,18 @@ function AdminView() {
           </Segment>
         )}
 
-        <div className="flow-selection">
+        <div className="section">
           <h3>Eliminar Flujo</h3>
-          <label htmlFor="flowSelect">Seleccione un flujo:</label>
-          <select id="flowSelect" onChange={handleFlowChange}>
-            <option value="">Seleccione un flujo</option>
-            {flows.map(flow => (
-              <option key={flow.id} value={flow.id}>{flow.name}</option>
-            ))}
-          </select>
-          <button onClick={handleDeleteFlow}>Eliminar Flujo</button>
+          <div className="flow-selection">
+            <label htmlFor="flowSelect">Seleccione un flujo:</label>
+            <select id="flowSelect" onChange={handleFlowChange}>
+              <option value="">Seleccione un flujo</option>
+              {flows.map(flow => (
+                <option key={flow.id} value={flow.id}>{flow.name}</option>
+              ))}
+            </select>
+            <button onClick={handleDeleteFlow}>Eliminar Flujo</button>
+          </div>
         </div>
       </div>
     </div>
@@ -243,6 +248,7 @@ function AdminView() {
 }
 
 export default AdminView;
+
 
 
 
