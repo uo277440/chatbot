@@ -1,0 +1,45 @@
+.not-found-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+    color: #333;
+    font-family: 'Arial', sans-serif;
+    text-align: center;
+    background-image: url('../assets/fondo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  
+  .not-found-title {
+    font-size: 10rem;
+    margin: 0;
+    color: #ff6f61; /* Color llamativo */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Sombra para el texto */
+  }
+  
+  .not-found-message {
+    font-size: 1.5rem;
+    margin: 20px 0;
+  }
+  
+  .not-found-home {
+    margin-top: 20px;
+  }
+  
+  .not-found-home a {
+    text-decoration: none;
+    color: white;
+    background-color: #ff6f61;
+    padding: 10px 20px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .not-found-home a:hover {
+    background-color: #ff3b2e; /* Cambio de color al pasar el mouse */
+  }
+  

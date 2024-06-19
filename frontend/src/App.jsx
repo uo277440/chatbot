@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import Forum from './components/Forum';
 import ProtectedRoute from './ProtectedRoute';
 import Unauthorized from './components/Unauthorized'; 
+import NotFound from './components/NotFound';
 import './App.css';
 
 function App() {
@@ -68,6 +69,7 @@ function App() {
               }
             />
             <Route path="/unauthorized" element={<Unauthorized />} /> {/* Ruta para no autorizado */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </Router>
       </div>
