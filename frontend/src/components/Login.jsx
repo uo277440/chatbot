@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import AuthContext from './AuthContext';
 import logo from '../assets/logo.png'; // Import the logo image
-import { Dimmer, Loader, Segment } from 'semantic-ui-react'; // Import Loader from semantic-ui-react
+import { Dimmer, Loader } from 'semantic-ui-react'; // Import Loader from semantic-ui-react
 
 function Login() {
   const client = useMemo(() => axios.create({
@@ -22,6 +22,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState(''); // New state for confirm password
   const [loading, setLoading] = useState(false); // Loader state
   const navigate = useNavigate();
 
@@ -34,12 +35,14 @@ function Login() {
       .catch(function (error) {
         setCurrentUser(null);
       });
-  }, [setCurrentUser]);
+  }, [client, setCurrentUser]);
+
   async function getCsrfToken() {
     const response = await client.get('/api/token');
     axios.defaults.headers.common['X-CSRFToken'] = response.data.token;
     return response.data.token;
   }
+
   useEffect(() => {
     if (currentUser) {
       const user = currentUser;
@@ -58,6 +61,18 @@ function Login() {
   function handleSubmit(e) {
     e.preventDefault();
     setLoading(true); // Start loader
+
+    if (registrationToggle && password !== confirmPassword) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Las contraseñas deben coincidir',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      });
+      setLoading(false); // Stop loader
+      return;
+    }
+
     if (registrationToggle) {
       submitRegistration();
     } else {
@@ -181,10 +196,16 @@ function Login() {
           </Form.Text>
         </Form.Group>
         {registrationToggle && (
-          <Form.Group className="mb-3" controlId="formBasicUsername">
-            <Form.Label>Usuario</Form.Label>
-            <Form.Control type="text" placeholder="Introduce usuario" value={username} onChange={e => setUsername(e.target.value)} />
-          </Form.Group>
+          <>
+            <Form.Group className="mb-3" controlId="formBasicUsername">
+              <Form.Label>Usuario</Form.Label>
+              <Form.Control type="text" placeholder="Introduce usuario" value={username} onChange={e => setUsername(e.target.value)} />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+              <Form.Label>Confirmar Contraseña</Form.Label>
+              <Form.Control type="password" placeholder="Confirmar Contraseña" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+            </Form.Group>
+          </>
         )}
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Contraseña</Form.Label>
@@ -199,6 +220,7 @@ function Login() {
 }
 
 export default Login;
+
 
 
 
