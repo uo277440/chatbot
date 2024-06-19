@@ -201,16 +201,20 @@ function Login() {
               <Form.Label>Usuario</Form.Label>
               <Form.Control type="text" placeholder="Introduce usuario" value={username} onChange={e => setUsername(e.target.value)} />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
-              <Form.Label>Confirmar Contraseña</Form.Label>
-              <Form.Control type="password" placeholder="Confirmar Contraseña" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
-            </Form.Group>
           </>
         )}
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Contraseña</Form.Label>
           <Form.Control type="password" placeholder="Contraseña" value={password} onChange={e => setPassword(e.target.value)} />
         </Form.Group>
+        {registrationToggle && (
+          <>
+            <Form.Group className="mb-3" controlId="formBasicConfirmPassword">
+              <Form.Label>Confirmar Contraseña</Form.Label>
+              <Form.Control type="password" placeholder="Confirmar Contraseña" value={confirmPassword} onChange={e => setConfirmPassword(e.target.value)} />
+            </Form.Group>
+          </>
+        )}
         <Button variant="primary" type="submit">
           {registrationToggle ? 'Registrarse' : 'Iniciar sesión'}
         </Button>
