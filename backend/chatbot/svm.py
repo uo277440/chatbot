@@ -97,7 +97,7 @@ class SVMChatbot:
     # \param model_path Ruta para guardar/cargar el modelo.
     # \param confidence_threshold Umbral de confianza para las predicciones.
     #
-    def __init__(self, csv_user_content,model_path,confidence_threshold=0.10):
+    def __init__(self, csv_user_content,model_path,confidence_threshold=0.40):
         self.csv_user_content = csv_user_content
         self.text_processor = TextTokenizer()
         self.pipeline = None
@@ -117,10 +117,8 @@ class SVMChatbot:
     #
     def load_model(self):
         if self.model_path and os.path.exists(self.model_path):
-            print('lo cargo')
             self.pipeline, self.label_encoder = joblib.load(self.model_path)
             return True
-        print('no lo cargo')
         return False
     ##
     # \brief Carga los datos desde un archivo CSV y los divide en conjuntos de entrenamiento y prueba.
@@ -157,11 +155,6 @@ class SVMChatbot:
 
         # Guardar el mejor modelo encontrado
         self.pipeline = grid_search.best_estimator_
-        # Debugging prints
-        print("Best C value:", grid_search.best_params_)
-        print("Unique labels in training set:", np.unique(self.y_train_encoded))
-        print("Training set size after encoding:", len(self.y_train_encoded))
-        print('A evaluar el modelo')
         self.evaluate_model()
         self.save_model()
     ##

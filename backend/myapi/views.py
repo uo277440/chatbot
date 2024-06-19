@@ -219,15 +219,17 @@ def chatbot_response(request):
         suggestions = grammarCorrector.correct_text(user_message)
         chatbot, flowManager, marker = get_session_objects(request.session)
         if suggestions:
-            marker.decrease()
+            marker.decrease(0.75)
             response_text = (suggestions)
             set_session_objects(request.session, chatbot, flowManager, marker)
             return Response({'response': response_text,'suggestion':True},status=200)
         if not sentence_checker.is_sentence_coherent(user_message):
+            marker.decrease(0.5)
             set_session_objects(request.session, chatbot, flowManager, marker)
             return Response({'response':'La frase no parece ser coherente. Asegúrate de que contenga al menos un sujeto y un verbo, o que sea una frase imperativa.','suggestion':True},status=200)
         bot_response = chatbot.predict_response_with_confidence(user_message)
         if(not bot_response):
+            marker.decrease()
             set_session_objects(request.session, chatbot, flowManager, marker)
             return Response({'response': 'Creo que no te entiendo del todo','suggestion':True},status=200)
         if(flowManager.advance(bot_response)):
@@ -249,6 +251,8 @@ def chatbot_response(request):
                 except Flow.DoesNotExist:
                     return Response({'response': 'Flujo no encontrado'},status=status.HTTP_404_NOT_FOUND)
         else:
+            marker.decrease(0.75)
+            set_session_objects(request.session, chatbot, flowManager, marker)
             return Response({'response': "Lo siento, parece que no entendí tu mensaje. Si te encuentras perdido en el flujo, no dudes en usar el botón de ayuda",'suggestion':True},status=200)
         if(response is None):
             return Response({'response': 'El texto que has introducido incoherente con el flujo','suggestion':True},status=200)
@@ -259,7 +263,7 @@ def chatbot_response(request):
 @authentication_classes([SessionAuthentication])
 def mascot_message(request):
     chatbot, flowManager, marker = get_session_objects(request.session)
-    marker.decrease(0.3)
+    marker.decrease(0.5)
     suggestion=flowManager.suggest()
     set_session_objects(request.session, chatbot, flowManager, marker)
     return Response({'suggestion': suggestion},status=200)
