@@ -69,7 +69,7 @@ function App() {
               }
             />
             <Route path="/unauthorized" element={<Unauthorized />} /> {/* Ruta para no autorizado */}
-            <Route path="*" element={<NotFound />} />
+            
           </Routes>
         </Router>
       </div>
