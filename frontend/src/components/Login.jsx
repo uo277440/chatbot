@@ -175,7 +175,7 @@ function Login() {
           <img src={logo} alt="App Logo" className="login-logo" />
           {loading ? (
               <Dimmer active>
-                <Loader>Cargando</Loader>s
+                <Loader>Cargando</Loader>
               </Dimmer>
           ) : (
             renderLoginForm()
