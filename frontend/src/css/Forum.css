@@ -1,0 +1,171 @@
+/* Forum.css */
+#forum-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#forum-header {
+    text-align: center;
+    font-size: 2em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+#forum-messages {
+    list-style-type: none;
+    padding: 0;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.forum-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.pinned-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff0f0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    color: red;
+    font-weight: bold;
+}
+
+.message-content {
+    flex-grow: 1;
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.pinned-content {
+    flex-grow: 1;
+    word-break: break-word;
+    white-space: pre-wrap;
+    color: red;
+}
+
+.message-user {
+    color: #007BFF;
+}
+
+.message-actions {
+    display: flex;
+    gap: 5px; /* Add some space between buttons */
+}
+
+.edit-button,
+.delete-button,
+.pin-button,
+.unpin-button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px; /* Set a fixed width */
+    height: 30px; /* Set a fixed height */
+}
+
+.edit-button:hover {
+    background-color: #7fb3eb;
+}
+
+.delete-button {
+    background-color: #dc3545;
+}
+
+.delete-button:hover {
+    background-color: #c82333;
+}
+
+.pin-button,
+.unpin-button {
+    background-color: #ffc107;
+}
+
+.pin-button:hover,
+.unpin-button:hover {
+    background-color: #e0a800;
+}
+
+#forum-form {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+#message-input {
+    resize: none;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1em;
+    margin-bottom: 10px;
+}
+
+#submit-button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+#submit-button:hover {
+    background-color: #218838;
+}
+
+.own-message {
+    background-color: #d4edda;
+}
+
+.message-actions button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.message-actions img {
+    width: 20px;
+    height: 20px;
+}
+
+.edit-button img {
+    content: url('../assets/editar.png');
+}
+
+.delete-button img {
+    content: url('../assets/borrar.png');
+}
+
+.pin-button img,
+.unpin-button img {
+    content: url('../assets/chincheta.png');
+}
+
+
