@@ -131,9 +131,6 @@ class SVMChatbot:
         self.y = data['Label']
         # Dividir los datos en conjuntos de entrenamiento y prueba
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42,shuffle=True)
-        print("Training set size:", len(self.X_train))
-        print("Test set size:", len(self.X_test))
-        print("Class distribution in training set:\n", self.y_train.value_counts())
         
     ##
     # \brief Entrena el modelo SVM utilizando GridSearchCV para encontrar el mejor hiperparámetro C.
@@ -165,8 +162,6 @@ class SVMChatbot:
         y_pred = self.pipeline.predict(self.X_test)
         accuracy = accuracy_score(y_test_encoded, y_pred)
         report = classification_report(y_test_encoded, y_pred, target_names=self.label_encoder.classes_)
-        print(f'Accuracy: {accuracy}')
-        print(f'Classification Report:\n{report}')
     ##
     # \brief Predice la respuesta del chatbot para un texto de entrada.
     #
@@ -230,9 +225,6 @@ class SVMChatbot:
             train_sizes=train_sizes, random_state=42
         )
         
-        print("Train sizes:", train_sizes)
-        print("Train scores:\n", train_scores)
-        print("Test scores:\n", test_scores)
 
         train_scores_mean = np.mean(train_scores, axis=1)
         test_scores_mean = np.mean(test_scores, axis=1)

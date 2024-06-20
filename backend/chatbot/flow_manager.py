@@ -53,9 +53,6 @@ class FlowManager:
     def suggest(self):
         for step in self.steps:
             if step.label == self.current_label:
-                print(step)
-                print("sugerencia")
-                print(step.suggestion)
                 return step.suggestion
         return 'Start with a greeting message!'
     ##

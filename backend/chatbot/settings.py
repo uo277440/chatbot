@@ -127,7 +127,6 @@ DATABASES = {
     }
 }
 
-print(f'Final DATABASES settings: {DATABASES}')
 AUTH_USER_MODEL = 'myapi.AppUser'
 
 REST_FRAMEWORK = {

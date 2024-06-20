@@ -21,7 +21,6 @@ function AdminMarks() {
     const handleSearch = () => {
         axiosInstance.get(`/api/search_student/?search_param=${username}`)
             .then(response => {
-                console.log(response.data.conversations); 
                 setUser(response.data.user);
                 setMarks(response.data.marks);
                 setConversations(response.data.conversations);
