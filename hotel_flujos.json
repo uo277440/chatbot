@@ -1,0 +1,54 @@
+{
+    "flows": [
+      {
+        "name": "RESERVATION_FLOW",
+        "steps": [
+          {
+            "label": "GREETING",
+            "message": "Hello! I would like to make a reservation for tonight.",
+            "suggestion":"At this moment, you should check if there is availability for the requested reservation. Since it's a fictional scenario, you can decide. Communicate the availability or unavailability of the reservation.",
+            "options": ["CHECK_AVAILABILITY","CHECK_NO_AVAILABILITY"]
+          },
+          {
+            "label": "CHECK_NO_AVAILABILITY",
+            "message": "Ok,im sorry to hear that",
+            "suggestion":"Always ask the client if they would like to ask anything else or if they have any questions.",
+            "options": ["ASK_QUESTION"]
+          },
+          {
+            "label": "CHECK_AVAILABILITY",
+            "message": "Ok, thats fine to me",
+            "suggestion":"Ask the client for their name and their NIF (National Identification Number) in order to complete the reservation.",
+            "options": ["TAKE_DETAILS"]
+          },
+          {
+            "label": "TAKE_DETAILS",
+            "message": "My name is pepito, my dni is x",
+            "suggestion":"Communicate to the client that their reservation has been confirmed.",
+            "options": ["CONFIRM_RESERVATION"]
+          },
+          {
+            "label": "CONFIRM_RESERVATION",
+            "message": "Thanks you so much",
+            "suggestion":"Always ask the client if they would like to ask anything else or if they have any questions.",
+            "options": ["ASK_QUESTION"]
+          },
+          {
+            "label": "ASK_QUESTION",
+            "message": "No, thanks",
+            "suggestion":"Farewell politely.",
+            "options": ["FAREWELL"]
+          },
+          {
+            "label": "FAREWELL",
+            "message": "Nice day",
+            "suggestion":"Well done ! Reinicia el flujo si quieres volver a practicar este escenario !",
+            "options": []
+          }
+        ]
+      }
+    ]
+  }
+  
+
+  

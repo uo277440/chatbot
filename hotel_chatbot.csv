@@ -1,0 +1,10 @@
+Chatbot Response,Label
+Hello I need an extra blanket for my room.,GREETING
+I'd like to make a reservation for two.,RESERVATION
+Can I see the menu for today?,MENU
+What time is breakfast served?,MENU
+I'm allergic to nuts do you have any nut-free options on the menu?,MENU
+Thank you for your assistance.,THANKS
+Is there a gym available for guests to use?,QUERY
+Could you arrange a taxi to the airport for tomorrow morning?,QUERY
+Goodbye see you later.,FAREWELL
