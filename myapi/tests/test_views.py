@@ -534,7 +534,57 @@ def test_search_student_missing_param(api_client, authenticated_user):
     assert 'error' in response.data
     assert response.data['error'] == 'Username parameter is required'
 
+##
+# \brief Prueba que verifica la obtención de escenarios.
+#
+# Verifica que la obtención de escenarios retorna el código de estado HTTP 200 y la cantidad correcta de escenarios.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
+@pytest.mark.django_db
+def test_scenarios(api_client, authenticated_user):
+    Scenery.objects.create(name='Scenario 1')
+    Scenery.objects.create(name='Scenario 2')
+    
+    response = api_client.get(reverse('scenarios'))
+    
+    assert response.status_code == status.HTTP_200_OK
+    assert 'scenarios' in response.data
+    assert len(response.data['scenarios']) == 2
+    
+##
+# \brief Prueba que verifica el envío de una conversación.
+#
+# Verifica que el envío de una conversación retorna el código de estado HTTP 201 y contiene los datos de la conversación.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
+@pytest.mark.django_db
+def test_submit_conversation(api_client, authenticated_user):
+    conversation_data = "This is a test conversation"
+    response = api_client.post(reverse('submit_conversation'), {'conversation': conversation_data})
 
+    assert response.status_code == status.HTTP_201_CREATED
+    assert 'conversation' in response.data
+    assert response.data['conversation'] == conversation_data
+
+##
+# \brief Prueba que verifica la traducción de texto.
+#
+# Verifica que la traducción de un texto retorna el código de estado HTTP 200 y el texto traducido correctamente.
+#
+# \param api_client Fixture que proporciona una instancia de APIClient.
+# \param authenticated_user Fixture que proporciona un usuario autenticado.
+#
+@pytest.mark.django_db
+def test_translate(api_client, authenticated_user):
+    response = api_client.get(reverse('translate'), {'text': 'Hello', 'target': 'es'})
+
+    assert response.status_code == status.HTTP_200_OK
+    assert 'translated_text' in response.data
+    assert response.data['translated_text'] == 'Hola' 
 
 
     
