@@ -36,8 +36,6 @@ function Mascot({ showHelp, setShowHelp }) {
             setMessage('');
             localStorage.removeItem('mascotMessage');
         }
-        console.log('MASCOTA')
-        console.log(localStorage.getItem('showHelp'))
     }, [showHelp]);
 
     return (

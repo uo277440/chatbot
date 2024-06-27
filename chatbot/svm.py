@@ -4,9 +4,13 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.svm import SVC
 from sklearn.pipeline import Pipeline
 from sklearn.base import BaseEstimator, TransformerMixin
+import nltk
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
 from nltk.corpus import stopwords
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
 from nltk.corpus import wordnet
 import numpy as np
 import string
@@ -113,10 +117,8 @@ class SVMChatbot:
     #
     def load_model(self):
         if self.model_path and os.path.exists(self.model_path):
-            print('lo cargo')
             self.pipeline, self.label_encoder = joblib.load(self.model_path)
             return True
-        print('no lo cargo')
         return False
     ##
     # \brief Carga los datos desde un archivo CSV y los divide en conjuntos de entrenamiento y prueba.
@@ -129,9 +131,6 @@ class SVMChatbot:
         self.y = data['Label']
         # Dividir los datos en conjuntos de entrenamiento y prueba
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(self.X, self.y, test_size=0.2, random_state=42,shuffle=True)
-        print("Training set size:", len(self.X_train))
-        print("Test set size:", len(self.X_test))
-        print("Class distribution in training set:\n", self.y_train.value_counts())
         
     ##
     # \brief Entrena el modelo SVM utilizando GridSearchCV para encontrar el mejor hiperparámetro C.
@@ -153,11 +152,6 @@ class SVMChatbot:
 
         # Guardar el mejor modelo encontrado
         self.pipeline = grid_search.best_estimator_
-        # Debugging prints
-        print("Best C value:", grid_search.best_params_)
-        print("Unique labels in training set:", np.unique(self.y_train_encoded))
-        print("Training set size after encoding:", len(self.y_train_encoded))
-        print('A evaluar el modelo')
         self.evaluate_model()
         self.save_model()
     ##
@@ -168,8 +162,6 @@ class SVMChatbot:
         y_pred = self.pipeline.predict(self.X_test)
         accuracy = accuracy_score(y_test_encoded, y_pred)
         report = classification_report(y_test_encoded, y_pred, target_names=self.label_encoder.classes_)
-        print(f'Accuracy: {accuracy}')
-        print(f'Classification Report:\n{report}')
     ##
     # \brief Predice la respuesta del chatbot para un texto de entrada.
     #
@@ -202,8 +194,7 @@ class SVMChatbot:
         
         predicted_label = self.label_encoder.inverse_transform([predicted_scalar])[0]
         probability = probabilities[self.pipeline.classes_.tolist().index(predicted_scalar)]
-        print("PROBABILIDAD")
-        print(probability)
+
         if probability >= self.confidence_threshold:
             #return predicted_label,probability,probabilities
             return predicted_label
@@ -214,31 +205,30 @@ class SVMChatbot:
     ##
     # \brief Dibuja la matriz de confusión para el conjunto de prueba.
     #
-    def plot_confusion_matrix(self):
+    def plot_confusion_matrix(self, save_path=None):
+        if save_path is None:
+            save_path = os.path.join(os.path.dirname(__file__), 'tests', 'images', 'confusion_matrix.png')
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
         y_test_encoded = self.label_encoder.transform(self.y_test)
         ConfusionMatrixDisplay.from_estimator(self.pipeline, self.X_test, y_test_encoded)
         plt.title("Confusion Matrix")
-        plt.show()
+        plt.savefig(save_path)
+        plt.close()
 
     ##
     # \brief Dibuja la curva de aprendizaje del modelo.
     #
-    def plot_learning_curve(self):
-        """Plot the learning curve for the model."""
-        # Ajustar los tamaños de entrenamiento para evitar tamaños demasiado pequeños
+    def plot_learning_curve(self, save_path=None):
+        if save_path is None:
+            save_path = os.path.join(os.path.dirname(__file__), 'tests', 'images', 'learning_curve.png')
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
         train_sizes = np.linspace(0.2, 1.0, 5) * len(self.X)
         train_sizes = train_sizes[train_sizes <= len(self.X_train)]
         train_sizes = train_sizes.astype(int)
-
         train_sizes, train_scores, test_scores = learning_curve(
             self.pipeline, self.X, self.label_encoder.transform(self.y), cv=3, n_jobs=-1,
             train_sizes=train_sizes, random_state=42
         )
-        
-        print("Train sizes:", train_sizes)
-        print("Train scores:\n", train_scores)
-        print("Test scores:\n", test_scores)
-
         train_scores_mean = np.mean(train_scores, axis=1)
         test_scores_mean = np.mean(test_scores, axis=1)
         plt.figure()
@@ -248,7 +238,8 @@ class SVMChatbot:
         plt.xlabel("Training examples")
         plt.ylabel("Score")
         plt.legend(loc="best")
-        plt.show()
+        plt.savefig(save_path)
+        plt.close()
     def serialize(self):
         return {
             'model_path': self.model_path

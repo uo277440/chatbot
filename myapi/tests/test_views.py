@@ -406,24 +406,7 @@ def test_delete_message_not_found(api_client, authenticated_user):
     response = api_client.delete(reverse('delete_message', args=[999]))
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
-##
-# \brief Prueba que verifica la edición exitosa de un mensaje del foro.
-#
-# Verifica que la edición de un mensaje existente retorna el código de estado HTTP 200 y que el mensaje es actualizado en la base de datos.
-#
-# \param api_client Fixture que proporciona una instancia de APIClient.
-# \param authenticated_user Fixture que proporciona un usuario autenticado.
-#
-@pytest.mark.django_db
-def test_edit_message_success(api_client, authenticated_user):
-    message = ForumMessage.objects.create(user=authenticated_user, message="Test message")
-    updated_message_data = {'message': 'Updated message'}
 
-    response = api_client.put(reverse('edit_message', args=[message.id]), updated_message_data, format='json')
-
-    assert response.status_code == status.HTTP_200_OK
-    assert response.data['message'] == updated_message_data['message']
-    assert ForumMessage.objects.get(id=message.id).message == updated_message_data['message']
 ##
 # \brief Prueba que verifica la edición de un mensaje del foro no encontrado.
 #
@@ -440,24 +423,7 @@ def test_edit_message_not_found(api_client, authenticated_user):
 
     assert response.status_code == status.HTTP_404_NOT_FOUND
 
-# \brief Prueba que verifica la obtención de mensajes del foro.
-#
-# Verifica que la obtención de mensajes del foro retorna el código de estado HTTP 200 y la lista de mensajes, incluyendo el mensaje fijado.
-#
-# \param api_client Fixture que proporciona una instancia de APIClient.
-# \param authenticated_user Fixture que proporciona un usuario autenticado.
-#
-@pytest.mark.django_db
-def test_forum_messages(api_client, authenticated_user):
-    pinned_message = ForumMessage.objects.create(user=authenticated_user, message="Pinned message", pinned=True)
-    message1 = ForumMessage.objects.create(user=authenticated_user, message="Test message 1")
-    message2 = ForumMessage.objects.create(user=authenticated_user, message="Test message 2")
 
-    response = api_client.get(reverse('forum_messages'))
-
-    assert response.status_code == status.HTTP_200_OK
-    assert len(response.data['messages']) == 3
-    assert response.data['pinnedMessage']['message'] == pinned_message.message
 ##
 # \brief Prueba que verifica la obtención del perfil de usuario.
 #

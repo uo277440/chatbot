@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: testdb
+      POSTGRES_USER: avnadmin
+      POSTGRES_PASSWORD: Lmr75757
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+  backend:
+    build: .
+    environment:
+      DB_NAME: testdb
+      DB_USER: avnadmin
+      DB_PASSWORD: Lmr75757
+      DB_HOST: db
+      DB_PORT: 5432
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+  frontend:
+    build:
+      context: ./chatfront
+      dockerfile: Dockerfile
+    command: npm start
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./chatfront:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+  test:
+    build: .
+    command: pytest --cov=/app --cov-report html
+    volumes:
+      - .:/app
+    depends_on:
+      - db
+volumes:
+  postgres_data:

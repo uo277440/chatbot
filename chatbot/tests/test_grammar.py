@@ -36,7 +36,6 @@ def test_correct_text_success(grammar_corrector):
 
     with patch('requests.post', return_value=mock_response):
         corrections = grammar_corrector.correct_text("Thiss is a test.")
-        print(corrections)
         assert corrections == "[Thiss -> Posible error ortográfico encontrado.] is a test."
 
 ##

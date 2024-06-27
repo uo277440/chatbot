@@ -28,7 +28,6 @@ function Login() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    console.log('login')
     client.get("/api/user")
       .then(function (res) {
         setCurrentUser(res.data.user);

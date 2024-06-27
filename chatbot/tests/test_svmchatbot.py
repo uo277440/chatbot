@@ -5,7 +5,7 @@ import pandas as pd
 from sklearn.metrics import accuracy_score, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import matplotlib
-matplotlib.use('Agg')
+#matplotlib.use('Agg') 
 import os
 ##
 # \brief Fixture que carga los datos CSV desde un archivo.

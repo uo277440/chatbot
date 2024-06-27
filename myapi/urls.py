@@ -22,7 +22,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("chatbot_response/",views.chatbot_response, name='chatbot_response'),
-    path("mascot_message/",views.mascot_message, name='mascot_message'),
+    path("mascot_message",views.mascot_message, name='mascot_message'),
     path('forum', views.ForumView.as_view(), name='forum'),
     path('register', views.user_register, name='register'),
 	path('login', views.user_login, name='login'),

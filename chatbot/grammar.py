@@ -40,17 +40,12 @@ class GrammarCorrector:
                 offset = int(match['offset'])
                 length = int(match['length'])
                 message = match['message']
-                print('offset')
-                print(offset)
-                print('lengt')
-                print(length)
                 problematic_word = text[offset:offset+length]
                 corrections.append((problematic_word, message, offset))
             if not corrections:
                 return False
             return self.messaje(corrections, text)
         else:
-            print("Error:", response.status_code)
             return []
     ##
     # \brief Genera un mensaje de corrección basado en las sugerencias proporcionadas.
@@ -93,8 +88,6 @@ class GrammarCorrector:
     #
     def get_synonym_phrase(self,input_text):
         # Construir el cuerpo de la solicitud JSON
-        print("INPUT")
-        print(input_text)
         prompt = f"Provide a synonym for the following phrase: '{input_text}'"
         json_body = {
             "model": "gpt-3.5-turbo",
@@ -122,16 +115,12 @@ class GrammarCorrector:
 
             if "choices" in json_response and len(json_response["choices"]) > 0:
                 message_content = json_response["choices"][0]["message"]["content"].strip()
-                print("CONTENIDO:", message_content)
                 return message_content
             else:
-                print("Respuesta inesperada de la API:", json_response)
                 return None
         except requests.exceptions.RequestException as e:
-            print(f"Error en la solicitud: {e}")
             return None
         except ValueError as e:
-            print(f"Error al parsear la respuesta JSON: {e}")
             return None
 ##
 # \class SentenceChecker

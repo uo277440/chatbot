@@ -107,23 +107,14 @@ WSGI_APPLICATION = 'chatbot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': 'Lmr75757',
-        'HOST': 'localhost',
-        'PORT': '5432',
-        'OPTIONS': {
-            'client_encoding': 'UTF8',
-        },
+        'NAME': os.getenv('DB_NAME', 'defaultdb'),
+        'USER': os.getenv('DB_USER', 'avnadmin'),
+        'PASSWORD': os.getenv('DB_PASSWORD', 'Lmr75757'),
+        'HOST': os.getenv('DB_HOST', 'db'), 
+        'PORT': os.getenv('DB_PORT', '5432'),
     }
 }
-if 'test' in sys.argv or 'test_coverage' in sys.argv:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': ':memory:',
-        }
-    }
+
 print(f'Final DATABASES settings: {DATABASES}')
 AUTH_USER_MODEL = 'myapi.AppUser'
 
