@@ -1,6 +1,7 @@
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Web Available: https://c3787bab-f6e3-441f-9c38-ef9246cfe175.e1-eu-north-azure.choreoapps.dev/  
 
 ## Available Scripts
 
