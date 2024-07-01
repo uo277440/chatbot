@@ -54,9 +54,9 @@ function Chatbot() {
                 localStorage.setItem('chatMessages', JSON.stringify(updatedMessagesWithBot));
 
                 if (response.data.is_finished) {
-                    generateTextFile();
-                    submitConversation(updatedMessagesWithBot);
                     setTimeout(() => {
+                        generateTextFile();
+                        submitConversation(updatedMessagesWithBot);
                         var message 
                         var icon
                         if(response.data.mark > 5){
