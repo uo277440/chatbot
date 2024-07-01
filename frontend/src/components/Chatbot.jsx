@@ -94,7 +94,7 @@ function Chatbot() {
             }
         })
             .then(response => {
-                console.log('Conversation submitted successfully.');
+                console.log('Conversation submitted successfully y hola');
             })
             .catch(error => {
                 console.log('Error submitting conversation:', error);
