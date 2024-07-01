@@ -82,6 +82,7 @@ function Chatbot() {
             });
     };
     const submitConversation = (conversation) => {
+        console.log(conversation)
         const formData = new FormData();
         formData.append('conversation', JSON.stringify(conversation));
 
@@ -105,6 +106,7 @@ function Chatbot() {
         return cookieValue ? cookieValue.pop() : '';
     }
     const generateTextFile = (messagesToWrite) => {
+        console.log(messagesToWrite)
         return new Promise((resolve) => {
             const element = document.createElement('a');
             let fileContent = '';
