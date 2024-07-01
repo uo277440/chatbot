@@ -70,7 +70,7 @@ function Chatbot() {
                             icon: icon,
                             confirmButtonText: 'Aceptar'
                         });
-                        generateTextFile();
+                        generateTextFile(updatedMessagesWithBot);
                         submitConversation(updatedMessagesWithBot);
                         handleClearMessages();
                         navigate('/menu');
@@ -104,12 +104,12 @@ function Chatbot() {
         const cookieValue = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
         return cookieValue ? cookieValue.pop() : '';
     }
-    const generateTextFile = () => {
+    const generateTextFile = (messagesToWrite) => {
         return new Promise((resolve) => {
             const element = document.createElement('a');
             let fileContent = '';
 
-            messages.forEach(message => {
+            messagesToWrite.forEach(message => {
                 const from = message.from === 'user' ? 'User: ' : 'Bot: ';
                 fileContent += `${from}${message.text}\n`;
             });
@@ -117,7 +117,7 @@ function Chatbot() {
             const file = new Blob([fileContent], { type: 'text/plain' });
             element.href = URL.createObjectURL(file);
             element.download = 'chat_conversation.txt';
-            document.body.appendChild(element); // Required for this to work in FireFox
+            document.body.appendChild(element); 
             element.click();
             document.body.removeChild(element);
 
