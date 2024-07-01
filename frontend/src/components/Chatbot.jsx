@@ -70,9 +70,9 @@ function Chatbot() {
                             icon: icon,
                             confirmButtonText: 'Aceptar'
                         });
-                        handleClearMessages();
                         generateTextFile();
                         submitConversation(updatedMessagesWithBot);
+                        handleClearMessages();
                         navigate('/menu');
                     }, 2000); 
                 }
