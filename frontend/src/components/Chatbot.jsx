@@ -82,7 +82,6 @@ function Chatbot() {
             });
     };
     const submitConversation = (conversation) => {
-        console.log(conversation)
         const formData = new FormData();
         formData.append('conversation', JSON.stringify(conversation));
 
@@ -94,7 +93,7 @@ function Chatbot() {
             }
         })
             .then(response => {
-                console.log('Conversation submitted successfully y hola');
+                console.log('Conversation submitted successfully.');
             })
             .catch(error => {
                 console.log('Error submitting conversation:', error);
@@ -106,7 +105,6 @@ function Chatbot() {
         return cookieValue ? cookieValue.pop() : '';
     }
     const generateTextFile = (messagesToWrite) => {
-        console.log(messagesToWrite)
         return new Promise((resolve) => {
             const element = document.createElement('a');
             let fileContent = '';
