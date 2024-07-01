@@ -55,8 +55,6 @@ function Chatbot() {
 
                 if (response.data.is_finished) {
                     setTimeout(() => {
-                        generateTextFile();
-                        submitConversation(updatedMessagesWithBot);
                         var message 
                         var icon
                         if(response.data.mark > 5){
@@ -72,6 +70,8 @@ function Chatbot() {
                             icon: icon,
                             confirmButtonText: 'Aceptar'
                         });
+                        generateTextFile();
+                        submitConversation(updatedMessagesWithBot);
                         handleClearMessages();
                         navigate('/menu');
                     }, 2000); 
