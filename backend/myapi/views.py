@@ -103,7 +103,7 @@ def update_flow_manager(request):
         first_charge = True
     else:
         if(flow.id == flowManager.id):
-            return
+            return JsonResponse({'message': 'flowManager actualizado correctamente','first_charge':first_charge},status=status.HTTP_200_OK)
     # Definir la ruta del archivo del modelo específico para el flujo
     model_path = f'models/svm_model_{flow_id}.pkl'
     # Crear la carpeta models si no existe
