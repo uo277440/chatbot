@@ -7,7 +7,7 @@ function Profile() {
     const [profileData, setProfileData] = useState(null);
     const [loading, setLoading] = useState(true);
     const axiosInstance = useMemo(() => axios.create({
-        baseURL: '/choreo-apis/chatbottfg/backend/v1',
+        baseURL: '/choreo-apis/tfg2/back/v1',
         withCredentials: true
     }), []);
 

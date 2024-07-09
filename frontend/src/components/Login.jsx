@@ -14,7 +14,7 @@ import { Dimmer, Loader } from 'semantic-ui-react'; // Import Loader from semant
 
 function Login() {
   const client = useMemo(() => axios.create({
-    baseURL: '/choreo-apis/chatbottfg/backend/v1',
+    baseURL: '/choreo-apis/tfg2/back/v1',
     withCredentials: true
   }), []);
   const { currentUser, setCurrentUser } = useContext(AuthContext);

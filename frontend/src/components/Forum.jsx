@@ -19,7 +19,7 @@ const Forum = () => {
     const [isSuperUser, setIsSuperUser] = useState(false);
     const messagesEndRef = useRef(null);
     const axiosInstance = useMemo(() => axios.create({
-        baseURL: '/choreo-apis/chatbottfg/backend/v1',
+        baseURL: '/choreo-apis/tfg2/back/v1',
         withCredentials: true
     }), []);
 
