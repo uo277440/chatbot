@@ -7,7 +7,7 @@ import traducir from '../assets/translate.png';
 function ChatMessages({ messages, setMessages }) {
     const messagesRef = useRef(null);
     const axiosInstance = useMemo(() => axios.create({
-        baseURL: '/choreo-apis/tfg2/back/v1',
+        baseURL: '/choreo-apis/chatbottfg/backend/v1',
         withCredentials: true
     }), []);
 

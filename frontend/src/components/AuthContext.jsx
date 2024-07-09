@@ -9,7 +9,7 @@ export const AuthProvider = ({ children }) => {
     return savedUser ? JSON.parse(savedUser) : null;
   });
   const axiosInstance = useMemo(() => axios.create({
-    baseURL: '/choreo-apis/tfg2/back/v1',
+    baseURL: '/choreo-apis/chatbottfg/backend/v1',
     withCredentials: true
 }), []);
   const [newForumMessage, setNewForumMessage] = useState(false);
