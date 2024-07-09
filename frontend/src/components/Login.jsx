@@ -123,6 +123,8 @@ function Login() {
       }
     }
     ).then(function (res) {
+      localStorage.setItem('showHelp',false);
+      localStorage.removeItem('chatMessages')
       const user = res.data.user;
       setCurrentUser(user);
       if (user.is_superuser) {

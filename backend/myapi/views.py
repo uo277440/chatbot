@@ -92,6 +92,7 @@ def scenarios(request):
 @permission_classes([IsAuthenticated])
 def update_flow_manager(request):
     flow_id = request.GET.get('flow_id')
+    first_charge = False
     try:
         flow = Flow.objects.get(id=flow_id)
     except Flow.DoesNotExist:
@@ -100,16 +101,6 @@ def update_flow_manager(request):
     chatbot, flowManager, marker = get_session_objects(request.session)
     if(not flowManager):
         first_charge = True
-    else:
-        if(flow.id == flowManager.id):
-            model_path = f'models/svm_model_{flow_id}.pkl'
-            os.makedirs('models', exist_ok=True)
-            new_chatbot = SVMChatbot(generar_csv_entrenamiento(flow.id), model_path=model_path)
-            if not new_chatbot.load_model():
-                new_chatbot.load_data()  
-                new_chatbot.train_model()
-            set_session_objects(request.session, new_chatbot, flowManager, marker)
-            return JsonResponse({'message': 'flowManager actualizado correctamente','first_charge':first_charge},status=status.HTTP_200_OK)
     # Definir la ruta del archivo del modelo específico para el flujo
     model_path = f'models/svm_model_{flow_id}.pkl'
     # Crear la carpeta models si no existe
