@@ -92,7 +92,6 @@ def scenarios(request):
 @permission_classes([IsAuthenticated])
 def update_flow_manager(request):
     flow_id = request.GET.get('flow_id')
-    first_charge = False
     try:
         flow = Flow.objects.get(id=flow_id)
     except Flow.DoesNotExist:

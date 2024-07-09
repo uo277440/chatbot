@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState,useMemo } from 'react';
+import React, { useEffect, useRef, useState, useMemo } from 'react';
 import axios from 'axios';
 import '../css/ChatMessages.css';
 import altavoz from '../assets/altavoz.png';
@@ -9,7 +9,7 @@ function ChatMessages({ messages, setMessages }) {
     const axiosInstance = useMemo(() => axios.create({
         baseURL: '/choreo-apis/chatbottfg/backend/v1',
         withCredentials: true
-      }), []);
+    }), []);
 
     useEffect(() => {
         scrollToBottom();
@@ -22,20 +22,18 @@ function ChatMessages({ messages, setMessages }) {
     const [isButtonEnabled, setIsButtonEnabled] = useState(true);
 
     const handleTextToAudio = (text, lang) => {
-        const sourceLang = lang || 'en';
         if (!isButtonEnabled) return;
         setIsButtonEnabled(false);
-        axiosInstance.get(`api/transform?text=${encodeURIComponent(text)}&source=${sourceLang}`)
-            .then(response => {
-                console.log('Respuesta de text_to_audio:', response);
-                setTimeout(() => {
-                    setIsButtonEnabled(true);
-                }, response.data.delay);
-            })
-            .catch(error => {
-                console.error('Error al llamar a text_to_audio:', error);
-                setIsButtonEnabled(true);
-            });
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = lang || 'en';
+        utterance.onend = () => {
+            setIsButtonEnabled(true);
+        };
+        utterance.onerror = (error) => {
+            console.error('Error in speech synthesis:', error);
+            setIsButtonEnabled(true);
+        };
+        window.speechSynthesis.speak(utterance);
     };
 
     const handleTranslate = (text, lang, index) => {
@@ -89,6 +87,7 @@ function ChatMessages({ messages, setMessages }) {
 }
 
 export default ChatMessages;
+
 
 
 

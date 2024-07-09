@@ -1,0 +1,17 @@
+{
+    "name": "root_project",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+      "start": "cd chatfront && npm start",
+      "heroku-postbuild": "cd chatfront && npm install && npm run build"
+    },
+    "dependencies": {
+      "express": "^4.17.1",
+      "http-proxy-middleware": "^2.0.1"
+    },
+    "engines": {
+      "node": "18.x"
+    }
+  }
+  
